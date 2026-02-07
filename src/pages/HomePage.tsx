@@ -502,15 +502,14 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* Lead Capture Form */}
+      {/* Schedule a Meeting Section */}
       <section id="contact" className="py-20 md:py-32 px-4 sm:px-6 lg:px-8 bg-white dark:bg-gray-900">
         <div className="container mx-auto max-w-4xl">
           <motion.div
-            className="text-center mb-12"
+            className="text-center"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}>
-
             <Badge variant="secondary" className="mb-4 px-4 py-2">
               <Mail className="h-4 w-4 mr-2" />
               Get in Touch
@@ -519,124 +518,33 @@ const HomePage = () => {
               Start Your Journey to
               <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"> Smart Energy</span>
             </h3>
-            <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-              Fill out the form below and our team will contact you shortly to discuss your energy optimization needs
+            <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto mb-12">
+              Ready to transform your energy management? Book a consultation with our team to discuss your specific needs
             </p>
-          </motion.div>
+            
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}>
+              <a 
+                href="https://meetings.hubspot.com/vlad-lialine" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="inline-block">
+                <Button
+                  size="lg"
+                  className="text-lg px-12 py-8 h-auto bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 hover:shadow-2xl transition-all duration-300 transform hover:scale-105">
+                  <Mail className="mr-3 h-6 w-6" />
+                  Schedule a Consultation
+                  <ArrowRight className="ml-3 h-6 w-6" />
+                </Button>
+              </a>
+            </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}>
-
-            <Card className="border-2 shadow-2xl dark:bg-gray-800 dark:border-gray-700">
-              <CardHeader>
-                <CardTitle className="text-2xl dark:text-gray-100">Request a Demo</CardTitle>
-                <CardDescription className="text-base dark:text-gray-300">
-                  Let us show you how AI can transform your energy management
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <div className="grid md:grid-cols-2 gap-6">
-                    <div className="space-y-2">
-                      <Label htmlFor="companyName">Company Name *</Label>
-                      <Input
-                        id="companyName"
-                        placeholder="Your Company"
-                        value={formData.companyName}
-                        onChange={(e) => handleInputChange('companyName', e.target.value)}
-                        required
-                        className="h-11" />
-
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="contactName">Contact Name *</Label>
-                      <Input
-                        id="contactName"
-                        placeholder="Your Name"
-                        value={formData.contactName}
-                        onChange={(e) => handleInputChange('contactName', e.target.value)}
-                        required
-                        className="h-11" />
-
-                    </div>
-                  </div>
-
-                  <div className="grid md:grid-cols-2 gap-6">
-                    <div className="space-y-2">
-                      <Label htmlFor="email">Email Address *</Label>
-                      <Input
-                        id="email"
-                        type="email"
-                        placeholder="your.email@company.com"
-                        value={formData.email}
-                        onChange={(e) => handleInputChange('email', e.target.value)}
-                        required
-                        className="h-11" />
-
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="phone">Phone Number</Label>
-                      <Input
-                        id="phone"
-                        type="tel"
-                        placeholder="+1 (555) 000-0000"
-                        value={formData.phone}
-                        onChange={(e) => handleInputChange('phone', e.target.value)}
-                        className="h-11" />
-
-                    </div>
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="industry">Industry</Label>
-                    <Select value={formData.industry} onValueChange={(value) => handleInputChange('industry', value)}>
-                      <SelectTrigger className="h-11">
-                        <SelectValue placeholder="Select your industry" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {industries.map((industry) =>
-                        <SelectItem key={industry} value={industry}>
-                            {industry}
-                          </SelectItem>
-                        )}
-                      </SelectContent>
-                    </Select>
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="message">Message</Label>
-                    <Textarea
-                      id="message"
-                      placeholder="Tell us about your energy optimization needs..."
-                      value={formData.message}
-                      onChange={(e) => handleInputChange('message', e.target.value)}
-                      rows={4}
-                      className="resize-none" />
-
-                  </div>
-
-                  <Button
-                    type="submit"
-                    className="w-full h-12 text-lg bg-gradient-to-r from-blue-600 to-purple-600 hover:shadow-xl transition-shadow"
-                    disabled={isSubmitting}>
-
-                    {isSubmitting ?
-                    <>
-                        <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-                        Submitting...
-                      </> :
-
-                    <>
-                        Request Demo
-                        <ArrowRight className="ml-2 h-5 w-5" />
-                      </>
-                    }
-                  </Button>
-                </form>
-              </CardContent>
-            </Card>
+            <p className="text-sm text-gray-500 dark:text-gray-400 mt-8">
+              Our energy optimization experts are ready to help you achieve your sustainability and cost reduction goals
+            </p>
           </motion.div>
         </div>
       </section>
