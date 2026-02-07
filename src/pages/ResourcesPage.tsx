@@ -146,16 +146,16 @@ export default function ResourcesPage() {
               </TabsTrigger>
             </TabsList>
 
-            {activeTab !== 'schedule-demo' && (
-              <TabsContent value={activeTab} className="mt-0">
+            {activeTab !== 'schedule-demo' &&
+            <TabsContent value={activeTab} className="mt-0">
                 {loading ?
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {[1, 2, 3, 4, 5, 6].map((i) =>
-                  <div key={i} className="h-96 bg-muted animate-pulse rounded-lg" />
-                  )}
+                <div key={i} className="h-96 bg-muted animate-pulse rounded-lg" />
+                )}
                   </div> :
-                filteredResources.length === 0 ?
-                <div className="text-center py-20">
+              filteredResources.length === 0 ?
+              <div className="text-center py-20">
                     <FileText className="w-16 h-16 mx-auto text-muted-foreground mb-4" />
                     <h3 className="text-xl font-semibold mb-2">No resources found</h3>
                     <p className="text-muted-foreground">
@@ -163,14 +163,14 @@ export default function ResourcesPage() {
                     </p>
                   </div> :
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {filteredResources.map((resource) =>
-                  <ResourceCard key={resource.id} {...resource} />
-                  )}
+                <ResourceCard key={resource.id} {...resource} />
+                )}
                   </div>
-                }
+              }
               </TabsContent>
-            )}
+            }
 
             <TabsContent value="schedule-demo" className="mt-0">
               <div className="max-w-5xl mx-auto">
@@ -186,8 +186,8 @@ export default function ResourcesPage() {
                     title="Schedule Demo"
                     className="w-full h-full"
                     style={{ minHeight: '800px', border: 'none' }}
-                    loading="lazy"
-                  />
+                    loading="lazy" />
+
                 </div>
               </div>
             </TabsContent>
