@@ -13,93 +13,93 @@ import {
   ArrowRight,
   ArrowUp,
   ArrowDown,
-  Activity
-} from "lucide-react";
+  Activity } from
+"lucide-react";
 import { useNavigate } from "react-router-dom";
 
 const EnterpriseDashboard = () => {
   const navigate = useNavigate();
 
   const kpis = [
-    {
-      title: "Total Energy",
-      value: "345K",
-      unit: "kWh",
-      change: "+5.2%",
-      trend: "up",
-      icon: Zap,
-      color: "text-blue-600",
-      bgColor: "bg-blue-50"
-    },
-    {
-      title: "Cost Savings",
-      value: "$18.3K",
-      unit: "USD",
-      change: "+11.7%",
-      trend: "up",
-      icon: DollarSign,
-      color: "text-green-600",
-      bgColor: "bg-green-50"
-    },
-    {
-      title: "CO₂ Reduction",
-      value: "52",
-      unit: "tons",
-      change: "+18.5%",
-      trend: "up",
-      icon: Leaf,
-      color: "text-emerald-600",
-      bgColor: "bg-emerald-50"
-    },
-    {
-      title: "Forecast Accuracy",
-      value: "96.5",
-      unit: "%",
-      change: "+3.2%",
-      trend: "up",
-      icon: TrendingUp,
-      color: "text-purple-600",
-      bgColor: "bg-purple-50"
-    }
-  ];
+  {
+    title: "Total Energy",
+    value: "345K",
+    unit: "kWh",
+    change: "+5.2%",
+    trend: "up",
+    icon: Zap,
+    color: "text-blue-600",
+    bgColor: "bg-blue-50"
+  },
+  {
+    title: "Cost Savings",
+    value: "$18.3K",
+    unit: "USD",
+    change: "+11.7%",
+    trend: "up",
+    icon: DollarSign,
+    color: "text-green-600",
+    bgColor: "bg-green-50"
+  },
+  {
+    title: "CO₂ Reduction",
+    value: "52",
+    unit: "tons",
+    change: "+18.5%",
+    trend: "up",
+    icon: Leaf,
+    color: "text-emerald-600",
+    bgColor: "bg-emerald-50"
+  },
+  {
+    title: "Forecast Accuracy",
+    value: "96.5",
+    unit: "%",
+    change: "+3.2%",
+    trend: "up",
+    icon: TrendingUp,
+    color: "text-purple-600",
+    bgColor: "bg-purple-50"
+  }];
+
 
   const quickAccessCards = [
-    {
-      title: "Synthetic Data Generator",
-      description: "Model your facility's energy patterns",
-      icon: Database,
-      color: "text-blue-600",
-      path: "/dashboard/enterprise/data-generator"
-    },
-    {
-      title: "AI Forecasting",
-      description: "Forecast your energy needs accurately",
-      icon: TrendingUp,
-      color: "text-purple-600",
-      path: "/dashboard/enterprise/forecasting"
-    },
-    {
-      title: "Optimization Engine",
-      description: "Reduce costs and improve efficiency",
-      icon: BarChart3,
-      color: "text-green-600",
-      path: "/dashboard/enterprise/optimization"
-    },
-    {
-      title: "ESG Reports",
-      description: "Track your sustainability metrics",
-      icon: FileText,
-      color: "text-orange-600",
-      path: "/dashboard/enterprise/esg-reports"
-    }
-  ];
+  {
+    title: "Synthetic Data Generator",
+    description: "Model your facility's energy patterns",
+    icon: Database,
+    color: "text-blue-600",
+    path: "/dashboard/enterprise/data-generator"
+  },
+  {
+    title: "AI Forecasting",
+    description: "Forecast your energy needs accurately",
+    icon: TrendingUp,
+    color: "text-purple-600",
+    path: "/dashboard/enterprise/forecasting"
+  },
+  {
+    title: "Optimization Engine",
+    description: "Reduce costs and improve efficiency",
+    icon: BarChart3,
+    color: "text-green-600",
+    path: "/dashboard/enterprise/optimization"
+  },
+  {
+    title: "ESG Reports",
+    description: "Track your sustainability metrics",
+    icon: FileText,
+    color: "text-orange-600",
+    path: "/dashboard/enterprise/esg-reports"
+  }];
+
 
   const recentActivities = [
-    { action: "Energy forecast generated", time: "1 hour ago", status: "success" },
-    { action: "Cost optimization completed", time: "4 hours ago", status: "success" },
-    { action: "Weekly ESG report ready", time: "1 day ago", status: "success" },
-    { action: "Peak demand alert resolved", time: "2 days ago", status: "success" },
-  ];
+  { action: "Energy forecast generated", time: "1 hour ago", status: "success" },
+  { action: "Cost optimization completed", time: "4 hours ago", status: "success" },
+  { action: "Weekly ESG report ready", time: "1 day ago", status: "success" },
+  { action: "Peak demand alert resolved", time: "2 days ago", status: "success" }];
+
 
   return (
     <DashboardLayout dashboardType="enterprise">
@@ -133,11 +133,11 @@ const EnterpriseDashboard = () => {
                       <span className="text-sm text-gray-500">{kpi.unit}</span>
                     </div>
                     <div className="flex items-center gap-1">
-                      {kpi.trend === "up" ? (
-                        <ArrowUp className="h-4 w-4 text-green-600" />
-                      ) : (
-                        <ArrowDown className="h-4 w-4 text-red-600" />
-                      )}
+                      {kpi.trend === "up" ?
+                      <ArrowUp className="h-4 w-4 text-green-600" /> :
+
+                      <ArrowDown className="h-4 w-4 text-red-600" />
+                      }
                       <span className={`text-sm font-medium ${kpi.trend === "up" ? "text-green-600" : "text-red-600"}`}>
                         {kpi.change}
                       </span>
@@ -145,8 +145,8 @@ const EnterpriseDashboard = () => {
                     </div>
                   </div>
                 </CardContent>
-              </Card>
-            );
+              </Card>);
+
           })}
         </div>
 
@@ -172,8 +172,8 @@ const EnterpriseDashboard = () => {
                       </Button>
                     </div>
                   </CardHeader>
-                </Card>
-              );
+                </Card>);
+
             })}
           </div>
         </div>
@@ -189,21 +189,21 @@ const EnterpriseDashboard = () => {
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
-              {recentActivities.map((activity, index) => (
-                <div key={index} className="flex items-center justify-between py-2 border-b last:border-0">
+              {recentActivities.map((activity, index) =>
+              <div key={index} className="flex items-center justify-between py-2 border-b last:border-0">
                   <div className="flex items-center gap-3">
                     <div className="w-2 h-2 rounded-full bg-green-500" />
                     <span className="font-medium">{activity.action}</span>
                   </div>
                   <span className="text-sm text-gray-500">{activity.time}</span>
                 </div>
-              ))}
+              )}
             </div>
           </CardContent>
         </Card>
       </div>
-    </DashboardLayout>
-  );
+    </DashboardLayout>);
+
 };
 
 export default EnterpriseDashboard;

@@ -20,7 +20,7 @@ export default function ESGReportConfig({ onGenerateReport, isLoading }: ESGRepo
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     const config = {
       reportType,
       scopeSelector,
@@ -28,7 +28,7 @@ export default function ESGReportConfig({ onGenerateReport, isLoading }: ESGRepo
       endDate: new Date(endDate).toISOString(),
       location
     };
-    
+
     await onGenerateReport(config);
   };
 
@@ -92,8 +92,8 @@ export default function ESGReportConfig({ onGenerateReport, isLoading }: ESGRepo
               id="endDate"
               type="date"
               value={endDate}
-              onChange={(e) => setEndDate(e.target.value)}
-            />
+              onChange={(e) => setEndDate(e.target.value)} />
+
           </div>
 
           {/* Location */}
@@ -104,26 +104,26 @@ export default function ESGReportConfig({ onGenerateReport, isLoading }: ESGRepo
               type="text"
               value={location}
               onChange={(e) => setLocation(e.target.value)}
-              placeholder="e.g., region-1"
-            />
+              placeholder="e.g., region-1" />
+
           </div>
 
           {/* Generate Button */}
           <Button type="submit" className="w-full" size="lg" disabled={isLoading}>
-            {isLoading ? (
-              <>
+            {isLoading ?
+            <>
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                 Generating Report...
-              </>
-            ) : (
-              <>
+              </> :
+
+            <>
                 <FileText className="mr-2 h-4 w-4" />
                 Generate Report
               </>
-            )}
+            }
           </Button>
         </form>
       </CardContent>
-    </Card>
-  );
+    </Card>);
+
 }

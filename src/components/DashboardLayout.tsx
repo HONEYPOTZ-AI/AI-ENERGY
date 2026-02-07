@@ -16,8 +16,8 @@ import {
   Building2,
   Factory,
   Gauge,
-  Leaf
-} from "lucide-react";
+  Leaf } from
+"lucide-react";
 import { cn } from "@/lib/utils";
 
 interface DashboardLayoutProps {
@@ -31,12 +31,12 @@ const DashboardLayout = ({ children, dashboardType }: DashboardLayoutProps) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const navItems = [
-    { icon: LayoutDashboard, label: "Overview", path: `/dashboard/${dashboardType}` },
-    { icon: Database, label: "Data Generator", path: `/dashboard/data-generator` },
-    { icon: TrendingUp, label: "Forecasting", path: `/dashboard/forecasting` },
-    { icon: Gauge, label: "Optimization", path: `/dashboard/optimization` },
-    { icon: Leaf, label: "ESG Reports", path: `/dashboard/esg-reports` },
-  ];
+  { icon: LayoutDashboard, label: "Overview", path: `/dashboard/${dashboardType}` },
+  { icon: Database, label: "Data Generator", path: `/dashboard/data-generator` },
+  { icon: TrendingUp, label: "Forecasting", path: `/dashboard/forecasting` },
+  { icon: Gauge, label: "Optimization", path: `/dashboard/optimization` },
+  { icon: Leaf, label: "ESG Reports", path: `/dashboard/esg-reports` }];
+
 
   const isActive = (path: string) => location.pathname === path;
 
@@ -50,8 +50,8 @@ const DashboardLayout = ({ children, dashboardType }: DashboardLayoutProps) => {
               variant="ghost"
               size="icon"
               className="lg:hidden"
-              onClick={() => setSidebarOpen(!sidebarOpen)}
-            >
+              onClick={() => setSidebarOpen(!sidebarOpen)}>
+
               {sidebarOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </Button>
             
@@ -63,17 +63,17 @@ const DashboardLayout = ({ children, dashboardType }: DashboardLayoutProps) => {
             <Separator orientation="vertical" className="h-6 hidden sm:block" />
 
             <div className="flex items-center gap-2">
-              {dashboardType === "utility" ? (
-                <Badge variant="default" className="bg-blue-600">
+              {dashboardType === "utility" ?
+              <Badge variant="default" className="bg-blue-600">
                   <Factory className="h-3 w-3 mr-1" />
                   Utility
-                </Badge>
-              ) : (
-                <Badge variant="default" className="bg-purple-600">
+                </Badge> :
+
+              <Badge variant="default" className="bg-purple-600">
                   <Building2 className="h-3 w-3 mr-1" />
                   Enterprise
                 </Badge>
-              )}
+              }
             </div>
           </div>
 
@@ -81,8 +81,8 @@ const DashboardLayout = ({ children, dashboardType }: DashboardLayoutProps) => {
             <Button
               variant="outline"
               size="sm"
-              onClick={() => navigate(dashboardType === "utility" ? "/dashboard/enterprise" : "/dashboard/utility")}
-            >
+              onClick={() => navigate(dashboardType === "utility" ? "/dashboard/enterprise" : "/dashboard/utility")}>
+
               Switch to {dashboardType === "utility" ? "Enterprise" : "Utility"}
             </Button>
             <Button variant="ghost" size="sm" onClick={() => navigate("/")}>
@@ -98,8 +98,8 @@ const DashboardLayout = ({ children, dashboardType }: DashboardLayoutProps) => {
           className={cn(
             "fixed lg:sticky top-[57px] left-0 z-30 h-[calc(100vh-57px)] w-64 bg-white border-r transition-transform duration-300 ease-in-out",
             sidebarOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
-          )}
-        >
+          )}>
+
           <nav className="p-4 space-y-2">
             {navItems.map((item) => {
               const Icon = item.icon;
@@ -114,12 +114,12 @@ const DashboardLayout = ({ children, dashboardType }: DashboardLayoutProps) => {
                   onClick={() => {
                     navigate(item.path);
                     setSidebarOpen(false);
-                  }}
-                >
+                  }}>
+
                   <Icon className="h-4 w-4 mr-3" />
                   {item.label}
-                </Button>
-              );
+                </Button>);
+
             })}
           </nav>
         </aside>
@@ -133,14 +133,14 @@ const DashboardLayout = ({ children, dashboardType }: DashboardLayoutProps) => {
       </div>
 
       {/* Mobile Sidebar Overlay */}
-      {sidebarOpen && (
-        <div
-          className="fixed inset-0 bg-black/50 z-20 lg:hidden"
-          onClick={() => setSidebarOpen(false)}
-        />
-      )}
-    </div>
-  );
+      {sidebarOpen &&
+      <div
+        className="fixed inset-0 bg-black/50 z-20 lg:hidden"
+        onClick={() => setSidebarOpen(false)} />
+
+      }
+    </div>);
+
 };
 
 export default DashboardLayout;

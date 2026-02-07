@@ -11,18 +11,18 @@ export default function ESGReportsPage() {
 
   const handleGenerateReport = async (config: any) => {
     setIsLoading(true);
-    
+
     try {
       const { data, error } = await window.ezsite.apis.run({
         path: 'esg/generateReport',
         methodName: 'generateReport',
         param: [
-          config.reportType,
-          config.scopeSelector,
-          config.dateRange,
-          config.endDate,
-          config.location
-        ]
+        config.reportType,
+        config.scopeSelector,
+        config.dateRange,
+        config.endDate,
+        config.location]
+
       });
 
       if (error) {
@@ -32,13 +32,13 @@ export default function ESGReportsPage() {
       setReport(data);
       toast({
         title: 'Report Generated',
-        description: `ESG ${config.reportType === 'sec_climate' ? 'SEC Climate' : 'GHG Protocol'} report generated successfully`,
+        description: `ESG ${config.reportType === 'sec_climate' ? 'SEC Climate' : 'GHG Protocol'} report generated successfully`
       });
     } catch (err: any) {
       toast({
         title: 'Report Generation Failed',
         description: err.message || 'Failed to generate ESG report',
-        variant: 'destructive',
+        variant: 'destructive'
       });
     } finally {
       setIsLoading(false);
@@ -64,8 +64,8 @@ export default function ESGReportsPage() {
           <TabsContent value="configure" className="space-y-6">
             <ESGReportConfig
               onGenerateReport={handleGenerateReport}
-              isLoading={isLoading}
-            />
+              isLoading={isLoading} />
+
           </TabsContent>
 
           <TabsContent value="report" className="space-y-6">
@@ -73,6 +73,6 @@ export default function ESGReportsPage() {
           </TabsContent>
         </Tabs>
       </div>
-    </DashboardLayout>
-  );
+    </DashboardLayout>);
+
 }

@@ -73,25 +73,25 @@ export default function ForecastingPage() {
       const { data, error } = await window.ezsite.apis.sqlQuery({
         Sql: `SELECT COUNT(*) as count FROM forecasts WHERE created_at > @lastCheck`,
         Parameters: [
-          {
-            name: 'lastCheck',
-            value: new Date(lastCheck).toISOString(),
-            valueType: 'DateTime'
-          }
-        ]
+        {
+          name: 'lastCheck',
+          value: new Date(lastCheck).toISOString(),
+          valueType: 'DateTime'
+        }]
+
       });
 
       if (error) throw new Error(error);
 
       const count = data && data.length > 0 ? data[0] : 0;
-      
+
       if (count > 0) {
-        setNewForecastCount(prev => prev + count);
+        setNewForecastCount((prev) => prev + count);
         toast({
           title: 'New Forecasts Available',
-          description: `${count} new forecast(s) have been generated`,
+          description: `${count} new forecast(s) have been generated`
         });
-        setRefreshTrigger(prev => prev + 1);
+        setRefreshTrigger((prev) => prev + 1);
       }
 
       setLastCheck(Date.now());
@@ -101,13 +101,13 @@ export default function ForecastingPage() {
   };
 
   const handleForecastGenerated = () => {
-    setRefreshTrigger(prev => prev + 1);
+    setRefreshTrigger((prev) => prev + 1);
     setNewForecastCount(0);
   };
 
   const handleViewNewForecasts = () => {
     setNewForecastCount(0);
-    setRefreshTrigger(prev => prev + 1);
+    setRefreshTrigger((prev) => prev + 1);
   };
 
   return (
@@ -120,17 +120,17 @@ export default function ForecastingPage() {
             Generate and analyze energy load forecasts using advanced time-series models
           </p>
         </div>
-        {newForecastCount > 0 && (
-          <button
-            onClick={handleViewNewForecasts}
-            className="flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors"
-          >
+        {newForecastCount > 0 &&
+        <button
+          onClick={handleViewNewForecasts}
+          className="flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors">
+
             <Bell className="h-5 w-5" />
             <Badge variant="secondary" className="ml-1">
               {newForecastCount} new
             </Badge>
           </button>
-        )}
+        }
       </div>
 
       {/* Performance Metrics */}
@@ -140,15 +140,15 @@ export default function ForecastingPage() {
       <ForecastConfigPanel onForecastGenerated={handleForecastGenerated} />
 
       {/* Visualization */}
-      {forecastData.length > 0 && (
-        <ForecastVisualization
-          forecastData={forecastData}
-          historicalData={historicalData}
-        />
-      )}
+      {forecastData.length > 0 &&
+      <ForecastVisualization
+        forecastData={forecastData}
+        historicalData={historicalData} />
+
+      }
 
       {/* Forecast History */}
       <ForecastHistory refreshTrigger={refreshTrigger} />
-    </div>
-  );
+    </div>);
+
 }

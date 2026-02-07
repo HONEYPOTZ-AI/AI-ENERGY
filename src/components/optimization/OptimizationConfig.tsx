@@ -22,7 +22,7 @@ export default function OptimizationConfig({ onRunOptimization, isLoading }: Opt
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     const config = {
       objective,
       timeHorizon,
@@ -33,7 +33,7 @@ export default function OptimizationConfig({ onRunOptimization, isLoading }: Opt
       },
       location
     };
-    
+
     await onRunOptimization(config);
   };
 
@@ -82,8 +82,8 @@ export default function OptimizationConfig({ onRunOptimization, isLoading }: Opt
               type="text"
               value={location}
               onChange={(e) => setLocation(e.target.value)}
-              placeholder="e.g., region-1"
-            />
+              placeholder="e.g., region-1" />
+
           </div>
 
           {/* Constraints Section */}
@@ -100,8 +100,8 @@ export default function OptimizationConfig({ onRunOptimization, isLoading }: Opt
                   value={maxLoad}
                   onChange={(e) => setMaxLoad(Number(e.target.value))}
                   min={0}
-                  step={10}
-                />
+                  step={10} />
+
               </div>
 
               {/* Renewable Target */}
@@ -114,8 +114,8 @@ export default function OptimizationConfig({ onRunOptimization, isLoading }: Opt
                   onChange={(e) => setRenewableTarget(Number(e.target.value))}
                   min={0}
                   max={100}
-                  step={1}
-                />
+                  step={1} />
+
               </div>
 
               {/* Demand Response */}
@@ -126,28 +126,28 @@ export default function OptimizationConfig({ onRunOptimization, isLoading }: Opt
                 <Switch
                   id="demandResponse"
                   checked={demandResponse}
-                  onCheckedChange={setDemandResponse}
-                />
+                  onCheckedChange={setDemandResponse} />
+
               </div>
             </div>
           </div>
 
           {/* Run Button */}
           <Button type="submit" className="w-full" size="lg" disabled={isLoading}>
-            {isLoading ? (
-              <>
+            {isLoading ?
+            <>
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                 Running Optimization...
-              </>
-            ) : (
-              <>
+              </> :
+
+            <>
                 <Play className="mr-2 h-4 w-4" />
                 Run Optimization
               </>
-            )}
+            }
           </Button>
         </form>
       </CardContent>
-    </Card>
-  );
+    </Card>);
+
 }

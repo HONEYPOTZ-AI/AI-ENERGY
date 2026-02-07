@@ -45,8 +45,8 @@ export default function ForecastPerformance({ refreshTrigger }: ForecastPerforma
         <CardContent className="flex items-center justify-center py-8">
           <Loader2 className="h-8 w-8 animate-spin" />
         </CardContent>
-      </Card>
-    );
+      </Card>);
+
   }
 
   if (!performance) {
@@ -107,6 +107,6 @@ export default function ForecastPerformance({ refreshTrigger }: ForecastPerforma
           </p>
         </CardContent>
       </Card>
-    </div>
-  );
+    </div>);
+
 }

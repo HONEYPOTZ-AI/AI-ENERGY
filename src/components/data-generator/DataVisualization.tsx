@@ -15,8 +15,8 @@ export default function DataVisualization({ data }: DataVisualizationProps) {
         <CardContent className="py-12 text-center text-muted-foreground">
           Generate data to see visualization
         </CardContent>
-      </Card>
-    );
+      </Card>);
+
   }
 
   const chartData = data.dataPoints.slice(0, 168).map((point: any) => ({
@@ -33,17 +33,17 @@ export default function DataVisualization({ data }: DataVisualizationProps) {
   const downloadCSV = () => {
     const headers = Object.keys(data.dataPoints[0]).join(',');
     const rows = data.dataPoints.map((point: any) =>
-      Object.values(point).map(v => `"${v}"`).join(',')
+    Object.values(point).map((v) => `"${v}"`).join(',')
     );
     const csv = [headers, ...rows].join('\n');
-    
+
     const blob = new Blob([csv], { type: 'text/csv' });
     const url = window.URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
     a.download = `synthetic_data_${data.datasetType}_${Date.now()}.csv`;
     a.click();
-    
+
     toast({ title: 'CSV Downloaded' });
   };
 
@@ -55,7 +55,7 @@ export default function DataVisualization({ data }: DataVisualizationProps) {
     a.href = url;
     a.download = `synthetic_data_${data.datasetType}_${Date.now()}.json`;
     a.click();
-    
+
     toast({ title: 'JSON Downloaded' });
   };
 
@@ -86,8 +86,8 @@ export default function DataVisualization({ data }: DataVisualizationProps) {
                 angle={-45}
                 textAnchor="end"
                 height={80}
-                tick={{ fontSize: 12 }}
-              />
+                tick={{ fontSize: 12 }} />
+
               <YAxis />
               <Tooltip />
               <Legend />
@@ -97,28 +97,28 @@ export default function DataVisualization({ data }: DataVisualizationProps) {
                 stroke="#8884d8"
                 strokeWidth={2}
                 dot={false}
-                name={data.dataPoints[0]?.unit || 'Value'}
-              />
-              {hasMultipleMetrics && (
-                <>
+                name={data.dataPoints[0]?.unit || 'Value'} />
+
+              {hasMultipleMetrics &&
+              <>
                   <Line
-                    type="monotone"
-                    dataKey="humidity"
-                    stroke="#82ca9d"
-                    strokeWidth={2}
-                    dot={false}
-                    name="Humidity (%)"
-                  />
+                  type="monotone"
+                  dataKey="humidity"
+                  stroke="#82ca9d"
+                  strokeWidth={2}
+                  dot={false}
+                  name="Humidity (%)" />
+
                   <Line
-                    type="monotone"
-                    dataKey="windSpeed"
-                    stroke="#ffc658"
-                    strokeWidth={2}
-                    dot={false}
-                    name="Wind Speed (m/s)"
-                  />
+                  type="monotone"
+                  dataKey="windSpeed"
+                  stroke="#ffc658"
+                  strokeWidth={2}
+                  dot={false}
+                  name="Wind Speed (m/s)" />
+
                 </>
-              )}
+              }
             </LineChart>
           </ResponsiveContainer>
         </CardContent>
@@ -153,6 +153,6 @@ export default function DataVisualization({ data }: DataVisualizationProps) {
           </div>
         </CardContent>
       </Card>
-    </div>
-  );
+    </div>);
+
 }

@@ -35,19 +35,19 @@ export default function ForecastConfigPanel({ onForecastGenerated }: ForecastCon
         path: 'forecasting/generateForecast',
         methodName: 'generateForecast',
         param: [
-          config.horizon,
-          config.targetMetric,
-          config.location,
-          config.features,
-          config.modelType
-        ]
+        config.horizon,
+        config.targetMetric,
+        config.location,
+        config.features,
+        config.modelType]
+
       });
 
       if (error) throw new Error(error);
 
       toast({
         title: 'Forecast Generated',
-        description: `Successfully generated ${config.horizon}-hour forecast`,
+        description: `Successfully generated ${config.horizon}-hour forecast`
       });
 
       onForecastGenerated();
@@ -81,8 +81,8 @@ export default function ForecastConfigPanel({ onForecastGenerated }: ForecastCon
                 max={24}
                 value={config.horizon}
                 onChange={(e) => setConfig({ ...config, horizon: parseInt(e.target.value) })}
-                required
-              />
+                required />
+
               <p className="text-xs text-muted-foreground">1-24 hours ahead</p>
             </div>
 
@@ -91,8 +91,8 @@ export default function ForecastConfigPanel({ onForecastGenerated }: ForecastCon
               <Label htmlFor="targetMetric">Target Metric</Label>
               <Select
                 value={config.targetMetric}
-                onValueChange={(value) => setConfig({ ...config, targetMetric: value })}
-              >
+                onValueChange={(value) => setConfig({ ...config, targetMetric: value })}>
+
                 <SelectTrigger id="targetMetric">
                   <SelectValue />
                 </SelectTrigger>
@@ -111,8 +111,8 @@ export default function ForecastConfigPanel({ onForecastGenerated }: ForecastCon
                 id="location"
                 value={config.location}
                 onChange={(e) => setConfig({ ...config, location: e.target.value })}
-                placeholder="e.g., Building A, Zone 1"
-              />
+                placeholder="e.g., Building A, Zone 1" />
+
             </div>
 
             {/* Model Selection */}
@@ -120,8 +120,8 @@ export default function ForecastConfigPanel({ onForecastGenerated }: ForecastCon
               <Label htmlFor="modelType">Model Type</Label>
               <Select
                 value={config.modelType}
-                onValueChange={(value) => setConfig({ ...config, modelType: value })}
-              >
+                onValueChange={(value) => setConfig({ ...config, modelType: value })}>
+
                 <SelectTrigger id="modelType">
                   <SelectValue />
                 </SelectTrigger>
@@ -142,16 +142,16 @@ export default function ForecastConfigPanel({ onForecastGenerated }: ForecastCon
                   id="weather"
                   checked={config.features.weather}
                   onCheckedChange={(checked) =>
-                    setConfig({
-                      ...config,
-                      features: { ...config.features, weather: checked as boolean }
-                    })
-                  }
-                />
+                  setConfig({
+                    ...config,
+                    features: { ...config.features, weather: checked as boolean }
+                  })
+                  } />
+
                 <label
                   htmlFor="weather"
-                  className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                >
+                  className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+
                   Weather Data
                 </label>
               </div>
@@ -161,16 +161,16 @@ export default function ForecastConfigPanel({ onForecastGenerated }: ForecastCon
                   id="historical"
                   checked={config.features.historical}
                   onCheckedChange={(checked) =>
-                    setConfig({
-                      ...config,
-                      features: { ...config.features, historical: checked as boolean }
-                    })
-                  }
-                />
+                  setConfig({
+                    ...config,
+                    features: { ...config.features, historical: checked as boolean }
+                  })
+                  } />
+
                 <label
                   htmlFor="historical"
-                  className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                >
+                  className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+
                   Historical Load Data
                 </label>
               </div>
@@ -180,16 +180,16 @@ export default function ForecastConfigPanel({ onForecastGenerated }: ForecastCon
                   id="timeFeatures"
                   checked={config.features.timeFeatures}
                   onCheckedChange={(checked) =>
-                    setConfig({
-                      ...config,
-                      features: { ...config.features, timeFeatures: checked as boolean }
-                    })
-                  }
-                />
+                  setConfig({
+                    ...config,
+                    features: { ...config.features, timeFeatures: checked as boolean }
+                  })
+                  } />
+
                 <label
                   htmlFor="timeFeatures"
-                  className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                >
+                  className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
+
                   Time Features (hour, day, seasonality)
                 </label>
               </div>
@@ -197,17 +197,17 @@ export default function ForecastConfigPanel({ onForecastGenerated }: ForecastCon
           </div>
 
           <Button type="submit" className="w-full" disabled={isLoading}>
-            {isLoading ? (
-              <>
+            {isLoading ?
+            <>
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                 Generating Forecast...
-              </>
-            ) : (
-              'Generate Forecast'
-            )}
+              </> :
+
+            'Generate Forecast'
+            }
           </Button>
         </form>
       </CardContent>
-    </Card>
-  );
+    </Card>);
+
 }

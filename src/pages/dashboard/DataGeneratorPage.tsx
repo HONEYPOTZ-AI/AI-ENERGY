@@ -10,7 +10,7 @@ export default function DataGeneratorPage() {
 
   const handleGenerate = (data: any) => {
     setGeneratedData(data);
-    setRefreshKey(prev => prev + 1);
+    setRefreshKey((prev) => prev + 1);
   };
 
   const handleView = (data: any) => {
@@ -38,6 +38,6 @@ export default function DataGeneratorPage() {
 
         <DatasetManagement onView={handleView} refreshTrigger={refreshKey} />
       </div>
-    </DashboardLayout>
-  );
+    </DashboardLayout>);
+
 }

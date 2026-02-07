@@ -104,16 +104,16 @@ export default function DataGeneratorForm({ onGenerate }: DataGeneratorFormProps
             <Input
               type="date"
               value={startDate}
-              onChange={(e) => setStartDate(e.target.value)}
-            />
+              onChange={(e) => setStartDate(e.target.value)} />
+
           </div>
           <div className="space-y-2">
             <Label>End Date</Label>
             <Input
               type="date"
               value={endDate}
-              onChange={(e) => setEndDate(e.target.value)}
-            />
+              onChange={(e) => setEndDate(e.target.value)} />
+
           </div>
         </div>
 
@@ -122,8 +122,8 @@ export default function DataGeneratorForm({ onGenerate }: DataGeneratorFormProps
           <Input
             value={location}
             onChange={(e) => setLocation(e.target.value)}
-            placeholder="Enter location"
-          />
+            placeholder="Enter location" />
+
         </div>
 
         <div className="space-y-2">
@@ -134,8 +134,8 @@ export default function DataGeneratorForm({ onGenerate }: DataGeneratorFormProps
             min={0}
             max={1}
             step={0.05}
-            className="w-full"
-          />
+            className="w-full" />
+
         </div>
 
         <div className="space-y-2">
@@ -146,19 +146,19 @@ export default function DataGeneratorForm({ onGenerate }: DataGeneratorFormProps
             min={0}
             max={0.5}
             step={0.05}
-            className="w-full"
-          />
+            className="w-full" />
+
         </div>
 
         <Button
           onClick={handleGenerate}
           disabled={loading}
-          className="w-full"
-        >
+          className="w-full">
+
           {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
           Generate Data
         </Button>
       </CardContent>
-    </Card>
-  );
+    </Card>);
+
 }

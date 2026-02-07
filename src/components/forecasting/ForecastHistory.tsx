@@ -70,16 +70,16 @@ export default function ForecastHistory({ refreshTrigger }: ForecastHistoryProps
         </div>
       </CardHeader>
       <CardContent>
-        {isLoading ? (
-          <div className="flex items-center justify-center py-8">
+        {isLoading ?
+        <div className="flex items-center justify-center py-8">
             <Loader2 className="h-8 w-8 animate-spin" />
-          </div>
-        ) : forecasts.length === 0 ? (
-          <div className="text-center py-8 text-muted-foreground">
+          </div> :
+        forecasts.length === 0 ?
+        <div className="text-center py-8 text-muted-foreground">
             No forecasts found. Generate a forecast to get started.
-          </div>
-        ) : (
-          <div className="overflow-x-auto">
+          </div> :
+
+        <div className="overflow-x-auto">
             <Table>
               <TableHeader>
                 <TableRow>
@@ -92,8 +92,8 @@ export default function ForecastHistory({ refreshTrigger }: ForecastHistoryProps
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {forecasts.map((forecast) => (
-                  <TableRow key={forecast.id}>
+                {forecasts.map((forecast) =>
+              <TableRow key={forecast.id}>
                     <TableCell className="text-sm">
                       {format(new Date(forecast.created_at), 'MMM dd, HH:mm')}
                     </TableCell>
@@ -117,12 +117,12 @@ export default function ForecastHistory({ refreshTrigger }: ForecastHistoryProps
                       {forecast.model_version}
                     </TableCell>
                   </TableRow>
-                ))}
+              )}
               </TableBody>
             </Table>
           </div>
-        )}
+        }
       </CardContent>
-    </Card>
-  );
+    </Card>);
+
 }

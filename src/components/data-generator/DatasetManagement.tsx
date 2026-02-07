@@ -13,8 +13,8 @@ import {
   AlertDialogDescription,
   AlertDialogFooter,
   AlertDialogHeader,
-  AlertDialogTitle,
-} from '@/components/ui/alert-dialog';
+  AlertDialogTitle } from
+'@/components/ui/alert-dialog';
 
 interface DatasetManagementProps {
   onView: (data: any) => void;
@@ -57,7 +57,7 @@ export default function DatasetManagement({ onView, refreshTrigger }: DatasetMan
   const handleView = (dataset: any) => {
     const dataPoints = JSON.parse(dataset.data_points);
     const parameters = JSON.parse(dataset.generation_parameters);
-    
+
     onView({
       datasetType: dataset.dataset_type,
       dataPoints,
@@ -73,7 +73,7 @@ export default function DatasetManagement({ onView, refreshTrigger }: DatasetMan
     const sum = values.reduce((a: number, b: number) => a + b, 0);
     const mean = sum / values.length;
     const variance = values.reduce((acc: number, val: number) => acc + Math.pow(val - mean, 2), 0) / values.length;
-    
+
     return {
       min: Math.min(...values),
       max: Math.max(...values),
@@ -87,17 +87,17 @@ export default function DatasetManagement({ onView, refreshTrigger }: DatasetMan
     const dataPoints = JSON.parse(dataset.data_points);
     const headers = Object.keys(dataPoints[0]).join(',');
     const rows = dataPoints.map((point: any) =>
-      Object.values(point).map(v => `"${v}"`).join(',')
+    Object.values(point).map((v) => `"${v}"`).join(',')
     );
     const csv = [headers, ...rows].join('\n');
-    
+
     const blob = new Blob([csv], { type: 'text/csv' });
     const url = window.URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
     a.download = `dataset_${dataset.id}_${dataset.dataset_type}.csv`;
     a.click();
-    
+
     toast({ title: 'Dataset Downloaded' });
   };
 
@@ -137,8 +137,8 @@ export default function DatasetManagement({ onView, refreshTrigger }: DatasetMan
         <CardContent className="py-12 flex justify-center">
           <Loader2 className="h-8 w-8 animate-spin text-muted-foreground" />
         </CardContent>
-      </Card>
-    );
+      </Card>);
+
   }
 
   return (
@@ -148,10 +148,10 @@ export default function DatasetManagement({ onView, refreshTrigger }: DatasetMan
           <CardTitle>Generated Datasets</CardTitle>
         </CardHeader>
         <CardContent>
-          {datasets.length === 0 ? (
-            <p className="text-center text-muted-foreground py-8">No datasets generated yet</p>
-          ) : (
-            <div className="overflow-x-auto">
+          {datasets.length === 0 ?
+          <p className="text-center text-muted-foreground py-8">No datasets generated yet</p> :
+
+          <div className="overflow-x-auto">
               <Table>
                 <TableHeader>
                   <TableRow>
@@ -162,8 +162,8 @@ export default function DatasetManagement({ onView, refreshTrigger }: DatasetMan
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {datasets.map((dataset) => (
-                    <TableRow key={dataset.id}>
+                  {datasets.map((dataset) =>
+                <TableRow key={dataset.id}>
                       <TableCell>
                         <Badge variant="secondary">
                           {getDatasetTypeLabel(dataset.dataset_type)}
@@ -179,34 +179,34 @@ export default function DatasetManagement({ onView, refreshTrigger }: DatasetMan
                       <TableCell>
                         <div className="flex gap-2">
                           <Button
-                            variant="outline"
-                            size="sm"
-                            onClick={() => handleView(dataset)}
-                          >
+                        variant="outline"
+                        size="sm"
+                        onClick={() => handleView(dataset)}>
+
                             <Eye className="h-4 w-4" />
                           </Button>
                           <Button
-                            variant="outline"
-                            size="sm"
-                            onClick={() => handleDownload(dataset)}
-                          >
+                        variant="outline"
+                        size="sm"
+                        onClick={() => handleDownload(dataset)}>
+
                             <Download className="h-4 w-4" />
                           </Button>
                           <Button
-                            variant="outline"
-                            size="sm"
-                            onClick={() => setDeleteId(dataset.id)}
-                          >
+                        variant="outline"
+                        size="sm"
+                        onClick={() => setDeleteId(dataset.id)}>
+
                             <Trash2 className="h-4 w-4" />
                           </Button>
                         </div>
                       </TableCell>
                     </TableRow>
-                  ))}
+                )}
                 </TableBody>
               </Table>
             </div>
-          )}
+          }
         </CardContent>
       </Card>
 
@@ -224,6 +224,6 @@ export default function DatasetManagement({ onView, refreshTrigger }: DatasetMan
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
-    </>
-  );
+    </>);
+
 }

@@ -17,10 +17,10 @@ export default function ESGReportDisplay({ report }: ESGReportDisplayProps) {
 
   // Emissions breakdown data
   const emissionsData = [
-    { name: 'Scope 1', value: summary.scope1, color: '#ef4444' },
-    { name: 'Scope 2', value: summary.scope2, color: '#f97316' },
-    { name: 'Scope 3', value: summary.scope3, color: '#eab308' }
-  ];
+  { name: 'Scope 1', value: summary.scope1, color: '#ef4444' },
+  { name: 'Scope 2', value: summary.scope2, color: '#f97316' },
+  { name: 'Scope 3', value: summary.scope3, color: '#eab308' }];
+
 
   // Trend data
   const trendData = trends.monthOverMonth.map((item: any) => ({
@@ -141,11 +141,11 @@ export default function ESGReportDisplay({ report }: ESGReportDisplayProps) {
                   label={({ name, value }) => `${name}: ${value.toFixed(2)} t`}
                   outerRadius={100}
                   fill="#8884d8"
-                  dataKey="value"
-                >
-                  {emissionsData.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={entry.color} />
-                  ))}
+                  dataKey="value">
+
+                  {emissionsData.map((entry, index) =>
+                  <Cell key={`cell-${index}`} fill={entry.color} />
+                  )}
                 </Pie>
                 <Tooltip />
               </PieChart>
@@ -177,8 +177,8 @@ export default function ESGReportDisplay({ report }: ESGReportDisplayProps) {
             <CardDescription>Month-over-month comparison</CardDescription>
           </CardHeader>
           <CardContent>
-            {trendData.length > 0 ? (
-              <>
+            {trendData.length > 0 ?
+            <>
                 <ResponsiveContainer width="100%" height={300}>
                   <LineChart data={trendData}>
                     <CartesianGrid strokeDasharray="3 3" />
@@ -206,12 +206,12 @@ export default function ESGReportDisplay({ report }: ESGReportDisplayProps) {
                     </Badge>
                   </div>
                 </div>
-              </>
-            ) : (
-              <div className="flex items-center justify-center h-[300px] text-muted-foreground">
+              </> :
+
+            <div className="flex items-center justify-center h-[300px] text-muted-foreground">
                 Insufficient data for trend analysis
               </div>
-            )}
+            }
           </CardContent>
         </Card>
       </div>
@@ -224,8 +224,8 @@ export default function ESGReportDisplay({ report }: ESGReportDisplayProps) {
         </CardHeader>
         <CardContent>
           <div className="space-y-4">
-            {compliance.map((item: any, index: number) => (
-              <div key={index} className="flex items-start space-x-3 p-3 border rounded-lg">
+            {compliance.map((item: any, index: number) =>
+            <div key={index} className="flex items-start space-x-3 p-3 border rounded-lg">
                 <div className="mt-0.5">{getStatusIcon(item.status)}</div>
                 <div className="flex-1 space-y-1">
                   <div className="flex items-center justify-between">
@@ -237,7 +237,7 @@ export default function ESGReportDisplay({ report }: ESGReportDisplayProps) {
                   <p className="text-xs text-muted-foreground">{item.description}</p>
                 </div>
               </div>
-            ))}
+            )}
           </div>
         </CardContent>
       </Card>
@@ -253,32 +253,32 @@ export default function ESGReportDisplay({ report }: ESGReportDisplayProps) {
             <Button
               onClick={() => exportJSON(report)}
               variant="outline"
-              className="w-full"
-            >
+              className="w-full">
+
               <FileJson className="mr-2 h-4 w-4" />
               Export JSON
             </Button>
             <Button
               onClick={() => exportCSV(report)}
               variant="outline"
-              className="w-full"
-            >
+              className="w-full">
+
               <FileSpreadsheet className="mr-2 h-4 w-4" />
               Export CSV
             </Button>
             <Button
               onClick={() => exportPDF(report)}
               variant="outline"
-              className="w-full"
-            >
+              className="w-full">
+
               <FilePdf className="mr-2 h-4 w-4" />
               Export PDF (Summary)
             </Button>
           </div>
         </CardContent>
       </Card>
-    </div>
-  );
+    </div>);
+
 }
 
 function exportJSON(report: any) {
@@ -289,31 +289,31 @@ function exportJSON(report: any) {
 
 function exportCSV(report: any) {
   const lines = [
-    'ESG Compliance Report',
-    '',
-    `Report Type,${report.reportType}`,
-    `Period,${report.period.start} to ${report.period.end}`,
-    `Frequency,${report.dateRange}`,
-    '',
-    'Summary Metrics',
-    'Metric,Value,Unit',
-    `Total Emissions,${report.summary.totalEmissions},tonnes CO2e`,
-    `Total Energy,${report.summary.totalEnergy},MWh`,
-    `Renewable Percentage,${report.summary.renewablePercentage},%`,
-    `Emissions Intensity,${report.summary.emissionsIntensity},kg CO2e/MWh`,
-    '',
-    'Emissions by Scope',
-    'Scope,Emissions (tonnes CO2e)',
-    `Scope 1,${report.summary.scope1}`,
-    `Scope 2,${report.summary.scope2}`,
-    `Scope 3,${report.summary.scope3}`,
-    '',
-    'Compliance Checklist',
-    'Item,Status,Description',
-    ...report.compliance.map((item: any) => 
-      `"${item.item}",${item.status},"${item.description}"`
-    )
-  ];
+  'ESG Compliance Report',
+  '',
+  `Report Type,${report.reportType}`,
+  `Period,${report.period.start} to ${report.period.end}`,
+  `Frequency,${report.dateRange}`,
+  '',
+  'Summary Metrics',
+  'Metric,Value,Unit',
+  `Total Emissions,${report.summary.totalEmissions},tonnes CO2e`,
+  `Total Energy,${report.summary.totalEnergy},MWh`,
+  `Renewable Percentage,${report.summary.renewablePercentage},%`,
+  `Emissions Intensity,${report.summary.emissionsIntensity},kg CO2e/MWh`,
+  '',
+  'Emissions by Scope',
+  'Scope,Emissions (tonnes CO2e)',
+  `Scope 1,${report.summary.scope1}`,
+  `Scope 2,${report.summary.scope2}`,
+  `Scope 3,${report.summary.scope3}`,
+  '',
+  'Compliance Checklist',
+  'Item,Status,Description',
+  ...report.compliance.map((item: any) =>
+  `"${item.item}",${item.status},"${item.description}"`
+  )];
+
 
   const csv = lines.join('\n');
   const blob = new Blob([csv], { type: 'text/csv' });
@@ -345,9 +345,9 @@ Scope 3 (Supply Chain): ${report.summary.scope3} tonnes CO₂e
 
 COMPLIANCE CHECKLIST
 --------------------
-${report.compliance.map((item: any) => 
+${report.compliance.map((item: any) =>
   `[${item.status.toUpperCase()}] ${item.item}\n   ${item.description}`
-).join('\n\n')}
+  ).join('\n\n')}
 
 Generated: ${new Date().toISOString()}
   `.trim();

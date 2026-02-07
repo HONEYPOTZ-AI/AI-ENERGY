@@ -11,17 +11,17 @@ export default function OptimizationPage() {
 
   const handleRunOptimization = async (config: any) => {
     setIsLoading(true);
-    
+
     try {
       const { data, error } = await window.ezsite.apis.run({
         path: 'optimization/runOptimization',
         methodName: 'runOptimization',
         param: [
-          config.objective,
-          config.timeHorizon,
-          config.constraints,
-          config.location
-        ]
+        config.objective,
+        config.timeHorizon,
+        config.constraints,
+        config.location]
+
       });
 
       if (error) {
@@ -31,13 +31,13 @@ export default function OptimizationPage() {
       setResults(data);
       toast({
         title: 'Optimization Complete',
-        description: `Successfully optimized for ${config.objective}. Cost savings: $${data.savings.costSavings.toFixed(2)}`,
+        description: `Successfully optimized for ${config.objective}. Cost savings: $${data.savings.costSavings.toFixed(2)}`
       });
     } catch (err: any) {
       toast({
         title: 'Optimization Failed',
         description: err.message || 'Failed to run optimization',
-        variant: 'destructive',
+        variant: 'destructive'
       });
     } finally {
       setIsLoading(false);
@@ -63,8 +63,8 @@ export default function OptimizationPage() {
           <TabsContent value="configure" className="space-y-6">
             <OptimizationConfig
               onRunOptimization={handleRunOptimization}
-              isLoading={isLoading}
-            />
+              isLoading={isLoading} />
+
           </TabsContent>
 
           <TabsContent value="results" className="space-y-6">
@@ -72,6 +72,6 @@ export default function OptimizationPage() {
           </TabsContent>
         </Tabs>
       </div>
-    </DashboardLayout>
-  );
+    </DashboardLayout>);
+
 }
