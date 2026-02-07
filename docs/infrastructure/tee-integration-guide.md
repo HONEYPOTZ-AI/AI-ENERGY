@@ -1,8 +1,8 @@
-# Trusted Execution Environment (TEE) Integration Guide
+# Trusted Execution Environment (TEE) Integration Guide - AI ENERGY Optimizer
 
 ## Overview
 
-This guide provides comprehensive instructions for setting up and integrating Trusted Execution Environment (TEE) into your Kubernetes cluster. TEE ensures sensitive workloads run in a protected execution environment with hardware-backed isolation.
+This guide provides comprehensive instructions for setting up and integrating Trusted Execution Environment (TEE) into AI ENERGY Optimizer Kubernetes cluster. TEE ensures sensitive workloads run in a protected execution environment with hardware-backed isolation.
 
 ## Architecture Overview
 

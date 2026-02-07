@@ -1,8 +1,8 @@
-# Security & Compliance Guide
+# Security & Compliance Guide - AI ENERGY Optimizer
 
 ## Overview
 
-This guide defines the security architecture, policy enforcement mechanisms, compliance controls, and audit procedures for the infrastructure. It covers data protection, network security, identity management, and regulatory compliance.
+This guide defines the security architecture, policy enforcement mechanisms, compliance controls, and audit procedures for AI ENERGY Optimizer infrastructure. It covers data protection, network security, identity management, and regulatory compliance.
 
 ## Security Architecture
 

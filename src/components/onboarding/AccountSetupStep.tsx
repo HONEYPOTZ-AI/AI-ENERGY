@@ -36,8 +36,8 @@ const AccountSetupStep = ({ data, updateData }: AccountSetupStepProps) => {
             placeholder="your.email@company.com"
             value={data.email}
             onChange={(e) => updateData({ email: e.target.value })}
-            className="text-base"
-          />
+            className="text-base" />
+
           <p className="text-xs text-gray-500">This will be your username for login</p>
         </div>
 
@@ -52,18 +52,18 @@ const AccountSetupStep = ({ data, updateData }: AccountSetupStepProps) => {
               placeholder="Create a secure password"
               value={data.password}
               onChange={(e) => updateData({ password: e.target.value })}
-              className="text-base pr-10"
-            />
+              className="text-base pr-10" />
+
             <button
               type="button"
               onClick={() => setShowPassword(!showPassword)}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700"
-            >
-              {showPassword ? (
-                <EyeOff className="w-4 h-4" />
-              ) : (
-                <Eye className="w-4 h-4" />
-              )}
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700">
+
+              {showPassword ?
+              <EyeOff className="w-4 h-4" /> :
+
+              <Eye className="w-4 h-4" />
+              }
             </button>
           </div>
           <p className="text-xs text-gray-500">Must be at least 6 characters</p>
@@ -74,15 +74,15 @@ const AccountSetupStep = ({ data, updateData }: AccountSetupStepProps) => {
             <Checkbox
               id="terms"
               checked={data.acceptedTerms}
-              onCheckedChange={(checked) => 
-                updateData({ acceptedTerms: checked as boolean })
+              onCheckedChange={(checked) =>
+              updateData({ acceptedTerms: checked as boolean })
               }
-              className="mt-1"
-            />
+              className="mt-1" />
+
             <Label
               htmlFor="terms"
-              className="text-sm text-gray-700 cursor-pointer leading-relaxed"
-            >
+              className="text-sm text-gray-700 cursor-pointer leading-relaxed">
+
               I agree to the{' '}
               <a href="#" className="text-blue-600 hover:underline">
                 Terms of Service
@@ -103,8 +103,8 @@ const AccountSetupStep = ({ data, updateData }: AccountSetupStepProps) => {
           </p>
         </div>
       </div>
-    </div>
-  );
+    </div>);
+
 };
 
 export default AccountSetupStep;

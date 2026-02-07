@@ -8,14 +8,14 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Label } from '@/components/ui/label';
 import { useNavigate } from 'react-router-dom';
 import { useToast } from '@/hooks/use-toast';
-import { 
-  Zap, 
-  Database, 
-  TrendingUp, 
-  Leaf, 
-  BarChart3, 
-  Settings, 
-  ArrowRight, 
+import {
+  Zap,
+  Database,
+  TrendingUp,
+  Leaf,
+  BarChart3,
+  Settings,
+  ArrowRight,
   CheckCircle,
   Sparkles,
   Globe,
@@ -24,8 +24,8 @@ import {
   Mail,
   Phone,
   MapPin,
-  Loader2
-} from 'lucide-react';
+  Loader2 } from
+'lucide-react';
 import { motion } from 'framer-motion';
 
 const HomePage = () => {
@@ -42,56 +42,56 @@ const HomePage = () => {
   });
 
   const features = [
-    {
-      icon: TrendingUp,
-      title: 'AI Load Forecasting',
-      description: 'Predict energy demand with 98% accuracy using advanced machine learning models trained on real-world patterns',
-      color: 'from-blue-500 to-cyan-500',
-      iconColor: 'text-blue-500'
-    },
-    {
-      icon: Settings,
-      title: 'Energy Optimization',
-      description: 'Reduce operational costs by up to 35% with intelligent energy distribution and real-time optimization algorithms',
-      color: 'from-green-500 to-emerald-500',
-      iconColor: 'text-green-500'
-    },
-    {
-      icon: Database,
-      title: 'Synthetic Data Generation',
-      description: 'Generate realistic energy consumption patterns for AI model training, testing, and validation',
-      color: 'from-purple-500 to-pink-500',
-      iconColor: 'text-purple-500'
-    },
-    {
-      icon: Leaf,
-      title: 'ESG Reporting',
-      description: 'Automated environmental, social, and governance compliance reporting with real-time carbon tracking',
-      color: 'from-orange-500 to-red-500',
-      iconColor: 'text-orange-500'
-    }
-  ];
+  {
+    icon: TrendingUp,
+    title: 'AI Load Forecasting',
+    description: 'Predict energy demand with 98% accuracy using advanced machine learning models trained on real-world patterns',
+    color: 'from-blue-500 to-cyan-500',
+    iconColor: 'text-blue-500'
+  },
+  {
+    icon: Settings,
+    title: 'Energy Optimization',
+    description: 'Reduce operational costs by up to 35% with intelligent energy distribution and real-time optimization algorithms',
+    color: 'from-green-500 to-emerald-500',
+    iconColor: 'text-green-500'
+  },
+  {
+    icon: Database,
+    title: 'Synthetic Data Generation',
+    description: 'Generate realistic energy consumption patterns for AI model training, testing, and validation',
+    color: 'from-purple-500 to-pink-500',
+    iconColor: 'text-purple-500'
+  },
+  {
+    icon: Leaf,
+    title: 'ESG Reporting',
+    description: 'Automated environmental, social, and governance compliance reporting with real-time carbon tracking',
+    color: 'from-orange-500 to-red-500',
+    iconColor: 'text-orange-500'
+  }];
+
 
   const industries = [
-    'Utilities & Energy',
-    'Manufacturing',
-    'Healthcare',
-    'Technology',
-    'Retail',
-    'Finance',
-    'Transportation',
-    'Real Estate',
-    'Government',
-    'Other'
-  ];
+  'Utilities & Energy',
+  'Manufacturing',
+  'Healthcare',
+  'Technology',
+  'Retail',
+  'Finance',
+  'Transportation',
+  'Real Estate',
+  'Government',
+  'Other'];
+
 
   const handleInputChange = (field: string, value: string) => {
-    setFormData(prev => ({ ...prev, [field]: value }));
+    setFormData((prev) => ({ ...prev, [field]: value }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!formData.companyName || !formData.contactName || !formData.email) {
       toast({
         title: 'Required Fields',
@@ -102,7 +102,7 @@ const HomePage = () => {
     }
 
     setIsSubmitting(true);
-    
+
     try {
       const { error } = await window.ezsite.apis.tableCreate(74746, {
         company_name: formData.companyName,
@@ -153,20 +153,20 @@ const HomePage = () => {
       <header className="border-b bg-white/95 backdrop-blur-md sticky top-0 z-50 shadow-sm">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-4">
-            <motion.div 
+            <motion.div
               className="flex items-center gap-2 cursor-pointer"
               whileHover={{ scale: 1.02 }}
-              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            >
+              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+
               <div className="relative">
                 <Zap className="h-8 w-8 text-blue-600" />
                 <Sparkles className="h-4 w-4 text-yellow-500 absolute -top-1 -right-1" />
               </div>
               <div>
                 <h1 className="text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                  Honeypotz Inc
+                  AI ENERGY Optimizer
                 </h1>
-                <p className="text-xs text-gray-500">AI Energy Optimizer</p>
+                <p className="text-xs text-gray-500">Intelligent Energy Management</p>
               </div>
             </motion.div>
             <nav className="hidden md:flex items-center space-x-6">
@@ -186,11 +186,11 @@ const HomePage = () => {
                 Get Started
               </Button>
             </nav>
-            <Button 
-              className="md:hidden bg-gradient-to-r from-blue-600 to-purple-600" 
+            <Button
+              className="md:hidden bg-gradient-to-r from-blue-600 to-purple-600"
               size="sm"
-              onClick={() => navigate('/onboarding')}
-            >
+              onClick={() => navigate('/onboarding')}>
+
               Get Started
             </Button>
           </div>
@@ -201,29 +201,29 @@ const HomePage = () => {
       <section className="relative overflow-hidden bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 py-20 md:py-32 px-4 sm:px-6 lg:px-8">
         <div className="absolute inset-0 bg-grid-slate-200 [mask-image:linear-gradient(0deg,white,rgba(255,255,255,0.6))] -z-10" />
         <div className="container mx-auto max-w-6xl">
-          <motion.div 
+          <motion.div
             className="text-center space-y-8"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
+            transition={{ duration: 0.6 }}>
+
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.2 }}
-            >
+              transition={{ delay: 0.2 }}>
+
               <Badge variant="secondary" className="mb-6 px-4 py-2 text-sm">
                 <Sparkles className="h-4 w-4 mr-2" />
                 Revolutionizing Energy Management with AI
               </Badge>
             </motion.div>
             
-            <motion.h2 
+            <motion.h2
               className="text-4xl sm:text-5xl lg:text-7xl font-bold tracking-tight leading-tight"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3 }}
-            >
+              transition={{ delay: 0.3 }}>
+
               AI-Powered Energy
               <br />
               <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
@@ -231,63 +231,63 @@ const HomePage = () => {
               </span>
             </motion.h2>
             
-            <motion.p 
+            <motion.p
               className="text-xl md:text-2xl text-gray-600 max-w-3xl mx-auto leading-relaxed"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 0.4 }}
-            >
+              transition={{ delay: 0.4 }}>
+
               Transform your energy management with intelligent forecasting, optimization, and ESG compliance. 
               Reduce costs by 35%, achieve 98% forecast accuracy, and meet sustainability goals.
             </motion.p>
             
-            <motion.div 
+            <motion.div
               className="flex flex-col sm:flex-row gap-4 justify-center pt-8"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5 }}
-            >
-              <Button 
-                size="lg" 
-                onClick={() => navigate('/onboarding')} 
-                className="text-lg px-8 py-6 bg-gradient-to-r from-blue-600 to-purple-600 hover:shadow-xl transition-shadow"
-              >
+              transition={{ delay: 0.5 }}>
+
+              <Button
+                size="lg"
+                onClick={() => navigate('/onboarding')}
+                className="text-lg px-8 py-6 bg-gradient-to-r from-blue-600 to-purple-600 hover:shadow-xl transition-shadow">
+
                 Start Onboarding
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
-              <Button 
-                size="lg" 
-                variant="outline" 
+              <Button
+                size="lg"
+                variant="outline"
                 onClick={scrollToDemo}
-                className="text-lg px-8 py-6 border-2 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50"
-              >
+                className="text-lg px-8 py-6 border-2 hover:bg-gradient-to-r hover:from-blue-50 hover:to-purple-50">
+
                 Request Demo
               </Button>
             </motion.div>
 
             {/* Stats */}
-            <motion.div 
+            <motion.div
               className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 mt-16 md:mt-20"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6 }}
-            >
+              transition={{ delay: 0.6 }}>
+
               {[
-                { value: '98%', label: 'Forecast Accuracy', color: 'text-blue-600' },
-                { value: '35%', label: 'Cost Reduction', color: 'text-green-600' },
-                { value: '24/7', label: 'Real-time Monitoring', color: 'text-purple-600' },
-                { value: 'Zero', label: 'Carbon Target', color: 'text-orange-600' }
-              ].map((stat, idx) => (
-                <motion.div 
-                  key={idx}
-                  className="text-center"
-                  whileHover={{ scale: 1.05 }}
-                  transition={{ type: "spring", stiffness: 300 }}
-                >
+              { value: '98%', label: 'Forecast Accuracy', color: 'text-blue-600' },
+              { value: '35%', label: 'Cost Reduction', color: 'text-green-600' },
+              { value: '24/7', label: 'Real-time Monitoring', color: 'text-purple-600' },
+              { value: 'Zero', label: 'Carbon Target', color: 'text-orange-600' }].
+              map((stat, idx) =>
+              <motion.div
+                key={idx}
+                className="text-center"
+                whileHover={{ scale: 1.05 }}
+                transition={{ type: "spring", stiffness: 300 }}>
+
                   <div className={`text-4xl md:text-5xl font-bold ${stat.color}`}>{stat.value}</div>
                   <div className="text-sm md:text-base text-gray-600 mt-2">{stat.label}</div>
                 </motion.div>
-              ))}
+              )}
             </motion.div>
           </motion.div>
         </div>
@@ -296,17 +296,17 @@ const HomePage = () => {
       {/* About Section */}
       <section id="about" className="py-20 md:py-32 px-4 sm:px-6 lg:px-8 bg-white">
         <div className="container mx-auto max-w-6xl">
-          <motion.div 
+          <motion.div
             className="grid md:grid-cols-2 gap-12 items-center"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
+            transition={{ duration: 0.6 }}>
+
             <div className="space-y-6">
               <Badge variant="outline" className="px-3 py-1">
                 <Globe className="h-3 w-3 mr-2" />
-                About Honeypotz Inc
+                About AI ENERGY Optimizer
               </Badge>
               <h3 className="text-3xl md:text-5xl font-bold leading-tight">
                 Leading the Future of{' '}
@@ -315,37 +315,37 @@ const HomePage = () => {
                 </span>
               </h3>
               <p className="text-lg text-gray-600 leading-relaxed">
-                At Honeypotz Inc, we're on a mission to revolutionize how organizations manage and optimize their energy consumption. 
+                At AI ENERGY Optimizer, we're on a mission to revolutionize how organizations manage and optimize their energy consumption. 
                 By combining cutting-edge artificial intelligence with deep energy sector expertise, we empower utilities and enterprises 
                 to make smarter, more sustainable decisions.
               </p>
               <p className="text-lg text-gray-600 leading-relaxed">
-                Our AI Energy Optimizer platform leverages advanced machine learning algorithms to deliver unprecedented accuracy in 
+                Our AI ENERGY Optimizer platform leverages advanced machine learning algorithms to deliver unprecedented accuracy in 
                 energy forecasting, optimization, and ESG reporting. We're committed to building a cleaner, more efficient energy future 
                 for generations to come.
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-6">
                 {[
-                  { icon: Target, label: 'Mission-Driven', desc: 'Zero Carbon Future' },
-                  { icon: Sparkles, label: 'AI Innovation', desc: 'Cutting-Edge Tech' },
-                  { icon: Shield, label: 'Trusted Partner', desc: 'Enterprise Grade' }
-                ].map((item, idx) => (
-                  <Card key={idx} className="border-2 hover:shadow-lg transition-shadow">
+                { icon: Target, label: 'Mission-Driven', desc: 'Zero Carbon Future' },
+                { icon: Sparkles, label: 'AI Innovation', desc: 'Cutting-Edge Tech' },
+                { icon: Shield, label: 'Trusted Partner', desc: 'Enterprise Grade' }].
+                map((item, idx) =>
+                <Card key={idx} className="border-2 hover:shadow-lg transition-shadow">
                     <CardContent className="pt-6 text-center">
                       <item.icon className="h-8 w-8 mx-auto mb-3 text-blue-600" />
                       <div className="font-semibold text-sm">{item.label}</div>
                       <div className="text-xs text-gray-500 mt-1">{item.desc}</div>
                     </CardContent>
                   </Card>
-                ))}
+                )}
               </div>
             </div>
             <div className="relative">
               <motion.div
                 className="relative bg-gradient-to-br from-blue-100 to-purple-100 rounded-2xl p-8 shadow-2xl"
                 whileHover={{ scale: 1.02 }}
-                transition={{ type: "spring", stiffness: 300 }}
-              >
+                transition={{ type: "spring", stiffness: 300 }}>
+
                 <div className="space-y-4">
                   <div className="bg-white rounded-xl p-6 shadow-lg">
                     <div className="flex items-center gap-4 mb-4">
@@ -385,12 +385,12 @@ const HomePage = () => {
       {/* Features Section */}
       <section id="features" className="py-20 md:py-32 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-gray-50 to-white">
         <div className="container mx-auto max-w-6xl">
-          <motion.div 
+          <motion.div
             className="text-center mb-16"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
+            viewport={{ once: true }}>
+
             <Badge variant="secondary" className="mb-4 px-4 py-2">
               <BarChart3 className="h-4 w-4 mr-2" />
               Platform Capabilities
@@ -412,16 +412,16 @@ const HomePage = () => {
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
-                >
+                  transition={{ delay: index * 0.1 }}>
+
                   <Card className="h-full hover:shadow-2xl transition-all duration-300 border-2 hover:border-blue-200 group">
                     <CardHeader>
                       <div className="flex items-start gap-4">
-                        <motion.div 
+                        <motion.div
                           className={`p-4 rounded-xl bg-gradient-to-br ${feature.color} shadow-lg`}
                           whileHover={{ rotate: 360 }}
-                          transition={{ duration: 0.6 }}
-                        >
+                          transition={{ duration: 0.6 }}>
+
                           <Icon className="h-8 w-8 text-white" />
                         </motion.div>
                         <div className="flex-1">
@@ -435,22 +435,22 @@ const HomePage = () => {
                       </div>
                     </CardHeader>
                   </Card>
-                </motion.div>
-              );
+                </motion.div>);
+
             })}
           </div>
 
-          <motion.div 
+          <motion.div
             className="text-center mt-12"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-          >
-            <Button 
-              size="lg" 
+            viewport={{ once: true }}>
+
+            <Button
+              size="lg"
               onClick={() => navigate('/dashboard/utility')}
-              className="bg-gradient-to-r from-blue-600 to-purple-600"
-            >
+              className="bg-gradient-to-r from-blue-600 to-purple-600">
+
               Explore All Features
               <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
@@ -461,12 +461,12 @@ const HomePage = () => {
       {/* Demo Preview Section */}
       <section id="demo-section" className="py-20 md:py-32 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 text-white">
         <div className="container mx-auto max-w-6xl">
-          <motion.div 
+          <motion.div
             className="text-center mb-16"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
+            viewport={{ once: true }}>
+
             <Badge variant="secondary" className="mb-4 px-4 py-2 bg-white/10 text-white border-white/20">
               <Sparkles className="h-4 w-4 mr-2" />
               Platform Preview
@@ -479,31 +479,31 @@ const HomePage = () => {
             </p>
           </motion.div>
 
-          <motion.div 
+          <motion.div
             className="grid md:grid-cols-2 gap-8 mb-12"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-          >
+            viewport={{ once: true }}>
+
             {[
-              {
-                title: 'Utility Dashboard',
-                description: 'Comprehensive tools for energy providers to forecast demand, optimize distribution, and manage resources',
-                link: '/dashboard/utility',
-                gradient: 'from-blue-500 to-cyan-500'
-              },
-              {
-                title: 'Enterprise Dashboard',
-                description: 'Powerful analytics for businesses to monitor consumption, reduce costs, and track ESG metrics',
-                link: '/dashboard/enterprise',
-                gradient: 'from-purple-500 to-pink-500'
-              }
-            ].map((demo, idx) => (
-              <motion.div
-                key={idx}
-                whileHover={{ scale: 1.03 }}
-                transition={{ type: "spring", stiffness: 300 }}
-              >
+            {
+              title: 'Utility Dashboard',
+              description: 'Comprehensive tools for energy providers to forecast demand, optimize distribution, and manage resources',
+              link: '/dashboard/utility',
+              gradient: 'from-blue-500 to-cyan-500'
+            },
+            {
+              title: 'Enterprise Dashboard',
+              description: 'Powerful analytics for businesses to monitor consumption, reduce costs, and track ESG metrics',
+              link: '/dashboard/enterprise',
+              gradient: 'from-purple-500 to-pink-500'
+            }].
+            map((demo, idx) =>
+            <motion.div
+              key={idx}
+              whileHover={{ scale: 1.03 }}
+              transition={{ type: "spring", stiffness: 300 }}>
+
                 <Card className="bg-white/10 backdrop-blur-lg border-white/20 hover:bg-white/15 transition-all h-full">
                   <CardHeader>
                     <div className={`h-40 rounded-lg bg-gradient-to-br ${demo.gradient} mb-4 flex items-center justify-center`}>
@@ -513,33 +513,33 @@ const HomePage = () => {
                     <CardDescription className="text-gray-300 text-base mb-4">
                       {demo.description}
                     </CardDescription>
-                    <Button 
-                      onClick={() => navigate(demo.link)}
-                      className="w-full bg-white text-gray-900 hover:bg-gray-100"
-                    >
+                    <Button
+                    onClick={() => navigate(demo.link)}
+                    className="w-full bg-white text-gray-900 hover:bg-gray-100">
+
                       View Dashboard
                       <ArrowRight className="ml-2 h-4 w-4" />
                     </Button>
                   </CardHeader>
                 </Card>
               </motion.div>
-            ))}
+            )}
           </motion.div>
 
-          <motion.div 
+          <motion.div
             className="text-center"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
+            viewport={{ once: true }}>
+
             <p className="text-lg text-gray-300 mb-6">
               Ready to see it in action?
             </p>
-            <Button 
-              size="lg" 
+            <Button
+              size="lg"
               onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-              className="bg-gradient-to-r from-green-500 to-emerald-500 hover:shadow-xl"
-            >
+              className="bg-gradient-to-r from-green-500 to-emerald-500 hover:shadow-xl">
+
               Request a Personalized Demo
             </Button>
           </motion.div>
@@ -549,12 +549,12 @@ const HomePage = () => {
       {/* Lead Capture Form */}
       <section id="contact" className="py-20 md:py-32 px-4 sm:px-6 lg:px-8 bg-white">
         <div className="container mx-auto max-w-4xl">
-          <motion.div 
+          <motion.div
             className="text-center mb-12"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
+            viewport={{ once: true }}>
+
             <Badge variant="secondary" className="mb-4 px-4 py-2">
               <Mail className="h-4 w-4 mr-2" />
               Get in Touch
@@ -571,8 +571,8 @@ const HomePage = () => {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
+            viewport={{ once: true }}>
+
             <Card className="border-2 shadow-2xl">
               <CardHeader>
                 <CardTitle className="text-2xl">Request a Demo</CardTitle>
@@ -591,8 +591,8 @@ const HomePage = () => {
                         value={formData.companyName}
                         onChange={(e) => handleInputChange('companyName', e.target.value)}
                         required
-                        className="h-11"
-                      />
+                        className="h-11" />
+
                     </div>
                     <div className="space-y-2">
                       <Label htmlFor="contactName">Contact Name *</Label>
@@ -602,8 +602,8 @@ const HomePage = () => {
                         value={formData.contactName}
                         onChange={(e) => handleInputChange('contactName', e.target.value)}
                         required
-                        className="h-11"
-                      />
+                        className="h-11" />
+
                     </div>
                   </div>
 
@@ -617,8 +617,8 @@ const HomePage = () => {
                         value={formData.email}
                         onChange={(e) => handleInputChange('email', e.target.value)}
                         required
-                        className="h-11"
-                      />
+                        className="h-11" />
+
                     </div>
                     <div className="space-y-2">
                       <Label htmlFor="phone">Phone Number</Label>
@@ -628,8 +628,8 @@ const HomePage = () => {
                         placeholder="+1 (555) 000-0000"
                         value={formData.phone}
                         onChange={(e) => handleInputChange('phone', e.target.value)}
-                        className="h-11"
-                      />
+                        className="h-11" />
+
                     </div>
                   </div>
 
@@ -640,11 +640,11 @@ const HomePage = () => {
                         <SelectValue placeholder="Select your industry" />
                       </SelectTrigger>
                       <SelectContent>
-                        {industries.map((industry) => (
-                          <SelectItem key={industry} value={industry}>
+                        {industries.map((industry) =>
+                        <SelectItem key={industry} value={industry}>
                             {industry}
                           </SelectItem>
-                        ))}
+                        )}
                       </SelectContent>
                     </Select>
                   </div>
@@ -657,26 +657,26 @@ const HomePage = () => {
                       value={formData.message}
                       onChange={(e) => handleInputChange('message', e.target.value)}
                       rows={4}
-                      className="resize-none"
-                    />
+                      className="resize-none" />
+
                   </div>
 
-                  <Button 
-                    type="submit" 
+                  <Button
+                    type="submit"
                     className="w-full h-12 text-lg bg-gradient-to-r from-blue-600 to-purple-600 hover:shadow-xl transition-shadow"
-                    disabled={isSubmitting}
-                  >
-                    {isSubmitting ? (
-                      <>
+                    disabled={isSubmitting}>
+
+                    {isSubmitting ?
+                    <>
                         <Loader2 className="mr-2 h-5 w-5 animate-spin" />
                         Submitting...
-                      </>
-                    ) : (
-                      <>
+                      </> :
+
+                    <>
                         Request Demo
                         <ArrowRight className="ml-2 h-5 w-5" />
                       </>
-                    )}
+                    }
                   </Button>
                 </form>
               </CardContent>
@@ -696,18 +696,18 @@ const HomePage = () => {
                   <Sparkles className="h-5 w-5 text-yellow-400 absolute -top-1 -right-1" />
                 </div>
                 <div>
-                  <h4 className="text-2xl font-bold">Honeypotz Inc</h4>
-                  <p className="text-sm text-gray-400">AI Energy Optimizer</p>
+                  <h4 className="text-2xl font-bold">AI ENERGY Optimizer</h4>
+                  <p className="text-sm text-gray-400">Intelligent Energy Management</p>
                 </div>
               </div>
               <p className="text-gray-400 mb-6 leading-relaxed">
-                Leading the future of sustainable energy with AI-powered optimization solutions for utilities and enterprises worldwide.
+                AI ENERGY Optimizer - Leading the future of sustainable energy with AI-powered optimization solutions for utilities and enterprises worldwide.
               </p>
               <div className="flex gap-4">
                 <div className="flex items-center gap-2 text-sm text-gray-400">
                   <Mail className="h-4 w-4" />
-                  <a href="mailto:contact@honeypotz.com" className="hover:text-white transition-colors">
-                    contact@honeypotz.com
+                  <a href="mailto:contact@aienergyoptimizer.com" className="hover:text-white transition-colors">
+                    contact@aienergyoptimizer.com
                   </a>
                 </div>
               </div>
@@ -758,7 +758,7 @@ const HomePage = () => {
 
           <div className="border-t border-gray-700 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-gray-400 text-sm text-center md:text-left">
-              © {new Date().getFullYear()} Honeypotz Inc. All rights reserved. Powering sustainable energy management worldwide.
+              © {new Date().getFullYear()} AI ENERGY Optimizer. All rights reserved. Powering sustainable energy management worldwide.
             </p>
             <div className="flex gap-6 text-sm text-gray-400">
               <button className="hover:text-white transition-colors">Privacy Policy</button>
@@ -767,8 +767,8 @@ const HomePage = () => {
           </div>
         </div>
       </footer>
-    </div>
-  );
+    </div>);
+
 };
 
 export default HomePage;

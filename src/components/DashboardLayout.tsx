@@ -57,7 +57,7 @@ const DashboardLayout = ({ children, dashboardType }: DashboardLayoutProps) => {
             
             <Link to="/" className="flex items-center gap-2">
               <Zap className="h-6 w-6 text-blue-600" />
-              <span className="font-bold text-lg hidden sm:inline">AI Energy Optimizer</span>
+              <span className="font-bold text-lg hidden sm:inline">AI ENERGY Optimizer</span>
             </Link>
 
             <Separator orientation="vertical" className="h-6 hidden sm:block" />

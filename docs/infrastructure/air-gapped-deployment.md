@@ -1,8 +1,8 @@
-# Air-Gapped Deployment Guide
+# Air-Gapped Deployment Guide - AI ENERGY Optimizer
 
 ## Overview
 
-This guide provides comprehensive instructions for deploying infrastructure in air-gapped (offline) environments with no direct internet access. It covers artifact management, image registry setup, network requirements, and offline deployment strategies.
+This guide provides comprehensive instructions for deploying AI ENERGY Optimizer infrastructure in air-gapped (offline) environments with no direct internet access. It covers artifact management, image registry setup, network requirements, and offline deployment strategies.
 
 ## Architecture Overview
 

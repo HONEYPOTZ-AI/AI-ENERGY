@@ -37,19 +37,19 @@ const OnboardingPage = () => {
     useCases: [],
     email: '',
     password: '',
-    acceptedTerms: false,
+    acceptedTerms: false
   });
 
   const steps = [
-    { id: 0, name: 'Welcome', component: WelcomeStep },
-    { id: 1, name: 'Company Info', component: CompanyInfoStep },
-    { id: 2, name: 'Use Cases', component: UseCaseStep },
-    { id: 3, name: 'Account', component: AccountSetupStep },
-    { id: 4, name: 'Complete', component: CompletionStep },
-  ];
+  { id: 0, name: 'Welcome', component: WelcomeStep },
+  { id: 1, name: 'Company Info', component: CompanyInfoStep },
+  { id: 2, name: 'Use Cases', component: UseCaseStep },
+  { id: 3, name: 'Account', component: AccountSetupStep },
+  { id: 4, name: 'Complete', component: CompletionStep }];
+
 
   const totalSteps = steps.length;
-  const progress = ((currentStep + 1) / totalSteps) * 100;
+  const progress = (currentStep + 1) / totalSteps * 100;
 
   const updateData = (data: Partial<OnboardingData>) => {
     setOnboardingData((prev) => ({ ...prev, ...data }));
@@ -116,14 +116,14 @@ const OnboardingPage = () => {
     if (currentStep === 3) {
       // Last step before completion - submit data
       if (!validateStep()) return;
-      
+
       setIsSubmitting(true);
       try {
         // Create user account
         const { error: registerError } = await window.ezsite.apis.register({
           email: onboardingData.email,
           password: onboardingData.password,
-          name: onboardingData.contactName,
+          name: onboardingData.contactName
         });
 
         if (registerError) {
@@ -143,7 +143,7 @@ const OnboardingPage = () => {
           lead_source: 'onboarding_wizard',
           notes: `Use cases selected: ${onboardingData.useCases.join(', ')}`,
           created_at: new Date().toISOString(),
-          updated_at: new Date().toISOString(),
+          updated_at: new Date().toISOString()
         });
 
         if (leadsError) {
@@ -154,10 +154,10 @@ const OnboardingPage = () => {
         setCurrentStep(4);
         toast({ title: 'Success', description: 'Account created successfully!' });
       } catch (error: any) {
-        toast({ 
-          title: 'Error', 
+        toast({
+          title: 'Error',
           description: error.message || 'Failed to complete onboarding. Please try again.',
-          variant: 'destructive' 
+          variant: 'destructive'
         });
       } finally {
         setIsSubmitting(false);
@@ -186,8 +186,8 @@ const OnboardingPage = () => {
       <Card className="w-full max-w-2xl shadow-xl">
         <CardContent className="p-6 md:p-8">
           {/* Progress Bar */}
-          {currentStep < totalSteps - 1 && (
-            <div className="mb-6">
+          {currentStep < totalSteps - 1 &&
+          <div className="mb-6">
               <div className="flex items-center justify-between mb-2">
                 <span className="text-sm font-medium text-gray-600">
                   Step {currentStep + 1} of {totalSteps}
@@ -198,7 +198,7 @@ const OnboardingPage = () => {
               </div>
               <Progress value={progress} className="h-2" />
             </div>
-          )}
+          }
 
           {/* Step Content */}
           <AnimatePresence mode="wait">
@@ -207,42 +207,42 @@ const OnboardingPage = () => {
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -20 }}
-              transition={{ duration: 0.3 }}
-            >
+              transition={{ duration: 0.3 }}>
+
               <CurrentStepComponent
                 data={onboardingData}
                 updateData={updateData}
-                onNext={currentStep === 4 ? handleGoToDashboard : handleNext}
-              />
+                onNext={currentStep === 4 ? handleGoToDashboard : handleNext} />
+
             </motion.div>
           </AnimatePresence>
 
           {/* Navigation Buttons */}
-          {currentStep < totalSteps - 1 && (
-            <div className="flex items-center justify-between mt-8 gap-4">
+          {currentStep < totalSteps - 1 &&
+          <div className="flex items-center justify-between mt-8 gap-4">
               <Button
-                variant="outline"
-                onClick={handleBack}
-                disabled={currentStep === 0}
-                className="flex items-center gap-2 min-w-[100px]"
-              >
+              variant="outline"
+              onClick={handleBack}
+              disabled={currentStep === 0}
+              className="flex items-center gap-2 min-w-[100px]">
+
                 <ChevronLeft className="w-4 h-4" />
                 Back
               </Button>
               <Button
-                onClick={handleNext}
-                disabled={isSubmitting}
-                className="flex items-center gap-2 min-w-[100px]"
-              >
+              onClick={handleNext}
+              disabled={isSubmitting}
+              className="flex items-center gap-2 min-w-[100px]">
+
                 {isSubmitting ? 'Submitting...' : currentStep === 3 ? 'Complete' : 'Next'}
                 {!isSubmitting && <ChevronRight className="w-4 h-4" />}
               </Button>
             </div>
-          )}
+          }
         </CardContent>
       </Card>
-    </div>
-  );
+    </div>);
+
 };
 
 export default OnboardingPage;

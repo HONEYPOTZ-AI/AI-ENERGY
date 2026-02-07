@@ -1,8 +1,8 @@
-# Kubernetes Deployment Guide
+# Kubernetes Deployment Guide - AI ENERGY Optimizer
 
 ## Overview
 
-This guide provides comprehensive instructions for deploying and managing applications on Azure Kubernetes Service (AKS) with security-hardened configurations, GPU support, and Trusted Execution Environment (TEE) integration.
+This guide provides comprehensive instructions for deploying and managing AI ENERGY Optimizer applications on Azure Kubernetes Service (AKS) with security-hardened configurations, GPU support, and Trusted Execution Environment (TEE) integration.
 
 ## Architecture Overview
 

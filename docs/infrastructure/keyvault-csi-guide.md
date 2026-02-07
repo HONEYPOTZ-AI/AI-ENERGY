@@ -1,8 +1,8 @@
-# Azure Key Vault CSI Driver Integration Guide
+# Azure Key Vault CSI Driver Integration Guide - AI ENERGY Optimizer
 
 ## Overview
 
-This guide provides comprehensive instructions for integrating Azure Key Vault with Kubernetes using the Secrets Store CSI Driver. This enables secure secret management, automatic rotation, and workload identity-based authentication.
+This guide provides comprehensive instructions for integrating Azure Key Vault with AI ENERGY Optimizer using the Secrets Store CSI Driver. This enables secure secret management, automatic rotation, and workload identity-based authentication.
 
 ## Architecture Overview
 

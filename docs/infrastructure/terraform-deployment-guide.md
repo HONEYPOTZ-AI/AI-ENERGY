@@ -1,8 +1,8 @@
-# Terraform Deployment Guide
+# Terraform Deployment Guide - AI ENERGY Optimizer
 
 ## Overview
 
-This guide provides comprehensive instructions for deploying infrastructure using Terraform. It covers infrastructure provisioning, state management, variable configuration, and best practices for managing Azure resources.
+This guide provides comprehensive instructions for deploying AI ENERGY Optimizer infrastructure using Terraform. It covers infrastructure provisioning, state management, variable configuration, and best practices for managing Azure resources.
 
 ## Architecture Deployment Flow
 

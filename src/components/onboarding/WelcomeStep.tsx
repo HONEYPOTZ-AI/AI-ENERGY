@@ -16,7 +16,7 @@ const WelcomeStep = ({ onNext }: WelcomeStepProps) => {
       
       <div className="space-y-3">
         <h1 className="text-3xl md:text-4xl font-bold text-gray-900">
-          Welcome to Honeypotz Inc
+          Welcome to AI ENERGY Optimizer
         </h1>
         <p className="text-lg text-gray-600 max-w-md mx-auto">
           Your AI-Powered Energy Intelligence Platform
@@ -57,15 +57,15 @@ const WelcomeStep = ({ onNext }: WelcomeStepProps) => {
         </div>
       </div>
 
-      <Button 
-        onClick={onNext} 
+      <Button
+        onClick={onNext}
         size="lg"
-        className="w-full sm:w-auto px-8 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700"
-      >
+        className="w-full sm:w-auto px-8 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700">
+
         Get Started
       </Button>
-    </div>
-  );
+    </div>);
+
 };
 
 export default WelcomeStep;

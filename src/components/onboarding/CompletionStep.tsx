@@ -19,7 +19,7 @@ const CompletionStep = ({ onNext }: CompletionStepProps) => {
           Welcome Aboard! 🎉
         </h1>
         <p className="text-lg text-gray-600 max-w-md mx-auto">
-          Your account has been successfully created and you're all set to start using Honeypotz Inc.
+          Your account has been successfully created and you're all set to start using AI ENERGY Optimizer.
         </p>
       </div>
 
@@ -45,20 +45,20 @@ const CompletionStep = ({ onNext }: CompletionStepProps) => {
         </ul>
       </div>
 
-      <Button 
-        onClick={onNext} 
+      <Button
+        onClick={onNext}
         size="lg"
-        className="w-full sm:w-auto px-8 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-base"
-      >
+        className="w-full sm:w-auto px-8 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-base">
+
         Go to Dashboard
         <ArrowRight className="w-5 h-5 ml-2" />
       </Button>
 
       <p className="text-xs text-gray-500 mt-4">
-        Need help? Contact us at support@honeypotz.com
+        Need help? Contact us at support@aienergyoptimizer.com
       </p>
-    </div>
-  );
+    </div>);
+
 };
 
 export default CompletionStep;

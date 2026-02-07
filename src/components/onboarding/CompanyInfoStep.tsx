@@ -31,8 +31,8 @@ const CompanyInfoStep = ({ data, updateData }: CompanyInfoStepProps) => {
             placeholder="Enter your company name"
             value={data.companyName}
             onChange={(e) => updateData({ companyName: e.target.value })}
-            className="text-base"
-          />
+            className="text-base" />
+
         </div>
 
         <div className="space-y-2">
@@ -44,8 +44,8 @@ const CompanyInfoStep = ({ data, updateData }: CompanyInfoStepProps) => {
             placeholder="e.g., Energy, Manufacturing, Healthcare"
             value={data.industry}
             onChange={(e) => updateData({ industry: e.target.value })}
-            className="text-base"
-          />
+            className="text-base" />
+
         </div>
 
         <div className="space-y-2">
@@ -56,8 +56,8 @@ const CompanyInfoStep = ({ data, updateData }: CompanyInfoStepProps) => {
             id="companySize"
             value={data.companySize}
             onChange={(e) => updateData({ companySize: e.target.value })}
-            className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50"
-          >
+            className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50">
+
             <option value="">Select company size</option>
             <option value="small">Small (1-50 employees)</option>
             <option value="medium">Medium (51-250 employees)</option>
@@ -75,8 +75,8 @@ const CompanyInfoStep = ({ data, updateData }: CompanyInfoStepProps) => {
             placeholder="Enter your full name"
             value={data.contactName}
             onChange={(e) => updateData({ contactName: e.target.value })}
-            className="text-base"
-          />
+            className="text-base" />
+
         </div>
 
         <div className="space-y-2">
@@ -89,12 +89,12 @@ const CompanyInfoStep = ({ data, updateData }: CompanyInfoStepProps) => {
             placeholder="+1 (555) 123-4567"
             value={data.phone}
             onChange={(e) => updateData({ phone: e.target.value })}
-            className="text-base"
-          />
+            className="text-base" />
+
         </div>
       </div>
-    </div>
-  );
+    </div>);
+
 };
 
 export default CompanyInfoStep;
