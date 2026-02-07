@@ -42,12 +42,12 @@ export default function ForecastVisualization({ forecastData, historicalData }: 
   };
 
   return (
-    <Card>
+    <Card className="dark:bg-gray-800 dark:border-gray-700">
       <CardHeader>
         <div className="flex items-center justify-between">
           <div>
-            <CardTitle>Forecast Visualization</CardTitle>
-            <CardDescription>Interactive view of historical and forecasted values</CardDescription>
+            <CardTitle className="dark:text-gray-100">Forecast Visualization</CardTitle>
+            <CardDescription className="dark:text-gray-300">Interactive view of historical and forecasted values</CardDescription>
           </div>
           <div className="flex gap-2">
             <Button

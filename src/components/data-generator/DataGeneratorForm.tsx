@@ -78,9 +78,9 @@ export default function DataGeneratorForm({ onGenerate }: DataGeneratorFormProps
   };
 
   return (
-    <Card>
+    <Card className="dark:bg-gray-800 dark:border-gray-700">
       <CardHeader>
-        <CardTitle>Generate Synthetic Data</CardTitle>
+        <CardTitle className="dark:text-gray-100">Generate Synthetic Data</CardTitle>
       </CardHeader>
       <CardContent className="space-y-6">
         <div className="space-y-2">

@@ -11,8 +11,8 @@ interface DataVisualizationProps {
 export default function DataVisualization({ data }: DataVisualizationProps) {
   if (!data) {
     return (
-      <Card>
-        <CardContent className="py-12 text-center text-muted-foreground">
+      <Card className="dark:bg-gray-800 dark:border-gray-700">
+        <CardContent className="py-12 text-center text-muted-foreground dark:text-gray-400">
           Generate data to see visualization
         </CardContent>
       </Card>);
@@ -63,9 +63,9 @@ export default function DataVisualization({ data }: DataVisualizationProps) {
 
   return (
     <div className="space-y-4">
-      <Card>
+      <Card className="dark:bg-gray-800 dark:border-gray-700">
         <CardHeader className="flex flex-row items-center justify-between">
-          <CardTitle>Time Series Visualization</CardTitle>
+          <CardTitle className="dark:text-gray-100">Time Series Visualization</CardTitle>
           <div className="flex gap-2">
             <Button variant="outline" size="sm" onClick={downloadCSV}>
               <Download className="mr-2 h-4 w-4" />
@@ -124,31 +124,31 @@ export default function DataVisualization({ data }: DataVisualizationProps) {
         </CardContent>
       </Card>
 
-      <Card>
+      <Card className="dark:bg-gray-800 dark:border-gray-700">
         <CardHeader>
-          <CardTitle>Summary Statistics</CardTitle>
+          <CardTitle className="dark:text-gray-100">Summary Statistics</CardTitle>
         </CardHeader>
         <CardContent>
           <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
             <div className="space-y-1">
-              <p className="text-sm text-muted-foreground">Minimum</p>
-              <p className="text-2xl font-bold">{data.stats.min.toFixed(2)}</p>
+              <p className="text-sm text-muted-foreground dark:text-gray-400">Minimum</p>
+              <p className="text-2xl font-bold dark:text-gray-100">{data.stats.min.toFixed(2)}</p>
             </div>
             <div className="space-y-1">
-              <p className="text-sm text-muted-foreground">Maximum</p>
-              <p className="text-2xl font-bold">{data.stats.max.toFixed(2)}</p>
+              <p className="text-sm text-muted-foreground dark:text-gray-400">Maximum</p>
+              <p className="text-2xl font-bold dark:text-gray-100">{data.stats.max.toFixed(2)}</p>
             </div>
             <div className="space-y-1">
-              <p className="text-sm text-muted-foreground">Average</p>
-              <p className="text-2xl font-bold">{data.stats.avg.toFixed(2)}</p>
+              <p className="text-sm text-muted-foreground dark:text-gray-400">Average</p>
+              <p className="text-2xl font-bold dark:text-gray-100">{data.stats.avg.toFixed(2)}</p>
             </div>
             <div className="space-y-1">
-              <p className="text-sm text-muted-foreground">Std Dev</p>
-              <p className="text-2xl font-bold">{data.stats.stdDev.toFixed(2)}</p>
+              <p className="text-sm text-muted-foreground dark:text-gray-400">Std Dev</p>
+              <p className="text-2xl font-bold dark:text-gray-100">{data.stats.stdDev.toFixed(2)}</p>
             </div>
             <div className="space-y-1">
-              <p className="text-sm text-muted-foreground">Data Points</p>
-              <p className="text-2xl font-bold">{data.stats.count}</p>
+              <p className="text-sm text-muted-foreground dark:text-gray-400">Data Points</p>
+              <p className="text-2xl font-bold dark:text-gray-100">{data.stats.count}</p>
             </div>
           </div>
         </CardContent>

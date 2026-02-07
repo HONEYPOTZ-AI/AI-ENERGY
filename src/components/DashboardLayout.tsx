@@ -19,6 +19,7 @@ import {
   Leaf } from
 "lucide-react";
 import { cn } from "@/lib/utils";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 interface DashboardLayoutProps {
   children: ReactNode;
@@ -41,9 +42,9 @@ const DashboardLayout = ({ children, dashboardType }: DashboardLayoutProps) => {
   const isActive = (path: string) => location.pathname === path;
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
       {/* Top Navigation Bar */}
-      <header className="bg-white border-b sticky top-0 z-40">
+      <header className="bg-white dark:bg-gray-800 border-b dark:border-gray-700 sticky top-0 z-40">
         <div className="flex items-center justify-between px-4 py-3">
           <div className="flex items-center gap-4">
             <Button
@@ -78,6 +79,7 @@ const DashboardLayout = ({ children, dashboardType }: DashboardLayoutProps) => {
           </div>
 
           <div className="flex items-center gap-2">
+            <ThemeToggle />
             <Button
               variant="outline"
               size="sm"
@@ -96,7 +98,7 @@ const DashboardLayout = ({ children, dashboardType }: DashboardLayoutProps) => {
         {/* Sidebar Navigation */}
         <aside
           className={cn(
-            "fixed lg:sticky top-[57px] left-0 z-30 h-[calc(100vh-57px)] w-64 bg-white border-r transition-transform duration-300 ease-in-out",
+            "fixed lg:sticky top-[57px] left-0 z-30 h-[calc(100vh-57px)] w-64 bg-white dark:bg-gray-800 border-r dark:border-gray-700 transition-transform duration-300 ease-in-out",
             sidebarOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
           )}>
 
@@ -109,7 +111,7 @@ const DashboardLayout = ({ children, dashboardType }: DashboardLayoutProps) => {
                   variant={isActive(item.path) ? "secondary" : "ghost"}
                   className={cn(
                     "w-full justify-start",
-                    isActive(item.path) && "bg-blue-50 text-blue-600 hover:bg-blue-100"
+                    isActive(item.path) && "bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 hover:bg-blue-100 dark:hover:bg-blue-900/30"
                   )}
                   onClick={() => {
                     navigate(item.path);

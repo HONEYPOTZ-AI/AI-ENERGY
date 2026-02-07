@@ -49,8 +49,8 @@ export default function ESGReportsPage() {
     <DashboardLayout dashboardType="enterprise">
       <div className="space-y-6">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight">ESG Compliance Reports</h1>
-          <p className="text-muted-foreground">
+          <h1 className="text-3xl font-bold tracking-tight dark:text-gray-100">ESG Compliance Reports</h1>
+          <p className="text-muted-foreground dark:text-gray-300">
             Generate and export ESG compliance reports for SEC Climate Disclosure and GHG Protocol
           </p>
         </div>

@@ -106,8 +106,8 @@ const EnterpriseDashboard = () => {
       <div className="space-y-8">
         {/* Header */}
         <div>
-          <h1 className="text-3xl font-bold mb-2">Enterprise Dashboard</h1>
-          <p className="text-gray-600">Optimize your facility's energy consumption and costs</p>
+          <h1 className="text-3xl font-bold mb-2 dark:text-gray-100">Enterprise Dashboard</h1>
+          <p className="text-gray-600 dark:text-gray-300">Optimize your facility's energy consumption and costs</p>
         </div>
 
         {/* KPI Cards */}
@@ -115,10 +115,10 @@ const EnterpriseDashboard = () => {
           {kpis.map((kpi, index) => {
             const Icon = kpi.icon;
             return (
-              <Card key={index}>
+              <Card key={index} className="dark:bg-gray-800 dark:border-gray-700">
                 <CardHeader className="pb-2">
                   <div className="flex items-center justify-between">
-                    <CardTitle className="text-sm font-medium text-gray-600">
+                    <CardTitle className="text-sm font-medium text-gray-600 dark:text-gray-300">
                       {kpi.title}
                     </CardTitle>
                     <div className={`p-2 rounded-lg ${kpi.bgColor}`}>
@@ -129,19 +129,19 @@ const EnterpriseDashboard = () => {
                 <CardContent>
                   <div className="space-y-2">
                     <div className="flex items-baseline gap-2">
-                      <span className="text-3xl font-bold">{kpi.value}</span>
-                      <span className="text-sm text-gray-500">{kpi.unit}</span>
+                      <span className="text-3xl font-bold dark:text-gray-100">{kpi.value}</span>
+                      <span className="text-sm text-gray-500 dark:text-gray-400">{kpi.unit}</span>
                     </div>
                     <div className="flex items-center gap-1">
                       {kpi.trend === "up" ?
-                      <ArrowUp className="h-4 w-4 text-green-600" /> :
+                      <ArrowUp className="h-4 w-4 text-green-600 dark:text-green-400" /> :
 
-                      <ArrowDown className="h-4 w-4 text-red-600" />
+                      <ArrowDown className="h-4 w-4 text-red-600 dark:text-red-400" />
                       }
-                      <span className={`text-sm font-medium ${kpi.trend === "up" ? "text-green-600" : "text-red-600"}`}>
+                      <span className={`text-sm font-medium ${kpi.trend === "up" ? "text-green-600 dark:text-green-400" : "text-red-600 dark:text-red-400"}`}>
                         {kpi.change}
                       </span>
-                      <span className="text-sm text-gray-500">vs last month</span>
+                      <span className="text-sm text-gray-500 dark:text-gray-400">vs last month</span>
                     </div>
                   </div>
                 </CardContent>
@@ -152,18 +152,18 @@ const EnterpriseDashboard = () => {
 
         {/* Quick Access Cards */}
         <div>
-          <h2 className="text-xl font-bold mb-4">Quick Access</h2>
+          <h2 className="text-xl font-bold mb-4 dark:text-gray-100">Quick Access</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {quickAccessCards.map((card, index) => {
               const Icon = card.icon;
               return (
-                <Card key={index} className="hover:shadow-lg transition-shadow cursor-pointer" onClick={() => navigate(card.path)}>
+                <Card key={index} className="hover:shadow-lg transition-shadow cursor-pointer dark:bg-gray-800 dark:border-gray-700" onClick={() => navigate(card.path)}>
                   <CardHeader>
                     <div className="flex items-start justify-between">
                       <div className="flex-1">
                         <div className="flex items-center gap-3 mb-2">
                           <Icon className={`h-5 w-5 ${card.color}`} />
-                          <CardTitle className="text-lg">{card.title}</CardTitle>
+                          <CardTitle className="text-lg dark:text-gray-100">{card.title}</CardTitle>
                         </div>
                         <CardDescription>{card.description}</CardDescription>
                       </div>
@@ -179,23 +179,23 @@ const EnterpriseDashboard = () => {
         </div>
 
         {/* Recent Activity */}
-        <Card>
+        <Card className="dark:bg-gray-800 dark:border-gray-700">
           <CardHeader>
             <div className="flex items-center gap-2">
-              <Activity className="h-5 w-5 text-gray-600" />
-              <CardTitle>Recent Activity</CardTitle>
+              <Activity className="h-5 w-5 text-gray-600 dark:text-gray-300" />
+              <CardTitle className="dark:text-gray-100">Recent Activity</CardTitle>
             </div>
-            <CardDescription>Latest system activities and updates</CardDescription>
+            <CardDescription className="dark:text-gray-300">Latest system activities and updates</CardDescription>
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
               {recentActivities.map((activity, index) =>
-              <div key={index} className="flex items-center justify-between py-2 border-b last:border-0">
+              <div key={index} className="flex items-center justify-between py-2 border-b dark:border-gray-700 last:border-0">
                   <div className="flex items-center gap-3">
-                    <div className="w-2 h-2 rounded-full bg-green-500" />
-                    <span className="font-medium">{activity.action}</span>
+                    <div className="w-2 h-2 rounded-full bg-green-500 dark:bg-green-400" />
+                    <span className="font-medium dark:text-gray-200">{activity.action}</span>
                   </div>
-                  <span className="text-sm text-gray-500">{activity.time}</span>
+                  <span className="text-sm text-gray-500 dark:text-gray-400">{activity.time}</span>
                 </div>
               )}
             </div>

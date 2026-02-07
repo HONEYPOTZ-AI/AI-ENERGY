@@ -63,10 +63,10 @@ export default function ForecastConfigPanel({ onForecastGenerated }: ForecastCon
   };
 
   return (
-    <Card>
+    <Card className="dark:bg-gray-800 dark:border-gray-700">
       <CardHeader>
-        <CardTitle>Forecast Configuration</CardTitle>
-        <CardDescription>Configure parameters for AI-powered energy forecasting</CardDescription>
+        <CardTitle className="dark:text-gray-100">Forecast Configuration</CardTitle>
+        <CardDescription className="dark:text-gray-300">Configure parameters for AI-powered energy forecasting</CardDescription>
       </CardHeader>
       <CardContent>
         <form onSubmit={handleSubmit} className="space-y-6">
@@ -83,7 +83,7 @@ export default function ForecastConfigPanel({ onForecastGenerated }: ForecastCon
                 onChange={(e) => setConfig({ ...config, horizon: parseInt(e.target.value) })}
                 required />
 
-              <p className="text-xs text-muted-foreground">1-24 hours ahead</p>
+              <p className="text-xs text-muted-foreground dark:text-gray-400">1-24 hours ahead</p>
             </div>
 
             {/* Target Metric */}

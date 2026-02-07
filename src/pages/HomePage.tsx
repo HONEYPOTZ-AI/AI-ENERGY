@@ -27,6 +27,7 @@ import {
   Loader2 } from
 'lucide-react';
 import { motion } from 'framer-motion';
+import { ThemeToggle } from '@/components/ThemeToggle';
 
 const HomePage = () => {
   const navigate = useNavigate();
@@ -148,9 +149,9 @@ const HomePage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white dark:bg-gray-900">
       {/* Header */}
-      <header className="border-b bg-white/95 backdrop-blur-md sticky top-0 z-50 shadow-sm">
+      <header className="border-b dark:border-gray-700 bg-white/95 dark:bg-gray-900/95 backdrop-blur-md sticky top-0 z-50 shadow-sm">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-4">
             <motion.div
@@ -166,7 +167,7 @@ const HomePage = () => {
                 <h1 className="text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
                   AI ENERGY Optimizer
                 </h1>
-                <p className="text-xs text-gray-500">Intelligent Energy Management</p>
+                <p className="text-xs text-gray-500 dark:text-gray-400">Intelligent Energy Management</p>
               </div>
             </motion.div>
             <nav className="hidden md:flex items-center space-x-6">
@@ -182,23 +183,27 @@ const HomePage = () => {
               <Button variant="ghost" onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}>
                 Contact
               </Button>
+              <ThemeToggle />
               <Button onClick={() => navigate('/onboarding')} className="bg-gradient-to-r from-blue-600 to-purple-600">
                 Get Started
               </Button>
             </nav>
-            <Button
-              className="md:hidden bg-gradient-to-r from-blue-600 to-purple-600"
-              size="sm"
-              onClick={() => navigate('/onboarding')}>
+            <div className="flex items-center gap-2 md:hidden">
+              <ThemeToggle />
+              <Button
+                className="bg-gradient-to-r from-blue-600 to-purple-600"
+                size="sm"
+                onClick={() => navigate('/onboarding')}>
 
-              Get Started
-            </Button>
+                Get Started
+              </Button>
+            </div>
           </div>
         </div>
       </header>
 
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 py-20 md:py-32 px-4 sm:px-6 lg:px-8">
+      <section className="relative overflow-hidden bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 dark:from-gray-800 dark:via-gray-900 dark:to-gray-800 py-20 md:py-32 px-4 sm:px-6 lg:px-8">
         <div className="absolute inset-0 bg-grid-slate-200 [mask-image:linear-gradient(0deg,white,rgba(255,255,255,0.6))] -z-10" />
         <div className="container mx-auto max-w-6xl">
           <motion.div
@@ -232,7 +237,7 @@ const HomePage = () => {
             </motion.h2>
             
             <motion.p
-              className="text-xl md:text-2xl text-gray-600 max-w-3xl mx-auto leading-relaxed"
+              className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ delay: 0.4 }}>
@@ -285,7 +290,7 @@ const HomePage = () => {
                 transition={{ type: "spring", stiffness: 300 }}>
 
                   <div className={`text-4xl md:text-5xl font-bold ${stat.color}`}>{stat.value}</div>
-                  <div className="text-sm md:text-base text-gray-600 mt-2">{stat.label}</div>
+                  <div className="text-sm md:text-base text-gray-600 dark:text-gray-300 mt-2">{stat.label}</div>
                 </motion.div>
               )}
             </motion.div>
@@ -294,7 +299,7 @@ const HomePage = () => {
       </section>
 
       {/* About Section */}
-      <section id="about" className="py-20 md:py-32 px-4 sm:px-6 lg:px-8 bg-white">
+      <section id="about" className="py-20 md:py-32 px-4 sm:px-6 lg:px-8 bg-white dark:bg-gray-900">
         <div className="container mx-auto max-w-6xl">
           <motion.div
             className="grid md:grid-cols-2 gap-12 items-center"
@@ -314,12 +319,12 @@ const HomePage = () => {
                   Sustainable Energy
                 </span>
               </h3>
-              <p className="text-lg text-gray-600 leading-relaxed">
+              <p className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
                 At AI ENERGY Optimizer, we're on a mission to revolutionize how organizations manage and optimize their energy consumption. 
                 By combining cutting-edge artificial intelligence with deep energy sector expertise, we empower utilities and enterprises 
                 to make smarter, more sustainable decisions.
               </p>
-              <p className="text-lg text-gray-600 leading-relaxed">
+              <p className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
                 Our AI ENERGY Optimizer platform leverages advanced machine learning algorithms to deliver unprecedented accuracy in 
                 energy forecasting, optimization, and ESG reporting. We're committed to building a cleaner, more efficient energy future 
                 for generations to come.
@@ -330,11 +335,11 @@ const HomePage = () => {
                 { icon: Sparkles, label: 'AI Innovation', desc: 'Cutting-Edge Tech' },
                 { icon: Shield, label: 'Trusted Partner', desc: 'Enterprise Grade' }].
                 map((item, idx) =>
-                <Card key={idx} className="border-2 hover:shadow-lg transition-shadow">
+                <Card key={idx} className="border-2 hover:shadow-lg transition-shadow dark:bg-gray-800 dark:border-gray-700">
                     <CardContent className="pt-6 text-center">
-                      <item.icon className="h-8 w-8 mx-auto mb-3 text-blue-600" />
-                      <div className="font-semibold text-sm">{item.label}</div>
-                      <div className="text-xs text-gray-500 mt-1">{item.desc}</div>
+                      <item.icon className="h-8 w-8 mx-auto mb-3 text-blue-600 dark:text-blue-400" />
+                      <div className="font-semibold text-sm dark:text-gray-200">{item.label}</div>
+                      <div className="text-xs text-gray-500 dark:text-gray-400 mt-1">{item.desc}</div>
                     </CardContent>
                   </Card>
                 )}
@@ -342,36 +347,36 @@ const HomePage = () => {
             </div>
             <div className="relative">
               <motion.div
-                className="relative bg-gradient-to-br from-blue-100 to-purple-100 rounded-2xl p-8 shadow-2xl"
+                className="relative bg-gradient-to-br from-blue-100 to-purple-100 dark:from-gray-800 dark:to-gray-700 rounded-2xl p-8 shadow-2xl"
                 whileHover={{ scale: 1.02 }}
                 transition={{ type: "spring", stiffness: 300 }}>
 
                 <div className="space-y-4">
-                  <div className="bg-white rounded-xl p-6 shadow-lg">
+                  <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg">
                     <div className="flex items-center gap-4 mb-4">
                       <div className="h-12 w-12 rounded-full bg-gradient-to-r from-green-500 to-emerald-500 flex items-center justify-center">
                         <CheckCircle className="h-6 w-6 text-white" />
                       </div>
                       <div>
-                        <div className="font-bold text-lg">Sustainable Innovation</div>
-                        <div className="text-sm text-gray-500">AI-Driven Solutions</div>
+                        <div className="font-bold text-lg dark:text-gray-200">Sustainable Innovation</div>
+                        <div className="text-sm text-gray-500 dark:text-gray-400">AI-Driven Solutions</div>
                       </div>
                     </div>
-                    <div className="text-sm text-gray-600">
+                    <div className="text-sm text-gray-600 dark:text-gray-300">
                       Pioneering AI technologies that reduce carbon emissions and optimize energy consumption across industries.
                     </div>
                   </div>
-                  <div className="bg-white rounded-xl p-6 shadow-lg">
+                  <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg">
                     <div className="flex items-center gap-4 mb-4">
                       <div className="h-12 w-12 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 flex items-center justify-center">
                         <Globe className="h-6 w-6 text-white" />
                       </div>
                       <div>
-                        <div className="font-bold text-lg">Global Impact</div>
-                        <div className="text-sm text-gray-500">Worldwide Reach</div>
+                        <div className="font-bold text-lg dark:text-gray-200">Global Impact</div>
+                        <div className="text-sm text-gray-500 dark:text-gray-400">Worldwide Reach</div>
                       </div>
                     </div>
-                    <div className="text-sm text-gray-600">
+                    <div className="text-sm text-gray-600 dark:text-gray-300">
                       Partnering with organizations globally to create a more sustainable and efficient energy ecosystem.
                     </div>
                   </div>
@@ -383,7 +388,7 @@ const HomePage = () => {
       </section>
 
       {/* Features Section */}
-      <section id="features" className="py-20 md:py-32 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-gray-50 to-white">
+      <section id="features" className="py-20 md:py-32 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-gray-50 to-white dark:from-gray-800 dark:to-gray-900">
         <div className="container mx-auto max-w-6xl">
           <motion.div
             className="text-center mb-16"
@@ -398,7 +403,7 @@ const HomePage = () => {
             <h3 className="text-3xl md:text-5xl font-bold mb-6">
               Comprehensive Energy Solutions
             </h3>
-            <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-lg md:text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
               Everything you need to optimize energy management, reduce costs, and achieve sustainability goals
             </p>
           </motion.div>
@@ -414,7 +419,7 @@ const HomePage = () => {
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1 }}>
 
-                  <Card className="h-full hover:shadow-2xl transition-all duration-300 border-2 hover:border-blue-200 group">
+                  <Card className="h-full hover:shadow-2xl transition-all duration-300 border-2 hover:border-blue-200 dark:hover:border-blue-700 group dark:bg-gray-800 dark:border-gray-700">
                     <CardHeader>
                       <div className="flex items-start gap-4">
                         <motion.div
@@ -425,10 +430,10 @@ const HomePage = () => {
                           <Icon className="h-8 w-8 text-white" />
                         </motion.div>
                         <div className="flex-1">
-                          <CardTitle className="text-2xl mb-3 group-hover:text-blue-600 transition-colors">
+                          <CardTitle className="text-2xl mb-3 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors dark:text-gray-100">
                             {feature.title}
                           </CardTitle>
-                          <CardDescription className="text-base leading-relaxed">
+                          <CardDescription className="text-base leading-relaxed dark:text-gray-300">
                             {feature.description}
                           </CardDescription>
                         </div>
@@ -504,7 +509,7 @@ const HomePage = () => {
               whileHover={{ scale: 1.03 }}
               transition={{ type: "spring", stiffness: 300 }}>
 
-                <Card className="bg-white/10 backdrop-blur-lg border-white/20 hover:bg-white/15 transition-all h-full">
+                <Card className="bg-white/10 dark:bg-gray-800/50 backdrop-blur-lg border-white/20 dark:border-gray-700 hover:bg-white/15 dark:hover:bg-gray-800/70 transition-all h-full">
                   <CardHeader>
                     <div className={`h-40 rounded-lg bg-gradient-to-br ${demo.gradient} mb-4 flex items-center justify-center`}>
                       <BarChart3 className="h-20 w-20 text-white/80" />
@@ -547,7 +552,7 @@ const HomePage = () => {
       </section>
 
       {/* Lead Capture Form */}
-      <section id="contact" className="py-20 md:py-32 px-4 sm:px-6 lg:px-8 bg-white">
+      <section id="contact" className="py-20 md:py-32 px-4 sm:px-6 lg:px-8 bg-white dark:bg-gray-900">
         <div className="container mx-auto max-w-4xl">
           <motion.div
             className="text-center mb-12"
@@ -563,7 +568,7 @@ const HomePage = () => {
               Start Your Journey to
               <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent"> Smart Energy</span>
             </h3>
-            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
               Fill out the form below and our team will contact you shortly to discuss your energy optimization needs
             </p>
           </motion.div>
@@ -573,10 +578,10 @@ const HomePage = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}>
 
-            <Card className="border-2 shadow-2xl">
+            <Card className="border-2 shadow-2xl dark:bg-gray-800 dark:border-gray-700">
               <CardHeader>
-                <CardTitle className="text-2xl">Request a Demo</CardTitle>
-                <CardDescription className="text-base">
+                <CardTitle className="text-2xl dark:text-gray-100">Request a Demo</CardTitle>
+                <CardDescription className="text-base dark:text-gray-300">
                   Let us show you how AI can transform your energy management
                 </CardDescription>
               </CardHeader>

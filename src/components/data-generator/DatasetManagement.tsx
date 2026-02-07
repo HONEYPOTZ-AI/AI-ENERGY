@@ -133,9 +133,9 @@ export default function DatasetManagement({ onView, refreshTrigger }: DatasetMan
 
   if (loading) {
     return (
-      <Card>
+      <Card className="dark:bg-gray-800 dark:border-gray-700">
         <CardContent className="py-12 flex justify-center">
-          <Loader2 className="h-8 w-8 animate-spin text-muted-foreground" />
+          <Loader2 className="h-8 w-8 animate-spin text-muted-foreground dark:text-gray-400" />
         </CardContent>
       </Card>);
 
@@ -143,13 +143,13 @@ export default function DatasetManagement({ onView, refreshTrigger }: DatasetMan
 
   return (
     <>
-      <Card>
+      <Card className="dark:bg-gray-800 dark:border-gray-700">
         <CardHeader>
-          <CardTitle>Generated Datasets</CardTitle>
+          <CardTitle className="dark:text-gray-100">Generated Datasets</CardTitle>
         </CardHeader>
         <CardContent>
           {datasets.length === 0 ?
-          <p className="text-center text-muted-foreground py-8">No datasets generated yet</p> :
+          <p className="text-center text-muted-foreground dark:text-gray-400 py-8">No datasets generated yet</p> :
 
           <div className="overflow-x-auto">
               <Table>
@@ -163,17 +163,17 @@ export default function DatasetManagement({ onView, refreshTrigger }: DatasetMan
                 </TableHeader>
                 <TableBody>
                   {datasets.map((dataset) =>
-                <TableRow key={dataset.id}>
+                <TableRow key={dataset.id} className="dark:border-gray-700">
                       <TableCell>
-                        <Badge variant="secondary">
+                        <Badge variant="secondary" className="dark:bg-gray-700 dark:text-gray-200">
                           {getDatasetTypeLabel(dataset.dataset_type)}
                         </Badge>
                       </TableCell>
-                      <TableCell className="text-sm">
+                      <TableCell className="text-sm dark:text-gray-300">
                         {new Date(dataset.timerange_start).toLocaleDateString()} -{' '}
                         {new Date(dataset.timerange_end).toLocaleDateString()}
                       </TableCell>
-                      <TableCell className="text-sm">
+                      <TableCell className="text-sm dark:text-gray-300">
                         {new Date(dataset.created_at).toLocaleString()}
                       </TableCell>
                       <TableCell>
@@ -211,10 +211,10 @@ export default function DatasetManagement({ onView, refreshTrigger }: DatasetMan
       </Card>
 
       <AlertDialog open={deleteId !== null} onOpenChange={() => setDeleteId(null)}>
-        <AlertDialogContent>
+        <AlertDialogContent className="dark:bg-gray-800 dark:border-gray-700">
           <AlertDialogHeader>
-            <AlertDialogTitle>Delete Dataset</AlertDialogTitle>
-            <AlertDialogDescription>
+            <AlertDialogTitle className="dark:text-gray-100">Delete Dataset</AlertDialogTitle>
+            <AlertDialogDescription className="dark:text-gray-300">
               Are you sure you want to delete this dataset? This action cannot be undone.
             </AlertDialogDescription>
           </AlertDialogHeader>

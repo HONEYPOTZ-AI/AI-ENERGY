@@ -6,6 +6,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { toast } from '@/hooks/use-toast';
+import { ThemeToggle } from '@/components/ThemeToggle';
 import WelcomeStep from '@/components/onboarding/WelcomeStep';
 import CompanyInfoStep from '@/components/onboarding/CompanyInfoStep';
 import UseCaseStep from '@/components/onboarding/UseCaseStep';
@@ -182,17 +183,20 @@ const OnboardingPage = () => {
   const CurrentStepComponent = steps[currentStep].component;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 flex items-center justify-center p-4">
-      <Card className="w-full max-w-2xl shadow-xl">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 flex items-center justify-center p-4 relative">
+      <div className="absolute top-4 right-4">
+        <ThemeToggle />
+      </div>
+      <Card className="w-full max-w-2xl shadow-xl dark:bg-gray-800 dark:border-gray-700">
         <CardContent className="p-6 md:p-8">
           {/* Progress Bar */}
           {currentStep < totalSteps - 1 &&
           <div className="mb-6">
               <div className="flex items-center justify-between mb-2">
-                <span className="text-sm font-medium text-gray-600">
+                <span className="text-sm font-medium text-gray-600 dark:text-gray-300">
                   Step {currentStep + 1} of {totalSteps}
                 </span>
-                <span className="text-sm font-medium text-gray-600">
+                <span className="text-sm font-medium text-gray-600 dark:text-gray-300">
                   {Math.round(progress)}%
                 </span>
               </div>

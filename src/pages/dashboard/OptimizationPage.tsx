@@ -48,8 +48,8 @@ export default function OptimizationPage() {
     <DashboardLayout dashboardType="enterprise">
       <div className="space-y-6">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight">Optimization Engine</h1>
-          <p className="text-muted-foreground">
+          <h1 className="text-3xl font-bold tracking-tight dark:text-gray-100">Optimization Engine</h1>
+          <p className="text-muted-foreground dark:text-gray-300">
             Configure and run energy optimization to minimize costs and reduce emissions
           </p>
         </div>

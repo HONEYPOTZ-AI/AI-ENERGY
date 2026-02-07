@@ -33,10 +33,10 @@ export default function ESGReportConfig({ onGenerateReport, isLoading }: ESGRepo
   };
 
   return (
-    <Card>
+    <Card className="dark:bg-gray-800 dark:border-gray-700">
       <CardHeader>
-        <CardTitle>ESG Report Configuration</CardTitle>
-        <CardDescription>Generate compliance reports for SEC Climate Disclosure or GHG Protocol</CardDescription>
+        <CardTitle className="dark:text-gray-100">ESG Report Configuration</CardTitle>
+        <CardDescription className="dark:text-gray-300">Generate compliance reports for SEC Climate Disclosure or GHG Protocol</CardDescription>
       </CardHeader>
       <CardContent>
         <form onSubmit={handleSubmit} className="space-y-6">

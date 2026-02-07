@@ -21,8 +21,8 @@ export default function DataGeneratorPage() {
     <DashboardLayout>
       <div className="space-y-6">
         <div>
-          <h1 className="text-3xl font-bold">Synthetic Data Generator</h1>
-          <p className="text-muted-foreground mt-2">
+          <h1 className="text-3xl font-bold dark:text-gray-100">Synthetic Data Generator</h1>
+          <p className="text-muted-foreground dark:text-gray-300 mt-2">
             Generate realistic synthetic datasets for testing and development
           </p>
         </div>

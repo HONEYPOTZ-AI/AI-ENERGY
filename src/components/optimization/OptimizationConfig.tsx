@@ -38,10 +38,10 @@ export default function OptimizationConfig({ onRunOptimization, isLoading }: Opt
   };
 
   return (
-    <Card>
+    <Card className="dark:bg-gray-800 dark:border-gray-700">
       <CardHeader>
-        <CardTitle>Optimization Configuration</CardTitle>
-        <CardDescription>Configure your optimization parameters and constraints</CardDescription>
+        <CardTitle className="dark:text-gray-100">Optimization Configuration</CardTitle>
+        <CardDescription className="dark:text-gray-300">Configure your optimization parameters and constraints</CardDescription>
       </CardHeader>
       <CardContent>
         <form onSubmit={handleSubmit} className="space-y-6">
@@ -87,8 +87,8 @@ export default function OptimizationConfig({ onRunOptimization, isLoading }: Opt
           </div>
 
           {/* Constraints Section */}
-          <div className="pt-4 border-t">
-            <h3 className="text-sm font-medium mb-4">Constraints</h3>
+          <div className="pt-4 border-t dark:border-gray-700">
+            <h3 className="text-sm font-medium mb-4 dark:text-gray-200">Constraints</h3>
             
             <div className="space-y-4">
               {/* Max Load */}

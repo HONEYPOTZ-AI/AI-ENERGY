@@ -115,18 +115,18 @@ export default function ForecastingPage() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight">AI Forecasting Dashboard</h1>
-          <p className="text-muted-foreground">
+          <h1 className="text-3xl font-bold tracking-tight dark:text-gray-100">AI Forecasting Dashboard</h1>
+          <p className="text-muted-foreground dark:text-gray-300">
             Generate and analyze energy load forecasts using advanced time-series models
           </p>
         </div>
         {newForecastCount > 0 &&
         <button
           onClick={handleViewNewForecasts}
-          className="flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors">
+          className="flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors dark:bg-blue-600 dark:hover:bg-blue-700">
 
             <Bell className="h-5 w-5" />
-            <Badge variant="secondary" className="ml-1">
+            <Badge variant="secondary" className="ml-1 dark:bg-gray-700 dark:text-gray-200">
               {newForecastCount} new
             </Badge>
           </button>
