@@ -127,7 +127,7 @@ export default function ResourcesPage() {
         {/* Resources Tabs */}
         <section className="max-w-7xl mx-auto px-4 pb-20">
           <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-            <TabsList className="grid w-full max-w-md mx-auto grid-cols-3 mb-12">
+            <TabsList className="grid w-full max-w-3xl mx-auto grid-cols-4 mb-12">
               <TabsTrigger value="all" className="flex items-center gap-2">
                 <FileText className="w-4 h-4" />
                 All ({resources.length})
@@ -140,30 +140,56 @@ export default function ResourcesPage() {
                 <FileText className="w-4 h-4" />
                 White Papers ({whitePapersCount})
               </TabsTrigger>
+              <TabsTrigger value="schedule-demo" className="flex items-center gap-2">
+                <FileText className="w-4 h-4" />
+                Schedule Demo
+              </TabsTrigger>
             </TabsList>
 
-            <TabsContent value={activeTab} className="mt-0">
-              {loading ?
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {[1, 2, 3, 4, 5, 6].map((i) =>
-                <div key={i} className="h-96 bg-muted animate-pulse rounded-lg" />
-                )}
-                </div> :
-              filteredResources.length === 0 ?
-              <div className="text-center py-20">
-                  <FileText className="w-16 h-16 mx-auto text-muted-foreground mb-4" />
-                  <h3 className="text-xl font-semibold mb-2">No resources found</h3>
-                  <p className="text-muted-foreground">
-                    {searchQuery ? 'Try adjusting your search query' : 'Check back soon for new content'}
-                  </p>
-                </div> :
+            {activeTab !== 'schedule-demo' && (
+              <TabsContent value={activeTab} className="mt-0">
+                {loading ?
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {[1, 2, 3, 4, 5, 6].map((i) =>
+                  <div key={i} className="h-96 bg-muted animate-pulse rounded-lg" />
+                  )}
+                  </div> :
+                filteredResources.length === 0 ?
+                <div className="text-center py-20">
+                    <FileText className="w-16 h-16 mx-auto text-muted-foreground mb-4" />
+                    <h3 className="text-xl font-semibold mb-2">No resources found</h3>
+                    <p className="text-muted-foreground">
+                      {searchQuery ? 'Try adjusting your search query' : 'Check back soon for new content'}
+                    </p>
+                  </div> :
 
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {filteredResources.map((resource) =>
-                <ResourceCard key={resource.id} {...resource} />
-                )}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {filteredResources.map((resource) =>
+                  <ResourceCard key={resource.id} {...resource} />
+                  )}
+                  </div>
+                }
+              </TabsContent>
+            )}
+
+            <TabsContent value="schedule-demo" className="mt-0">
+              <div className="max-w-5xl mx-auto">
+                <div className="bg-card rounded-lg shadow-lg p-6 mb-6">
+                  <h2 className="text-2xl font-bold mb-2">Schedule a Demo</h2>
+                  <p className="text-muted-foreground mb-6">
+                    Book a personalized demo with our team to see how AI Energy Optimizer can transform your energy management strategy.
+                  </p>
                 </div>
-              }
+                <div className="bg-card rounded-lg shadow-lg overflow-hidden" style={{ minHeight: '800px' }}>
+                  <iframe
+                    src="https://meetings.hubspot.com/vlad-lialine"
+                    title="Schedule Demo"
+                    className="w-full h-full"
+                    style={{ minHeight: '800px', border: 'none' }}
+                    loading="lazy"
+                  />
+                </div>
+              </div>
             </TabsContent>
           </Tabs>
         </section>

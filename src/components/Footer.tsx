@@ -73,12 +73,12 @@ export default function Footer() {
                 Contact: support@aienergyoptimizer.com
               </p>
               <p className="text-sm text-muted-foreground">
-                <a 
-                  href="https://meetings.hubspot.com/vlad-lialine" 
-                  target="_blank" 
+                <a
+                  href="https://meetings.hubspot.com/vlad-lialine"
+                  target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:text-foreground transition-colors underline"
-                >
+                  className="hover:text-foreground transition-colors underline">
+
                   Schedule a Meeting
                 </a>
               </p>
