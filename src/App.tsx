@@ -11,6 +11,8 @@ import ForecastingPage from "./pages/dashboard/ForecastingPage";
 import OptimizationPage from "./pages/dashboard/OptimizationPage";
 import ESGReportsPage from "./pages/dashboard/ESGReportsPage";
 import OnboardingPage from "./pages/OnboardingPage";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
+import TermsOfService from "./pages/TermsOfService";
 import { ErrorBoundary } from "react-error-boundary";
 import { HelmetProvider } from "react-helmet-async";
 import ErrorFallback from "./components/error-fallback";
@@ -43,6 +45,8 @@ const App = () =>
                 <Route path="/dashboard/optimization" element={<OptimizationPage />} />
                 <Route path="/dashboard/esg-reports" element={<ESGReportsPage />} />
                 <Route path="/onboarding" element={<OnboardingPage />} />
+                <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+                <Route path="/terms-of-service" element={<TermsOfService />} />
                 {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
                 <Route path="*" element={<NotFound />} />
               </Route>
