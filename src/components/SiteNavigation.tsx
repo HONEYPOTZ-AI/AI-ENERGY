@@ -59,11 +59,11 @@ export default function SiteNavigation() {
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2">
-            <img 
-              src="https://newoaks.s3.us-west-1.amazonaws.com/AutoDev/59275/7b1d9089-26ac-42a4-8f23-d615a059978f.png" 
-              alt="AI-Energy Logo" 
-              className="h-10 w-auto"
-            />
+            <img
+              src="https://newoaks.s3.us-west-1.amazonaws.com/AutoDev/59275/ca742850-fe9e-4a16-9efc-a791f65af5c7.webp"
+              alt="AI-Energy Logo"
+              className="h-10 w-auto" />
+
             <span className="font-bold text-lg hidden sm:inline">AI ENERGY Optimizer</span>
           </Link>
 
