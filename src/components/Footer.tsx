@@ -10,8 +10,8 @@ export default function Footer() {
           <div>
             <Link to="/" className="inline-block">
               <img
-                src="https://newoaks.s3.us-west-1.amazonaws.com/AutoDev/59275/ca742850-fe9e-4a16-9efc-a791f65af5c7.webp"
-                alt="AI-Energy Logo"
+                src="/logo.webp"
+                alt="Company Logo"
                 className="h-12 w-auto mb-3 hover:opacity-80 transition-opacity" />
             </Link>
 

@@ -187,8 +187,8 @@ const OnboardingPage = () => {
       <div className="absolute top-4 left-4">
         <Link to="/">
           <img
-            src="https://newoaks.s3.us-west-1.amazonaws.com/AutoDev/59275/ca742850-fe9e-4a16-9efc-a791f65af5c7.webp"
-            alt="AI-Energy Logo"
+            src="/logo.webp"
+            alt="Company Logo"
             className="h-10 w-auto hover:opacity-80 transition-opacity" />
         </Link>
       </div>

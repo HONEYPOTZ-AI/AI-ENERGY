@@ -10,8 +10,8 @@ const WelcomeStep = ({ onNext }: WelcomeStepProps) => {
     <div className="text-center space-y-6">
       <div className="flex justify-center mb-6">
         <img
-          src="https://newoaks.s3.us-west-1.amazonaws.com/AutoDev/59275/ca742850-fe9e-4a16-9efc-a791f65af5c7.webp"
-          alt="AI-Energy Logo"
+          src="/logo.webp"
+          alt="Company Logo"
           className="h-20 w-auto" />
       </div>
       
