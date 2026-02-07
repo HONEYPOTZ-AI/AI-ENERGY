@@ -40,6 +40,11 @@ export default function Footer() {
                   Enterprise Dashboard
                 </Link>
               </li>
+              <li>
+                <Link to="/press" className="hover:text-foreground transition-colors">
+                  Press Releases
+                </Link>
+              </li>
             </ul>
           </div>
 
@@ -80,6 +85,6 @@ export default function Footer() {
           </div>
         </div>
       </div>
-    </footer>
-  );
+    </footer>);
+
 }

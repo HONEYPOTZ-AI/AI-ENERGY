@@ -8,6 +8,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { Label } from '@/components/ui/label';
 import { useNavigate, Link } from 'react-router-dom';
 import { useToast } from '@/hooks/use-toast';
+import SiteNavigation from '@/components/SiteNavigation';
 import {
   Zap,
   Database,
@@ -150,57 +151,7 @@ const HomePage = () => {
 
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900">
-      {/* Header */}
-      <header className="border-b dark:border-gray-700 bg-white/95 dark:bg-gray-900/95 backdrop-blur-md sticky top-0 z-50 shadow-sm">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center py-4">
-            <motion.div
-              className="flex items-center gap-2 cursor-pointer"
-              whileHover={{ scale: 1.02 }}
-              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
-
-              <div className="relative">
-                <Zap className="h-8 w-8 text-blue-600" />
-                <Sparkles className="h-4 w-4 text-yellow-500 absolute -top-1 -right-1" />
-              </div>
-              <div>
-                <h1 className="text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                  AI ENERGY Optimizer
-                </h1>
-                <p className="text-xs text-gray-500 dark:text-gray-400">Intelligent Energy Management</p>
-              </div>
-            </motion.div>
-            <nav className="hidden md:flex items-center space-x-6">
-              <Button variant="ghost" onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })}>
-                About
-              </Button>
-              <Button variant="ghost" onClick={() => document.getElementById('features')?.scrollIntoView({ behavior: 'smooth' })}>
-                Features
-              </Button>
-              <Button variant="ghost" onClick={() => document.getElementById('demo-section')?.scrollIntoView({ behavior: 'smooth' })}>
-                Demo
-              </Button>
-              <Button variant="ghost" onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}>
-                Contact
-              </Button>
-              <ThemeToggle />
-              <Button onClick={() => navigate('/onboarding')} className="bg-gradient-to-r from-blue-600 to-purple-600">
-                Get Started
-              </Button>
-            </nav>
-            <div className="flex items-center gap-2 md:hidden">
-              <ThemeToggle />
-              <Button
-                className="bg-gradient-to-r from-blue-600 to-purple-600"
-                size="sm"
-                onClick={() => navigate('/onboarding')}>
-
-                Get Started
-              </Button>
-            </div>
-          </div>
-        </div>
-      </header>
+      <SiteNavigation />
 
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 dark:from-gray-800 dark:via-gray-900 dark:to-gray-800 py-20 md:py-32 px-4 sm:px-6 lg:px-8">
@@ -750,6 +701,21 @@ const HomePage = () => {
                 <li>
                   <button onClick={() => document.getElementById('features')?.scrollIntoView({ behavior: 'smooth' })} className="text-gray-400 hover:text-white transition-colors">
                     Features
+                  </button>
+                </li>
+                <li>
+                  <button onClick={() => navigate('/blog')} className="text-gray-400 hover:text-white transition-colors">
+                    Blog
+                  </button>
+                </li>
+                <li>
+                  <button onClick={() => navigate('/press')} className="text-gray-400 hover:text-white transition-colors">
+                    Press
+                  </button>
+                </li>
+                <li>
+                  <button onClick={() => navigate('/resources')} className="text-gray-400 hover:text-white transition-colors">
+                    Resources
                   </button>
                 </li>
                 <li>

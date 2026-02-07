@@ -357,6 +357,6 @@ export default function TermsOfService() {
           </Card>
         </div>
       </div>
-    </div>
-  );
+    </div>);
+
 }
