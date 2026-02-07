@@ -68,9 +68,19 @@ export default function Footer() {
                 </Link>
               </li>
             </ul>
-            <div className="mt-4">
+            <div className="mt-4 space-y-2">
               <p className="text-sm text-muted-foreground">
                 Contact: support@aienergyoptimizer.com
+              </p>
+              <p className="text-sm text-muted-foreground">
+                <a 
+                  href="https://meetings.hubspot.com/vlad-lialine" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="hover:text-foreground transition-colors underline"
+                >
+                  Schedule a Meeting
+                </a>
               </p>
             </div>
           </div>
