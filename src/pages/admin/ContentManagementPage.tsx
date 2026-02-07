@@ -16,7 +16,7 @@ export default function ContentManagementPage() {
   const [isGenerating, setIsGenerating] = useState(false);
   const [isCheckingAuth, setIsCheckingAuth] = useState(true);
   const [generatedCount, setGeneratedCount] = useState(0);
-  const [generatedArticles, setGeneratedArticles] = useState<Array<{ slug: string; title: string }>>([]);
+  const [generatedArticles, setGeneratedArticles] = useState<Array<{slug: string;title: string;}>>([]);
   const totalCount = 5;
 
   // Check if user is administrator
@@ -27,7 +27,7 @@ export default function ContentManagementPage() {
   const checkAdminAccess = async () => {
     try {
       const { data: userInfo, error } = await window.ezsite.apis.getUserInfo();
-      
+
       if (error || !userInfo) {
         toast({
           title: 'Authentication Required',
@@ -86,16 +86,16 @@ export default function ContentManagementPage() {
       // Save each article to database
       const tableId = 74747; // blog_posts table ID
       let savedCount = 0;
-      const savedArticles: Array<{ slug: string; title: string }> = [];
+      const savedArticles: Array<{slug: string;title: string;}> = [];
 
       for (const article of data.articles) {
         const { error: saveError } = await window.ezsite.apis.tableCreate(tableId, article);
-        
+
         if (saveError) {
           console.error(`Failed to save article: ${article.title}`, saveError);
           throw new Error(`Failed to save article: ${article.title}`);
         }
-        
+
         savedCount++;
         setGeneratedCount(savedCount);
         savedArticles.push({ slug: article.slug, title: article.title });
@@ -105,9 +105,9 @@ export default function ContentManagementPage() {
 
       toast({
         title: 'Success! 🎉',
-        description: `Generated and saved ${savedCount} SEO-optimized blog articles!`,
+        description: `Generated and saved ${savedCount} SEO-optimized blog articles!`
       });
-      
+
       // Clear API key for security
       setApiKey('');
 
@@ -126,8 +126,8 @@ export default function ContentManagementPage() {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <Loader2 className="w-8 h-8 animate-spin text-primary" />
-      </div>
-    );
+      </div>);
+
   }
 
   return (
@@ -191,16 +191,16 @@ export default function ContentManagementPage() {
                   placeholder="sk-proj-..."
                   value={apiKey}
                   onChange={(e) => setApiKey(e.target.value)}
-                  disabled={isGenerating}
-                />
+                  disabled={isGenerating} />
+
                 <p className="text-xs text-slate-500">
                   Your API key is only used for this session and never stored
                 </p>
               </div>
 
               {/* Progress Indicator */}
-              {isGenerating && (
-                <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+              {isGenerating &&
+              <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
                   <div className="flex items-center gap-3 mb-2">
                     <Loader2 className="w-5 h-5 animate-spin text-blue-600" />
                     <span className="font-medium text-blue-900">
@@ -209,34 +209,34 @@ export default function ContentManagementPage() {
                   </div>
                   <div className="w-full bg-blue-200 rounded-full h-2">
                     <div
-                      className="bg-blue-600 h-2 rounded-full transition-all duration-500"
-                      style={{ width: `${(generatedCount / totalCount) * 100}%` }}
-                    />
+                    className="bg-blue-600 h-2 rounded-full transition-all duration-500"
+                    style={{ width: `${generatedCount / totalCount * 100}%` }} />
+
                   </div>
                   <p className="text-xs text-blue-600 mt-2">
                     This may take 1-2 minutes. Please don't close this page.
                   </p>
                 </div>
-              )}
+              }
 
               {/* Success Message with Links */}
-              {!isGenerating && generatedArticles.length > 0 && (
-                <Alert className="border-green-200 bg-green-50">
+              {!isGenerating && generatedArticles.length > 0 &&
+              <Alert className="border-green-200 bg-green-50">
                   <CheckCircle2 className="h-4 w-4 text-green-600" />
                   <AlertTitle className="text-green-900">Successfully Generated {generatedArticles.length} Articles!</AlertTitle>
                   <AlertDescription className="text-green-800">
                     <p className="mb-3">View your newly generated articles:</p>
                     <div className="space-y-2">
-                      {generatedArticles.map((article, index) => (
-                        <Link
-                          key={index}
-                          to={`/blog/${article.slug}`}
-                          className="flex items-center gap-2 text-sm text-green-700 hover:text-green-900 hover:underline"
-                        >
+                      {generatedArticles.map((article, index) =>
+                    <Link
+                      key={index}
+                      to={`/blog/${article.slug}`}
+                      className="flex items-center gap-2 text-sm text-green-700 hover:text-green-900 hover:underline">
+
                           <ExternalLink className="w-3 h-3" />
                           {article.title}
                         </Link>
-                      ))}
+                    )}
                     </div>
                     <div className="mt-3 pt-3 border-t border-green-200">
                       <Link to="/blog" className="text-sm font-medium text-green-700 hover:text-green-900 hover:underline">
@@ -245,26 +245,26 @@ export default function ContentManagementPage() {
                     </div>
                   </AlertDescription>
                 </Alert>
-              )}
+              }
 
               {/* Generate Button */}
               <Button
                 onClick={handleGenerate}
                 disabled={isGenerating || !apiKey}
                 className="w-full h-12 text-lg"
-                size="lg"
-              >
-                {isGenerating ? (
-                  <>
+                size="lg">
+
+                {isGenerating ?
+                <>
                     <Loader2 className="w-5 h-5 mr-2 animate-spin" />
                     Generating Articles...
-                  </>
-                ) : (
-                  <>
+                  </> :
+
+                <>
                     <Sparkles className="w-5 h-5 mr-2" />
                     Generate 5 Articles
                   </>
-                )}
+                }
               </Button>
 
               {/* Info Card */}
@@ -304,6 +304,6 @@ export default function ContentManagementPage() {
           </Card>
         </div>
       </div>
-    </>
-  );
+    </>);
+
 }

@@ -34,10 +34,10 @@ export default function GenerateBlogPostsPage() {
 
     try {
       // Parse custom topics if provided
-      const topicArray = customTopics
-        .split('\n')
-        .map(t => t.trim())
-        .filter(t => t.length > 0);
+      const topicArray = customTopics.
+      split('\n').
+      map((t) => t.trim()).
+      filter((t) => t.length > 0);
 
       // Generate articles using backend
       const { data, error } = await window.ezsite.apis.run({
@@ -56,7 +56,7 @@ export default function GenerateBlogPostsPage() {
 
       for (const article of data.articles) {
         const { error: saveError } = await window.ezsite.apis.tableCreate(tableId, article);
-        
+
         if (saveError) {
           console.error(`Failed to save article: ${article.title}`, saveError);
           toast({
@@ -66,7 +66,7 @@ export default function GenerateBlogPostsPage() {
           });
           break;
         }
-        
+
         savedCount++;
         setGeneratedCount(savedCount);
       }
@@ -74,9 +74,9 @@ export default function GenerateBlogPostsPage() {
       if (savedCount === data.articles.length) {
         toast({
           title: 'Success! 🎉',
-          description: `Generated and saved ${savedCount} SEO-optimized blog articles!`,
+          description: `Generated and saved ${savedCount} SEO-optimized blog articles!`
         });
-        
+
         // Reset form
         setApiKey('');
         setCustomTopics('');
@@ -147,8 +147,8 @@ export default function GenerateBlogPostsPage() {
                   placeholder={provider === 'openai' ? 'sk-proj-...' : 'sk-ant-...'}
                   value={apiKey}
                   onChange={(e) => setApiKey(e.target.value)}
-                  disabled={isGenerating}
-                />
+                  disabled={isGenerating} />
+
                 <p className="text-xs text-slate-500">
                   Your API key is only used for this session and never stored
                 </p>
@@ -162,8 +162,8 @@ export default function GenerateBlogPostsPage() {
                   placeholder="AI Energy Optimizer Team"
                   value={author}
                   onChange={(e) => setAuthor(e.target.value)}
-                  disabled={isGenerating}
-                />
+                  disabled={isGenerating} />
+
               </div>
 
               {/* Custom Topics */}
@@ -176,16 +176,16 @@ export default function GenerateBlogPostsPage() {
                   onChange={(e) => setCustomTopics(e.target.value)}
                   disabled={isGenerating}
                   rows={6}
-                  className="resize-none"
-                />
+                  className="resize-none" />
+
                 <p className="text-xs text-slate-500">
                   One topic per line. If you provide fewer than 5, default topics will be used for the rest.
                 </p>
               </div>
 
               {/* Progress Indicator */}
-              {isGenerating && (
-                <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
+              {isGenerating &&
+              <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
                   <div className="flex items-center gap-3 mb-2">
                     <Loader2 className="w-5 h-5 animate-spin text-blue-600" />
                     <span className="font-medium text-blue-900">
@@ -194,34 +194,34 @@ export default function GenerateBlogPostsPage() {
                   </div>
                   <div className="w-full bg-blue-200 rounded-full h-2">
                     <div
-                      className="bg-blue-600 h-2 rounded-full transition-all duration-500"
-                      style={{ width: `${(generatedCount / totalCount) * 100}%` }}
-                    />
+                    className="bg-blue-600 h-2 rounded-full transition-all duration-500"
+                    style={{ width: `${generatedCount / totalCount * 100}%` }} />
+
                   </div>
                   <p className="text-xs text-blue-600 mt-2">
                     This may take 1-2 minutes. Please don't close this page.
                   </p>
                 </div>
-              )}
+              }
 
               {/* Generate Button */}
               <Button
                 onClick={handleGenerate}
                 disabled={isGenerating || !apiKey}
                 className="w-full h-12 text-lg"
-                size="lg"
-              >
-                {isGenerating ? (
-                  <>
+                size="lg">
+
+                {isGenerating ?
+                <>
                     <Loader2 className="w-5 h-5 mr-2 animate-spin" />
                     Generating Articles...
-                  </>
-                ) : (
-                  <>
+                  </> :
+
+                <>
                     <Sparkles className="w-5 h-5 mr-2" />
                     Generate 5 Blog Articles
                   </>
-                )}
+                }
               </Button>
 
               {/* Info Card */}
@@ -243,6 +243,6 @@ export default function GenerateBlogPostsPage() {
           </Card>
         </div>
       </div>
-    </>
-  );
+    </>);
+
 }
