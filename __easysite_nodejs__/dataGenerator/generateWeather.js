@@ -3,11 +3,14 @@ export function generateWeather(startDate, endDate, location, params = {}) {
     avgTemp = 20,
     tempRange = 15,
     seasonality = 0.8,
-    noiseLevel = 0.15
+    noiseLevel = 0.15,
+    timeInterval = 60,
+    numCustomers = 1
   } = params;
   
   const dataPoints = [];
   const current = new Date(startDate);
+  const intervalMs = timeInterval * 60 * 1000;
   
   while (current <= endDate) {
     const hour = current.getHours();
@@ -30,15 +33,21 @@ export function generateWeather(startDate, endDate, location, params = {}) {
     const baseWind = 10 + Math.abs(Math.sin((dayOfYear / 365) * 2 * Math.PI)) * 5;
     const windSpeed = Math.max(0, baseWind + (Math.random() - 0.5) * 8);
     
-    dataPoints.push({
-      timestamp: current.toISOString(),
-      value: temperature,
-      humidity,
-      windSpeed,
-      unit: '°C'
-    });
+    // Generate for each location/site
+    for (let i = 0; i < numCustomers; i++) {
+      // Add slight location variation
+      const locationVariation = (Math.random() - 0.5) * 2;
+      dataPoints.push({
+        timestamp: current.toISOString(),
+        value: temperature + locationVariation,
+        humidity: Math.max(20, Math.min(100, humidity + (Math.random() - 0.5) * 5)),
+        windSpeed: Math.max(0, windSpeed + (Math.random() - 0.5) * 2),
+        unit: '°C',
+        locationId: numCustomers > 1 ? `location_${i + 1}` : undefined
+      });
+    }
     
-    current.setHours(current.getHours() + 1);
+    current.setTime(current.getTime() + intervalMs);
   }
   
   return dataPoints;

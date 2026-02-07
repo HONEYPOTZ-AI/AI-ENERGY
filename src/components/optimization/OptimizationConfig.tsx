@@ -84,8 +84,8 @@ export default function OptimizationConfig({ onRunOptimization, isLoading }: Opt
               type="text"
               value={location}
               onChange={(e) => setLocation(e.target.value)}
-              placeholder="e.g., region-1"
-            />
+              placeholder="e.g., region-1" />
+
           </div>
 
           {/* Storage Configuration Section */}
@@ -102,8 +102,8 @@ export default function OptimizationConfig({ onRunOptimization, isLoading }: Opt
                   value={storageCapacity}
                   onChange={(e) => setStorageCapacity(Number(e.target.value))}
                   min={0}
-                  step={10}
-                />
+                  step={10} />
+
               </div>
 
               {/* Max Charge Rate */}
@@ -115,8 +115,8 @@ export default function OptimizationConfig({ onRunOptimization, isLoading }: Opt
                   value={maxChargeRate}
                   onChange={(e) => setMaxChargeRate(Number(e.target.value))}
                   min={0}
-                  step={10}
-                />
+                  step={10} />
+
               </div>
 
               {/* Max Discharge Rate */}
@@ -128,8 +128,8 @@ export default function OptimizationConfig({ onRunOptimization, isLoading }: Opt
                   value={maxDischargeRate}
                   onChange={(e) => setMaxDischargeRate(Number(e.target.value))}
                   min={0}
-                  step={10}
-                />
+                  step={10} />
+
               </div>
             </div>
           </div>
@@ -148,8 +148,8 @@ export default function OptimizationConfig({ onRunOptimization, isLoading }: Opt
                   value={gridCapacity}
                   onChange={(e) => setGridCapacity(Number(e.target.value))}
                   min={0}
-                  step={10}
-                />
+                  step={10} />
+
               </div>
 
               {/* Renewable Capacity */}
@@ -161,28 +161,28 @@ export default function OptimizationConfig({ onRunOptimization, isLoading }: Opt
                   value={renewableCapacity}
                   onChange={(e) => setRenewableCapacity(Number(e.target.value))}
                   min={0}
-                  step={10}
-                />
+                  step={10} />
+
               </div>
             </div>
           </div>
 
           {/* Run Button */}
           <Button type="submit" className="w-full" size="lg" disabled={isLoading}>
-            {isLoading ? (
-              <>
+            {isLoading ?
+            <>
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                 Running Optimization...
-              </>
-            ) : (
-              <>
+              </> :
+
+            <>
                 <Play className="mr-2 h-4 w-4" />
                 Run Optimization
               </>
-            )}
+            }
           </Button>
         </form>
       </CardContent>
-    </Card>
-  );
+    </Card>);
+
 }

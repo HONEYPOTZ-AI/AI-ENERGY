@@ -18,7 +18,7 @@ export default function DataGeneratorPage() {
   };
 
   return (
-    <DashboardLayout>
+    <DashboardLayout dashboardType="utility">
       <div className="space-y-6">
         <div>
           <h1 className="text-3xl font-bold dark:text-gray-100">Synthetic Data Generator</h1>

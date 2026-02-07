@@ -4,11 +4,14 @@ export function generateLoadCurves(startDate, endDate, params = {}) {
     peakLoad = 100,
     seasonality = 0.2,
     noiseLevel = 0.1,
-    weekendReduction = 0.3
+    weekendReduction = 0.3,
+    timeInterval = 60,
+    numCustomers = 1
   } = params;
   
   const dataPoints = [];
   const current = new Date(startDate);
+  const intervalMs = timeInterval * 60 * 1000;
   
   while (current <= endDate) {
     const hour = current.getHours();
@@ -49,13 +52,21 @@ export function generateLoadCurves(startDate, endDate, params = {}) {
     const noise = (Math.random() - 0.5) * 2 * noiseLevel * load;
     load += noise;
     
-    dataPoints.push({
-      timestamp: current.toISOString(),
-      value: Math.max(0, load),
-      unit: 'MW'
-    });
+    // Generate for each customer/site
+    for (let i = 0; i < numCustomers; i++) {
+      // Add slight variation per customer
+      const customerVariation = 1 + (Math.random() - 0.5) * 0.2;
+      const customerLoad = load * customerVariation;
+      
+      dataPoints.push({
+        timestamp: current.toISOString(),
+        value: Math.max(0, customerLoad),
+        unit: 'MW',
+        customerId: numCustomers > 1 ? `customer_${i + 1}` : undefined
+      });
+    }
     
-    current.setHours(current.getHours() + 1);
+    current.setTime(current.getTime() + intervalMs);
   }
   
   return dataPoints;

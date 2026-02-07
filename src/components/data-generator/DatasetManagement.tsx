@@ -157,6 +157,8 @@ export default function DatasetManagement({ onView, refreshTrigger }: DatasetMan
                   <TableRow>
                     <TableHead>Type</TableHead>
                     <TableHead>Time Range</TableHead>
+                    <TableHead>Interval</TableHead>
+                    <TableHead>Customers</TableHead>
                     <TableHead>Generated</TableHead>
                     <TableHead>Actions</TableHead>
                   </TableRow>
@@ -172,6 +174,12 @@ export default function DatasetManagement({ onView, refreshTrigger }: DatasetMan
                       <TableCell className="text-sm dark:text-gray-300">
                         {new Date(dataset.timerange_start).toLocaleDateString()} -{' '}
                         {new Date(dataset.timerange_end).toLocaleDateString()}
+                      </TableCell>
+                      <TableCell className="text-sm dark:text-gray-300">
+                        {dataset.time_interval || 60}m
+                      </TableCell>
+                      <TableCell className="text-sm dark:text-gray-300">
+                        {dataset.num_customers || 1}
                       </TableCell>
                       <TableCell className="text-sm dark:text-gray-300">
                         {new Date(dataset.created_at).toLocaleString()}

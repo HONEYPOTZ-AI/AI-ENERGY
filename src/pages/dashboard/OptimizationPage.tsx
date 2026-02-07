@@ -55,15 +55,15 @@ export default function OptimizationPage() {
         path: 'optimization/runOptimization',
         methodName: 'runOptimization',
         param: [
-          config.optimizationType,
-          config.timeHorizon,
-          config.storageCapacity,
-          config.maxChargeRate,
-          config.maxDischargeRate,
-          config.gridCapacity,
-          config.renewableCapacity,
-          config.location
-        ]
+        config.optimizationType,
+        config.timeHorizon,
+        config.storageCapacity,
+        config.maxChargeRate,
+        config.maxDischargeRate,
+        config.gridCapacity,
+        config.renewableCapacity,
+        config.location]
+
       });
 
       if (error) {
@@ -72,7 +72,7 @@ export default function OptimizationPage() {
 
       setResults(data);
       setActiveTab('results');
-      
+
       // Reload history to include the new run
       loadHistory();
 
@@ -120,8 +120,8 @@ export default function OptimizationPage() {
     return (
       <Badge variant={variants[type] || 'default'}>
         {getOptimizationTypeLabel(type)}
-      </Badge>
-    );
+      </Badge>);
+
   };
 
   return (
@@ -144,8 +144,8 @@ export default function OptimizationPage() {
           <TabsContent value="configure" className="space-y-6">
             <OptimizationConfig
               onRunOptimization={handleRunOptimization}
-              isLoading={isLoading}
-            />
+              isLoading={isLoading} />
+
           </TabsContent>
 
           <TabsContent value="results" className="space-y-6">
@@ -166,35 +166,35 @@ export default function OptimizationPage() {
                     onClick={loadHistory}
                     disabled={isLoadingHistory}
                     variant="outline"
-                    size="sm"
-                  >
-                    {isLoadingHistory ? (
-                      <>
+                    size="sm">
+
+                    {isLoadingHistory ?
+                    <>
                         <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                         Refreshing...
-                      </>
-                    ) : (
-                      <>
+                      </> :
+
+                    <>
                         <RefreshCw className="mr-2 h-4 w-4" />
                         Refresh
                       </>
-                    )}
+                    }
                   </Button>
                 </div>
               </CardHeader>
               <CardContent>
-                {isLoadingHistory ? (
-                  <div className="flex items-center justify-center py-12">
+                {isLoadingHistory ?
+                <div className="flex items-center justify-center py-12">
                     <Loader2 className="h-8 w-8 animate-spin text-primary" />
-                  </div>
-                ) : history.length === 0 ? (
-                  <div className="text-center py-12">
+                  </div> :
+                history.length === 0 ?
+                <div className="text-center py-12">
                     <p className="text-muted-foreground dark:text-gray-400">
                       No optimization history yet. Run your first optimization to see results here.
                     </p>
-                  </div>
-                ) : (
-                  <div className="overflow-x-auto">
+                  </div> :
+
+                <div className="overflow-x-auto">
                     <Table>
                       <TableHeader>
                         <TableRow>
@@ -208,8 +208,8 @@ export default function OptimizationPage() {
                         </TableRow>
                       </TableHeader>
                       <TableBody>
-                        {history.map((run) => (
-                          <TableRow key={run.id} className="hover:bg-gray-50 dark:hover:bg-gray-700">
+                        {history.map((run) =>
+                      <TableRow key={run.id} className="hover:bg-gray-50 dark:hover:bg-gray-700">
                             <TableCell className="dark:text-gray-200">
                               <div className="flex items-center">
                                 <Clock className="mr-2 h-4 w-4 text-muted-foreground" />
@@ -255,16 +255,16 @@ export default function OptimizationPage() {
                               </Badge>
                             </TableCell>
                           </TableRow>
-                        ))}
+                      )}
                       </TableBody>
                     </Table>
                   </div>
-                )}
+                }
               </CardContent>
             </Card>
           </TabsContent>
         </Tabs>
       </div>
-    </DashboardLayout>
-  );
+    </DashboardLayout>);
+
 }

@@ -16,32 +16,32 @@ export default function OptimizationResults({ results }: OptimizationResultsProp
 
   // Prepare comparison data for charts
   const comparisonData = [
-    {
-      metric: 'Cost',
-      Baseline: baseline.metrics.totalCost,
-      Optimized: optimized.metrics.totalCost,
-      unit: '$'
-    },
-    {
-      metric: 'Emissions',
-      Baseline: baseline.metrics.totalEmissions,
-      Optimized: optimized.metrics.totalEmissions,
-      unit: 'kg CO₂'
-    },
-    {
-      metric: 'Peak Load',
-      Baseline: baseline.metrics.peakDemand,
-      Optimized: optimized.metrics.peakDemand,
-      unit: 'kW'
-    }
-  ];
+  {
+    metric: 'Cost',
+    Baseline: baseline.metrics.totalCost,
+    Optimized: optimized.metrics.totalCost,
+    unit: '$'
+  },
+  {
+    metric: 'Emissions',
+    Baseline: baseline.metrics.totalEmissions,
+    Optimized: optimized.metrics.totalEmissions,
+    unit: 'kg CO₂'
+  },
+  {
+    metric: 'Peak Load',
+    Baseline: baseline.metrics.peakDemand,
+    Optimized: optimized.metrics.peakDemand,
+    unit: 'kW'
+  }];
+
 
   // Energy source breakdown for optimized schedule
   const renewablePercent = optimized.metrics.renewablePercentage;
   const energySourceData = [
-    { name: 'Renewable', value: renewablePercent, color: '#10b981' },
-    { name: 'Grid', value: 100 - renewablePercent, color: '#6366f1' }
-  ];
+  { name: 'Renewable', value: renewablePercent, color: '#10b981' },
+  { name: 'Grid', value: 100 - renewablePercent, color: '#6366f1' }];
+
 
   // Hourly schedule comparison (show first 24 hours)
   const scheduleData = baseline.schedule.slice(0, 24).map((item: any, index: number) => ({
@@ -211,11 +211,11 @@ export default function OptimizationResults({ results }: OptimizationResultsProp
                   label={({ name, value }) => `${name}: ${value.toFixed(1)}%`}
                   outerRadius={100}
                   fill="#8884d8"
-                  dataKey="value"
-                >
-                  {energySourceData.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={entry.color} />
-                  ))}
+                  dataKey="value">
+
+                  {energySourceData.map((entry, index) =>
+                  <Cell key={`cell-${index}`} fill={entry.color} />
+                  )}
                 </Pie>
                 <Tooltip />
               </PieChart>
@@ -272,41 +272,41 @@ export default function OptimizationResults({ results }: OptimizationResultsProp
               const csv = convertToCSV(results);
               downloadCSV(csv, `optimization_report_${Date.now()}.csv`);
             }}
-            className="w-full"
-          >
+            className="w-full">
+
             <Download className="mr-2 h-4 w-4" />
             Export Optimization Report (CSV)
           </Button>
         </CardContent>
       </Card>
-    </div>
-  );
+    </div>);
+
 }
 
 function convertToCSV(results: any) {
   const lines = [
-    'Optimization Report',
-    '',
-    'Summary',
-    `Optimization Type,${results.optimizationType}`,
-    `Time Horizon,${results.timeHorizon} hours`,
-    `Location,${results.location}`,
-    '',
-    'Metrics,Baseline,Optimized,Savings,Savings %',
-    `Cost ($),${results.baseline.metrics.totalCost},${results.optimized.metrics.totalCost},${results.savings.cost.absolute},${results.savings.cost.percentage}%`,
-    `Emissions (kg CO2),${results.baseline.metrics.totalEmissions},${results.optimized.metrics.totalEmissions},${results.savings.emissions.absolute},${results.savings.emissions.percentage}%`,
-    `Peak Load (kW),${results.baseline.metrics.peakDemand},${results.optimized.metrics.peakDemand},${results.savings.peakDemand.absolute},${results.savings.peakDemand.percentage}%`,
-    '',
-    'Configuration',
-    `Storage Capacity,${results.configuration.storageCapacity} kWh`,
-    `Max Charge Rate,${results.configuration.maxChargeRate} kW`,
-    `Max Discharge Rate,${results.configuration.maxDischargeRate} kW`,
-    `Grid Capacity,${results.configuration.gridCapacity} kW`,
-    `Renewable Capacity,${results.configuration.renewableCapacity} kW`,
-    '',
-    'Hourly Schedule',
-    'Hour,Baseline Load (kW),Optimized Load (kW),Renewable (kW),Storage (kW),Grid Import (kW),Price ($/kWh),Carbon Intensity (g/kWh)'
-  ];
+  'Optimization Report',
+  '',
+  'Summary',
+  `Optimization Type,${results.optimizationType}`,
+  `Time Horizon,${results.timeHorizon} hours`,
+  `Location,${results.location}`,
+  '',
+  'Metrics,Baseline,Optimized,Savings,Savings %',
+  `Cost ($),${results.baseline.metrics.totalCost},${results.optimized.metrics.totalCost},${results.savings.cost.absolute},${results.savings.cost.percentage}%`,
+  `Emissions (kg CO2),${results.baseline.metrics.totalEmissions},${results.optimized.metrics.totalEmissions},${results.savings.emissions.absolute},${results.savings.emissions.percentage}%`,
+  `Peak Load (kW),${results.baseline.metrics.peakDemand},${results.optimized.metrics.peakDemand},${results.savings.peakDemand.absolute},${results.savings.peakDemand.percentage}%`,
+  '',
+  'Configuration',
+  `Storage Capacity,${results.configuration.storageCapacity} kWh`,
+  `Max Charge Rate,${results.configuration.maxChargeRate} kW`,
+  `Max Discharge Rate,${results.configuration.maxDischargeRate} kW`,
+  `Grid Capacity,${results.configuration.gridCapacity} kW`,
+  `Renewable Capacity,${results.configuration.renewableCapacity} kW`,
+  '',
+  'Hourly Schedule',
+  'Hour,Baseline Load (kW),Optimized Load (kW),Renewable (kW),Storage (kW),Grid Import (kW),Price ($/kWh),Carbon Intensity (g/kWh)'];
+
 
   results.baseline.schedule.forEach((item: any, i: number) => {
     const hour = new Date(item.timestamp).getHours();

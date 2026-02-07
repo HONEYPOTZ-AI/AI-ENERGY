@@ -3,11 +3,14 @@ export function generateCarbonIntensity(startDate, endDate, params = {}) {
     baseIntensity = 400,
     peakIntensity = 600,
     noiseLevel = 0.1,
-    renewableShare = 0.3
+    renewableShare = 0.3,
+    timeInterval = 60,
+    numCustomers = 1
   } = params;
   
   const dataPoints = [];
   const current = new Date(startDate);
+  const intervalMs = timeInterval * 60 * 1000;
   
   while (current <= endDate) {
     const hour = current.getHours();
@@ -35,13 +38,19 @@ export function generateCarbonIntensity(startDate, endDate, params = {}) {
     const noise = (Math.random() - 0.5) * 2 * noiseLevel * intensity;
     intensity += noise;
     
-    dataPoints.push({
-      timestamp: current.toISOString(),
-      value: Math.max(0, intensity),
-      unit: 'gCO2/kWh'
-    });
+    // Generate for each grid/region
+    for (let i = 0; i < numCustomers; i++) {
+      // Add regional variation
+      const regionalVariation = 1 + (Math.random() - 0.5) * 0.15;
+      dataPoints.push({
+        timestamp: current.toISOString(),
+        value: Math.max(0, intensity * regionalVariation),
+        unit: 'gCO2/kWh',
+        regionId: numCustomers > 1 ? `region_${i + 1}` : undefined
+      });
+    }
     
-    current.setHours(current.getHours() + 1);
+    current.setTime(current.getTime() + intervalMs);
   }
   
   return dataPoints;
