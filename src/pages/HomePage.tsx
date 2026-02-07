@@ -527,9 +527,9 @@ const HomePage = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.2 }}>
-              <a 
-                href="https://meetings.hubspot.com/vlad-lialine" 
-                target="_blank" 
+              <a
+                href="https://meetings.hubspot.com/vlad-lialine"
+                target="_blank"
                 rel="noopener noreferrer"
                 className="inline-block">
                 <Button
