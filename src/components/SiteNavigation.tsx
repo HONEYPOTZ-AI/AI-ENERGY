@@ -12,6 +12,7 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger } from
 '@/components/ui/navigation-menu';
+import Logo from '@/components/ui/logo';
 
 export default function SiteNavigation() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -59,11 +60,7 @@ export default function SiteNavigation() {
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2">
-            <img
-              src="/logo.webp"
-              alt="Company Logo"
-              className="h-10 w-auto" />
-
+            <Logo className="h-10 w-auto" alt="Company Logo" />
             <span className="font-bold text-lg hidden sm:inline">AI ENERGY Optimizer</span>
           </Link>
 

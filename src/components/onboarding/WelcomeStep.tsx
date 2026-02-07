@@ -1,5 +1,6 @@
 import { Zap, TrendingUp, Leaf, Database } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import Logo from '@/components/ui/logo';
 
 interface WelcomeStepProps {
   onNext: () => void;
@@ -9,10 +10,7 @@ const WelcomeStep = ({ onNext }: WelcomeStepProps) => {
   return (
     <div className="text-center space-y-6">
       <div className="flex justify-center mb-6">
-        <img
-          src="/logo.webp"
-          alt="Company Logo"
-          className="h-20 w-auto" />
+        <Logo className="h-20 w-auto" alt="Company Logo" />
       </div>
       
       <div className="space-y-3">

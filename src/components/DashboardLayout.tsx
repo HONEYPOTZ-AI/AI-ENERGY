@@ -20,6 +20,7 @@ import {
 "lucide-react";
 import { cn } from "@/lib/utils";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import Logo from "@/components/ui/logo";
 
 interface DashboardLayoutProps {
   children: ReactNode;
@@ -57,10 +58,7 @@ const DashboardLayout = ({ children, dashboardType }: DashboardLayoutProps) => {
             </Button>
             
             <Link to="/" className="flex items-center gap-2">
-              <img
-                src="/logo.webp"
-                alt="Company Logo"
-                className="h-8 w-auto" />
+              <Logo className="h-8 w-auto" alt="Company Logo" />
               <span className="font-bold text-lg hidden sm:inline">AI ENERGY Optimizer</span>
             </Link>
 

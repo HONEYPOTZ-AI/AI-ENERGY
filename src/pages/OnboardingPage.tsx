@@ -7,6 +7,7 @@ import { Progress } from '@/components/ui/progress';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { toast } from '@/hooks/use-toast';
 import { ThemeToggle } from '@/components/ThemeToggle';
+import Logo from '@/components/ui/logo';
 import WelcomeStep from '@/components/onboarding/WelcomeStep';
 import CompanyInfoStep from '@/components/onboarding/CompanyInfoStep';
 import UseCaseStep from '@/components/onboarding/UseCaseStep';
@@ -186,10 +187,7 @@ const OnboardingPage = () => {
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 flex items-center justify-center p-4 relative">
       <div className="absolute top-4 left-4">
         <Link to="/">
-          <img
-            src="/logo.webp"
-            alt="Company Logo"
-            className="h-10 w-auto hover:opacity-80 transition-opacity" />
+          <Logo className="h-10 w-auto hover:opacity-80 transition-opacity" alt="Company Logo" />
         </Link>
       </div>
       <div className="absolute top-4 right-4">

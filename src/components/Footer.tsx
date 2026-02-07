@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { Separator } from "@/components/ui/separator";
+import Logo from "@/components/ui/logo";
 
 export default function Footer() {
   return (
@@ -9,10 +10,7 @@ export default function Footer() {
           {/* Company Info */}
           <div>
             <Link to="/" className="inline-block">
-              <img
-                src="/logo.webp"
-                alt="Company Logo"
-                className="h-12 w-auto mb-3 hover:opacity-80 transition-opacity" />
+              <Logo className="h-12 w-auto mb-3 hover:opacity-80 transition-opacity" alt="Company Logo" />
             </Link>
 
             <h3 className="font-semibold text-lg mb-3 bg-gradient-to-r from-blue-600 to-cyan-600 dark:from-blue-400 dark:to-cyan-400 bg-clip-text text-transparent">
