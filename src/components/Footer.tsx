@@ -9,11 +9,16 @@ export default function Footer() {
           {/* Company Info */}
           <div>
             <h3 className="font-semibold text-lg mb-3 bg-gradient-to-r from-blue-600 to-cyan-600 dark:from-blue-400 dark:to-cyan-400 bg-clip-text text-transparent">
-              AI ENERGY Optimizer
+              Honeypotz Inc
             </h3>
             <p className="text-sm text-muted-foreground">
               Advanced AI-powered energy forecasting and optimization platform for utilities and enterprises.
             </p>
+            <div className="mt-4 space-y-2 text-sm text-muted-foreground">
+              <p><strong>Address:</strong> 8 The Green STE R, Dover DE 19901</p>
+              <p><strong>Phone:</strong> +1 (203) 998-5660</p>
+              <p><strong>Email:</strong> team@honeypotz.net</p>
+            </div>
           </div>
 
           {/* Quick Links */}
@@ -74,7 +79,7 @@ export default function Footer() {
         <Separator className="my-6" />
 
         <div className="flex flex-col md:flex-row justify-between items-center text-sm text-muted-foreground">
-          <p>&copy; {new Date().getFullYear()} AI ENERGY Optimizer. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} Honeypotz Inc. All rights reserved.</p>
           <div className="flex gap-4 mt-4 md:mt-0">
             <Link to="/privacy-policy" className="hover:text-foreground transition-colors">
               Privacy

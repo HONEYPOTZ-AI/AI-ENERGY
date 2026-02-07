@@ -32,7 +32,7 @@ export default function PrivacyPolicy() {
             </CardHeader>
             <CardContent className="prose dark:prose-invert max-w-none">
               <p className="text-muted-foreground">
-                Welcome to AI ENERGY Optimizer. We are committed to protecting your personal information and your right to privacy. 
+                Welcome to Honeypotz Inc. We are committed to protecting your personal information and your right to privacy. 
                 This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our AI-powered 
                 energy optimization platform.
               </p>
@@ -236,9 +236,9 @@ export default function PrivacyPolicy() {
                 If you have any questions about this Privacy Policy or our privacy practices, please contact us:
               </p>
               <div className="space-y-2 text-muted-foreground">
-                <p><strong>Email:</strong> privacy@aienergyoptimizer.com</p>
-                <p><strong>Address:</strong> AI ENERGY Optimizer, Privacy Department</p>
-                <p><strong>Phone:</strong> +1 (555) 123-4567</p>
+                <p><strong>Email:</strong> team@honeypotz.net</p>
+                <p><strong>Address:</strong> Honeypotz Inc, Privacy Department, 8 The Green STE R, Dover DE 19901</p>
+                <p><strong>Phone:</strong> +1 (203) 998-5660</p>
               </div>
             </CardContent>
           </Card>

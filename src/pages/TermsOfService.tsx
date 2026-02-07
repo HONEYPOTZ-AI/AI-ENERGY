@@ -32,11 +32,11 @@ export default function TermsOfService() {
             </CardHeader>
             <CardContent>
               <p className="text-muted-foreground mb-3">
-                By accessing and using AI ENERGY Optimizer (the "Service"), you accept and agree to be bound by these Terms of Service 
+                By accessing and using Honeypotz Inc's services (the "Service"), you accept and agree to be bound by these Terms of Service 
                 ("Terms"). If you do not agree to these Terms, you may not access or use the Service.
               </p>
               <p className="text-muted-foreground">
-                These Terms constitute a legally binding agreement between you (the "User" or "you") and AI ENERGY Optimizer 
+                These Terms constitute a legally binding agreement between you (the "User" or "you") and Honeypotz Inc 
                 (the "Company," "we," "us," or "our").
               </p>
             </CardContent>
@@ -48,7 +48,7 @@ export default function TermsOfService() {
             </CardHeader>
             <CardContent>
               <p className="text-muted-foreground mb-3">
-                AI ENERGY Optimizer is an AI-powered platform that provides:
+                Honeypotz Inc is an AI-powered platform that provides:
               </p>
               <ul className="list-disc pl-6 text-muted-foreground space-y-2">
                 <li>Energy load forecasting using advanced machine learning algorithms</li>
@@ -349,9 +349,9 @@ export default function TermsOfService() {
                 If you have any questions about these Terms, please contact us:
               </p>
               <div className="space-y-2 text-muted-foreground">
-                <p><strong>Email:</strong> legal@aienergyoptimizer.com</p>
-                <p><strong>Address:</strong> AI ENERGY Optimizer, Legal Department</p>
-                <p><strong>Phone:</strong> +1 (555) 123-4567</p>
+                <p><strong>Email:</strong> team@honeypotz.net</p>
+                <p><strong>Address:</strong> Honeypotz Inc, Legal Department, 8 The Green STE R, Dover DE 19901</p>
+                <p><strong>Phone:</strong> +1 (203) 998-5660</p>
               </div>
             </CardContent>
           </Card>

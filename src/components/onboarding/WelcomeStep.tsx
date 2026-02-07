@@ -16,7 +16,7 @@ const WelcomeStep = ({ onNext }: WelcomeStepProps) => {
       
       <div className="space-y-3">
         <h1 className="text-3xl md:text-4xl font-bold text-gray-900">
-          Welcome to AI ENERGY Optimizer
+          Welcome to Honeypotz Inc
         </h1>
         <p className="text-lg text-gray-600 max-w-md mx-auto">
           Your AI-Powered Energy Intelligence Platform

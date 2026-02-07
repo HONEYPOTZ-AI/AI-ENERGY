@@ -262,7 +262,7 @@ const HomePage = () => {
             <div className="space-y-6">
               <Badge variant="outline" className="px-3 py-1">
                 <Globe className="h-3 w-3 mr-2" />
-                About AI ENERGY Optimizer
+                About Honeypotz Inc
               </Badge>
               <h3 className="text-3xl md:text-5xl font-bold leading-tight">
                 Leading the Future of{' '}
@@ -271,12 +271,12 @@ const HomePage = () => {
                 </span>
               </h3>
               <p className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
-                At AI ENERGY Optimizer, we're on a mission to revolutionize how organizations manage and optimize their energy consumption. 
+                At Honeypotz Inc, we're on a mission to revolutionize how organizations manage and optimize their energy consumption. 
                 By combining cutting-edge artificial intelligence with deep energy sector expertise, we empower utilities and enterprises 
                 to make smarter, more sustainable decisions.
               </p>
               <p className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
-                Our AI ENERGY Optimizer platform leverages advanced machine learning algorithms to deliver unprecedented accuracy in 
+                Our platform leverages advanced machine learning algorithms to deliver unprecedented accuracy in 
                 energy forecasting, optimization, and ESG reporting. We're committed to building a cleaner, more efficient energy future 
                 for generations to come.
               </p>
@@ -652,19 +652,27 @@ const HomePage = () => {
                   <Sparkles className="h-5 w-5 text-yellow-400 absolute -top-1 -right-1" />
                 </div>
                 <div>
-                  <h4 className="text-2xl font-bold">AI ENERGY Optimizer</h4>
+                  <h4 className="text-2xl font-bold">Honeypotz Inc</h4>
                   <p className="text-sm text-gray-400">Intelligent Energy Management</p>
                 </div>
               </div>
               <p className="text-gray-400 mb-6 leading-relaxed">
-                AI ENERGY Optimizer - Leading the future of sustainable energy with AI-powered optimization solutions for utilities and enterprises worldwide.
+                Honeypotz Inc - Leading the future of sustainable energy with AI-powered optimization solutions for utilities and enterprises worldwide.
               </p>
-              <div className="flex gap-4">
+              <div className="space-y-2">
                 <div className="flex items-center gap-2 text-sm text-gray-400">
                   <Mail className="h-4 w-4" />
-                  <a href="mailto:contact@aienergyoptimizer.com" className="hover:text-white transition-colors">
-                    contact@aienergyoptimizer.com
+                  <a href="mailto:team@honeypotz.net" className="hover:text-white transition-colors">
+                    team@honeypotz.net
                   </a>
+                </div>
+                <div className="flex items-center gap-2 text-sm text-gray-400">
+                  <Phone className="h-4 w-4" />
+                  <span>+1 (203) 998-5660</span>
+                </div>
+                <div className="flex items-center gap-2 text-sm text-gray-400">
+                  <MapPin className="h-4 w-4" />
+                  <span>8 The Green STE R, Dover DE 19901</span>
                 </div>
               </div>
             </div>
@@ -729,7 +737,7 @@ const HomePage = () => {
 
           <div className="border-t border-gray-700 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-gray-400 text-sm text-center md:text-left">
-              © {new Date().getFullYear()} AI ENERGY Optimizer. All rights reserved. Powering sustainable energy management worldwide.
+              © {new Date().getFullYear()} Honeypotz Inc. All rights reserved. Powering sustainable energy management worldwide.
             </p>
             <div className="flex gap-6 text-sm text-gray-400">
               <Link to="/privacy-policy" className="hover:text-white transition-colors">Privacy Policy</Link>
