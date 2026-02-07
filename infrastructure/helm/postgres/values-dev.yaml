@@ -1,0 +1,29 @@
+# Development environment overrides
+image:
+  tag: "15.3-alpine"
+
+resources:
+  limits:
+    cpu: 1000m
+    memory: 2Gi
+  requests:
+    cpu: 250m
+    memory: 512Mi
+
+persistence:
+  enabled: true
+  size: 5Gi
+
+postgres:
+  database: "mydb_dev"
+  username: "postgres"
+  password: "devpassword"
+  maxConnections: "50"
+  sharedBuffers: "128MB"
+  effectiveCacheSize: "512MB"
+
+configMap:
+  data:
+    POSTGRES_DB: "mydb_dev"
+    POSTGRES_MAX_CONNECTIONS: "50"
+    POSTGRES_SHARED_BUFFERS: "128MB"

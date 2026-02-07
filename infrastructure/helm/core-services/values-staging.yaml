@@ -1,0 +1,24 @@
+# Staging environment overrides
+replicaCount: 2
+
+image:
+  tag: "staging-latest"
+
+resources:
+  limits:
+    cpu: 1500m
+    memory: 1.5Gi
+  requests:
+    cpu: 300m
+    memory: 384Mi
+
+autoscaling:
+  enabled: true
+  minReplicas: 2
+  maxReplicas: 5
+
+configMap:
+  data:
+    LOG_LEVEL: "info"
+    APP_ENV: "staging"
+    MAX_CONNECTIONS: "75"

@@ -1,0 +1,26 @@
+# Development environment overrides
+daemonset:
+  enabled: false
+
+nodeSelector: {}
+
+tolerations: []
+
+runtimeClass:
+  name: kata-dev
+  handler: kata-qemu
+  scheduling:
+    nodeSelector: {}
+
+kataConfig:
+  confidential_guest: false
+  sev_guest: false
+  default_vcpus: 1
+  default_memory: 1024
+
+configMap:
+  data:
+    KATA_HYPERVISOR: "qemu"
+    KATA_CONFIDENTIAL: "false"
+    SEV_ENABLED: "false"
+    LOG_LEVEL: "debug"

@@ -1,0 +1,13 @@
+apiVersion: v2
+name: inference
+description: AI/ML inference service with GPU support
+type: application
+version: 1.0.0
+appVersion: "1.0.0"
+keywords:
+  - inference
+  - ml
+  - gpu
+maintainers:
+  - name: ML Platform Team
+    email: ml-platform@example.com

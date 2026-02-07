@@ -1,0 +1,70 @@
+# Gatekeeper Test: Kata Runtime on TEE
+# Run: kubectl apply -f test-kata-runtime.yaml --dry-run=server
+---
+# PASS: Confidential workload with kata-cc
+apiVersion: v1
+kind: Pod
+metadata:
+  name: test-tee-compliant
+  namespace: default
+  labels:
+    confidential: "true"
+  annotations:
+    tee.azure.com/attestation-policy: "minimum"
+spec:
+  runtimeClassName: kata-cc
+  nodeSelector:
+    confidential: "true"
+  containers:
+  - name: confidential-app
+    image: myapp:v1
+    securityContext:
+      runAsNonRoot: true
+      readOnlyRootFilesystem: true
+---
+# FAIL: Confidential label but no kata runtime (should be blocked)
+apiVersion: v1
+kind: Pod
+metadata:
+  name: test-missing-kata
+  namespace: default
+  labels:
+    confidential: "true"
+spec:
+  nodeSelector:
+    confidential: "true"
+  containers:
+  - name: app
+    image: myapp:v1
+---
+# FAIL: Confidential but wrong node selector (should be blocked)
+apiVersion: v1
+kind: Pod
+metadata:
+  name: test-wrong-node
+  namespace: default
+  labels:
+    confidential: "true"
+spec:
+  runtimeClassName: kata-cc
+  nodeSelector:
+    node-type: standard
+  containers:
+  - name: app
+    image: myapp:v1
+---
+# FAIL: Missing attestation annotation (should be blocked in namespaces with confidential-computing label)
+apiVersion: v1
+kind: Pod
+metadata:
+  name: test-missing-attestation
+  namespace: confidential-workloads
+  labels:
+    confidential: "true"
+spec:
+  runtimeClassName: kata-cc
+  nodeSelector:
+    confidential: "true"
+  containers:
+  - name: app
+    image: myapp:v1

@@ -1,0 +1,145 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: restrict-hostpath
+  annotations:
+    policies.kyverno.io/title: Restrict HostPath Volumes
+    policies.kyverno.io/category: Security, Pod Security
+    policies.kyverno.io/severity: high
+    policies.kyverno.io/subject: Pod, Volume
+    policies.kyverno.io/description: >-
+      Restricts the use of hostPath volumes which can expose host filesystem to containers.
+      HostPath volumes are only allowed in system namespaces and must use specific paths.
+spec:
+  validationFailureAction: Enforce
+  background: true
+  failurePolicy: Fail
+  rules:
+  - name: block-hostpath-production
+    match:
+      any:
+      - resources:
+          kinds:
+          - Pod
+          namespaces:
+          - "!kube-system"
+          - "!kube-public"
+          - "!local-path-storage"
+    validate:
+      message: >-
+        HostPath volumes are not allowed in production namespaces.
+        Use PersistentVolumeClaims, ConfigMaps, or Secrets instead.
+      pattern:
+        spec:
+          =(volumes):
+          - X(hostPath): null
+  - name: restrict-hostpath-system
+    match:
+      any:
+      - resources:
+          kinds:
+          - Pod
+          namespaces:
+          - kube-system
+          - local-path-storage
+    validate:
+      message: >-
+        HostPath volumes in system namespaces must use allowed paths:
+        /var/lib/kubelet, /var/lib/docker, /var/run/docker.sock, /var/log, /etc/kubernetes
+      foreach:
+      - list: "request.object.spec.volumes[?hostPath]"
+        deny:
+          conditions:
+            all:
+            - key: "{{ element.hostPath.path }}"
+              operator: NotIn
+              value:
+              - /var/lib/kubelet*
+              - /var/lib/docker*
+              - /var/run/docker.sock
+              - /var/log*
+              - /etc/kubernetes*
+              - /run/kata-containers*
+---
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: require-read-only-root-filesystem
+  annotations:
+    policies.kyverno.io/title: Require Read-Only Root Filesystem
+    policies.kyverno.io/category: Security, Pod Security
+    policies.kyverno.io/severity: medium
+    policies.kyverno.io/description: >-
+      Requires containers to run with a read-only root filesystem. This prevents
+      runtime modification of the container filesystem, enhancing security.
+spec:
+  validationFailureAction: Enforce
+  background: true
+  rules:
+  - name: require-ro-rootfs
+    match:
+      any:
+      - resources:
+          kinds:
+          - Pod
+          namespaces:
+          - "!kube-system"
+          - "!kube-public"
+    exclude:
+      any:
+      - resources:
+          annotations:
+            policies.kyverno.io/allow-writable-rootfs: "true"
+    validate:
+      message: >-
+        Containers must set securityContext.readOnlyRootFilesystem to true.
+        Use emptyDir or PVC for writable storage.
+      pattern:
+        spec:
+          containers:
+          - securityContext:
+              readOnlyRootFilesystem: true
+---
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: validate-volume-types
+  annotations:
+    policies.kyverno.io/title: Validate Volume Types
+    policies.kyverno.io/category: Security, Best Practices
+    policies.kyverno.io/severity: medium
+    policies.kyverno.io/description: >-
+      Validates that only approved volume types are used in production workloads.
+spec:
+  validationFailureAction: Enforce
+  background: true
+  rules:
+  - name: allowed-volume-types
+    match:
+      any:
+      - resources:
+          kinds:
+          - Pod
+          namespaces:
+          - "!kube-system"
+          - "!kube-public"
+    validate:
+      message: >-
+        Only approved volume types are allowed: persistentVolumeClaim, configMap, 
+        secret, emptyDir, downwardAPI, projected. HostPath is not allowed.
+      foreach:
+      - list: "request.object.spec.volumes[]"
+        deny:
+          conditions:
+            any:
+            # Deny if none of the allowed types are present
+            - key: "{{ element.keys(@)[0] }}"
+              operator: NotIn
+              value:
+              - persistentVolumeClaim
+              - configMap
+              - secret
+              - emptyDir
+              - downwardAPI
+              - projected
+              - name

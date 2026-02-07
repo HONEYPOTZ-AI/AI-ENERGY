@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "tee-runtime.fullname" . }}
+  labels:
+    {{- include "tee-runtime.labels" . | nindent 4 }}
+data:
+  {{- toYaml .Values.configMap.data | nindent 2 }}
+  kata-configuration.toml: |
+    [hypervisor.qemu]
+    path = "/opt/kata/bin/qemu-system-x86_64"
+    kernel = "{{ .Values.kataConfig.kernel }}"
+    initrd = "{{ .Values.kataConfig.initrd }}"
+    {{- if .Values.kataConfig.image }}
+    image = "{{ .Values.kataConfig.image }}"
+    {{- end }}
+    firmware = "{{ .Values.kataConfig.firmware }}"
+    machine_type = "{{ .Values.kataConfig.machine_type }}"
+    default_vcpus = {{ .Values.kataConfig.default_vcpus }}
+    default_maxvcpus = {{ .Values.kataConfig.default_maxvcpus }}
+    default_memory = {{ .Values.kataConfig.default_memory }}
+    disable_block_device_use = {{ .Values.kataConfig.disable_block_device_use }}
+    shared_fs = "{{ .Values.kataConfig.shared_fs }}"
+    virtio_fs_daemon = "{{ .Values.kataConfig.virtio_fs_daemon }}"
+    virtio_fs_cache = "{{ .Values.kataConfig.virtio_fs_cache }}"
+    virtio_fs_cache_size = {{ .Values.kataConfig.virtio_fs_cache_size }}
+    enable_iommu = {{ .Values.kataConfig.enable_iommu }}
+    enable_iommu_platform = {{ .Values.kataConfig.enable_iommu_platform }}
+    confidential_guest = {{ .Values.kataConfig.confidential_guest }}
+    {{- if .Values.kataConfig.sev_guest }}
+    sev_guest = {{ .Values.kataConfig.sev_guest }}
+    {{- end }}

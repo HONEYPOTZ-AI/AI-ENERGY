@@ -1,0 +1,80 @@
+# Gatekeeper Test: Privileged Containers
+# Run: kubectl apply -f test-privileged-containers.yaml --dry-run=server
+---
+# PASS: Secure container configuration
+apiVersion: v1
+kind: Pod
+metadata:
+  name: test-secure-container
+  namespace: default
+spec:
+  securityContext:
+    runAsNonRoot: true
+  containers:
+  - name: app
+    image: myapp:v1
+    securityContext:
+      runAsNonRoot: true
+      allowPrivilegeEscalation: false
+      capabilities:
+        drop:
+        - ALL
+        add:
+        - NET_BIND_SERVICE
+      readOnlyRootFilesystem: true
+---
+# FAIL: Privileged container (should be blocked)
+apiVersion: v1
+kind: Pod
+metadata:
+  name: test-privileged
+  namespace: default
+spec:
+  containers:
+  - name: app
+    image: myapp:v1
+    securityContext:
+      privileged: true
+---
+# FAIL: Host network access (should be blocked)
+apiVersion: v1
+kind: Pod
+metadata:
+  name: test-host-network
+  namespace: default
+spec:
+  hostNetwork: true
+  hostPID: true
+  containers:
+  - name: app
+    image: myapp:v1
+---
+# FAIL: Dangerous capability (should be blocked)
+apiVersion: v1
+kind: Pod
+metadata:
+  name: test-bad-capability
+  namespace: default
+spec:
+  containers:
+  - name: app
+    image: myapp:v1
+    securityContext:
+      capabilities:
+        add:
+        - SYS_ADMIN
+---
+# FAIL: Missing drop ALL (should be blocked)
+apiVersion: v1
+kind: Pod
+metadata:
+  name: test-missing-drop-all
+  namespace: default
+spec:
+  containers:
+  - name: app
+    image: myapp:v1
+    securityContext:
+      capabilities:
+        add:
+        - NET_BIND_SERVICE

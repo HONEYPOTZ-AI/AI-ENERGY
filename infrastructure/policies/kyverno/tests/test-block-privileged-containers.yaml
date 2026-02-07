@@ -1,0 +1,77 @@
+---
+# Test Case 1: Valid - Non-privileged container
+apiVersion: v1
+kind: Pod
+metadata:
+  name: valid-non-privileged
+  namespace: default
+spec:
+  securityContext:
+    runAsNonRoot: true
+  containers:
+  - name: app
+    image: myapp:v1
+    securityContext:
+      privileged: false
+      allowPrivilegeEscalation: false
+      capabilities:
+        drop:
+        - ALL
+      readOnlyRootFilesystem: true
+---
+# Test Case 2: Invalid - Privileged container (should fail)
+apiVersion: v1
+kind: Pod
+metadata:
+  name: invalid-privileged
+  namespace: default
+spec:
+  containers:
+  - name: app
+    image: myapp:v1
+    securityContext:
+      privileged: true
+---
+# Test Case 3: Invalid - Host namespace access (should fail)
+apiVersion: v1
+kind: Pod
+metadata:
+  name: invalid-host-namespace
+  namespace: default
+spec:
+  hostNetwork: true
+  hostPID: true
+  containers:
+  - name: app
+    image: myapp:v1
+---
+# Test Case 4: Invalid - Dangerous capabilities (should fail)
+apiVersion: v1
+kind: Pod
+metadata:
+  name: invalid-capabilities
+  namespace: default
+spec:
+  containers:
+  - name: app
+    image: myapp:v1
+    securityContext:
+      capabilities:
+        add:
+        - SYS_ADMIN
+        - NET_ADMIN
+---
+# Test Case 5: Valid - With exemption annotation
+apiVersion: v1
+kind: Pod
+metadata:
+  name: valid-with-exemption
+  namespace: default
+  annotations:
+    policies.kyverno.io/allow-privileged: "true"
+spec:
+  containers:
+  - name: system-container
+    image: system-tool:v1
+    securityContext:
+      privileged: true

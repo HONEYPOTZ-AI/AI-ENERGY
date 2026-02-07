@@ -1,0 +1,32 @@
+# Staging environment overrides
+replicaCount: 2
+
+image:
+  tag: "staging-latest"
+
+gpu:
+  enabled: true
+  limit: 1
+
+resources:
+  limits:
+    cpu: 3000m
+    memory: 6Gi
+    nvidia.com/gpu: 1
+  requests:
+    cpu: 1500m
+    memory: 3Gi
+    nvidia.com/gpu: 1
+
+autoscaling:
+  enabled: true
+  minReplicas: 2
+  maxReplicas: 5
+
+configMap:
+  data:
+    MODEL_PATH: "/models"
+    BATCH_SIZE: "16"
+    MAX_BATCH_DELAY: "150"
+    ENABLE_CUDA: "true"
+    LOG_LEVEL: "info"

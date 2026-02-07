@@ -1,0 +1,32 @@
+# Development environment overrides
+tls:
+  enabled: false
+
+ingress:
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "false"
+    nginx.ingress.kubernetes.io/proxy-body-size: "50m"
+
+  hosts:
+    - host: dev.example.com
+      paths:
+        - path: /
+          pathType: Prefix
+          backend:
+            service:
+              name: core-services
+              port: 8080
+        - path: /api/inference
+          pathType: Prefix
+          backend:
+            service:
+              name: inference
+              port: 8000
+
+rateLimiting:
+  enabled: false
+
+cors:
+  enabled: true
+  allowOrigin: "*"

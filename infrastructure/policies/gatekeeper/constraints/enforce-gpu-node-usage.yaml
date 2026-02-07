@@ -1,0 +1,23 @@
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: K8sGPUNodeLabeling
+metadata:
+  name: enforce-gpu-node-usage
+  annotations:
+    description: Enforce proper GPU node selection and configuration
+spec:
+  enforcementAction: deny
+  match:
+    kinds:
+    - apiGroups: [""]
+      kinds: ["Pod"]
+  parameters:
+    gpuResourceName: nvidia.com/gpu
+    requiredNodeLabels:
+    - key: node-type
+      value: gpu
+    - key: gpu-type
+      value: nvidia
+    requiredTolerations:
+    - key: nvidia.com/gpu
+      value: present
+      effect: NoSchedule

@@ -1,0 +1,80 @@
+{{- if .Values.daemonset.enabled }}
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: {{ include "tee-runtime.fullname" . }}
+  labels:
+    {{- include "tee-runtime.labels" . | nindent 4 }}
+spec:
+  selector:
+    matchLabels:
+      {{- include "tee-runtime.selectorLabels" . | nindent 6 }}
+  updateStrategy:
+    {{- toYaml .Values.daemonset.updateStrategy | nindent 4 }}
+  template:
+    metadata:
+      annotations:
+        checksum/config: {{ include (print $.Template.BasePath "/configmap.yaml") . | sha256sum }}
+        {{- with .Values.podAnnotations }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+      labels:
+        {{- include "tee-runtime.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "tee-runtime.serviceAccountName" . }}
+      hostNetwork: true
+      hostPID: true
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+      - name: {{ .Chart.Name }}
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        command:
+          - /bin/bash
+          - -c
+          - |
+            set -e
+            echo "Installing Kata Containers runtime..."
+            /opt/kata-artifacts/scripts/kata-deploy.sh install
+            echo "Kata runtime installed successfully"
+            tail -f /dev/null
+        resources:
+          {{- toYaml .Values.resources | nindent 12 }}
+        envFrom:
+        - configMapRef:
+            name: {{ include "tee-runtime.fullname" . }}
+        volumeMounts:
+        - name: host-root
+          mountPath: /host
+        - name: containerd-conf
+          mountPath: /etc/containerd
+        - name: kata-artifacts
+          mountPath: /opt/kata
+        securityContext:
+          privileged: true
+      volumes:
+      - name: host-root
+        hostPath:
+          path: /
+      - name: containerd-conf
+        hostPath:
+          path: /etc/containerd
+          type: DirectoryOrCreate
+      - name: kata-artifacts
+        hostPath:
+          path: /opt/kata
+          type: DirectoryOrCreate
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+{{- end }}

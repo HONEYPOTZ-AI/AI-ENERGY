@@ -1,0 +1,77 @@
+
+# General Configuration
+resource_group_name = "aks-production-rg"
+location            = "East US"
+
+# Networking
+vnet_name                             = "aks-vnet"
+vnet_address_space                    = ["10.0.0.0/16"]
+aks_subnet_address_prefix             = "10.0.1.0/24"
+aks_service_subnet_address_prefix     = "10.0.2.0/24"
+private_endpoint_subnet_address_prefix = "10.0.3.0/24"
+gateway_subnet_address_prefix         = "10.0.4.0/24"
+
+# AKS Cluster
+aks_cluster_name   = "aks-private-cluster"
+kubernetes_version = "1.28.5"
+aks_dns_prefix     = "aksprivate"
+
+# Azure CNI Configuration
+network_plugin     = "azure"
+network_policy     = "azure"
+service_cidr       = "10.1.0.0/16"
+dns_service_ip     = "10.1.0.10"
+docker_bridge_cidr = "172.17.0.1/16"
+
+# System Node Pool
+system_node_pool_name       = "system"
+system_node_pool_vm_size    = "Standard_D4s_v5"
+system_node_pool_node_count = 3
+system_node_pool_min_count  = 3
+system_node_pool_max_count  = 6
+
+# GPU Node Pool (Tesla T4)
+enable_gpu_node_pool = true
+gpu_node_pool_name   = "gpupool"
+gpu_vm_size          = "Standard_NC4as_T4_v3"
+gpu_node_count       = 1
+gpu_min_count        = 0
+gpu_max_count        = 3
+
+# For A100 GPU instead, use:
+# gpu_vm_size = "Standard_NC24ads_A100_v4"
+
+# Confidential Compute Node Pool
+enable_confidential_node_pool = true
+confidential_node_pool_name   = "confpool"
+confidential_vm_size          = "Standard_DC4as_v5"
+confidential_node_count       = 1
+confidential_min_count        = 0
+confidential_max_count        = 3
+
+# Security
+key_vault_name          = "aks-kv"
+enable_managed_hsm      = false
+managed_hsm_name        = "aks-hsm"
+enable_workload_identity = true
+enable_oidc_issuer      = true
+
+# Azure AD Integration
+# Replace with your Azure AD group object IDs
+admin_group_object_ids = []
+
+# Monitoring
+log_analytics_workspace_name = "aks-logs"
+log_analytics_retention_days = 30
+enable_container_insights    = true
+
+# Private DNS
+private_dns_zone_name = "privatelink.eastus.azmk8s.io"
+
+# Tags
+tags = {
+  Environment = "Production"
+  ManagedBy   = "Terraform"
+  Project     = "AKS-Infrastructure"
+  CostCenter  = "Engineering"
+}

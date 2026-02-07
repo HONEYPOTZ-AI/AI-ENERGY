@@ -1,0 +1,36 @@
+# Staging environment overrides
+tls:
+  enabled: true
+  secretName: "tls-secret-staging"
+
+ingress:
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-staging"
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/proxy-body-size: "75m"
+
+  hosts:
+    - host: staging.example.com
+      paths:
+        - path: /
+          pathType: Prefix
+          backend:
+            service:
+              name: core-services
+              port: 8080
+        - path: /api/inference
+          pathType: Prefix
+          backend:
+            service:
+              name: inference
+              port: 8000
+
+rateLimiting:
+  enabled: true
+  rpm: 500
+  rps: 50
+
+cors:
+  enabled: true
+  allowOrigin: "https://staging.example.com"

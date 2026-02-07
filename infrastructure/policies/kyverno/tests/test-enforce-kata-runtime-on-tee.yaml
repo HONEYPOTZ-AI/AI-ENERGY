@@ -1,0 +1,87 @@
+---
+# Test Case 1: Valid - Confidential workload with kata-cc runtime
+apiVersion: v1
+kind: Pod
+metadata:
+  name: valid-confidential-pod
+  namespace: default
+  labels:
+    confidential: "true"
+spec:
+  runtimeClassName: kata-cc
+  nodeSelector:
+    confidential: "true"
+  containers:
+  - name: confidential-app
+    image: myapp:v1
+    resources:
+      limits:
+        memory: "4Gi"
+        cpu: "2"
+---
+# Test Case 2: Invalid - Confidential label but no kata runtime (should fail)
+apiVersion: v1
+kind: Pod
+metadata:
+  name: invalid-missing-kata-runtime
+  namespace: default
+  labels:
+    confidential: "true"
+spec:
+  nodeSelector:
+    confidential: "true"
+  containers:
+  - name: app
+    image: myapp:v1
+---
+# Test Case 3: Invalid - Confidential but wrong node selector (should fail)
+apiVersion: v1
+kind: Pod
+metadata:
+  name: invalid-wrong-node
+  namespace: default
+  labels:
+    confidential: "true"
+spec:
+  runtimeClassName: kata-cc
+  nodeSelector:
+    node-type: standard
+  containers:
+  - name: app
+    image: myapp:v1
+---
+# Test Case 4: Valid - Auto-mutation for confidential-compute workload
+apiVersion: v1
+kind: Pod
+metadata:
+  name: valid-auto-mutated
+  namespace: default
+  labels:
+    workload: confidential-compute
+spec:
+  containers:
+  - name: app
+    image: myapp:v1
+---
+# Test Case 5: Valid - Confidential with affinity
+apiVersion: v1
+kind: Pod
+metadata:
+  name: valid-with-affinity
+  namespace: default
+  labels:
+    confidential: "true"
+spec:
+  runtimeClassName: kata-cc
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: confidential
+            operator: In
+            values:
+            - "true"
+  containers:
+  - name: app
+    image: myapp:v1

@@ -1,0 +1,105 @@
+---
+# Test Case 1: Valid - GPU pod with proper configuration
+apiVersion: v1
+kind: Pod
+metadata:
+  name: valid-gpu-pod
+  namespace: default
+  labels:
+    workload: training
+spec:
+  nodeSelector:
+    node-type: gpu
+    gpu-type: nvidia
+  tolerations:
+  - key: nvidia.com/gpu
+    operator: Equal
+    value: present
+    effect: NoSchedule
+  containers:
+  - name: gpu-app
+    image: tensorflow/tensorflow:latest-gpu
+    resources:
+      limits:
+        nvidia.com/gpu: 1
+      requests:
+        nvidia.com/gpu: 1
+---
+# Test Case 2: Invalid - GPU request without node selector (should fail)
+apiVersion: v1
+kind: Pod
+metadata:
+  name: invalid-no-node-selector
+  namespace: default
+spec:
+  containers:
+  - name: app
+    image: myapp:v1
+    resources:
+      limits:
+        nvidia.com/gpu: 1
+---
+# Test Case 3: Invalid - Mismatched GPU limits and requests (should fail)
+apiVersion: v1
+kind: Pod
+metadata:
+  name: invalid-mismatched-resources
+  namespace: default
+spec:
+  nodeSelector:
+    node-type: gpu
+  tolerations:
+  - key: nvidia.com/gpu
+    operator: Equal
+    value: present
+    effect: NoSchedule
+  containers:
+  - name: app
+    image: myapp:v1
+    resources:
+      limits:
+        nvidia.com/gpu: 2
+      requests:
+        nvidia.com/gpu: 1
+---
+# Test Case 4: Valid - Auto-mutation applies GPU config
+apiVersion: v1
+kind: Pod
+metadata:
+  name: valid-auto-gpu-config
+  namespace: default
+spec:
+  containers:
+  - name: app
+    image: myapp:v1
+    resources:
+      limits:
+        nvidia.com/gpu: 1
+      requests:
+        nvidia.com/gpu: 1
+---
+# Test Case 5: Valid - Multi-GPU training pod
+apiVersion: v1
+kind: Pod
+metadata:
+  name: valid-multi-gpu
+  namespace: default
+  labels:
+    workload: distributed-training
+    cost-center: ml-team
+spec:
+  nodeSelector:
+    node-type: gpu
+  tolerations:
+  - key: nvidia.com/gpu
+    operator: Equal
+    value: present
+    effect: NoSchedule
+  containers:
+  - name: trainer
+    image: pytorch/pytorch:latest
+    resources:
+      limits:
+        nvidia.com/gpu: 4
+      requests:
+        nvidia.com/gpu: 4

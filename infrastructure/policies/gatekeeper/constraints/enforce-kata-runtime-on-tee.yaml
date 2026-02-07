@@ -1,0 +1,48 @@
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: K8sRuntimeClassConstraints
+metadata:
+  name: enforce-kata-runtime-on-tee
+  annotations:
+    description: Enforce Kata-CC runtime for confidential workloads
+spec:
+  enforcementAction: deny
+  match:
+    kinds:
+    - apiGroups: [""]
+      kinds: ["Pod"]
+  parameters:
+    requiredRuntimeClass: kata-cc
+    labelSelector:
+      key: confidential
+      value: "true"
+    requiredNodeSelectors:
+    - key: confidential
+      value: "true"
+---
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: K8sTEEAttestationPreconditions
+metadata:
+  name: validate-tee-configuration
+  annotations:
+    description: Validate TEE workload security configuration
+spec:
+  enforcementAction: deny
+  match:
+    kinds:
+    - apiGroups: [""]
+      kinds: ["Pod"]
+    namespaceSelector:
+      matchExpressions:
+      - key: confidential-computing
+        operator: Exists
+  parameters:
+    requiredAnnotations:
+    - tee.azure.com/attestation-policy
+    allowedRuntimeClasses:
+    - kata-cc
+    - kata-confidential
+    requiredNodeSelectors:
+    - key: confidential
+      value: "true"
+    blockHostPath: true
+    blockDebugMode: true

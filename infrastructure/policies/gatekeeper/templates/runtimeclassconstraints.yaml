@@ -1,0 +1,89 @@
+apiVersion: templates.gatekeeper.sh/v1
+kind: ConstraintTemplate
+metadata:
+  name: k8sruntimeclassconstraints
+  annotations:
+    description: >-
+      Enforces RuntimeClass usage based on pod labels or annotations.
+      Useful for requiring specific runtimes like kata-cc for confidential workloads.
+spec:
+  crd:
+    spec:
+      names:
+        kind: K8sRuntimeClassConstraints
+      validation:
+        openAPIV3Schema:
+          type: object
+          properties:
+            requiredRuntimeClass:
+              description: Required runtime class name
+              type: string
+            labelSelector:
+              description: Label that triggers runtime class requirement
+              type: object
+              properties:
+                key:
+                  type: string
+                value:
+                  type: string
+            requiredNodeSelectors:
+              description: Required node selectors
+              type: array
+              items:
+                type: object
+                properties:
+                  key:
+                    type: string
+                  value:
+                    type: string
+  targets:
+    - target: admission.k8s.gatekeeper.sh
+      rego: |
+        package k8sruntimeclassconstraints
+
+        import future.keywords.contains
+        import future.keywords.if
+        import future.keywords.in
+
+        violation[{"msg": msg}] {
+          has_required_label
+          not has_required_runtime_class
+          msg := sprintf("Pod with label '%v=%v' must specify runtimeClassName '%v'", [input.parameters.labelSelector.key, input.parameters.labelSelector.value, input.parameters.requiredRuntimeClass])
+        }
+
+        violation[{"msg": msg}] {
+          has_required_label
+          count(input.parameters.requiredNodeSelectors) > 0
+          not has_required_node_selectors
+          msg := sprintf("Pod with label '%v=%v' must have required node selectors: %v", [input.parameters.labelSelector.key, input.parameters.labelSelector.value, input.parameters.requiredNodeSelectors])
+        }
+
+        # Check if pod has the label that requires runtime class
+        has_required_label {
+          input.review.object.metadata.labels[input.parameters.labelSelector.key] == input.parameters.labelSelector.value
+        }
+
+        # Check if pod has required runtime class
+        has_required_runtime_class {
+          input.review.object.spec.runtimeClassName == input.parameters.requiredRuntimeClass
+        }
+
+        # Check if pod has all required node selectors
+        has_required_node_selectors {
+          required := input.parameters.requiredNodeSelectors[_]
+          input.review.object.spec.nodeSelector[required.key] == required.value
+        }
+
+        has_required_node_selectors {
+          required := input.parameters.requiredNodeSelectors[_]
+          affinity := input.review.object.spec.affinity.nodeAffinity.requiredDuringSchedulingIgnoredDuringExecution
+          term := affinity.nodeSelectorTerms[_]
+          expr := term.matchExpressions[_]
+          expr.key == required.key
+          expr.operator == "In"
+          required.value in expr.values
+        }
+
+        has_required_node_selectors {
+          count(input.parameters.requiredNodeSelectors) == 0
+        }

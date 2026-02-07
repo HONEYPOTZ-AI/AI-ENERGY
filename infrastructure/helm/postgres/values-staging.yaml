@@ -1,0 +1,26 @@
+# Staging environment overrides
+resources:
+  limits:
+    cpu: 1500m
+    memory: 3Gi
+  requests:
+    cpu: 500m
+    memory: 1Gi
+
+persistence:
+  enabled: true
+  size: 10Gi
+
+postgres:
+  database: "mydb_staging"
+  username: "postgres"
+  password: "stagingpassword"
+  maxConnections: "100"
+  sharedBuffers: "192MB"
+  effectiveCacheSize: "768MB"
+
+configMap:
+  data:
+    POSTGRES_DB: "mydb_staging"
+    POSTGRES_MAX_CONNECTIONS: "100"
+    POSTGRES_SHARED_BUFFERS: "192MB"

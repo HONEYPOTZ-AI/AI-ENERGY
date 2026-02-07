@@ -1,0 +1,129 @@
+---
+# Test Case 1: Valid - Ingress with TLS 1.2/1.3
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: valid-tls-ingress
+  namespace: default
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-protocols: "TLSv1.2 TLSv1.3"
+    nginx.ingress.kubernetes.io/ssl-ciphers: "ECDHE-RSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-GCM-SHA384"
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+spec:
+  ingressClassName: nginx
+  tls:
+  - hosts:
+    - app.example.com
+    secretName: app-tls-cert
+  rules:
+  - host: app.example.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: app-service
+            port:
+              number: 80
+---
+# Test Case 2: Invalid - Missing TLS version annotation (should fail or be mutated)
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: invalid-missing-tls-version
+  namespace: default
+spec:
+  ingressClassName: nginx
+  tls:
+  - hosts:
+    - app.example.com
+    secretName: app-tls-cert
+  rules:
+  - host: app.example.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: app-service
+            port:
+              number: 80
+---
+# Test Case 3: Invalid - Using deprecated TLS 1.0 (should fail)
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: invalid-old-tls
+  namespace: default
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-protocols: "TLSv1.0 TLSv1.1"
+spec:
+  ingressClassName: nginx
+  tls:
+  - hosts:
+    - app.example.com
+    secretName: app-tls-cert
+  rules:
+  - host: app.example.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: app-service
+            port:
+              number: 80
+---
+# Test Case 4: Valid - No TLS (policy doesn't apply)
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: valid-no-tls
+  namespace: default
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: internal-app.local
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: internal-service
+            port:
+              number: 80
+---
+# Test Case 5: Valid - Production ingress with full security
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: valid-production-ingress
+  namespace: production
+  annotations:
+    production: "true"
+    nginx.ingress.kubernetes.io/ssl-protocols: "TLSv1.3"
+    nginx.ingress.kubernetes.io/ssl-ciphers: "ECDHE-RSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-GCM-SHA384"
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/hsts: "true"
+    nginx.ingress.kubernetes.io/hsts-max-age: "31536000"
+spec:
+  ingressClassName: nginx
+  tls:
+  - hosts:
+    - api.example.com
+    secretName: api-tls-cert
+  rules:
+  - host: api.example.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: api-service
+            port:
+              number: 443

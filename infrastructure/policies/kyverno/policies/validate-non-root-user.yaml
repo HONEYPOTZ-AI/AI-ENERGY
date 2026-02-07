@@ -1,0 +1,168 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: validate-non-root-user
+  annotations:
+    policies.kyverno.io/title: Validate Non-Root User
+    policies.kyverno.io/category: Security, Pod Security
+    policies.kyverno.io/severity: high
+    policies.kyverno.io/subject: Pod
+    policies.kyverno.io/description: >-
+      Validates that containers run as non-root user (UID != 0). Running as root
+      increases security risk and potential for privilege escalation.
+spec:
+  validationFailureAction: Enforce
+  background: true
+  failurePolicy: Fail
+  rules:
+  - name: require-run-as-nonroot
+    match:
+      any:
+      - resources:
+          kinds:
+          - Pod
+          namespaces:
+          - "!kube-system"
+          - "!kube-public"
+    exclude:
+      any:
+      - resources:
+          annotations:
+            policies.kyverno.io/allow-root: "true"
+    validate:
+      message: >-
+        Containers must run as non-root user. Set securityContext.runAsNonRoot to true.
+      pattern:
+        spec:
+          securityContext:
+            runAsNonRoot: true
+          =(ephemeralContainers):
+          - =(securityContext):
+              =(runAsNonRoot): true
+          =(initContainers):
+          - =(securityContext):
+              =(runAsNonRoot): true
+          containers:
+          - =(securityContext):
+              =(runAsNonRoot): true
+  - name: validate-run-as-user
+    match:
+      any:
+      - resources:
+          kinds:
+          - Pod
+          namespaces:
+          - "!kube-system"
+    preconditions:
+      any:
+      - key: "{{ request.object.spec.securityContext.runAsUser || '0' }}"
+        operator: NotEquals
+        value: 0
+      - key: "{{ request.object.spec.containers[].securityContext.runAsUser || '0' }}"
+        operator: NotEquals
+        value: 0
+    validate:
+      message: >-
+        When runAsUser is specified, it must not be 0 (root).
+        Use UID >= 1000 for application users.
+      deny:
+        conditions:
+          any:
+          - key: "{{ request.object.spec.securityContext.runAsUser || '1000' }}"
+            operator: Equals
+            value: 0
+          - key: "{{ request.object.spec.containers[].securityContext.runAsUser || '1000' }}"
+            operator: AnyIn
+            value: [0]
+  - name: auto-add-nonroot-context
+    match:
+      any:
+      - resources:
+          kinds:
+          - Pod
+          namespaces:
+          - "!kube-system"
+    exclude:
+      any:
+      - resources:
+          annotations:
+            policies.kyverno.io/skip-auto-config: "true"
+    mutate:
+      patchStrategicMerge:
+        spec:
+          securityContext:
+            +(runAsNonRoot): true
+            +(runAsUser): 65534
+            +(fsGroup): 65534
+---
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: validate-security-context
+  annotations:
+    policies.kyverno.io/title: Validate Pod Security Context
+    policies.kyverno.io/category: Security, Pod Security
+    policies.kyverno.io/severity: high
+    policies.kyverno.io/description: >-
+      Comprehensive validation of Pod security context including user/group settings,
+      filesystem group, and supplemental groups.
+spec:
+  validationFailureAction: Enforce
+  background: true
+  rules:
+  - name: require-pod-security-context
+    match:
+      any:
+      - resources:
+          kinds:
+          - Pod
+          namespaces:
+          - "!kube-system"
+    validate:
+      message: >-
+        Pods must define a securityContext with appropriate settings.
+      pattern:
+        spec:
+          securityContext:
+            runAsNonRoot: true
+            =(runAsUser): ">0"
+            =(fsGroup): ">0"
+  - name: validate-fsgroup
+    match:
+      any:
+      - resources:
+          kinds:
+          - Pod
+    preconditions:
+      any:
+      - key: "{{ request.object.spec.securityContext.fsGroup || '0' }}"
+        operator: NotEquals
+        value: 0
+    validate:
+      message: >-
+        When fsGroup is specified, it should be >= 1000 to avoid conflicts
+        with system groups.
+      deny:
+        conditions:
+          any:
+          - key: "{{ request.object.spec.securityContext.fsGroup || '1000' }}"
+            operator: LessThan
+            value: 1000
+  - name: block-gid-0
+    match:
+      any:
+      - resources:
+          kinds:
+          - Pod
+          namespaces:
+          - "!kube-system"
+    validate:
+      message: >-
+        Containers must not run with GID 0 (root group).
+      pattern:
+        spec:
+          securityContext:
+            X(runAsGroup): "!0"
+          containers:
+          - =(securityContext):
+              X(runAsGroup): "!0"

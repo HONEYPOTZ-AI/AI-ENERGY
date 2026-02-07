@@ -1,0 +1,131 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: require-signed-images
+  annotations:
+    policies.kyverno.io/title: Require Signed Images
+    policies.kyverno.io/category: Security, Supply Chain
+    policies.kyverno.io/severity: high
+    policies.kyverno.io/subject: Pod
+    policies.kyverno.io/minversion: 1.10.0
+    policies.kyverno.io/description: >-
+      Validates that all container images are signed using Sigstore/Cosign.
+      This ensures supply chain security and prevents deployment of untrusted images.
+      Production workloads must use signed images verified through cosign.
+spec:
+  validationFailureAction: Enforce
+  background: true
+  failurePolicy: Fail
+  rules:
+  - name: check-image-signature
+    match:
+      any:
+      - resources:
+          kinds:
+          - Pod
+          - Deployment
+          - StatefulSet
+          - DaemonSet
+          - Job
+          - CronJob
+          namespaces:
+          - "!kube-system"
+          - "!kube-public"
+          - "!kube-node-lease"
+          - "!local-path-storage"
+    exclude:
+      any:
+      - resources:
+          annotations:
+            policies.kyverno.io/exclude-image-verify: "true"
+    verifyImages:
+    - imageReferences:
+      - "*"
+      attestors:
+      - count: 1
+        entries:
+        - keys:
+            publicKeys: |-
+              -----BEGIN PUBLIC KEY-----
+              MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE8XhW4MHNEpcN+VKJOhcfxK6bHcxq
+              Y/Fws/XZJPsn+qCnHg4zKHrwL1xZKcHnFJ6tJGLLJnMslGF2F+P3yP/qww==
+              -----END PUBLIC KEY-----
+            rekor:
+              url: https://rekor.sigstore.dev
+      # Require attestation
+      attestations:
+      - predicateType: https://slsa.dev/provenance/v0.2
+        attestors:
+        - count: 1
+          entries:
+          - keys:
+              publicKeys: |-
+                -----BEGIN PUBLIC KEY-----
+                MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAE8XhW4MHNEpcN+VKJOhcfxK6bHcxq
+                Y/Fws/XZJPsn+qCnHg4zKHrwL1xZKcHnFJ6tJGLLJnMslGF2F+P3yP/qww==
+                -----END PUBLIC KEY-----
+      mutateDigest: true
+      verifyDigest: true
+      required: true
+  - name: check-image-registry
+    match:
+      any:
+      - resources:
+          kinds:
+          - Pod
+          namespaces:
+          - "!kube-system"
+          - "!kube-public"
+    validate:
+      message: >-
+        Images must be from approved registries: 
+        <registry>.azurecr.io, ghcr.io/<org>, or docker.io/<org>
+      pattern:
+        spec:
+          containers:
+          - image: "*.azurecr.io/* | ghcr.io/* | docker.io/*"
+---
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: require-image-tag
+  annotations:
+    policies.kyverno.io/title: Require Image Tag
+    policies.kyverno.io/category: Best Practices
+    policies.kyverno.io/severity: medium
+    policies.kyverno.io/description: >-
+      Requires that container images specify a tag other than 'latest'.
+      Using specific tags ensures reproducible deployments.
+spec:
+  validationFailureAction: Enforce
+  background: true
+  rules:
+  - name: require-image-tag
+    match:
+      any:
+      - resources:
+          kinds:
+          - Pod
+    validate:
+      message: "Container images must not use the 'latest' tag."
+      pattern:
+        spec:
+          containers:
+          - image: "!*:latest"
+  - name: require-image-tag-init
+    match:
+      any:
+      - resources:
+          kinds:
+          - Pod
+    preconditions:
+      any:
+      - key: "{{ request.object.spec.initContainers[] || '' }}"
+        operator: NotEquals
+        value: ""
+    validate:
+      message: "Init container images must not use the 'latest' tag."
+      pattern:
+        spec:
+          initContainers:
+          - image: "!*:latest"

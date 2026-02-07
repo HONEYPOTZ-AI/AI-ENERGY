@@ -1,0 +1,84 @@
+# Gatekeeper Test: Capabilities Restrictions
+# Run: kubectl apply -f test-capabilities.yaml --dry-run=server
+---
+# PASS: Properly dropped capabilities
+apiVersion: v1
+kind: Pod
+metadata:
+  name: test-caps-valid
+  namespace: default
+spec:
+  securityContext:
+    runAsNonRoot: true
+  containers:
+  - name: app
+    image: myapp:v1
+    securityContext:
+      runAsNonRoot: true
+      allowPrivilegeEscalation: false
+      capabilities:
+        drop:
+        - ALL
+        add:
+        - NET_BIND_SERVICE
+---
+# FAIL: Privileged container (should be blocked)
+apiVersion: v1
+kind: Pod
+metadata:
+  name: test-caps-privileged
+  namespace: default
+spec:
+  containers:
+  - name: app
+    image: myapp:v1
+    securityContext:
+      privileged: true
+---
+# FAIL: Privilege escalation allowed (should be blocked)
+apiVersion: v1
+kind: Pod
+metadata:
+  name: test-caps-escalation
+  namespace: default
+spec:
+  containers:
+  - name: app
+    image: myapp:v1
+    securityContext:
+      allowPrivilegeEscalation: true
+      capabilities:
+        drop:
+        - ALL
+---
+# FAIL: Host namespaces (should be blocked)
+apiVersion: v1
+kind: Pod
+metadata:
+  name: test-caps-host-ns
+  namespace: default
+spec:
+  hostNetwork: true
+  hostPID: true
+  hostIPC: true
+  containers:
+  - name: app
+    image: myapp:v1
+---
+# FAIL: Disallowed capability (should be blocked)
+apiVersion: v1
+kind: Pod
+metadata:
+  name: test-caps-disallowed
+  namespace: default
+spec:
+  containers:
+  - name: app
+    image: myapp:v1
+    securityContext:
+      capabilities:
+        drop:
+        - ALL
+        add:
+        - SYS_ADMIN
+        - NET_ADMIN

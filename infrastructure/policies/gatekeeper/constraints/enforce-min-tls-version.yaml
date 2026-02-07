@@ -1,0 +1,81 @@
+apiVersion: templates.gatekeeper.sh/v1
+kind: ConstraintTemplate
+metadata:
+  name: k8stlsversion
+  annotations:
+    description: Enforce minimum TLS version for Ingress resources
+spec:
+  crd:
+    spec:
+      names:
+        kind: K8sTLSVersion
+      validation:
+        openAPIV3Schema:
+          type: object
+          properties:
+            minimumVersion:
+              description: Minimum TLS version (1.2 or 1.3)
+              type: string
+            allowedProtocols:
+              description: Allowed TLS protocol strings
+              type: array
+              items:
+                type: string
+  targets:
+    - target: admission.k8s.gatekeeper.sh
+      rego: |
+        package k8stlsversion
+
+        import future.keywords.contains
+        import future.keywords.if
+        import future.keywords.in
+
+        violation[{"msg": msg}] {
+          input.review.kind.kind == "Ingress"
+          has_tls
+          not has_tls_annotation
+          msg := "Ingress with TLS must specify minimum TLS version via annotation 'nginx.ingress.kubernetes.io/ssl-protocols'"
+        }
+
+        violation[{"msg": msg}] {
+          input.review.kind.kind == "Ingress"
+          has_tls
+          has_tls_annotation
+          not is_allowed_protocol
+          msg := sprintf("Ingress TLS protocol '%v' is not allowed. Must be one of: %v", [get_tls_annotation, input.parameters.allowedProtocols])
+        }
+
+        has_tls {
+          count(input.review.object.spec.tls) > 0
+        }
+
+        has_tls_annotation {
+          input.review.object.metadata.annotations["nginx.ingress.kubernetes.io/ssl-protocols"]
+        }
+
+        get_tls_annotation = annotation {
+          annotation := input.review.object.metadata.annotations["nginx.ingress.kubernetes.io/ssl-protocols"]
+        }
+
+        is_allowed_protocol {
+          protocol := get_tls_annotation
+          protocol == input.parameters.allowedProtocols[_]
+        }
+---
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: K8sTLSVersion
+metadata:
+  name: enforce-min-tls-version
+  annotations:
+    description: Enforce minimum TLS 1.2 for Ingress resources
+spec:
+  enforcementAction: deny
+  match:
+    kinds:
+    - apiGroups: ["networking.k8s.io"]
+      kinds: ["Ingress"]
+  parameters:
+    minimumVersion: "1.2"
+    allowedProtocols:
+    - "TLSv1.2 TLSv1.3"
+    - "TLSv1.3"

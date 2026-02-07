@@ -1,0 +1,113 @@
+apiVersion: templates.gatekeeper.sh/v1
+kind: ConstraintTemplate
+metadata:
+  name: k8simagesignatureverification
+  annotations:
+    description: >-
+      Validates that container images are from approved registries and do not use
+      banned tags like 'latest'. Optionally requires image signature verification.
+spec:
+  crd:
+    spec:
+      names:
+        kind: K8sImageSignatureVerification
+      validation:
+        openAPIV3Schema:
+          type: object
+          properties:
+            allowedRegistries:
+              description: List of allowed registry prefixes
+              type: array
+              items:
+                type: string
+            bannedTags:
+              description: List of banned image tags
+              type: array
+              items:
+                type: string
+            requireSignature:
+              description: Whether to require image signatures
+              type: boolean
+            exemptImages:
+              description: Images exempt from validation
+              type: array
+              items:
+                type: string
+  targets:
+    - target: admission.k8s.gatekeeper.sh
+      rego: |
+        package k8simagesignatureverification
+
+        import future.keywords.contains
+        import future.keywords.if
+        import future.keywords.in
+
+        violation[{"msg": msg}] {
+          container := input_containers[_]
+          not is_exempt_image(container.image)
+          not is_allowed_registry(container.image)
+          msg := sprintf("Container '%v' uses image '%v' from unapproved registry. Allowed registries: %v", [container.name, container.image, input.parameters.allowedRegistries])
+        }
+
+        violation[{"msg": msg}] {
+          container := input_containers[_]
+          not is_exempt_image(container.image)
+          uses_banned_tag(container.image)
+          msg := sprintf("Container '%v' uses banned tag in image '%v'. Banned tags: %v", [container.name, container.image, input.parameters.bannedTags])
+        }
+
+        violation[{"msg": msg}] {
+          container := input_containers[_]
+          not is_exempt_image(container.image)
+          not has_image_digest(container.image)
+          input.parameters.requireSignature == true
+          msg := sprintf("Container '%v' image '%v' must use digest (@sha256:...) for signature verification", [container.name, container.image])
+        }
+
+        # Check if image is from allowed registry
+        is_allowed_registry(image) {
+          registry := input.parameters.allowedRegistries[_]
+          startswith(image, registry)
+        }
+
+        # Check if image uses banned tag
+        uses_banned_tag(image) {
+          tag := get_image_tag(image)
+          tag == input.parameters.bannedTags[_]
+        }
+
+        # Extract tag from image
+        get_image_tag(image) = tag {
+          contains(image, ":")
+          parts := split(image, ":")
+          tag := parts[count(parts) - 1]
+          not contains(tag, "@")
+        }
+
+        get_image_tag(image) = "latest" {
+          not contains(image, ":")
+        }
+
+        # Check if image has digest
+        has_image_digest(image) {
+          contains(image, "@sha256:")
+        }
+
+        # Check if image is exempt
+        is_exempt_image(image) {
+          exempt := input.parameters.exemptImages[_]
+          startswith(image, exempt)
+        }
+
+        # Get all containers
+        input_containers[c] {
+          c := input.review.object.spec.containers[_]
+        }
+
+        input_containers[c] {
+          c := input.review.object.spec.initContainers[_]
+        }
+
+        input_containers[c] {
+          c := input.review.object.spec.ephemeralContainers[_]
+        }

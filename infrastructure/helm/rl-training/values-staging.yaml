@@ -1,0 +1,33 @@
+# Staging environment overrides
+replicaCount: 1
+
+image:
+  tag: "staging-latest"
+
+gpu:
+  enabled: true
+  limit: 2
+
+resources:
+  limits:
+    cpu: 6000m
+    memory: 24Gi
+    nvidia.com/gpu: 2
+  requests:
+    cpu: 3000m
+    memory: 12Gi
+    nvidia.com/gpu: 2
+
+persistence:
+  enabled: true
+  size: 50Gi
+
+configMap:
+  data:
+    TRAINING_MODE: "distributed"
+    NUM_WORKERS: "2"
+    BATCH_SIZE: "128"
+    LEARNING_RATE: "0.001"
+    CHECKPOINT_INTERVAL: "750"
+    LOG_LEVEL: "info"
+    ENABLE_TENSORBOARD: "true"

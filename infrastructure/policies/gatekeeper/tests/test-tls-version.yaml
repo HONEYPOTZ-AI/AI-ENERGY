@@ -1,0 +1,126 @@
+# Gatekeeper Test: TLS Version
+# Run: kubectl apply -f test-tls-version.yaml --dry-run=server
+---
+# PASS: Ingress with proper TLS configuration
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: test-tls-valid
+  namespace: default
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-protocols: "TLSv1.2 TLSv1.3"
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+spec:
+  ingressClassName: nginx
+  tls:
+  - hosts:
+    - app.example.com
+    secretName: app-tls-cert
+  rules:
+  - host: app.example.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: app-service
+            port:
+              number: 443
+---
+# FAIL: Missing TLS annotation (should be blocked)
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: test-tls-missing-annotation
+  namespace: default
+spec:
+  ingressClassName: nginx
+  tls:
+  - hosts:
+    - app.example.com
+    secretName: app-tls-cert
+  rules:
+  - host: app.example.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: app-service
+            port:
+              number: 80
+---
+# FAIL: Old TLS version (should be blocked)
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: test-tls-old-version
+  namespace: default
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-protocols: "TLSv1.0 TLSv1.1"
+spec:
+  ingressClassName: nginx
+  tls:
+  - hosts:
+    - app.example.com
+    secretName: app-tls-cert
+  rules:
+  - host: app.example.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: app-service
+            port:
+              number: 443
+---
+# PASS: TLS 1.3 only
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: test-tls-13-only
+  namespace: default
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-protocols: "TLSv1.3"
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+spec:
+  ingressClassName: nginx
+  tls:
+  - hosts:
+    - secure-app.example.com
+    secretName: secure-tls-cert
+  rules:
+  - host: secure-app.example.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: secure-service
+            port:
+              number: 443
+---
+# PASS: No TLS (policy doesn't apply)
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: test-no-tls
+  namespace: default
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: internal-app.local
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: internal-service
+            port:
+              number: 80

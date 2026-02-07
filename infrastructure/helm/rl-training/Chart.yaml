@@ -1,0 +1,14 @@
+apiVersion: v2
+name: rl-training
+description: Reinforcement Learning training workloads with GPU support
+type: application
+version: 1.0.0
+appVersion: "1.0.0"
+keywords:
+  - rl
+  - training
+  - gpu
+  - machine-learning
+maintainers:
+  - name: ML Training Team
+    email: ml-training@example.com

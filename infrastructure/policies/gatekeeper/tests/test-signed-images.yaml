@@ -1,0 +1,50 @@
+# Gatekeeper Test: Signed Images
+# Run: kubectl apply -f test-signed-images.yaml --dry-run=server
+---
+# PASS: Valid image from approved registry with version tag
+apiVersion: v1
+kind: Pod
+metadata:
+  name: test-valid-image
+  namespace: default
+spec:
+  containers:
+  - name: app
+    image: myregistry.azurecr.io/myapp:v1.2.3
+    resources:
+      limits:
+        memory: "128Mi"
+        cpu: "500m"
+---
+# FAIL: Using latest tag (should be blocked)
+apiVersion: v1
+kind: Pod
+metadata:
+  name: test-latest-tag
+  namespace: default
+spec:
+  containers:
+  - name: app
+    image: myregistry.azurecr.io/myapp:latest
+---
+# FAIL: Unapproved registry (should be blocked)
+apiVersion: v1
+kind: Pod
+metadata:
+  name: test-bad-registry
+  namespace: default
+spec:
+  containers:
+  - name: app
+    image: untrusted-registry.io/myapp:v1.0.0
+---
+# PASS: Exempt image
+apiVersion: v1
+kind: Pod
+metadata:
+  name: test-exempt-image
+  namespace: default
+spec:
+  containers:
+  - name: pause
+    image: k8s.gcr.io/pause:3.5

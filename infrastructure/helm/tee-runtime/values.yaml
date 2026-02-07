@@ -1,0 +1,92 @@
+# Default values for tee-runtime chart
+nameOverride: ""
+fullnameOverride: ""
+
+image:
+  repository: kata-containers/kata-deploy
+  pullPolicy: IfNotPresent
+  tag: "3.0.0"
+
+imagePullSecrets: []
+
+serviceAccount:
+  create: true
+  annotations: {}
+  name: ""
+
+podAnnotations: {}
+
+podSecurityContext:
+  privileged: true
+  runAsUser: 0
+
+# DaemonSet configuration for node-level runtime
+daemonset:
+  enabled: true
+  updateStrategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
+
+resources:
+  limits:
+    cpu: 1000m
+    memory: 1Gi
+  requests:
+    cpu: 200m
+    memory: 256Mi
+
+# Node selector for Confidential Computing capable nodes
+nodeSelector:
+  feature.node.kubernetes.io/cpu-security.sev: "true"
+  # Or for Intel SGX:
+  # feature.node.kubernetes.io/cpu-sgx.enabled: "true"
+
+# Tolerate CC node taints
+tolerations:
+  - key: confidential-computing
+    operator: Exists
+    effect: NoSchedule
+  - key: kata-containers
+    operator: Exists
+    effect: NoSchedule
+
+# Runtime Class configuration
+runtimeClass:
+  name: kata-cc
+  handler: kata-qemu-sev
+  scheduling:
+    nodeSelector:
+      feature.node.kubernetes.io/cpu-security.sev: "true"
+    tolerations:
+      - key: confidential-computing
+        operator: Exists
+        effect: NoSchedule
+
+# Kata Containers configuration
+kataConfig:
+  hypervisor: qemu
+  machine_type: "q35"
+  confidential_guest: true
+  sev_guest: true
+  kernel: "/opt/kata/share/kata-containers/vmlinuz.container"
+  initrd: "/opt/kata/share/kata-containers/kata-containers-initrd.img"
+  image: ""
+  firmware: "/usr/share/OVMF/OVMF_CODE.fd"
+  default_vcpus: 2
+  default_maxvcpus: 8
+  default_memory: 2048
+  disable_block_device_use: false
+  enable_iommu: true
+  enable_iommu_platform: true
+  shared_fs: "virtio-fs"
+  virtio_fs_daemon: "/opt/kata/libexec/virtiofsd"
+  virtio_fs_cache: "auto"
+  virtio_fs_cache_size: 0
+
+configMap:
+  data:
+    KATA_HYPERVISOR: "qemu"
+    KATA_CONFIDENTIAL: "true"
+    SEV_ENABLED: "true"
+    LOG_LEVEL: "info"

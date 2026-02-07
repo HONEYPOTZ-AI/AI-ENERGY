@@ -1,0 +1,171 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: block-privileged-containers
+  annotations:
+    policies.kyverno.io/title: Block Privileged Containers
+    policies.kyverno.io/category: Security, Pod Security
+    policies.kyverno.io/severity: high
+    policies.kyverno.io/subject: Pod
+    policies.kyverno.io/description: >-
+      Blocks containers from running in privileged mode or with dangerous capabilities.
+      Privileged containers have access to all host devices and can bypass security mechanisms.
+spec:
+  validationFailureAction: Enforce
+  background: true
+  failurePolicy: Fail
+  rules:
+  - name: block-privileged
+    match:
+      any:
+      - resources:
+          kinds:
+          - Pod
+          namespaces:
+          - "!kube-system"
+    exclude:
+      any:
+      - resources:
+          annotations:
+            policies.kyverno.io/allow-privileged: "true"
+    validate:
+      message: >-
+        Privileged containers are not allowed. Set securityContext.privileged to false.
+      pattern:
+        spec:
+          =(ephemeralContainers):
+          - =(securityContext):
+              =(privileged): false
+          =(initContainers):
+          - =(securityContext):
+              =(privileged): false
+          containers:
+          - =(securityContext):
+              =(privileged): false
+  - name: block-privilege-escalation
+    match:
+      any:
+      - resources:
+          kinds:
+          - Pod
+          namespaces:
+          - "!kube-system"
+    validate:
+      message: >-
+        Privilege escalation is not allowed. Set securityContext.allowPrivilegeEscalation to false.
+      pattern:
+        spec:
+          =(ephemeralContainers):
+          - =(securityContext):
+              =(allowPrivilegeEscalation): false
+          =(initContainers):
+          - =(securityContext):
+              =(allowPrivilegeEscalation): false
+          containers:
+          - =(securityContext):
+              =(allowPrivilegeEscalation): false
+  - name: restrict-capabilities
+    match:
+      any:
+      - resources:
+          kinds:
+          - Pod
+          namespaces:
+          - "!kube-system"
+    validate:
+      message: >-
+        Dangerous capabilities are not allowed. Capabilities must be dropped.
+        Allowed capabilities: NET_BIND_SERVICE
+      pattern:
+        spec:
+          =(ephemeralContainers):
+          - =(securityContext):
+              =(capabilities):
+                drop:
+                - ALL
+                =(add):
+                - NET_BIND_SERVICE
+          =(initContainers):
+          - =(securityContext):
+              =(capabilities):
+                drop:
+                - ALL
+                =(add):
+                - NET_BIND_SERVICE
+          containers:
+          - =(securityContext):
+              =(capabilities):
+                drop:
+                - ALL
+                =(add):
+                - NET_BIND_SERVICE
+  - name: block-host-namespace
+    match:
+      any:
+      - resources:
+          kinds:
+          - Pod
+          namespaces:
+          - "!kube-system"
+    validate:
+      message: >-
+        Sharing host namespaces (hostPID, hostIPC, hostNetwork) is not allowed.
+      pattern:
+        spec:
+          =(hostPID): false
+          =(hostIPC): false
+          =(hostNetwork): false
+  - name: block-host-ports
+    match:
+      any:
+      - resources:
+          kinds:
+          - Pod
+          namespaces:
+          - "!kube-system"
+    validate:
+      message: >-
+        Using host ports is not allowed for security reasons.
+      pattern:
+        spec:
+          =(ephemeralContainers):
+          - =(ports):
+            - X(hostPort): null
+          =(initContainers):
+          - =(ports):
+            - X(hostPort): null
+          containers:
+          - =(ports):
+            - X(hostPort): null
+---
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: restrict-seccomp-profile
+  annotations:
+    policies.kyverno.io/title: Restrict Seccomp Profile
+    policies.kyverno.io/category: Security, Pod Security
+    policies.kyverno.io/severity: medium
+    policies.kyverno.io/description: >-
+      Requires that Pods define a seccomp profile. Seccomp restricts system calls
+      that containers can make, reducing attack surface.
+spec:
+  validationFailureAction: Enforce
+  background: true
+  rules:
+  - name: restrict-seccomp-profile
+    match:
+      any:
+      - resources:
+          kinds:
+          - Pod
+          namespaces:
+          - "!kube-system"
+    validate:
+      message: >-
+        Seccomp profile must be set. Use RuntimeDefault or Localhost profile.
+      pattern:
+        spec:
+          =(securityContext):
+            =(seccompProfile):
+              type: RuntimeDefault | Localhost

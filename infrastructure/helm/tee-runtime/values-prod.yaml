@@ -1,0 +1,46 @@
+# Production environment overrides
+image:
+  tag: "3.0.0"
+  pullPolicy: IfNotPresent
+
+nodeSelector:
+  feature.node.kubernetes.io/cpu-security.sev: "true"
+  environment: production
+  confidential-computing: enabled
+
+resources:
+  limits:
+    cpu: 2000m
+    memory: 2Gi
+  requests:
+    cpu: 500m
+    memory: 512Mi
+
+runtimeClass:
+  name: kata-cc-prod
+  handler: kata-qemu-sev
+  scheduling:
+    nodeSelector:
+      feature.node.kubernetes.io/cpu-security.sev: "true"
+      environment: production
+      confidential-computing: enabled
+    tolerations:
+      - key: confidential-computing
+        operator: Exists
+        effect: NoSchedule
+
+kataConfig:
+  confidential_guest: true
+  sev_guest: true
+  default_vcpus: 4
+  default_maxvcpus: 16
+  default_memory: 4096
+  enable_iommu: true
+  enable_iommu_platform: true
+
+configMap:
+  data:
+    KATA_HYPERVISOR: "qemu"
+    KATA_CONFIDENTIAL: "true"
+    SEV_ENABLED: "true"
+    LOG_LEVEL: "warn"

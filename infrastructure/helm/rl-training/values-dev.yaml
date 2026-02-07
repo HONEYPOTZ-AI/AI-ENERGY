@@ -1,0 +1,37 @@
+# Development environment overrides
+replicaCount: 1
+
+image:
+  tag: "dev-latest"
+  pullPolicy: Always
+
+gpu:
+  enabled: false
+  limit: 0
+
+resources:
+  limits:
+    cpu: 4000m
+    memory: 8Gi
+  requests:
+    cpu: 1000m
+    memory: 2Gi
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
+
+persistence:
+  enabled: false
+
+configMap:
+  data:
+    TRAINING_MODE: "single"
+    NUM_WORKERS: "1"
+    BATCH_SIZE: "32"
+    LEARNING_RATE: "0.001"
+    CHECKPOINT_INTERVAL: "500"
+    LOG_LEVEL: "debug"
+    ENABLE_TENSORBOARD: "true"

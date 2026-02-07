@@ -1,0 +1,136 @@
+# Default values for rl-training chart
+replicaCount: 1
+
+image:
+  repository: your-registry/rl-training
+  pullPolicy: IfNotPresent
+  tag: "latest"
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  create: true
+  annotations: {}
+  name: ""
+
+podAnnotations:
+  prometheus.io/scrape: "true"
+  prometheus.io/port: "9090"
+  prometheus.io/path: "/metrics"
+
+podSecurityContext:
+  runAsNonRoot: true
+  runAsUser: 1000
+  fsGroup: 1000
+  seccompProfile:
+    type: RuntimeDefault
+
+securityContext:
+  allowPrivilegeEscalation: false
+  capabilities:
+    drop:
+      - ALL
+
+service:
+  type: ClusterIP
+  port: 9090
+  targetPort: 9090
+  annotations: {}
+
+# GPU configuration for training
+gpu:
+  enabled: true
+  type: "nvidia.com/gpu"
+  limit: 4
+
+resources:
+  limits:
+    cpu: 8000m
+    memory: 32Gi
+    nvidia.com/gpu: 4
+  requests:
+    cpu: 4000m
+    memory: 16Gi
+    nvidia.com/gpu: 4
+
+livenessProbe:
+  httpGet:
+    path: /healthz
+    port: 9090
+  initialDelaySeconds: 120
+  periodSeconds: 30
+  timeoutSeconds: 10
+  failureThreshold: 3
+
+readinessProbe:
+  httpGet:
+    path: /ready
+    port: 9090
+  initialDelaySeconds: 60
+  periodSeconds: 15
+  timeoutSeconds: 5
+  failureThreshold: 3
+
+# GPU node selector for training
+nodeSelector:
+  accelerator: nvidia-gpu
+  workload: training
+
+# Tolerate GPU taints
+tolerations:
+  - key: nvidia.com/gpu
+    operator: Exists
+    effect: NoSchedule
+  - key: training-workload
+    operator: Exists
+    effect: NoSchedule
+
+# GPU affinity rules for training
+affinity:
+  nodeAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: accelerator
+          operator: In
+          values:
+          - nvidia-gpu
+        - key: workload
+          operator: In
+          values:
+          - training
+  podAntiAffinity:
+    preferredDuringSchedulingIgnoredDuringExecution:
+      - weight: 100
+        podAffinityTerm:
+          labelSelector:
+            matchExpressions:
+              - key: app.kubernetes.io/name
+                operator: In
+                values:
+                  - rl-training
+          topologyKey: kubernetes.io/hostname
+
+persistence:
+  enabled: true
+  storageClass: "fast-ssd"
+  accessMode: ReadWriteOnce
+  size: 100Gi
+  mountPath: /data
+
+configMap:
+  data:
+    TRAINING_MODE: "distributed"
+    NUM_WORKERS: "4"
+    BATCH_SIZE: "256"
+    LEARNING_RATE: "0.001"
+    CHECKPOINT_INTERVAL: "1000"
+    LOG_LEVEL: "info"
+    ENABLE_TENSORBOARD: "true"
+
+secrets:
+  data: {}
+    # WANDB_API_KEY: ""
+    # S3_ACCESS_KEY: ""

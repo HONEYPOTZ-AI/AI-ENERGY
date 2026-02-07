@@ -1,0 +1,137 @@
+apiVersion: templates.gatekeeper.sh/v1
+kind: ConstraintTemplate
+metadata:
+  name: k8steeattestationpreconditions
+  annotations:
+    description: >-
+      Validates TEE (Trusted Execution Environment) configuration including
+      attestation settings, runtime class, and security preconditions.
+spec:
+  crd:
+    spec:
+      names:
+        kind: K8sTEEAttestationPreconditions
+      validation:
+        openAPIV3Schema:
+          type: object
+          properties:
+            requiredAnnotations:
+              description: Required attestation annotations
+              type: array
+              items:
+                type: string
+            allowedRuntimeClasses:
+              description: Allowed runtime classes for TEE
+              type: array
+              items:
+                type: string
+            requiredNodeSelectors:
+              description: Required node selector labels
+              type: array
+              items:
+                type: object
+                properties:
+                  key:
+                    type: string
+                  value:
+                    type: string
+            blockHostPath:
+              description: Block hostPath volumes in TEE workloads
+              type: boolean
+            blockDebugMode:
+              description: Block debug environment variables
+              type: boolean
+  targets:
+    - target: admission.k8s.gatekeeper.sh
+      rego: |
+        package k8steeattestationpreconditions
+
+        import future.keywords.contains
+        import future.keywords.if
+        import future.keywords.in
+
+        violation[{"msg": msg}] {
+          is_confidential_workload
+          not has_required_annotations
+          msg := sprintf("Confidential workload must have required attestation annotations: %v", [input.parameters.requiredAnnotations])
+        }
+
+        violation[{"msg": msg}] {
+          is_confidential_workload
+          not has_allowed_runtime_class
+          msg := sprintf("Confidential workload must use one of allowed runtime classes: %v. Current: %v", [input.parameters.allowedRuntimeClasses, object.get(input.review.object.spec, "runtimeClassName", "default")])
+        }
+
+        violation[{"msg": msg}] {
+          is_confidential_workload
+          not has_required_node_selectors
+          msg := sprintf("Confidential workload must have required node selectors: %v", [input.parameters.requiredNodeSelectors])
+        }
+
+        violation[{"msg": msg}] {
+          is_confidential_workload
+          input.parameters.blockHostPath == true
+          has_hostpath_volume
+          msg := "Confidential workloads cannot use hostPath volumes for security reasons"
+        }
+
+        violation[{"msg": msg}] {
+          is_confidential_workload
+          input.parameters.blockDebugMode == true
+          has_debug_env
+          container := debug_containers[_]
+          msg := sprintf("Container '%v' has debug mode enabled, which is not allowed in confidential workloads", [container.name])
+        }
+
+        # Check if workload is marked as confidential
+        is_confidential_workload {
+          input.review.object.metadata.labels["confidential"] == "true"
+        }
+
+        is_confidential_workload {
+          input.review.object.metadata.labels["workload"] == "confidential-compute"
+        }
+
+        # Check required annotations
+        has_required_annotations {
+          required := input.parameters.requiredAnnotations[_]
+          input.review.object.metadata.annotations[required]
+        }
+
+        has_required_annotations {
+          count(input.parameters.requiredAnnotations) == 0
+        }
+
+        # Check runtime class
+        has_allowed_runtime_class {
+          runtime := object.get(input.review.object.spec, "runtimeClassName", "")
+          runtime == input.parameters.allowedRuntimeClasses[_]
+        }
+
+        # Check node selectors
+        has_required_node_selectors {
+          required := input.parameters.requiredNodeSelectors[_]
+          input.review.object.spec.nodeSelector[required.key] == required.value
+        }
+
+        has_required_node_selectors {
+          count(input.parameters.requiredNodeSelectors) == 0
+        }
+
+        # Check for hostPath volumes
+        has_hostpath_volume {
+          volume := input.review.object.spec.volumes[_]
+          volume.hostPath
+        }
+
+        # Check for debug environment variables
+        has_debug_env {
+          count(debug_containers) > 0
+        }
+
+        debug_containers[container] {
+          container := input.review.object.spec.containers[_]
+          env := container.env[_]
+          env.name in ["DEBUG", "ENABLE_DEBUG"]
+          env.value in ["true", "1", "yes"]
+        }

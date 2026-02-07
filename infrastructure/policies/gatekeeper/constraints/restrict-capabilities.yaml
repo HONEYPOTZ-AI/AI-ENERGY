@@ -1,0 +1,22 @@
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: K8sCapabilitiesRestrictions
+metadata:
+  name: restrict-capabilities
+  annotations:
+    description: Restrict Linux capabilities to minimum required
+spec:
+  enforcementAction: deny
+  match:
+    kinds:
+    - apiGroups: [""]
+      kinds: ["Pod"]
+    excludedNamespaces:
+    - kube-system
+  parameters:
+    allowedCapabilities:
+    - NET_BIND_SERVICE
+    requiredDropCapabilities:
+    - ALL
+    allowPrivileged: false
+    blockPrivilegeEscalation: true
+    blockHostNamespace: true

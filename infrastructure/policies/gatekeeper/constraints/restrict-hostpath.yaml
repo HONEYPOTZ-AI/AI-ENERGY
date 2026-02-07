@@ -1,0 +1,52 @@
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: K8sFilesystemIsolation
+metadata:
+  name: restrict-hostpath
+  annotations:
+    description: Restrict hostPath volumes and enforce filesystem isolation
+spec:
+  enforcementAction: deny
+  match:
+    kinds:
+    - apiGroups: [""]
+      kinds: ["Pod"]
+    excludedNamespaces:
+    - kube-system
+    - kube-public
+    - local-path-storage
+  parameters:
+    blockHostPath: true
+    allowedVolumeTypes:
+    - persistentVolumeClaim
+    - configMap
+    - secret
+    - emptyDir
+    - downwardAPI
+    - projected
+    requireReadOnlyRoot: true
+---
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: K8sFilesystemIsolation
+metadata:
+  name: restrict-hostpath-system
+  annotations:
+    description: Restrict hostPath to allowed paths in system namespaces
+spec:
+  enforcementAction: deny
+  match:
+    kinds:
+    - apiGroups: [""]
+      kinds: ["Pod"]
+    namespaces:
+    - kube-system
+    - local-path-storage
+  parameters:
+    blockHostPath: false
+    allowedHostPaths:
+    - /var/lib/kubelet.*
+    - /var/lib/docker.*
+    - /var/run/docker.sock
+    - /var/log.*
+    - /etc/kubernetes.*
+    - /run/kata-containers.*
+    requireReadOnlyRoot: false

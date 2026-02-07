@@ -1,0 +1,68 @@
+# Default values for ingress chart
+nameOverride: ""
+fullnameOverride: ""
+
+# Ingress class to use
+ingressClassName: nginx
+
+# TLS configuration
+tls:
+  enabled: true
+  secretName: "tls-secret"
+
+# Default backend service
+defaultBackend:
+  service:
+    name: core-services
+    port: 8080
+
+# Ingress rules
+ingress:
+  enabled: true
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/proxy-body-size: "100m"
+    nginx.ingress.kubernetes.io/proxy-connect-timeout: "600"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "600"
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "600"
+
+  hosts:
+    - host: example.com
+      paths:
+        - path: /
+          pathType: Prefix
+          backend:
+            service:
+              name: core-services
+              port: 8080
+        - path: /api/inference
+          pathType: Prefix
+          backend:
+            service:
+              name: inference
+              port: 8000
+
+# Rate limiting
+rateLimiting:
+  enabled: true
+  rpm: 1000
+  rps: 100
+  burstMultiplier: 5
+
+# CORS configuration
+cors:
+  enabled: true
+  allowOrigin: "*"
+  allowMethods: "GET, POST, PUT, DELETE, OPTIONS"
+  allowHeaders: "DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Authorization"
+
+configMap:
+  data:
+    proxy-connect-timeout: "600"
+    proxy-send-timeout: "600"
+    proxy-read-timeout: "600"
+    proxy-body-size: "100m"
+    use-forwarded-headers: "true"
+    compute-full-forwarded-for: "true"

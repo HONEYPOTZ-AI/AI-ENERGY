@@ -1,0 +1,134 @@
+apiVersion: templates.gatekeeper.sh/v1
+kind: ConstraintTemplate
+metadata:
+  name: k8sfilesystemisolation
+  annotations:
+    description: >-
+      Controls filesystem access including volume types, hostPath restrictions,
+      and read-only root filesystem enforcement.
+spec:
+  crd:
+    spec:
+      names:
+        kind: K8sFilesystemIsolation
+      validation:
+        openAPIV3Schema:
+          type: object
+          properties:
+            allowedVolumeTypes:
+              description: Allowed volume types
+              type: array
+              items:
+                type: string
+            allowedHostPaths:
+              description: Allowed hostPath patterns (regex)
+              type: array
+              items:
+                type: string
+            requireReadOnlyRoot:
+              description: Require read-only root filesystem
+              type: boolean
+            blockHostPath:
+              description: Block all hostPath volumes
+              type: boolean
+  targets:
+    - target: admission.k8s.gatekeeper.sh
+      rego: |
+        package k8sfilesystemisolation
+
+        import future.keywords.contains
+        import future.keywords.if
+        import future.keywords.in
+
+        violation[{"msg": msg}] {
+          input.parameters.blockHostPath == true
+          volume := input.review.object.spec.volumes[_]
+          volume.hostPath
+          msg := sprintf("HostPath volume '%v' is not allowed. Use PersistentVolumeClaim, ConfigMap, or Secret instead", [volume.name])
+        }
+
+        violation[{"msg": msg}] {
+          input.parameters.blockHostPath == false
+          volume := input.review.object.spec.volumes[_]
+          volume.hostPath
+          not is_allowed_hostpath(volume.hostPath.path)
+          msg := sprintf("HostPath volume '%v' uses disallowed path '%v'. Allowed paths: %v", [volume.name, volume.hostPath.path, input.parameters.allowedHostPaths])
+        }
+
+        violation[{"msg": msg}] {
+          count(input.parameters.allowedVolumeTypes) > 0
+          volume := input.review.object.spec.volumes[_]
+          volume_type := get_volume_type(volume)
+          not volume_type in input.parameters.allowedVolumeTypes
+          msg := sprintf("Volume '%v' uses disallowed type '%v'. Allowed types: %v", [volume.name, volume_type, input.parameters.allowedVolumeTypes])
+        }
+
+        violation[{"msg": msg}] {
+          input.parameters.requireReadOnlyRoot == true
+          container := input_containers[_]
+          not has_readonly_rootfs(container)
+          msg := sprintf("Container '%v' must have readOnlyRootFilesystem: true", [container.name])
+        }
+
+        # Check if hostPath is allowed
+        is_allowed_hostpath(path) {
+          pattern := input.parameters.allowedHostPaths[_]
+          regex.match(pattern, path)
+        }
+
+        # Get volume type
+        get_volume_type(volume) = "hostPath" {
+          volume.hostPath
+        }
+
+        get_volume_type(volume) = "persistentVolumeClaim" {
+          volume.persistentVolumeClaim
+        }
+
+        get_volume_type(volume) = "configMap" {
+          volume.configMap
+        }
+
+        get_volume_type(volume) = "secret" {
+          volume.secret
+        }
+
+        get_volume_type(volume) = "emptyDir" {
+          volume.emptyDir
+        }
+
+        get_volume_type(volume) = "downwardAPI" {
+          volume.downwardAPI
+        }
+
+        get_volume_type(volume) = "projected" {
+          volume.projected
+        }
+
+        get_volume_type(volume) = "other" {
+          not volume.hostPath
+          not volume.persistentVolumeClaim
+          not volume.configMap
+          not volume.secret
+          not volume.emptyDir
+          not volume.downwardAPI
+          not volume.projected
+        }
+
+        # Check read-only root filesystem
+        has_readonly_rootfs(container) {
+          container.securityContext.readOnlyRootFilesystem == true
+        }
+
+        # Get all containers
+        input_containers[c] {
+          c := input.review.object.spec.containers[_]
+        }
+
+        input_containers[c] {
+          c := input.review.object.spec.initContainers[_]
+        }
+
+        input_containers[c] {
+          c := input.review.object.spec.ephemeralContainers[_]
+        }

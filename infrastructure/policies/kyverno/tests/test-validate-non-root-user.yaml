@@ -1,0 +1,116 @@
+---
+# Test Case 1: Valid - Non-root user properly configured
+apiVersion: v1
+kind: Pod
+metadata:
+  name: valid-non-root
+  namespace: default
+spec:
+  securityContext:
+    runAsNonRoot: true
+    runAsUser: 1000
+    fsGroup: 1000
+  containers:
+  - name: app
+    image: myapp:v1
+    securityContext:
+      runAsNonRoot: true
+      allowPrivilegeEscalation: false
+      capabilities:
+        drop:
+        - ALL
+---
+# Test Case 2: Invalid - Running as root (should fail)
+apiVersion: v1
+kind: Pod
+metadata:
+  name: invalid-root-user
+  namespace: default
+spec:
+  securityContext:
+    runAsUser: 0
+  containers:
+  - name: app
+    image: myapp:v1
+---
+# Test Case 3: Invalid - RunAsNonRoot not set (should fail)
+apiVersion: v1
+kind: Pod
+metadata:
+  name: invalid-missing-nonroot
+  namespace: default
+spec:
+  containers:
+  - name: app
+    image: myapp:v1
+---
+# Test Case 4: Valid - Auto-mutation adds security context
+apiVersion: v1
+kind: Pod
+metadata:
+  name: valid-auto-mutated
+  namespace: default
+spec:
+  containers:
+  - name: app
+    image: myapp:v1
+---
+# Test Case 5: Valid - With exemption annotation
+apiVersion: v1
+kind: Pod
+metadata:
+  name: valid-with-exemption
+  namespace: default
+  annotations:
+    policies.kyverno.io/allow-root: "true"
+spec:
+  containers:
+  - name: legacy-app
+    image: legacy-app:v1
+    securityContext:
+      runAsUser: 0
+---
+# Test Case 6: Valid - System namespace exemption
+apiVersion: v1
+kind: Pod
+metadata:
+  name: valid-system-pod
+  namespace: kube-system
+spec:
+  containers:
+  - name: system-component
+    image: k8s.gcr.io/pause:3.5
+---
+# Test Case 7: Invalid - UID 0 in container context (should fail)
+apiVersion: v1
+kind: Pod
+metadata:
+  name: invalid-container-root
+  namespace: default
+spec:
+  securityContext:
+    runAsNonRoot: true
+  containers:
+  - name: app
+    image: myapp:v1
+    securityContext:
+      runAsUser: 0
+---
+# Test Case 8: Valid - High UID for security
+apiVersion: v1
+kind: Pod
+metadata:
+  name: valid-high-uid
+  namespace: default
+spec:
+  securityContext:
+    runAsNonRoot: true
+    runAsUser: 10000
+    runAsGroup: 10000
+    fsGroup: 10000
+  containers:
+  - name: app
+    image: myapp:v1
+    securityContext:
+      runAsNonRoot: true
+      allowPrivilegeEscalation: false

@@ -1,0 +1,49 @@
+# Production environment overrides
+tls:
+  enabled: true
+  secretName: "tls-secret-prod"
+
+ingress:
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/proxy-body-size: "100m"
+    nginx.ingress.kubernetes.io/rate-limit: "100"
+    nginx.ingress.kubernetes.io/limit-rps: "100"
+    nginx.ingress.kubernetes.io/limit-rpm: "1000"
+
+  hosts:
+    - host: example.com
+      paths:
+        - path: /
+          pathType: Prefix
+          backend:
+            service:
+              name: core-services
+              port: 8080
+        - path: /api/inference
+          pathType: Prefix
+          backend:
+            service:
+              name: inference
+              port: 8000
+    - host: www.example.com
+      paths:
+        - path: /
+          pathType: Prefix
+          backend:
+            service:
+              name: core-services
+              port: 8080
+
+rateLimiting:
+  enabled: true
+  rpm: 2000
+  rps: 200
+  burstMultiplier: 5
+
+cors:
+  enabled: true
+  allowOrigin: "https://example.com,https://www.example.com"
+  allowMethods: "GET, POST, PUT, DELETE, OPTIONS"

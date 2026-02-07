@@ -1,0 +1,46 @@
+{{- if .Values.ingress.enabled }}
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ include "ingress.fullname" . }}
+  labels:
+    {{- include "ingress.labels" . | nindent 4 }}
+  annotations:
+    {{- toYaml .Values.ingress.annotations | nindent 4 }}
+    {{- if .Values.cors.enabled }}
+    nginx.ingress.kubernetes.io/enable-cors: "true"
+    nginx.ingress.kubernetes.io/cors-allow-origin: {{ .Values.cors.allowOrigin | quote }}
+    nginx.ingress.kubernetes.io/cors-allow-methods: {{ .Values.cors.allowMethods | quote }}
+    nginx.ingress.kubernetes.io/cors-allow-headers: {{ .Values.cors.allowHeaders | quote }}
+    {{- end }}
+    {{- if .Values.rateLimiting.enabled }}
+    nginx.ingress.kubernetes.io/limit-rps: {{ .Values.rateLimiting.rps | quote }}
+    nginx.ingress.kubernetes.io/limit-rpm: {{ .Values.rateLimiting.rpm | quote }}
+    nginx.ingress.kubernetes.io/limit-burst-multiplier: {{ .Values.rateLimiting.burstMultiplier | quote }}
+    {{- end }}
+spec:
+  ingressClassName: {{ .Values.ingressClassName }}
+  {{- if .Values.tls.enabled }}
+  tls:
+  {{- range .Values.ingress.hosts }}
+    - hosts:
+        - {{ .host }}
+      secretName: {{ $.Values.tls.secretName }}
+  {{- end }}
+  {{- end }}
+  rules:
+  {{- range .Values.ingress.hosts }}
+    - host: {{ .host }}
+      http:
+        paths:
+        {{- range .paths }}
+          - path: {{ .path }}
+            pathType: {{ .pathType }}
+            backend:
+              service:
+                name: {{ .backend.service.name }}
+                port:
+                  number: {{ .backend.service.port }}
+        {{- end }}
+  {{- end }}
+{{- end }}

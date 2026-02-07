@@ -1,0 +1,13 @@
+apiVersion: v2
+name: postgres
+description: PostgreSQL database with high availability configuration
+type: application
+version: 1.0.0
+appVersion: "15.3"
+keywords:
+  - postgres
+  - postgresql
+  - database
+maintainers:
+  - name: Database Team
+    email: database@example.com

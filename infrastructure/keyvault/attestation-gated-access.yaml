@@ -1,0 +1,109 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: tee-attestation-config
+  namespace: tee-workloads
+data:
+  attestation-policy.json: |
+    {
+      "version": "1.0",
+      "attestationPolicy": {
+        "provider": "azure-dcap",
+        "minimumTcbLevel": "uptodate",
+        "allowedSgxExtensions": ["PROVISIONINGKEY", "EINITTOKEN"],
+        "requiredClaims": {
+          "x-ms-sgx-is-debuggable": "false",
+          "x-ms-sgx-product-id": 1,
+          "x-ms-sgx-svn": 1,
+          "x-ms-sgx-mrsigner": "${EXPECTED_MRSIGNER}"
+        }
+      },
+      "keyVaultAccess": {
+        "attestationRequired": true,
+        "allowedResources": [
+          "tee-model-decryption-key",
+          "tee-inference-secrets",
+          "tee-training-secrets"
+        ]
+      }
+    }
+  
+  attestation-endpoint: "https://${ATTESTATION_PROVIDER_NAME}.${REGION}.attest.azure.net"
+
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: attestation-credentials
+  namespace: tee-workloads
+type: Opaque
+stringData:
+  attestation-client-id: "${ATTESTATION_CLIENT_ID}"
+  attestation-client-secret: "${ATTESTATION_CLIENT_SECRET}"
+
+---
+# Azure Key Vault Access Policy (applied via Azure CLI or Terraform)
+# Requires valid attestation token in the access request
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: keyvault-access-policy
+  namespace: tee-workloads
+data:
+  policy.json: |
+    {
+      "tenantId": "${TENANT_ID}",
+      "objectId": "${TEE_WORKLOAD_IDENTITY_OBJECT_ID}",
+      "permissions": {
+        "keys": [
+          "get",
+          "decrypt",
+          "unwrapKey"
+        ],
+        "secrets": [
+          "get",
+          "list"
+        ],
+        "certificates": []
+      },
+      "conditionalAccess": {
+        "requiredClaims": [
+          {
+            "claim": "x-ms-attestation-type",
+            "value": "sgx"
+          },
+          {
+            "claim": "x-ms-sgx-is-debuggable",
+            "value": "false"
+          }
+        ]
+      }
+    }
+
+---
+# Admission Controller Webhook for TEE Attestation Validation
+apiVersion: admissionregistration.k8s.io/v1
+kind: ValidatingWebhookConfiguration
+metadata:
+  name: tee-attestation-validator
+webhooks:
+  - name: validate-tee-attestation.security.azure.com
+    clientConfig:
+      service:
+        name: tee-attestation-validator
+        namespace: tee-system
+        path: "/validate"
+      caBundle: "${CA_BUNDLE}"
+    rules:
+      - operations: ["CREATE", "UPDATE"]
+        apiGroups: [""]
+        apiVersions: ["v1"]
+        resources: ["pods"]
+        scope: "Namespaced"
+    namespaceSelector:
+      matchLabels:
+        tee-enforcement: "strict"
+    admissionReviewVersions: ["v1", "v1beta1"]
+    sideEffects: None
+    timeoutSeconds: 10
+    failurePolicy: Fail

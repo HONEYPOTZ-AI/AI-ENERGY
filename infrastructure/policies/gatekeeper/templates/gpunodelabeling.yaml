@@ -1,0 +1,122 @@
+apiVersion: templates.gatekeeper.sh/v1
+kind: ConstraintTemplate
+metadata:
+  name: k8sgpunodelabeling
+  annotations:
+    description: >-
+      Enforces proper node selection and tolerations for GPU workloads.
+      Ensures GPU resources are properly configured with matching requests/limits.
+spec:
+  crd:
+    spec:
+      names:
+        kind: K8sGPUNodeLabeling
+      validation:
+        openAPIV3Schema:
+          type: object
+          properties:
+            gpuResourceName:
+              description: GPU resource name (e.g., nvidia.com/gpu)
+              type: string
+            requiredNodeLabels:
+              description: Required node selector labels for GPU pods
+              type: array
+              items:
+                type: object
+                properties:
+                  key:
+                    type: string
+                  value:
+                    type: string
+            requiredTolerations:
+              description: Required tolerations for GPU pods
+              type: array
+              items:
+                type: object
+                properties:
+                  key:
+                    type: string
+                  value:
+                    type: string
+                  effect:
+                    type: string
+  targets:
+    - target: admission.k8s.gatekeeper.sh
+      rego: |
+        package k8sgpunodelabeling
+
+        import future.keywords.contains
+        import future.keywords.if
+        import future.keywords.in
+
+        violation[{"msg": msg}] {
+          has_gpu_request
+          not has_required_node_labels
+          msg := sprintf("Pod requesting GPU must have required node selectors: %v", [input.parameters.requiredNodeLabels])
+        }
+
+        violation[{"msg": msg}] {
+          has_gpu_request
+          not has_required_tolerations
+          msg := sprintf("Pod requesting GPU must have required tolerations: %v", [input.parameters.requiredTolerations])
+        }
+
+        violation[{"msg": msg}] {
+          has_gpu_request
+          not gpu_limits_match_requests
+          container := mismatched_containers[_]
+          msg := sprintf("Container '%v' GPU limits must equal GPU requests. Limits: %v, Requests: %v", [container.name, get_gpu_limit(container), get_gpu_request(container)])
+        }
+
+        # Check if pod requests GPU
+        has_gpu_request {
+          container := input.review.object.spec.containers[_]
+          get_gpu_request(container) > 0
+        }
+
+        # Get GPU request from container
+        get_gpu_request(container) = request {
+          request := object.get(container.resources.requests, input.parameters.gpuResourceName, 0)
+        }
+
+        # Get GPU limit from container
+        get_gpu_limit(container) = limit {
+          limit := object.get(container.resources.limits, input.parameters.gpuResourceName, 0)
+        }
+
+        # Check if GPU limits match requests
+        gpu_limits_match_requests {
+          container := input.review.object.spec.containers[_]
+          get_gpu_request(container) > 0
+          get_gpu_limit(container) == get_gpu_request(container)
+        }
+
+        # Get containers with mismatched GPU resources
+        mismatched_containers[container] {
+          container := input.review.object.spec.containers[_]
+          get_gpu_request(container) > 0
+          get_gpu_limit(container) != get_gpu_request(container)
+        }
+
+        # Check required node labels
+        has_required_node_labels {
+          required := input.parameters.requiredNodeLabels[_]
+          input.review.object.spec.nodeSelector[required.key] == required.value
+        }
+
+        has_required_node_labels {
+          count(input.parameters.requiredNodeLabels) == 0
+        }
+
+        # Check required tolerations
+        has_required_tolerations {
+          required := input.parameters.requiredTolerations[_]
+          toleration := input.review.object.spec.tolerations[_]
+          toleration.key == required.key
+          toleration.value == required.value
+          toleration.effect == required.effect
+        }
+
+        has_required_tolerations {
+          count(input.parameters.requiredTolerations) == 0
+        }

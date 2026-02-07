@@ -1,0 +1,156 @@
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: enforce-kata-runtime-on-tee
+  annotations:
+    policies.kyverno.io/title: Enforce Kata Runtime on TEE Workloads
+    policies.kyverno.io/category: Security, Confidential Computing
+    policies.kyverno.io/severity: high
+    policies.kyverno.io/subject: Pod
+    policies.kyverno.io/description: >-
+      Enforces that workloads labeled for confidential computing (TEE) use the
+      Kata Containers Confidential Computing (kata-cc) runtime class. This ensures
+      hardware-based isolation and attestation for sensitive workloads.
+spec:
+  validationFailureAction: Enforce
+  background: true
+  failurePolicy: Fail
+  rules:
+  - name: require-kata-runtime
+    match:
+      any:
+      - resources:
+          kinds:
+          - Pod
+          selector:
+            matchLabels:
+              confidential: "true"
+    validate:
+      message: >-
+        Pods with label 'confidential=true' must use runtimeClassName 'kata-cc'
+        for hardware-based isolation and attestation.
+      pattern:
+        spec:
+          runtimeClassName: kata-cc
+  - name: require-confidential-node
+    match:
+      any:
+      - resources:
+          kinds:
+          - Pod
+          selector:
+            matchLabels:
+              confidential: "true"
+    validate:
+      message: >-
+        Confidential workloads must be scheduled on confidential computing nodes.
+        Add nodeSelector with 'node-type: confidential' or 'confidential: true'.
+      anyPattern:
+      - spec:
+          nodeSelector:
+            node-type: confidential
+      - spec:
+          nodeSelector:
+            confidential: "true"
+      - spec:
+          affinity:
+            nodeAffinity:
+              requiredDuringSchedulingIgnoredDuringExecution:
+                nodeSelectorTerms:
+                - matchExpressions:
+                  - key: confidential
+                    operator: In
+                    values:
+                    - "true"
+  - name: auto-add-kata-runtime
+    match:
+      any:
+      - resources:
+          kinds:
+          - Pod
+          selector:
+            matchLabels:
+              workload: confidential-compute
+    mutate:
+      patchStrategicMerge:
+        spec:
+          runtimeClassName: kata-cc
+          nodeSelector:
+            +(confidential): "true"
+---
+apiVersion: kyverno.io/v1
+kind: ClusterPolicy
+metadata:
+  name: validate-tee-configuration
+  annotations:
+    policies.kyverno.io/title: Validate TEE Configuration
+    policies.kyverno.io/category: Security, Confidential Computing
+    policies.kyverno.io/severity: high
+    policies.kyverno.io/description: >-
+      Validates TEE workload security configuration including encrypted storage,
+      attestation settings, and secure communication requirements.
+spec:
+  validationFailureAction: Audit
+  background: true
+  rules:
+  - name: require-encrypted-volumes
+    match:
+      any:
+      - resources:
+          kinds:
+          - Pod
+          selector:
+            matchLabels:
+              confidential: "true"
+    preconditions:
+      any:
+      - key: "{{ request.object.spec.volumes[] || '' }}"
+        operator: NotEquals
+        value: ""
+    validate:
+      message: >-
+        Confidential workloads should not use unencrypted hostPath volumes.
+        Use encrypted storage classes or secrets.
+      deny:
+        conditions:
+          any:
+          - key: "{{ request.object.spec.volumes[?type == 'hostPath'] || '' }}"
+            operator: NotEquals
+            value: ""
+  - name: require-attestation-annotation
+    match:
+      any:
+      - resources:
+          kinds:
+          - Pod
+          selector:
+            matchLabels:
+              confidential: "true"
+    validate:
+      message: >-
+        Confidential workloads should specify attestation policy via annotation
+        'tee.azure.com/attestation-policy'.
+      pattern:
+        metadata:
+          =(annotations):
+            =(tee.azure.com/attestation-policy): "?*"
+  - name: block-debug-mode
+    match:
+      any:
+      - resources:
+          kinds:
+          - Pod
+          selector:
+            matchLabels:
+              confidential: "true"
+    validate:
+      message: >-
+        Debug mode is not allowed on confidential workloads for security reasons.
+      pattern:
+        spec:
+          containers:
+          - X(env):
+            - name: DEBUG
+              value: "!true"
+            - name: ENABLE_DEBUG
+              value: "!true"

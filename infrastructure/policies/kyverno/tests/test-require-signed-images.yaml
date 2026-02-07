@@ -1,0 +1,48 @@
+---
+# Test Case 1: Valid - Signed image from approved registry
+apiVersion: v1
+kind: Pod
+metadata:
+  name: valid-signed-image
+  namespace: default
+spec:
+  containers:
+  - name: app
+    image: myregistry.azurecr.io/myapp:v1.2.3@sha256:abc123
+    resources:
+      limits:
+        memory: "128Mi"
+        cpu: "500m"
+---
+# Test Case 2: Invalid - Using latest tag (should fail)
+apiVersion: v1
+kind: Pod
+metadata:
+  name: invalid-latest-tag
+  namespace: default
+spec:
+  containers:
+  - name: app
+    image: myregistry.azurecr.io/myapp:latest
+---
+# Test Case 3: Invalid - Unapproved registry (should fail)
+apiVersion: v1
+kind: Pod
+metadata:
+  name: invalid-registry
+  namespace: default
+spec:
+  containers:
+  - name: app
+    image: untrusted.io/myapp:v1.0.0
+---
+# Test Case 4: Valid - Exempted namespace
+apiVersion: v1
+kind: Pod
+metadata:
+  name: system-pod
+  namespace: kube-system
+spec:
+  containers:
+  - name: app
+    image: k8s.gcr.io/pause:3.5

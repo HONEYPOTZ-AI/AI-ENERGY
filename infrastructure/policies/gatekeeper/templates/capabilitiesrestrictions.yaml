@@ -1,0 +1,120 @@
+apiVersion: templates.gatekeeper.sh/v1
+kind: ConstraintTemplate
+metadata:
+  name: k8scapabilitiesrestrictions
+  annotations:
+    description: >-
+      Restricts Linux capabilities and privileged mode for containers.
+      Enforces dropping ALL capabilities and only allowing specific ones.
+spec:
+  crd:
+    spec:
+      names:
+        kind: K8sCapabilitiesRestrictions
+      validation:
+        openAPIV3Schema:
+          type: object
+          properties:
+            allowedCapabilities:
+              description: Capabilities that can be added
+              type: array
+              items:
+                type: string
+            requiredDropCapabilities:
+              description: Capabilities that must be dropped
+              type: array
+              items:
+                type: string
+            allowPrivileged:
+              description: Whether privileged containers are allowed
+              type: boolean
+            blockPrivilegeEscalation:
+              description: Block allowPrivilegeEscalation
+              type: boolean
+            blockHostNamespace:
+              description: Block host namespace sharing
+              type: boolean
+  targets:
+    - target: admission.k8s.gatekeeper.sh
+      rego: |
+        package k8scapabilitiesrestrictions
+
+        import future.keywords.contains
+        import future.keywords.if
+        import future.keywords.in
+
+        violation[{"msg": msg}] {
+          container := input_containers[_]
+          container.securityContext.privileged == true
+          input.parameters.allowPrivileged == false
+          msg := sprintf("Container '%v' is running in privileged mode, which is not allowed", [container.name])
+        }
+
+        violation[{"msg": msg}] {
+          container := input_containers[_]
+          object.get(container.securityContext, "allowPrivilegeEscalation", true) == true
+          input.parameters.blockPrivilegeEscalation == true
+          msg := sprintf("Container '%v' allows privilege escalation, which is not allowed. Set allowPrivilegeEscalation: false", [container.name])
+        }
+
+        violation[{"msg": msg}] {
+          input.parameters.blockHostNamespace == true
+          has_host_namespace
+          msg := sprintf("Pod is using host namespaces (hostPID: %v, hostIPC: %v, hostNetwork: %v), which is not allowed", [object.get(input.review.object.spec, "hostPID", false), object.get(input.review.object.spec, "hostIPC", false), object.get(input.review.object.spec, "hostNetwork", false)])
+        }
+
+        violation[{"msg": msg}] {
+          container := input_containers[_]
+          not has_dropped_all_capabilities(container)
+          msg := sprintf("Container '%v' must drop ALL capabilities. Add securityContext.capabilities.drop: [ALL]", [container.name])
+        }
+
+        violation[{"msg": msg}] {
+          container := input_containers[_]
+          has_dropped_all_capabilities(container)
+          added := get_added_capabilities(container)
+          disallowed := added - {cap | cap := input.parameters.allowedCapabilities[_]}
+          count(disallowed) > 0
+          msg := sprintf("Container '%v' adds disallowed capabilities: %v. Allowed: %v", [container.name, disallowed, input.parameters.allowedCapabilities])
+        }
+
+        # Check if host namespace is used
+        has_host_namespace {
+          object.get(input.review.object.spec, "hostPID", false) == true
+        }
+
+        has_host_namespace {
+          object.get(input.review.object.spec, "hostIPC", false) == true
+        }
+
+        has_host_namespace {
+          object.get(input.review.object.spec, "hostNetwork", false) == true
+        }
+
+        # Check if ALL capabilities are dropped
+        has_dropped_all_capabilities(container) {
+          drop := object.get(container.securityContext.capabilities, "drop", [])
+          "ALL" in drop
+        }
+
+        # Get added capabilities
+        get_added_capabilities(container) = added {
+          added := {cap | cap := container.securityContext.capabilities.add[_]}
+        }
+
+        get_added_capabilities(container) = set() {
+          not container.securityContext.capabilities.add
+        }
+
+        # Get all containers
+        input_containers[c] {
+          c := input.review.object.spec.containers[_]
+        }
+
+        input_containers[c] {
+          c := input.review.object.spec.initContainers[_]
+        }
+
+        input_containers[c] {
+          c := input.review.object.spec.ephemeralContainers[_]
+        }

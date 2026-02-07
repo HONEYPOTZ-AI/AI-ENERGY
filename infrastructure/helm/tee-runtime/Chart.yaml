@@ -1,0 +1,14 @@
+apiVersion: v2
+name: tee-runtime
+description: Trusted Execution Environment runtime with Kata Containers Confidential Computing
+type: application
+version: 1.0.0
+appVersion: "3.0.0"
+keywords:
+  - tee
+  - kata-containers
+  - confidential-computing
+  - security
+maintainers:
+  - name: Security Team
+    email: security@example.com

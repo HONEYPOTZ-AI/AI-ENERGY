@@ -1,0 +1,101 @@
+---
+# Test Case 1: Valid - Using PVC instead of hostPath
+apiVersion: v1
+kind: Pod
+metadata:
+  name: valid-pvc-volume
+  namespace: default
+spec:
+  securityContext:
+    runAsNonRoot: true
+  containers:
+  - name: app
+    image: myapp:v1
+    securityContext:
+      readOnlyRootFilesystem: true
+    volumeMounts:
+    - name: data
+      mountPath: /data
+  volumes:
+  - name: data
+    persistentVolumeClaim:
+      claimName: app-data
+---
+# Test Case 2: Invalid - HostPath in production namespace (should fail)
+apiVersion: v1
+kind: Pod
+metadata:
+  name: invalid-hostpath
+  namespace: default
+spec:
+  containers:
+  - name: app
+    image: myapp:v1
+    volumeMounts:
+    - name: host-data
+      mountPath: /host-data
+  volumes:
+  - name: host-data
+    hostPath:
+      path: /var/data
+      type: Directory
+---
+# Test Case 3: Valid - HostPath in system namespace with allowed path
+apiVersion: v1
+kind: Pod
+metadata:
+  name: valid-system-hostpath
+  namespace: kube-system
+spec:
+  containers:
+  - name: log-collector
+    image: fluent/fluent-bit:latest
+    volumeMounts:
+    - name: varlog
+      mountPath: /var/log
+      readOnly: true
+  volumes:
+  - name: varlog
+    hostPath:
+      path: /var/log
+      type: Directory
+---
+# Test Case 4: Invalid - Writable root filesystem (should fail without exemption)
+apiVersion: v1
+kind: Pod
+metadata:
+  name: invalid-writable-rootfs
+  namespace: default
+spec:
+  securityContext:
+    runAsNonRoot: true
+  containers:
+  - name: app
+    image: myapp:v1
+    securityContext:
+      readOnlyRootFilesystem: false
+---
+# Test Case 5: Valid - Read-only rootfs with emptyDir for writable space
+apiVersion: v1
+kind: Pod
+metadata:
+  name: valid-ro-rootfs-emptydir
+  namespace: default
+spec:
+  securityContext:
+    runAsNonRoot: true
+  containers:
+  - name: app
+    image: myapp:v1
+    securityContext:
+      readOnlyRootFilesystem: true
+    volumeMounts:
+    - name: tmp
+      mountPath: /tmp
+    - name: cache
+      mountPath: /app/cache
+  volumes:
+  - name: tmp
+    emptyDir: {}
+  - name: cache
+    emptyDir: {}

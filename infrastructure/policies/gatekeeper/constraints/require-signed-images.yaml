@@ -1,0 +1,32 @@
+apiVersion: constraints.gatekeeper.sh/v1beta1
+kind: K8sImageSignatureVerification
+metadata:
+  name: require-signed-images
+  annotations:
+    description: Require signed images from approved registries
+spec:
+  enforcementAction: deny
+  match:
+    kinds:
+    - apiGroups: [""]
+      kinds: ["Pod"]
+    excludedNamespaces:
+    - kube-system
+    - kube-public
+    - kube-node-lease
+    - local-path-storage
+  parameters:
+    allowedRegistries:
+    - "*.azurecr.io/"
+    - "ghcr.io/"
+    - "docker.io/"
+    - "gcr.io/"
+    - "mcr.microsoft.com/"
+    bannedTags:
+    - latest
+    - dev
+    - test
+    requireSignature: false  # Set to true when cosign is configured
+    exemptImages:
+    - "k8s.gcr.io/pause"
+    - "mcr.microsoft.com/oss/kubernetes"

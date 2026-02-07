@@ -1,0 +1,79 @@
+# Gatekeeper Test: HostPath Restrictions
+# Run: kubectl apply -f test-hostpath.yaml --dry-run=server
+---
+# PASS: Using PVC instead of hostPath
+apiVersion: v1
+kind: Pod
+metadata:
+  name: test-fs-pvc
+  namespace: default
+spec:
+  securityContext:
+    runAsNonRoot: true
+  containers:
+  - name: app
+    image: myapp:v1
+    securityContext:
+      readOnlyRootFilesystem: true
+    volumeMounts:
+    - name: data
+      mountPath: /data
+  volumes:
+  - name: data
+    persistentVolumeClaim:
+      claimName: app-data
+---
+# FAIL: HostPath in production namespace (should be blocked)
+apiVersion: v1
+kind: Pod
+metadata:
+  name: test-fs-hostpath-blocked
+  namespace: default
+spec:
+  containers:
+  - name: app
+    image: myapp:v1
+    volumeMounts:
+    - name: host-data
+      mountPath: /host-data
+  volumes:
+  - name: host-data
+    hostPath:
+      path: /var/data
+      type: Directory
+---
+# FAIL: Writable root filesystem (should be blocked)
+apiVersion: v1
+kind: Pod
+metadata:
+  name: test-fs-writable-root
+  namespace: default
+spec:
+  securityContext:
+    runAsNonRoot: true
+  containers:
+  - name: app
+    image: myapp:v1
+    securityContext:
+      readOnlyRootFilesystem: false
+---
+# PASS: Read-only rootfs with emptyDir
+apiVersion: v1
+kind: Pod
+metadata:
+  name: test-fs-ro-emptydir
+  namespace: default
+spec:
+  securityContext:
+    runAsNonRoot: true
+  containers:
+  - name: app
+    image: myapp:v1
+    securityContext:
+      readOnlyRootFilesystem: true
+    volumeMounts:
+    - name: tmp
+      mountPath: /tmp
+  volumes:
+  - name: tmp
+    emptyDir: {}
