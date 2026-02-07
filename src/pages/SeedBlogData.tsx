@@ -9,7 +9,7 @@ const BLOG_TABLE_ID = 74747;
 
 export default function SeedBlogData() {
   const [isSeeding, setIsSeeding] = useState(false);
-  const [results, setResults] = useState<{ success: number; failed: number }>({ success: 0, failed: 0 });
+  const [results, setResults] = useState<{success: number;failed: number;}>({ success: 0, failed: 0 });
   const [isComplete, setIsComplete] = useState(false);
 
   const seedData = async () => {
@@ -23,18 +23,18 @@ export default function SeedBlogData() {
     for (const post of sampleBlogPosts) {
       try {
         const { error } = await window.ezsite.apis.tableCreate(BLOG_TABLE_ID, post);
-        
+
         if (error) {
           console.error(`Failed to create post: ${post.title}`, error);
           failCount++;
         } else {
           successCount++;
         }
-        
+
         setResults({ success: successCount, failed: failCount });
-        
+
         // Small delay to avoid overwhelming the API
-        await new Promise(resolve => setTimeout(resolve, 500));
+        await new Promise((resolve) => setTimeout(resolve, 500));
       } catch (error: any) {
         console.error(`Error creating post: ${post.title}`, error);
         failCount++;
@@ -73,14 +73,14 @@ export default function SeedBlogData() {
           <div className="space-y-2">
             <h3 className="font-semibold">Sample Articles to be Created:</h3>
             <ul className="list-disc pl-6 space-y-1 text-sm text-muted-foreground">
-              {sampleBlogPosts.map((post, idx) => (
-                <li key={idx}>{post.title}</li>
-              ))}
+              {sampleBlogPosts.map((post, idx) =>
+              <li key={idx}>{post.title}</li>
+              )}
             </ul>
           </div>
 
-          {isSeeding && (
-            <div className="space-y-4">
+          {isSeeding &&
+          <div className="space-y-4">
               <div className="flex items-center gap-3">
                 <Loader2 className="w-6 h-6 animate-spin text-primary" />
                 <div>
@@ -91,13 +91,13 @@ export default function SeedBlogData() {
                 </div>
               </div>
             </div>
-          )}
+          }
 
-          {isComplete && (
-            <div className="space-y-4">
+          {isComplete &&
+          <div className="space-y-4">
               <div className="flex items-center gap-3 p-4 bg-green-50 dark:bg-green-900/20 rounded-lg">
-                {results.failed === 0 ? (
-                  <>
+                {results.failed === 0 ?
+              <>
                     <CheckCircle className="w-6 h-6 text-green-600" />
                     <div>
                       <p className="font-medium text-green-900 dark:text-green-100">
@@ -107,9 +107,9 @@ export default function SeedBlogData() {
                         You can now visit the blog at /blog
                       </p>
                     </div>
-                  </>
-                ) : (
-                  <>
+                  </> :
+
+              <>
                     <AlertCircle className="w-6 h-6 text-orange-600" />
                     <div>
                       <p className="font-medium text-orange-900 dark:text-orange-100">
@@ -120,35 +120,35 @@ export default function SeedBlogData() {
                       </p>
                     </div>
                   </>
-                )}
+              }
               </div>
             </div>
-          )}
+          }
 
           <div className="flex gap-4">
             <Button
               onClick={seedData}
               disabled={isSeeding}
-              className="flex-1"
-            >
-              {isSeeding ? (
-                <>
+              className="flex-1">
+
+              {isSeeding ?
+              <>
                   <Loader2 className="w-4 h-4 mr-2 animate-spin" />
                   Seeding Data...
-                </>
-              ) : (
-                'Seed Blog Data'
-              )}
+                </> :
+
+              'Seed Blog Data'
+              }
             </Button>
             
-            {isComplete && (
-              <Button
-                variant="outline"
-                onClick={() => window.location.href = '/blog'}
-              >
+            {isComplete &&
+            <Button
+              variant="outline"
+              onClick={() => window.location.href = '/blog'}>
+
                 Go to Blog
               </Button>
-            )}
+            }
           </div>
 
           <p className="text-xs text-muted-foreground">
@@ -156,6 +156,6 @@ export default function SeedBlogData() {
           </p>
         </CardContent>
       </Card>
-    </div>
-  );
+    </div>);
+
 }

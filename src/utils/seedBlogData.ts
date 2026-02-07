@@ -3,11 +3,11 @@
 // Run this once to populate the blog with initial content
 
 export const sampleBlogPosts = [
-  {
-    title: "How AI is Revolutionizing Energy Optimization in 2024",
-    slug: "ai-revolutionizing-energy-optimization-2024",
-    excerpt: "Discover how artificial intelligence and machine learning are transforming the energy sector, enabling unprecedented accuracy in forecasting, optimization, and sustainability.",
-    content: `
+{
+  title: "How AI is Revolutionizing Energy Optimization in 2024",
+  slug: "ai-revolutionizing-energy-optimization-2024",
+  excerpt: "Discover how artificial intelligence and machine learning are transforming the energy sector, enabling unprecedented accuracy in forecasting, optimization, and sustainability.",
+  content: `
       <div class="space-y-6">
         <p class="text-lg leading-relaxed">
           The energy sector is undergoing a revolutionary transformation, driven by the rapid advancement of artificial intelligence (AI) and machine learning (ML) technologies. In 2024, we're witnessing unprecedented capabilities in energy management that were once thought impossible.
@@ -45,22 +45,22 @@ export const sampleBlogPosts = [
         </p>
       </div>
     `,
-    featured_image: "https://images.unsplash.com/photo-1732027912131-3a10677b8449?w=1200&q=80",
-    category: "Technology",
-    tags: "AI, Machine Learning, Energy Optimization, Innovation",
-    author: "Dr. Sarah Mitchell",
-    published_date: new Date("2024-03-15").toISOString(),
-    is_published: true,
-    views: 0,
-    seo_title: "How AI is Revolutionizing Energy Optimization in 2024 | AI ENERGY Optimizer",
-    seo_description: "Explore how artificial intelligence and machine learning are transforming energy management with 98% forecasting accuracy and 35% cost reduction.",
-    reading_time: 8
-  },
-  {
-    title: "Getting Started with AI ENERGY Optimizer: A Complete Guide",
-    slug: "getting-started-ai-energy-optimizer-guide",
-    excerpt: "A comprehensive step-by-step guide to onboarding and implementing AI ENERGY Optimizer in your organization for immediate impact and results.",
-    content: `
+  featured_image: "https://images.unsplash.com/photo-1732027912131-3a10677b8449?w=1200&q=80",
+  category: "Technology",
+  tags: "AI, Machine Learning, Energy Optimization, Innovation",
+  author: "Dr. Sarah Mitchell",
+  published_date: new Date("2024-03-15").toISOString(),
+  is_published: true,
+  views: 0,
+  seo_title: "How AI is Revolutionizing Energy Optimization in 2024 | AI ENERGY Optimizer",
+  seo_description: "Explore how artificial intelligence and machine learning are transforming energy management with 98% forecasting accuracy and 35% cost reduction.",
+  reading_time: 8
+},
+{
+  title: "Getting Started with AI ENERGY Optimizer: A Complete Guide",
+  slug: "getting-started-ai-energy-optimizer-guide",
+  excerpt: "A comprehensive step-by-step guide to onboarding and implementing AI ENERGY Optimizer in your organization for immediate impact and results.",
+  content: `
       <div class="space-y-6">
         <p class="text-lg leading-relaxed">
           Implementing an AI-powered energy optimization platform might seem daunting, but with the right approach, you can start seeing results in just a few weeks. This comprehensive guide will walk you through every step of the process.
@@ -123,22 +123,22 @@ export const sampleBlogPosts = [
         </p>
       </div>
     `,
-    featured_image: "https://images.unsplash.com/photo-1670392205249-f7144f72b8eb?w=1200&q=80",
-    category: "Guides",
-    tags: "Getting Started, Implementation, Best Practices, Tutorial",
-    author: "Michael Chen",
-    published_date: new Date("2024-03-10").toISOString(),
-    is_published: true,
-    views: 0,
-    seo_title: "Getting Started with AI ENERGY Optimizer: Complete Implementation Guide",
-    seo_description: "Step-by-step guide to implementing AI ENERGY Optimizer in your organization. Learn best practices for successful deployment and optimization.",
-    reading_time: 12
-  },
-  {
-    title: "5 Ways Utilities Can Reduce Carbon Emissions with AI",
-    slug: "utilities-reduce-carbon-emissions-ai",
-    excerpt: "Learn how utility companies are leveraging AI technology to dramatically reduce carbon emissions while improving operational efficiency and customer satisfaction.",
-    content: `
+  featured_image: "https://images.unsplash.com/photo-1670392205249-f7144f72b8eb?w=1200&q=80",
+  category: "Guides",
+  tags: "Getting Started, Implementation, Best Practices, Tutorial",
+  author: "Michael Chen",
+  published_date: new Date("2024-03-10").toISOString(),
+  is_published: true,
+  views: 0,
+  seo_title: "Getting Started with AI ENERGY Optimizer: Complete Implementation Guide",
+  seo_description: "Step-by-step guide to implementing AI ENERGY Optimizer in your organization. Learn best practices for successful deployment and optimization.",
+  reading_time: 12
+},
+{
+  title: "5 Ways Utilities Can Reduce Carbon Emissions with AI",
+  slug: "utilities-reduce-carbon-emissions-ai",
+  excerpt: "Learn how utility companies are leveraging AI technology to dramatically reduce carbon emissions while improving operational efficiency and customer satisfaction.",
+  content: `
       <div class="space-y-6">
         <p class="text-lg leading-relaxed">
           As the world races toward net-zero carbon targets, utility companies face unprecedented pressure to reduce emissions while maintaining reliable service. Artificial intelligence offers powerful solutions to this challenge. Here are five proven strategies that utilities are using today.
@@ -200,22 +200,22 @@ export const sampleBlogPosts = [
         </p>
       </div>
     `,
-    featured_image: "https://images.unsplash.com/photo-1654589347125-a8233f00d7ee?w=1200&q=80",
-    category: "Sustainability",
-    tags: "Carbon Emissions, Utilities, Renewable Energy, Grid Optimization",
-    author: "Jennifer Rodriguez",
-    published_date: new Date("2024-03-05").toISOString(),
-    is_published: true,
-    views: 0,
-    seo_title: "5 Ways Utilities Reduce Carbon Emissions with AI | Sustainability Guide",
-    seo_description: "Discover how utility companies use AI to reduce carbon emissions by 35-50% while improving efficiency. Learn proven strategies for sustainable energy.",
-    reading_time: 10
-  },
-  {
-    title: "Enterprise Energy Management: AI-Driven Solutions for Cost Savings",
-    slug: "enterprise-energy-management-ai-cost-savings",
-    excerpt: "How large enterprises are using AI-powered energy management to slash operational costs, improve efficiency, and meet sustainability targets simultaneously.",
-    content: `
+  featured_image: "https://images.unsplash.com/photo-1654589347125-a8233f00d7ee?w=1200&q=80",
+  category: "Sustainability",
+  tags: "Carbon Emissions, Utilities, Renewable Energy, Grid Optimization",
+  author: "Jennifer Rodriguez",
+  published_date: new Date("2024-03-05").toISOString(),
+  is_published: true,
+  views: 0,
+  seo_title: "5 Ways Utilities Reduce Carbon Emissions with AI | Sustainability Guide",
+  seo_description: "Discover how utility companies use AI to reduce carbon emissions by 35-50% while improving efficiency. Learn proven strategies for sustainable energy.",
+  reading_time: 10
+},
+{
+  title: "Enterprise Energy Management: AI-Driven Solutions for Cost Savings",
+  slug: "enterprise-energy-management-ai-cost-savings",
+  excerpt: "How large enterprises are using AI-powered energy management to slash operational costs, improve efficiency, and meet sustainability targets simultaneously.",
+  content: `
       <div class="space-y-6">
         <p class="text-lg leading-relaxed">
           For large enterprises, energy costs represent a significant portion of operational expenses. Traditional energy management approaches leave substantial savings on the table. Modern AI-driven solutions are changing this equation dramatically.
@@ -296,22 +296,22 @@ export const sampleBlogPosts = [
         </p>
       </div>
     `,
-    featured_image: "https://images.unsplash.com/photo-1670392162466-8e7d9a5168db?w=1200&q=80",
-    category: "Use Cases",
-    tags: "Enterprise, Cost Savings, ROI, Business Intelligence",
-    author: "Robert Anderson",
-    published_date: new Date("2024-02-28").toISOString(),
-    is_published: true,
-    views: 0,
-    seo_title: "Enterprise Energy Management: AI-Driven Cost Savings Guide",
-    seo_description: "Learn how enterprises use AI to reduce energy costs by 35%. Case studies, strategies, and ROI analysis for large-scale energy optimization.",
-    reading_time: 11
-  },
-  {
-    title: "The Future of Sustainable Energy: Forecasting and Optimization",
-    slug: "future-sustainable-energy-forecasting-optimization",
-    excerpt: "Exploring the cutting-edge technologies and methodologies that are shaping the future of sustainable energy management and environmental responsibility.",
-    content: `
+  featured_image: "https://images.unsplash.com/photo-1670392162466-8e7d9a5168db?w=1200&q=80",
+  category: "Use Cases",
+  tags: "Enterprise, Cost Savings, ROI, Business Intelligence",
+  author: "Robert Anderson",
+  published_date: new Date("2024-02-28").toISOString(),
+  is_published: true,
+  views: 0,
+  seo_title: "Enterprise Energy Management: AI-Driven Cost Savings Guide",
+  seo_description: "Learn how enterprises use AI to reduce energy costs by 35%. Case studies, strategies, and ROI analysis for large-scale energy optimization.",
+  reading_time: 11
+},
+{
+  title: "The Future of Sustainable Energy: Forecasting and Optimization",
+  slug: "future-sustainable-energy-forecasting-optimization",
+  excerpt: "Exploring the cutting-edge technologies and methodologies that are shaping the future of sustainable energy management and environmental responsibility.",
+  content: `
       <div class="space-y-6">
         <p class="text-lg leading-relaxed">
           The convergence of artificial intelligence, renewable energy, and advanced forecasting is creating a future where sustainable energy is not just an aspiration—it's an achievable reality. Let's explore the innovations driving this transformation.
@@ -403,22 +403,22 @@ export const sampleBlogPosts = [
         </p>
       </div>
     `,
-    featured_image: "https://images.unsplash.com/photo-1548140203-3bb3b3abf1cb?w=1200&q=80",
-    category: "Industry Insights",
-    tags: "Future Technology, Sustainability, Innovation, Forecasting",
-    author: "Dr. Emily Watson",
-    published_date: new Date("2024-02-20").toISOString(),
-    is_published: true,
-    views: 0,
-    seo_title: "Future of Sustainable Energy: AI Forecasting & Optimization",
-    seo_description: "Explore cutting-edge AI technologies shaping sustainable energy future. Learn about deep learning, quantum computing, and the path to net-zero.",
-    reading_time: 13
-  },
-  {
-    title: "Real-World Use Cases: AI Energy Optimization Success Stories",
-    slug: "real-world-use-cases-ai-energy-optimization",
-    excerpt: "Detailed case studies showcasing how organizations across industries are achieving remarkable results with AI-powered energy optimization.",
-    content: `
+  featured_image: "https://images.unsplash.com/photo-1548140203-3bb3b3abf1cb?w=1200&q=80",
+  category: "Industry Insights",
+  tags: "Future Technology, Sustainability, Innovation, Forecasting",
+  author: "Dr. Emily Watson",
+  published_date: new Date("2024-02-20").toISOString(),
+  is_published: true,
+  views: 0,
+  seo_title: "Future of Sustainable Energy: AI Forecasting & Optimization",
+  seo_description: "Explore cutting-edge AI technologies shaping sustainable energy future. Learn about deep learning, quantum computing, and the path to net-zero.",
+  reading_time: 13
+},
+{
+  title: "Real-World Use Cases: AI Energy Optimization Success Stories",
+  slug: "real-world-use-cases-ai-energy-optimization",
+  excerpt: "Detailed case studies showcasing how organizations across industries are achieving remarkable results with AI-powered energy optimization.",
+  content: `
       <div class="space-y-6">
         <p class="text-lg leading-relaxed">
           The impact of AI-powered energy optimization is best understood through real-world examples. Here are detailed case studies from organizations that have transformed their energy management with AI.
@@ -538,15 +538,14 @@ export const sampleBlogPosts = [
         </p>
       </div>
     `,
-    featured_image: "https://images.unsplash.com/photo-1616591172139-cbef8b843cf1?w=1200&q=80",
-    category: "Use Cases",
-    tags: "Case Studies, Success Stories, ROI, Best Practices",
-    author: "David Thompson",
-    published_date: new Date("2024-02-15").toISOString(),
-    is_published: true,
-    views: 0,
-    seo_title: "Real-World AI Energy Optimization Success Stories & Case Studies",
-    seo_description: "Detailed case studies showing how organizations achieve 30%+ energy savings with AI. Learn from real-world implementations and proven results.",
-    reading_time: 14
-  }
-];
+  featured_image: "https://images.unsplash.com/photo-1616591172139-cbef8b843cf1?w=1200&q=80",
+  category: "Use Cases",
+  tags: "Case Studies, Success Stories, ROI, Best Practices",
+  author: "David Thompson",
+  published_date: new Date("2024-02-15").toISOString(),
+  is_published: true,
+  views: 0,
+  seo_title: "Real-World AI Energy Optimization Success Stories & Case Studies",
+  seo_description: "Detailed case studies showing how organizations achieve 30%+ energy savings with AI. Learn from real-world implementations and proven results.",
+  reading_time: 14
+}];

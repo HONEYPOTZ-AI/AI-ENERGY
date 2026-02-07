@@ -2,12 +2,12 @@ const PRESS_TABLE_ID = 74748;
 
 export async function seedPressReleases() {
   const pressReleases = [
-    {
-      title: "AI ENERGY Optimizer Launches Revolutionary Platform to Transform Energy Management",
-      slug: "ai-energy-optimizer-launches-revolutionary-platform",
-      release_date: new Date('2024-01-15').toISOString(),
-      summary: "Industry-leading AI-powered platform helps utilities and enterprises optimize energy consumption, reduce costs, and achieve sustainability goals through advanced forecasting and real-time optimization.",
-      content: `
+  {
+    title: "AI ENERGY Optimizer Launches Revolutionary Platform to Transform Energy Management",
+    slug: "ai-energy-optimizer-launches-revolutionary-platform",
+    release_date: new Date('2024-01-15').toISOString(),
+    summary: "Industry-leading AI-powered platform helps utilities and enterprises optimize energy consumption, reduce costs, and achieve sustainability goals through advanced forecasting and real-time optimization.",
+    content: `
         <p><strong>SAN FRANCISCO, CA - January 15, 2024</strong> - AI ENERGY Optimizer today announced the official launch of its groundbreaking artificial intelligence platform designed to revolutionize energy management for utilities and enterprises worldwide. The platform combines cutting-edge machine learning algorithms with real-time data analytics to deliver unprecedented accuracy in energy forecasting and optimization.</p>
 
         <p>The AI ENERGY Optimizer platform addresses one of the most pressing challenges facing the energy sector: the need for more efficient, sustainable, and cost-effective energy management solutions. With global energy demand continuing to rise and sustainability targets becoming increasingly stringent, organizations require sophisticated tools to navigate this complex landscape.</p>
@@ -42,17 +42,17 @@ export async function seedPressReleases() {
 
         <p>###</p>
       `,
-      category: "launch",
-      location: "San Francisco, CA",
-      featured_image: "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=1200&h=630&fit=crop",
-      is_published: true
-    },
-    {
-      title: "AI ENERGY Optimizer Introduces Advanced Forecasting and ESG Reporting Capabilities",
-      slug: "ai-energy-optimizer-introduces-advanced-forecasting-esg-reporting",
-      release_date: new Date('2024-03-20').toISOString(),
-      summary: "Latest platform update delivers enhanced multi-horizon forecasting, comprehensive ESG analytics, and expanded integration capabilities to help organizations accelerate their sustainability initiatives.",
-      content: `
+    category: "launch",
+    location: "San Francisco, CA",
+    featured_image: "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=1200&h=630&fit=crop",
+    is_published: true
+  },
+  {
+    title: "AI ENERGY Optimizer Introduces Advanced Forecasting and ESG Reporting Capabilities",
+    slug: "ai-energy-optimizer-introduces-advanced-forecasting-esg-reporting",
+    release_date: new Date('2024-03-20').toISOString(),
+    summary: "Latest platform update delivers enhanced multi-horizon forecasting, comprehensive ESG analytics, and expanded integration capabilities to help organizations accelerate their sustainability initiatives.",
+    content: `
         <p><strong>SAN FRANCISCO, CA - March 20, 2024</strong> - AI ENERGY Optimizer today unveiled a major platform update featuring significantly enhanced forecasting capabilities and comprehensive ESG (Environmental, Social, and Governance) reporting tools. The update represents the company's continued commitment to helping organizations achieve their energy efficiency and sustainability goals.</p>
 
         <h3>Enhanced Forecasting Capabilities</h3>
@@ -100,17 +100,17 @@ export async function seedPressReleases() {
 
         <p>###</p>
       `,
-      category: "feature",
-      location: "San Francisco, CA",
-      featured_image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&h=630&fit=crop",
-      is_published: true
-    },
-    {
-      title: "AI ENERGY Optimizer Partners with Leading Utilities to Accelerate Clean Energy Transition",
-      slug: "ai-energy-optimizer-partners-leading-utilities-clean-energy",
-      release_date: new Date('2024-06-10').toISOString(),
-      summary: "Strategic partnerships with five major utility companies will deploy AI-powered optimization across 2 million customers, demonstrating the scalability and impact of intelligent energy management.",
-      content: `
+    category: "feature",
+    location: "San Francisco, CA",
+    featured_image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&h=630&fit=crop",
+    is_published: true
+  },
+  {
+    title: "AI ENERGY Optimizer Partners with Leading Utilities to Accelerate Clean Energy Transition",
+    slug: "ai-energy-optimizer-partners-leading-utilities-clean-energy",
+    release_date: new Date('2024-06-10').toISOString(),
+    summary: "Strategic partnerships with five major utility companies will deploy AI-powered optimization across 2 million customers, demonstrating the scalability and impact of intelligent energy management.",
+    content: `
         <p><strong>SAN FRANCISCO, CA - June 10, 2024</strong> - AI ENERGY Optimizer today announced strategic partnerships with five leading utility companies across North America and Europe to deploy its AI-powered energy optimization platform. The partnerships will bring intelligent energy management capabilities to more than 2 million customers and represent a significant milestone in the company's mission to accelerate the clean energy transition.</p>
 
         <h3>Partnership Overview</h3>
@@ -161,17 +161,17 @@ export async function seedPressReleases() {
 
         <p>###</p>
       `,
-      category: "partnership",
-      location: "San Francisco, CA",
-      featured_image: "https://images.unsplash.com/photo-1559302504-64aae6ca6b6d?w=1200&h=630&fit=crop",
-      is_published: true
-    },
-    {
-      title: "AI ENERGY Optimizer Recognized as 2024 Energy Innovation Leader by Industry Excellence Awards",
-      slug: "ai-energy-optimizer-recognized-2024-energy-innovation-leader",
-      release_date: new Date('2024-09-15').toISOString(),
-      summary: "Company receives prestigious recognition for outstanding contribution to energy innovation, technological excellence, and positive environmental impact in the clean energy transition.",
-      content: `
+    category: "partnership",
+    location: "San Francisco, CA",
+    featured_image: "https://images.unsplash.com/photo-1559302504-64aae6ca6b6d?w=1200&h=630&fit=crop",
+    is_published: true
+  },
+  {
+    title: "AI ENERGY Optimizer Recognized as 2024 Energy Innovation Leader by Industry Excellence Awards",
+    slug: "ai-energy-optimizer-recognized-2024-energy-innovation-leader",
+    release_date: new Date('2024-09-15').toISOString(),
+    summary: "Company receives prestigious recognition for outstanding contribution to energy innovation, technological excellence, and positive environmental impact in the clean energy transition.",
+    content: `
         <p><strong>SAN FRANCISCO, CA - September 15, 2024</strong> - AI ENERGY Optimizer today announced it has been named Energy Innovation Leader of 2024 by the International Energy Excellence Awards. The prestigious recognition honors the company's groundbreaking work in applying artificial intelligence to energy management and its significant contribution to advancing the clean energy transition.</p>
 
         <h3>Award Recognition</h3>
@@ -226,12 +226,12 @@ export async function seedPressReleases() {
 
         <p>###</p>
       `,
-      category: "recognition",
-      location: "San Francisco, CA",
-      featured_image: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=1200&h=630&fit=crop",
-      is_published: true
-    }
-  ];
+    category: "recognition",
+    location: "San Francisco, CA",
+    featured_image: "https://images.unsplash.com/photo-1552664730-d307ca884978?w=1200&h=630&fit=crop",
+    is_published: true
+  }];
+
 
   const results = [];
 

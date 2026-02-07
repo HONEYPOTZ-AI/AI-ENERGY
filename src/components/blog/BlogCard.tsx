@@ -33,8 +33,8 @@ export default function BlogCard({
           <img
             src={featured_image}
             alt={title}
-            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-          />
+            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+
           <Badge className="absolute top-4 right-4 bg-primary">
             {category}
           </Badge>
@@ -67,6 +67,6 @@ export default function BlogCard({
           </div>
         </div>
       </CardFooter>
-    </Card>
-  );
+    </Card>);
+
 }

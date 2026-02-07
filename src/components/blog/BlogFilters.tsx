@@ -17,20 +17,20 @@ export default function BlogFilters({
       <Button
         variant={selectedCategory === '' ? 'default' : 'outline'}
         size="sm"
-        onClick={() => onCategoryChange('')}
-      >
+        onClick={() => onCategoryChange('')}>
+
         All Articles
       </Button>
-      {categories.map((category) => (
-        <Button
-          key={category}
-          variant={selectedCategory === category ? 'default' : 'outline'}
-          size="sm"
-          onClick={() => onCategoryChange(category)}
-        >
+      {categories.map((category) =>
+      <Button
+        key={category}
+        variant={selectedCategory === category ? 'default' : 'outline'}
+        size="sm"
+        onClick={() => onCategoryChange(category)}>
+
           {category}
         </Button>
-      ))}
-    </div>
-  );
+      )}
+    </div>);
+
 }

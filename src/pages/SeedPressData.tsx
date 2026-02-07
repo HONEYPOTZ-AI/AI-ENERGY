@@ -12,17 +12,17 @@ export default function SeedPressData() {
   const handleSeed = async () => {
     setLoading(true);
     setResults([]);
-    
+
     try {
       const seedResults = await seedPressReleases();
       setResults(seedResults);
-      
-      const successCount = seedResults.filter(r => r.success).length;
+
+      const successCount = seedResults.filter((r) => r.success).length;
       const failCount = seedResults.length - successCount;
-      
+
       toast({
         title: 'Seeding Complete',
-        description: `${successCount} press releases created successfully${failCount > 0 ? `, ${failCount} failed` : ''}`,
+        description: `${successCount} press releases created successfully${failCount > 0 ? `, ${failCount} failed` : ''}`
       });
     } catch (error: any) {
       toast({
@@ -59,42 +59,42 @@ export default function SeedPressData() {
               </ul>
             </div>
 
-            <Button 
-              onClick={handleSeed} 
+            <Button
+              onClick={handleSeed}
               disabled={loading}
               size="lg"
-              className="w-full"
-            >
+              className="w-full">
+
               {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
               {loading ? 'Seeding Press Releases...' : 'Seed Press Releases'}
             </Button>
 
-            {results.length > 0 && (
-              <div className="space-y-2">
+            {results.length > 0 &&
+            <div className="space-y-2">
                 <h3 className="font-semibold">Results:</h3>
-                {results.map((result, index) => (
-                  <div 
-                    key={index}
-                    className="flex items-center gap-2 p-2 rounded border"
-                  >
-                    {result.success ? (
-                      <CheckCircle className="w-4 h-4 text-green-500 flex-shrink-0" />
-                    ) : (
-                      <XCircle className="w-4 h-4 text-red-500 flex-shrink-0" />
-                    )}
+                {results.map((result, index) =>
+              <div
+                key={index}
+                className="flex items-center gap-2 p-2 rounded border">
+
+                    {result.success ?
+                <CheckCircle className="w-4 h-4 text-green-500 flex-shrink-0" /> :
+
+                <XCircle className="w-4 h-4 text-red-500 flex-shrink-0" />
+                }
                     <div className="flex-1 min-w-0">
                       <p className="text-sm truncate">{result.title}</p>
-                      {result.error && (
-                        <p className="text-xs text-red-500">{result.error}</p>
-                      )}
+                      {result.error &&
+                  <p className="text-xs text-red-500">{result.error}</p>
+                  }
                     </div>
                   </div>
-                ))}
+              )}
               </div>
-            )}
+            }
           </CardContent>
         </Card>
       </div>
-    </div>
-  );
+    </div>);
+
 }

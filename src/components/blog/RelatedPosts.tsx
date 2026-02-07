@@ -26,15 +26,15 @@ export default function RelatedPosts({ posts }: RelatedPostsProps) {
     <section className="mt-12 border-t pt-12">
       <h2 className="text-2xl font-bold mb-6">Related Articles</h2>
       <div className="grid md:grid-cols-3 gap-6">
-        {posts.map((post) => (
-          <Card key={post.id} className="overflow-hidden hover:shadow-lg transition-shadow group">
+        {posts.map((post) =>
+        <Card key={post.id} className="overflow-hidden hover:shadow-lg transition-shadow group">
             <Link to={`/blog/${post.slug}`}>
               <div className="relative overflow-hidden h-40">
                 <img
-                  src={post.featured_image}
-                  alt={post.title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                />
+                src={post.featured_image}
+                alt={post.title}
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+
               </div>
               <CardContent className="p-4">
                 <h3 className="font-bold line-clamp-2 mb-2 group-hover:text-primary transition-colors">
@@ -56,8 +56,8 @@ export default function RelatedPosts({ posts }: RelatedPostsProps) {
               </CardContent>
             </Link>
           </Card>
-        ))}
+        )}
       </div>
-    </section>
-  );
+    </section>);
+
 }

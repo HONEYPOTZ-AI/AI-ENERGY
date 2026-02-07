@@ -5,20 +5,20 @@ import { Separator } from '@/components/ui/separator';
 
 export default function PressKit() {
   const keyFeatures = [
-    'AI-Powered Load Forecasting',
-    'Real-time Grid Optimization',
-    'ESG Reporting & Analytics',
-    'Synthetic Data Generation',
-    'Multi-horizon Predictions',
-    'Carbon Intensity Tracking'
-  ];
+  'AI-Powered Load Forecasting',
+  'Real-time Grid Optimization',
+  'ESG Reporting & Analytics',
+  'Synthetic Data Generation',
+  'Multi-horizon Predictions',
+  'Carbon Intensity Tracking'];
+
 
   const companyFacts = [
-    { icon: Building2, label: 'Founded', value: '2024' },
-    { icon: Users, label: 'Team Size', value: '50+ Experts' },
-    { icon: Zap, label: 'Energy Optimized', value: '10+ GWh' },
-    { icon: Award, label: 'Recognition', value: 'Industry Leader' }
-  ];
+  { icon: Building2, label: 'Founded', value: '2024' },
+  { icon: Users, label: 'Team Size', value: '50+ Experts' },
+  { icon: Zap, label: 'Energy Optimized', value: '10+ GWh' },
+  { icon: Award, label: 'Recognition', value: 'Industry Leader' }];
+
 
   return (
     <Card className="mb-8">
@@ -46,12 +46,12 @@ export default function PressKit() {
         <div>
           <h3 className="font-semibold text-lg mb-3">Key Features</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-            {keyFeatures.map((feature, index) => (
-              <div key={index} className="flex items-center gap-2">
+            {keyFeatures.map((feature, index) =>
+            <div key={index} className="flex items-center gap-2">
                 <div className="w-1.5 h-1.5 rounded-full bg-primary" />
                 <span className="text-sm">{feature}</span>
               </div>
-            ))}
+            )}
           </div>
         </div>
 
@@ -61,13 +61,13 @@ export default function PressKit() {
         <div>
           <h3 className="font-semibold text-lg mb-3">Company Facts</h3>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {companyFacts.map((fact, index) => (
-              <div key={index} className="text-center">
+            {companyFacts.map((fact, index) =>
+            <div key={index} className="text-center">
                 <fact.icon className="w-8 h-8 mx-auto mb-2 text-primary" />
                 <div className="text-sm text-muted-foreground">{fact.label}</div>
                 <div className="font-semibold">{fact.value}</div>
               </div>
-            ))}
+            )}
           </div>
         </div>
 
@@ -112,6 +112,6 @@ export default function PressKit() {
           </Button>
         </div>
       </CardContent>
-    </Card>
-  );
+    </Card>);
+
 }

@@ -10,48 +10,48 @@ import {
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
-  NavigationMenuTrigger,
-} from '@/components/ui/navigation-menu';
+  NavigationMenuTrigger } from
+'@/components/ui/navigation-menu';
 
 export default function SiteNavigation() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const location = useLocation();
 
   const solutionsLinks = [
-    {
-      title: 'AI Energy Optimization',
-      href: '/solutions/ai-energy-optimization',
-      description: 'Advanced AI algorithms for optimizing energy consumption and reducing costs'
-    },
-    {
-      title: 'Demand Forecasting',
-      href: '/solutions/demand-forecasting',
-      description: 'Predict energy demand with 95%+ accuracy using machine learning'
-    },
-    {
-      title: 'Cost Optimization',
-      href: '/solutions/cost-optimization',
-      description: 'Reduce energy costs by up to 30% through intelligent optimization'
-    },
-    {
-      title: 'Sustainability',
-      href: '/solutions/sustainability',
-      description: 'Achieve carbon reduction goals and automated ESG reporting'
-    }
-  ];
+  {
+    title: 'AI Energy Optimization',
+    href: '/solutions/ai-energy-optimization',
+    description: 'Advanced AI algorithms for optimizing energy consumption and reducing costs'
+  },
+  {
+    title: 'Demand Forecasting',
+    href: '/solutions/demand-forecasting',
+    description: 'Predict energy demand with 95%+ accuracy using machine learning'
+  },
+  {
+    title: 'Cost Optimization',
+    href: '/solutions/cost-optimization',
+    description: 'Reduce energy costs by up to 30% through intelligent optimization'
+  },
+  {
+    title: 'Sustainability',
+    href: '/solutions/sustainability',
+    description: 'Achieve carbon reduction goals and automated ESG reporting'
+  }];
+
 
   const industriesLinks = [
-    {
-      title: 'Utilities',
-      href: '/industries/utilities',
-      description: 'Grid optimization and demand management for electric utilities'
-    },
-    {
-      title: 'Enterprises',
-      href: '/industries/enterprises',
-      description: 'Multi-site energy management for manufacturing, data centers, and more'
-    }
-  ];
+  {
+    title: 'Utilities',
+    href: '/industries/utilities',
+    description: 'Grid optimization and demand management for electric utilities'
+  },
+  {
+    title: 'Enterprises',
+    href: '/industries/enterprises',
+    description: 'Multi-site energy management for manufacturing, data centers, and more'
+  }];
+
 
   return (
     <nav className="sticky top-0 z-50 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -72,16 +72,16 @@ export default function SiteNavigation() {
                   <NavigationMenuTrigger>Solutions</NavigationMenuTrigger>
                   <NavigationMenuContent>
                     <ul className="grid w-[500px] gap-3 p-4 md:grid-cols-2">
-                      {solutionsLinks.map((item) => (
-                        <li key={item.href}>
+                      {solutionsLinks.map((item) =>
+                      <li key={item.href}>
                           <NavigationMenuLink asChild>
                             <Link
-                              to={item.href}
-                              className={cn(
-                                'block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground',
-                                location.pathname === item.href && 'bg-accent'
-                              )}
-                            >
+                            to={item.href}
+                            className={cn(
+                              'block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground',
+                              location.pathname === item.href && 'bg-accent'
+                            )}>
+
                               <div className="text-sm font-medium leading-none">{item.title}</div>
                               <p className="line-clamp-2 text-xs leading-snug text-muted-foreground">
                                 {item.description}
@@ -89,7 +89,7 @@ export default function SiteNavigation() {
                             </Link>
                           </NavigationMenuLink>
                         </li>
-                      ))}
+                      )}
                     </ul>
                   </NavigationMenuContent>
                 </NavigationMenuItem>
@@ -99,16 +99,16 @@ export default function SiteNavigation() {
                   <NavigationMenuTrigger>Industries</NavigationMenuTrigger>
                   <NavigationMenuContent>
                     <ul className="grid w-[400px] gap-3 p-4">
-                      {industriesLinks.map((item) => (
-                        <li key={item.href}>
+                      {industriesLinks.map((item) =>
+                      <li key={item.href}>
                           <NavigationMenuLink asChild>
                             <Link
-                              to={item.href}
-                              className={cn(
-                                'block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground',
-                                location.pathname === item.href && 'bg-accent'
-                              )}
-                            >
+                            to={item.href}
+                            className={cn(
+                              'block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground',
+                              location.pathname === item.href && 'bg-accent'
+                            )}>
+
                               <div className="text-sm font-medium leading-none">{item.title}</div>
                               <p className="line-clamp-2 text-xs leading-snug text-muted-foreground">
                                 {item.description}
@@ -116,7 +116,7 @@ export default function SiteNavigation() {
                             </Link>
                           </NavigationMenuLink>
                         </li>
-                      ))}
+                      )}
                     </ul>
                   </NavigationMenuContent>
                 </NavigationMenuItem>
@@ -128,8 +128,8 @@ export default function SiteNavigation() {
               className={cn(
                 'text-sm font-medium transition-colors hover:text-primary',
                 location.pathname === '/resources' ? 'text-primary' : 'text-muted-foreground'
-              )}
-            >
+              )}>
+
               Resources
             </Link>
 
@@ -138,8 +138,8 @@ export default function SiteNavigation() {
               className={cn(
                 'text-sm font-medium transition-colors hover:text-primary',
                 location.pathname.startsWith('/blog') ? 'text-primary' : 'text-muted-foreground'
-              )}
-            >
+              )}>
+
               Blog
             </Link>
 
@@ -148,8 +148,8 @@ export default function SiteNavigation() {
               className={cn(
                 'text-sm font-medium transition-colors hover:text-primary',
                 location.pathname.startsWith('/press') ? 'text-primary' : 'text-muted-foreground'
-              )}
-            >
+              )}>
+
               Press
             </Link>
           </div>
@@ -166,92 +166,92 @@ export default function SiteNavigation() {
               variant="ghost"
               size="icon"
               className="md:hidden"
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            >
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
+
               {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </Button>
           </div>
         </div>
 
         {/* Mobile Menu */}
-        {mobileMenuOpen && (
-          <div className="md:hidden py-4 space-y-4 border-t">
+        {mobileMenuOpen &&
+        <div className="md:hidden py-4 space-y-4 border-t">
             {/* Solutions Section */}
             <div className="space-y-2">
               <div className="font-semibold text-sm px-2">Solutions</div>
-              {solutionsLinks.map((item) => (
-                <Link
-                  key={item.href}
-                  to={item.href}
-                  className={cn(
-                    'block px-2 py-2 rounded-md text-sm transition-colors',
-                    location.pathname === item.href
-                      ? 'bg-accent text-accent-foreground'
-                      : 'text-muted-foreground hover:text-foreground hover:bg-accent/50'
-                  )}
-                  onClick={() => setMobileMenuOpen(false)}
-                >
+              {solutionsLinks.map((item) =>
+            <Link
+              key={item.href}
+              to={item.href}
+              className={cn(
+                'block px-2 py-2 rounded-md text-sm transition-colors',
+                location.pathname === item.href ?
+                'bg-accent text-accent-foreground' :
+                'text-muted-foreground hover:text-foreground hover:bg-accent/50'
+              )}
+              onClick={() => setMobileMenuOpen(false)}>
+
                   {item.title}
                 </Link>
-              ))}
+            )}
             </div>
 
             {/* Industries Section */}
             <div className="space-y-2">
               <div className="font-semibold text-sm px-2">Industries</div>
-              {industriesLinks.map((item) => (
-                <Link
-                  key={item.href}
-                  to={item.href}
-                  className={cn(
-                    'block px-2 py-2 rounded-md text-sm transition-colors',
-                    location.pathname === item.href
-                      ? 'bg-accent text-accent-foreground'
-                      : 'text-muted-foreground hover:text-foreground hover:bg-accent/50'
-                  )}
-                  onClick={() => setMobileMenuOpen(false)}
-                >
+              {industriesLinks.map((item) =>
+            <Link
+              key={item.href}
+              to={item.href}
+              className={cn(
+                'block px-2 py-2 rounded-md text-sm transition-colors',
+                location.pathname === item.href ?
+                'bg-accent text-accent-foreground' :
+                'text-muted-foreground hover:text-foreground hover:bg-accent/50'
+              )}
+              onClick={() => setMobileMenuOpen(false)}>
+
                   {item.title}
                 </Link>
-              ))}
+            )}
             </div>
 
             {/* Other Links */}
             <div className="space-y-2">
               <Link
-                to="/resources"
-                className={cn(
-                  'block px-2 py-2 rounded-md text-sm transition-colors',
-                  location.pathname === '/resources'
-                    ? 'bg-accent text-accent-foreground'
-                    : 'text-muted-foreground hover:text-foreground hover:bg-accent/50'
-                )}
-                onClick={() => setMobileMenuOpen(false)}
-              >
+              to="/resources"
+              className={cn(
+                'block px-2 py-2 rounded-md text-sm transition-colors',
+                location.pathname === '/resources' ?
+                'bg-accent text-accent-foreground' :
+                'text-muted-foreground hover:text-foreground hover:bg-accent/50'
+              )}
+              onClick={() => setMobileMenuOpen(false)}>
+
                 Resources
               </Link>
               <Link
-                to="/blog"
-                className={cn(
-                  'block px-2 py-2 rounded-md text-sm transition-colors',
-                  location.pathname.startsWith('/blog')
-                    ? 'bg-accent text-accent-foreground'
-                    : 'text-muted-foreground hover:text-foreground hover:bg-accent/50'
-                )}
-                onClick={() => setMobileMenuOpen(false)}
-              >
+              to="/blog"
+              className={cn(
+                'block px-2 py-2 rounded-md text-sm transition-colors',
+                location.pathname.startsWith('/blog') ?
+                'bg-accent text-accent-foreground' :
+                'text-muted-foreground hover:text-foreground hover:bg-accent/50'
+              )}
+              onClick={() => setMobileMenuOpen(false)}>
+
                 Blog
               </Link>
               <Link
-                to="/press"
-                className={cn(
-                  'block px-2 py-2 rounded-md text-sm transition-colors',
-                  location.pathname.startsWith('/press')
-                    ? 'bg-accent text-accent-foreground'
-                    : 'text-muted-foreground hover:text-foreground hover:bg-accent/50'
-                )}
-                onClick={() => setMobileMenuOpen(false)}
-              >
+              to="/press"
+              className={cn(
+                'block px-2 py-2 rounded-md text-sm transition-colors',
+                location.pathname.startsWith('/press') ?
+                'bg-accent text-accent-foreground' :
+                'text-muted-foreground hover:text-foreground hover:bg-accent/50'
+              )}
+              onClick={() => setMobileMenuOpen(false)}>
+
                 Press
               </Link>
             </div>
@@ -264,8 +264,8 @@ export default function SiteNavigation() {
               </Button>
             </div>
           </div>
-        )}
+        }
       </div>
-    </nav>
-  );
+    </nav>);
+
 }

@@ -50,8 +50,8 @@ export default function CaseStudyDetailPage() {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary" />
-      </div>
-    );
+      </div>);
+
   }
 
   if (!caseStudy) return null;
@@ -108,12 +108,12 @@ export default function CaseStudyDetailPage() {
 
             <div className="flex items-center gap-4 mb-4">
               <Badge>Case Study</Badge>
-              {caseStudy.industry && (
-                <div className="flex items-center gap-2 text-sm text-muted-foreground">
+              {caseStudy.industry &&
+              <div className="flex items-center gap-2 text-sm text-muted-foreground">
                   <Building2 className="w-4 h-4" />
                   {caseStudy.industry}
                 </div>
-              )}
+              }
             </div>
 
             <h1 className="text-4xl md:text-5xl font-bold mb-4">{caseStudy.title}</h1>
@@ -128,29 +128,29 @@ export default function CaseStudyDetailPage() {
                 <Clock className="w-4 h-4" />
                 {caseStudy.read_time} min read
               </div>
-              {caseStudy.author && (
-                <div>By {caseStudy.author}</div>
-              )}
+              {caseStudy.author &&
+              <div>By {caseStudy.author}</div>
+              }
             </div>
           </div>
         </div>
 
         {/* Featured Image */}
-        {caseStudy.featured_image && (
-          <div className="max-w-5xl mx-auto px-4 py-8">
+        {caseStudy.featured_image &&
+        <div className="max-w-5xl mx-auto px-4 py-8">
             <img
-              src={caseStudy.featured_image}
-              alt={caseStudy.title}
-              className="w-full rounded-lg shadow-lg"
-            />
+            src={caseStudy.featured_image}
+            alt={caseStudy.title}
+            className="w-full rounded-lg shadow-lg" />
+
           </div>
-        )}
+        }
 
         {/* Content */}
         <div className="max-w-4xl mx-auto px-4 py-8">
           {/* Challenge */}
-          {caseStudy.challenge && (
-            <section className="mb-12">
+          {caseStudy.challenge &&
+          <section className="mb-12">
               <h2 className="text-3xl font-bold mb-4 flex items-center gap-3">
                 <div className="w-10 h-10 rounded-full bg-red-500/10 flex items-center justify-center">
                   <span className="text-red-500 text-xl">🎯</span>
@@ -163,11 +163,11 @@ export default function CaseStudyDetailPage() {
                 </CardContent>
               </Card>
             </section>
-          )}
+          }
 
           {/* Solution */}
-          {caseStudy.solution && (
-            <section className="mb-12">
+          {caseStudy.solution &&
+          <section className="mb-12">
               <h2 className="text-3xl font-bold mb-4 flex items-center gap-3">
                 <div className="w-10 h-10 rounded-full bg-blue-500/10 flex items-center justify-center">
                   <span className="text-blue-500 text-xl">💡</span>
@@ -180,11 +180,11 @@ export default function CaseStudyDetailPage() {
                 </CardContent>
               </Card>
             </section>
-          )}
+          }
 
           {/* Implementation */}
-          {caseStudy.implementation && (
-            <section className="mb-12">
+          {caseStudy.implementation &&
+          <section className="mb-12">
               <h2 className="text-3xl font-bold mb-4 flex items-center gap-3">
                 <div className="w-10 h-10 rounded-full bg-purple-500/10 flex items-center justify-center">
                   <span className="text-purple-500 text-xl">⚙️</span>
@@ -197,11 +197,11 @@ export default function CaseStudyDetailPage() {
                 </CardContent>
               </Card>
             </section>
-          )}
+          }
 
           {/* Results & Metrics */}
-          {caseStudy.results && (
-            <section className="mb-12">
+          {caseStudy.results &&
+          <section className="mb-12">
               <h2 className="text-3xl font-bold mb-4 flex items-center gap-3">
                 <div className="w-10 h-10 rounded-full bg-green-500/10 flex items-center justify-center">
                   <TrendingUp className="w-5 h-5 text-green-500" />
@@ -209,33 +209,33 @@ export default function CaseStudyDetailPage() {
                 Results & Impact
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-                {caseStudy.results.metrics?.map((metric: any, idx: number) => (
-                  <Card key={idx} className="bg-gradient-to-br from-primary/5 to-transparent">
+                {caseStudy.results.metrics?.map((metric: any, idx: number) =>
+              <Card key={idx} className="bg-gradient-to-br from-primary/5 to-transparent">
                     <CardHeader>
                       <CardTitle className="text-4xl font-bold text-primary">{metric.value}</CardTitle>
                     </CardHeader>
                     <CardContent>
                       <p className="text-lg font-semibold">{metric.label}</p>
-                      {metric.description && (
-                        <p className="text-sm text-muted-foreground mt-1">{metric.description}</p>
-                      )}
+                      {metric.description &&
+                  <p className="text-sm text-muted-foreground mt-1">{metric.description}</p>
+                  }
                     </CardContent>
                   </Card>
-                ))}
+              )}
               </div>
-              {caseStudy.results.summary && (
-                <Card>
+              {caseStudy.results.summary &&
+            <Card>
                   <CardContent className="pt-6">
                     <p className="text-lg leading-relaxed">{caseStudy.results.summary}</p>
                   </CardContent>
                 </Card>
-              )}
+            }
             </section>
-          )}
+          }
 
           {/* Testimonial */}
-          {caseStudy.testimonial && (
-            <section className="mb-12">
+          {caseStudy.testimonial &&
+          <section className="mb-12">
               <Card className="bg-gradient-to-br from-primary/5 via-blue-500/5 to-transparent border-2">
                 <CardContent className="pt-6">
                   <Quote className="w-12 h-12 text-primary/20 mb-4" />
@@ -243,13 +243,13 @@ export default function CaseStudyDetailPage() {
                     "{caseStudy.testimonial.quote}"
                   </blockquote>
                   <div className="flex items-center gap-4">
-                    {caseStudy.testimonial.avatar && (
-                      <img
-                        src={caseStudy.testimonial.avatar}
-                        alt={caseStudy.testimonial.name}
-                        className="w-16 h-16 rounded-full"
-                      />
-                    )}
+                    {caseStudy.testimonial.avatar &&
+                  <img
+                    src={caseStudy.testimonial.avatar}
+                    alt={caseStudy.testimonial.name}
+                    className="w-16 h-16 rounded-full" />
+
+                  }
                     <div>
                       <p className="font-semibold text-lg">{caseStudy.testimonial.name}</p>
                       <p className="text-muted-foreground">{caseStudy.testimonial.title}</p>
@@ -259,7 +259,7 @@ export default function CaseStudyDetailPage() {
                 </CardContent>
               </Card>
             </section>
-          )}
+          }
 
           <Separator className="my-12" />
 
@@ -270,14 +270,14 @@ export default function CaseStudyDetailPage() {
               See how AI Energy Optimizer can transform your energy management
             </p>
             <div className="flex flex-wrap gap-4 justify-center">
-              {caseStudy.download_url && (
-                <Button size="lg" variant="secondary" asChild>
+              {caseStudy.download_url &&
+              <Button size="lg" variant="secondary" asChild>
                   <a href={caseStudy.download_url} download>
                     <Download className="mr-2 w-5 h-5" />
                     Download PDF
                   </a>
                 </Button>
-              )}
+              }
               <Button size="lg" variant="outline" className="bg-transparent border-primary-foreground text-primary-foreground hover:bg-primary-foreground/10" asChild>
                 <Link to="/onboarding">
                   Get Started
@@ -288,6 +288,6 @@ export default function CaseStudyDetailPage() {
           </section>
         </div>
       </div>
-    </>
-  );
+    </>);
+
 }

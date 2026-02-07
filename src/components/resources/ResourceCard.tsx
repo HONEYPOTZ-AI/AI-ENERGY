@@ -32,7 +32,7 @@ export default function ResourceCard({
   download_url
 }: ResourceCardProps) {
   const detailPath = type === 'case_study' ? `/resources/case-study/${slug}` : `/resources/white-paper/${slug}`;
-  
+
   const formattedDate = new Date(publish_date).toLocaleDateString('en-US', {
     year: 'numeric',
     month: 'short',
@@ -41,15 +41,15 @@ export default function ResourceCard({
 
   return (
     <Card className="flex flex-col h-full hover:shadow-lg transition-shadow duration-300">
-      {featured_image && (
-        <div className="aspect-video overflow-hidden rounded-t-lg">
+      {featured_image &&
+      <div className="aspect-video overflow-hidden rounded-t-lg">
           <img
-            src={featured_image}
-            alt={title}
-            className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
-          />
+          src={featured_image}
+          alt={title}
+          className="w-full h-full object-cover hover:scale-105 transition-transform duration-300" />
+
         </div>
-      )}
+      }
       <CardHeader>
         <div className="flex items-center justify-between mb-2">
           <Badge variant="secondary">
@@ -73,15 +73,15 @@ export default function ResourceCard({
             <span>{read_time} min read</span>
           </div>
         </div>
-        {tags && (
-          <div className="flex flex-wrap gap-2 mt-3">
-            {tags.split(',').slice(0, 3).map((tag, idx) => (
-              <Badge key={idx} variant="outline" className="text-xs">
+        {tags &&
+        <div className="flex flex-wrap gap-2 mt-3">
+            {tags.split(',').slice(0, 3).map((tag, idx) =>
+          <Badge key={idx} variant="outline" className="text-xs">
                 {tag.trim()}
               </Badge>
-            ))}
+          )}
           </div>
-        )}
+        }
       </CardContent>
       <CardFooter className="flex gap-2">
         <Button asChild className="flex-1">
@@ -90,14 +90,14 @@ export default function ResourceCard({
             Read More
           </Link>
         </Button>
-        {download_url && (
-          <Button asChild variant="outline">
+        {download_url &&
+        <Button asChild variant="outline">
             <a href={download_url} download>
               <Download className="w-4 h-4" />
             </a>
           </Button>
-        )}
+        }
       </CardFooter>
-    </Card>
-  );
+    </Card>);
+
 }

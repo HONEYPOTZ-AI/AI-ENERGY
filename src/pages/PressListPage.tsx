@@ -43,12 +43,12 @@ export default function PressListPage() {
         OrderByField: 'release_date',
         IsAsc: false,
         Filters: [
-          { name: 'is_published', op: 'Equal', value: true }
-        ]
+        { name: 'is_published', op: 'Equal', value: true }]
+
       });
 
       if (error) throw new Error(error);
-      
+
       if (data?.List) {
         setPressReleases(data.List);
       }
@@ -63,29 +63,29 @@ export default function PressListPage() {
     }
   };
 
-  const filteredReleases = pressReleases.filter(release => {
+  const filteredReleases = pressReleases.filter((release) => {
     const matchesSearch = release.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                         release.summary.toLowerCase().includes(searchQuery.toLowerCase());
+    release.summary.toLowerCase().includes(searchQuery.toLowerCase());
     const matchesCategory = selectedCategory === 'all' || release.category === selectedCategory;
     return matchesSearch && matchesCategory;
   });
 
   const categories = [
-    { value: 'all', label: 'All Releases' },
-    { value: 'launch', label: 'Product Launch' },
-    { value: 'feature', label: 'Feature Updates' },
-    { value: 'partnership', label: 'Partnerships' },
-    { value: 'recognition', label: 'Recognition' }
-  ];
+  { value: 'all', label: 'All Releases' },
+  { value: 'launch', label: 'Product Launch' },
+  { value: 'feature', label: 'Feature Updates' },
+  { value: 'partnership', label: 'Partnerships' },
+  { value: 'recognition', label: 'Recognition' }];
+
 
   return (
     <>
       <Helmet>
         <title>Press Releases - AI ENERGY Optimizer</title>
-        <meta 
-          name="description" 
-          content="Latest press releases and news from AI ENERGY Optimizer. Stay updated on product launches, partnerships, and company achievements." 
-        />
+        <meta
+          name="description"
+          content="Latest press releases and news from AI ENERGY Optimizer. Stay updated on product launches, partnerships, and company achievements." />
+
         <link rel="canonical" href={`${window.location.origin}/press`} />
         
         <meta property="og:title" content="Press Releases - AI ENERGY Optimizer" />
@@ -129,8 +129,8 @@ export default function PressListPage() {
                   placeholder="Search press releases..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="pl-10 h-12"
-                />
+                  className="pl-10 h-12" />
+
               </div>
             </div>
           </div>
@@ -145,33 +145,33 @@ export default function PressListPage() {
             {/* Category Tabs */}
             <Tabs value={selectedCategory} onValueChange={setSelectedCategory} className="mb-8">
               <TabsList className="w-full justify-start overflow-x-auto flex-wrap h-auto">
-                {categories.map(cat => (
-                  <TabsTrigger key={cat.value} value={cat.value}>
+                {categories.map((cat) =>
+                <TabsTrigger key={cat.value} value={cat.value}>
                     {cat.label}
                   </TabsTrigger>
-                ))}
+                )}
               </TabsList>
 
               <TabsContent value={selectedCategory} className="mt-8">
-                {loading ? (
-                  <div className="flex items-center justify-center py-16">
+                {loading ?
+                <div className="flex items-center justify-center py-16">
                     <Loader2 className="w-8 h-8 animate-spin text-primary" />
-                  </div>
-                ) : filteredReleases.length > 0 ? (
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {filteredReleases.map(release => (
-                      <PressCard key={release.id} {...release} />
-                    ))}
-                  </div>
-                ) : (
-                  <div className="text-center py-16">
+                  </div> :
+                filteredReleases.length > 0 ?
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {filteredReleases.map((release) =>
+                  <PressCard key={release.id} {...release} />
+                  )}
+                  </div> :
+
+                <div className="text-center py-16">
                     <Newspaper className="w-16 h-16 mx-auto mb-4 text-muted-foreground" />
                     <h3 className="text-xl font-semibold mb-2">No Press Releases Found</h3>
                     <p className="text-muted-foreground">
                       {searchQuery ? 'Try adjusting your search criteria' : 'Check back soon for updates'}
                     </p>
                   </div>
-                )}
+                }
               </TabsContent>
             </Tabs>
 
@@ -191,6 +191,6 @@ export default function PressListPage() {
 
         <Footer />
       </div>
-    </>
-  );
+    </>);
+
 }

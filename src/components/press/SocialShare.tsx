@@ -47,52 +47,52 @@ export default function SocialShare({ title, url, description }: SocialShareProp
         <Button
           variant="outline"
           size="sm"
-          onClick={() => window.open(shareLinks.twitter, '_blank')}
-        >
+          onClick={() => window.open(shareLinks.twitter, '_blank')}>
+
           <Twitter className="w-4 h-4 mr-2" />
           Twitter
         </Button>
         <Button
           variant="outline"
           size="sm"
-          onClick={() => window.open(shareLinks.facebook, '_blank')}
-        >
+          onClick={() => window.open(shareLinks.facebook, '_blank')}>
+
           <Facebook className="w-4 h-4 mr-2" />
           Facebook
         </Button>
         <Button
           variant="outline"
           size="sm"
-          onClick={() => window.open(shareLinks.linkedin, '_blank')}
-        >
+          onClick={() => window.open(shareLinks.linkedin, '_blank')}>
+
           <Linkedin className="w-4 h-4 mr-2" />
           LinkedIn
         </Button>
         <Button
           variant="outline"
           size="sm"
-          onClick={() => window.location.href = shareLinks.email}
-        >
+          onClick={() => window.location.href = shareLinks.email}>
+
           <Mail className="w-4 h-4 mr-2" />
           Email
         </Button>
         <Button
           variant="outline"
           size="sm"
-          onClick={copyToClipboard}
-        >
+          onClick={copyToClipboard}>
+
           <Link2 className="w-4 h-4 mr-2" />
           Copy Link
         </Button>
         <Button
           variant="outline"
           size="sm"
-          onClick={downloadPDF}
-        >
+          onClick={downloadPDF}>
+
           <Download className="w-4 h-4 mr-2" />
           Download
         </Button>
       </div>
-    </div>
-  );
+    </div>);
+
 }

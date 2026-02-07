@@ -47,8 +47,8 @@ export default function BlogListPage() {
         OrderByField: 'category',
         IsAsc: true,
         Filters: [
-          { name: 'is_published', op: 'Equal', value: true }
-        ]
+        { name: 'is_published', op: 'Equal', value: true }]
+
       });
 
       if (error) throw new Error(error);
@@ -65,10 +65,10 @@ export default function BlogListPage() {
   const loadPosts = async () => {
     try {
       setLoading(true);
-      
+
       const filters: any[] = [
-        { name: 'is_published', op: 'Equal', value: true }
-      ];
+      { name: 'is_published', op: 'Equal', value: true }];
+
 
       if (selectedCategory) {
         filters.push({ name: 'category', op: 'Equal', value: selectedCategory });
@@ -148,61 +148,61 @@ export default function BlogListPage() {
             <BlogFilters
               categories={categories}
               selectedCategory={selectedCategory}
-              onCategoryChange={handleCategoryChange}
-            />
+              onCategoryChange={handleCategoryChange} />
+
           </div>
 
           {/* Loading State */}
-          {loading && (
-            <div className="flex justify-center items-center py-20">
+          {loading &&
+          <div className="flex justify-center items-center py-20">
               <Loader2 className="w-8 h-8 animate-spin text-primary" />
             </div>
-          )}
+          }
 
           {/* Blog Grid */}
-          {!loading && posts.length > 0 && (
-            <>
+          {!loading && posts.length > 0 &&
+          <>
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-                {posts.map((post) => (
-                  <BlogCard key={post.id} {...post} />
-                ))}
+                {posts.map((post) =>
+              <BlogCard key={post.id} {...post} />
+              )}
               </div>
 
               {/* Pagination */}
-              {totalPages > 1 && (
-                <div className="flex justify-center gap-2">
+              {totalPages > 1 &&
+            <div className="flex justify-center gap-2">
                   <Button
-                    variant="outline"
-                    onClick={() => setPageNo(p => Math.max(1, p - 1))}
-                    disabled={pageNo === 1}
-                  >
+                variant="outline"
+                onClick={() => setPageNo((p) => Math.max(1, p - 1))}
+                disabled={pageNo === 1}>
+
                     Previous
                   </Button>
                   <div className="flex items-center px-4">
                     Page {pageNo} of {totalPages}
                   </div>
                   <Button
-                    variant="outline"
-                    onClick={() => setPageNo(p => Math.min(totalPages, p + 1))}
-                    disabled={pageNo === totalPages}
-                  >
+                variant="outline"
+                onClick={() => setPageNo((p) => Math.min(totalPages, p + 1))}
+                disabled={pageNo === totalPages}>
+
                     Next
                   </Button>
                 </div>
-              )}
+            }
             </>
-          )}
+          }
 
           {/* Empty State */}
-          {!loading && posts.length === 0 && (
-            <div className="text-center py-20">
+          {!loading && posts.length === 0 &&
+          <div className="text-center py-20">
               <p className="text-xl text-muted-foreground">
                 No articles found. Try adjusting your filters.
               </p>
             </div>
-          )}
+          }
         </section>
       </div>
-    </>
-  );
+    </>);
+
 }

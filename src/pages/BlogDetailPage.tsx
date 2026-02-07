@@ -30,7 +30,7 @@ interface BlogPost {
 const BLOG_TABLE_ID = 74747; // Update this with actual table ID after creation
 
 export default function BlogDetailPage() {
-  const { slug } = useParams<{ slug: string }>();
+  const { slug } = useParams<{slug: string;}>();
   const [post, setPost] = useState<BlogPost | null>(null);
   const [relatedPosts, setRelatedPosts] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
@@ -51,9 +51,9 @@ export default function BlogDetailPage() {
         OrderByField: 'id',
         IsAsc: false,
         Filters: [
-          { name: 'slug', op: 'Equal', value: postSlug },
-          { name: 'is_published', op: 'Equal', value: true }
-        ]
+        { name: 'slug', op: 'Equal', value: postSlug },
+        { name: 'is_published', op: 'Equal', value: true }]
+
       });
 
       if (error) throw new Error(error);
@@ -61,10 +61,10 @@ export default function BlogDetailPage() {
       if (data?.List && data.List.length > 0) {
         const postData = data.List[0];
         setPost(postData);
-        
+
         // Increment views
         await incrementViews(postData.id, postData.views);
-        
+
         // Load related posts
         loadRelatedPosts(postData.category, postData.id);
       } else {
@@ -100,9 +100,9 @@ export default function BlogDetailPage() {
         OrderByField: 'published_date',
         IsAsc: false,
         Filters: [
-          { name: 'category', op: 'Equal', value: category },
-          { name: 'is_published', op: 'Equal', value: true }
-        ]
+        { name: 'category', op: 'Equal', value: category },
+        { name: 'is_published', op: 'Equal', value: true }]
+
       });
 
       if (error) throw new Error(error);
@@ -120,8 +120,8 @@ export default function BlogDetailPage() {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <Loader2 className="w-8 h-8 animate-spin text-primary" />
-      </div>
-    );
+      </div>);
+
   }
 
   if (!post) {
@@ -134,11 +134,11 @@ export default function BlogDetailPage() {
             Back to Blog
           </Button>
         </Link>
-      </div>
-    );
+      </div>);
+
   }
 
-  const tags = post.tags ? post.tags.split(',').map(t => t.trim()) : [];
+  const tags = post.tags ? post.tags.split(',').map((t) => t.trim()) : [];
   const seoTitle = post.seo_title || post.title;
   const seoDescription = post.seo_description || post.excerpt;
   const publishedDate = new Date(post.published_date);
@@ -187,9 +187,9 @@ export default function BlogDetailPage() {
         <meta property="article:published_time" content={post.published_date} />
         <meta property="article:author" content={post.author} />
         <meta property="article:section" content={post.category} />
-        {tags.map(tag => (
-          <meta key={tag} property="article:tag" content={tag} />
-        ))}
+        {tags.map((tag) =>
+        <meta key={tag} property="article:tag" content={tag} />
+        )}
         
         {/* Twitter Card */}
         <meta name="twitter:card" content="summary_large_image" />
@@ -242,35 +242,35 @@ export default function BlogDetailPage() {
             <img
               src={post.featured_image}
               alt={post.title}
-              className="w-full h-full object-cover"
-            />
+              className="w-full h-full object-cover" />
+
           </div>
         </header>
 
         {/* Article Content */}
         <div className="container mx-auto px-4 max-w-4xl">
-          <div 
+          <div
             className="prose prose-lg dark:prose-invert max-w-none mb-12"
-            dangerouslySetInnerHTML={{ __html: post.content }}
-          />
+            dangerouslySetInnerHTML={{ __html: post.content }} />
+
 
           {/* Tags */}
-          {tags.length > 0 && (
-            <>
+          {tags.length > 0 &&
+          <>
               <Separator className="my-8" />
               <div className="flex items-center gap-2 flex-wrap">
                 <Tag className="w-4 h-4 text-muted-foreground" />
-                {tags.map(tag => (
-                  <Badge key={tag} variant="outline">{tag}</Badge>
-                ))}
+                {tags.map((tag) =>
+              <Badge key={tag} variant="outline">{tag}</Badge>
+              )}
               </div>
             </>
-          )}
+          }
 
           {/* Related Posts */}
           <RelatedPosts posts={relatedPosts} />
         </div>
       </article>
-    </>
-  );
+    </>);
+
 }

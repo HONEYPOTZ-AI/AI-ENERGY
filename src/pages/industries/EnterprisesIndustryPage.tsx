@@ -3,18 +3,18 @@ import SolutionsCTA from '@/components/SolutionsCTA';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
-import { 
-  Building2, 
-  Factory, 
-  Database, 
-  TrendingDown, 
+import {
+  Building2,
+  Factory,
+  Database,
+  TrendingDown,
   Leaf,
   Shield,
   ArrowRight,
   CheckCircle2,
   BarChart3,
-  Zap
-} from 'lucide-react';
+  Zap } from
+'lucide-react';
 
 export default function EnterprisesIndustryPage() {
   const schema = {
@@ -41,8 +41,8 @@ export default function EnterprisesIndustryPage() {
         keywords="enterprise energy management, multi-site energy optimization, manufacturing energy, data center energy, commercial real estate energy, corporate sustainability"
         canonicalUrl="/industries/enterprises"
         ogImage="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1200&h=630&fit=crop"
-        schema={schema}
-      />
+        schema={schema} />
+
 
       <div className="min-h-screen">
         {/* Hero Section */}
@@ -90,28 +90,28 @@ export default function EnterprisesIndustryPage() {
 
               <div className="grid md:grid-cols-2 gap-8">
                 {[
-                  {
-                    challenge: "Multi-Site Complexity",
-                    description: "Managing energy across dozens or hundreds of facilities with different usage patterns, rate structures, and operational requirements.",
-                    solution: "Centralized platform with site-specific optimization and portfolio-level analytics for comprehensive visibility and control."
-                  },
-                  {
-                    challenge: "High Energy Costs",
-                    description: "Energy represents 2-10% of operating expenses for most enterprises, with peak demand charges and time-of-use rates driving up costs.",
-                    solution: "AI-driven cost optimization reduces bills by 25-35% through demand management, load shifting, and rate optimization."
-                  },
-                  {
-                    challenge: "Sustainability Commitments",
-                    description: "Meeting corporate net-zero targets, ESG reporting requirements, and stakeholder expectations for environmental leadership.",
-                    solution: "Automated carbon tracking, renewable energy optimization, and comprehensive ESG reporting aligned with global standards."
-                  },
-                  {
-                    challenge: "Operational Disruption",
-                    description: "Balancing energy savings with business continuity, production schedules, and customer experience requirements.",
-                    solution: "Intelligent optimization respects operational constraints while maximizing savings through non-disruptive efficiency improvements."
-                  }
-                ].map((item, index) => (
-                  <Card key={index} className="p-8 space-y-4">
+                {
+                  challenge: "Multi-Site Complexity",
+                  description: "Managing energy across dozens or hundreds of facilities with different usage patterns, rate structures, and operational requirements.",
+                  solution: "Centralized platform with site-specific optimization and portfolio-level analytics for comprehensive visibility and control."
+                },
+                {
+                  challenge: "High Energy Costs",
+                  description: "Energy represents 2-10% of operating expenses for most enterprises, with peak demand charges and time-of-use rates driving up costs.",
+                  solution: "AI-driven cost optimization reduces bills by 25-35% through demand management, load shifting, and rate optimization."
+                },
+                {
+                  challenge: "Sustainability Commitments",
+                  description: "Meeting corporate net-zero targets, ESG reporting requirements, and stakeholder expectations for environmental leadership.",
+                  solution: "Automated carbon tracking, renewable energy optimization, and comprehensive ESG reporting aligned with global standards."
+                },
+                {
+                  challenge: "Operational Disruption",
+                  description: "Balancing energy savings with business continuity, production schedules, and customer experience requirements.",
+                  solution: "Intelligent optimization respects operational constraints while maximizing savings through non-disruptive efficiency improvements."
+                }].
+                map((item, index) =>
+                <Card key={index} className="p-8 space-y-4">
                     <h3 className="text-2xl font-semibold text-purple-600 dark:text-purple-400">
                       {item.challenge}
                     </h3>
@@ -126,7 +126,7 @@ export default function EnterprisesIndustryPage() {
                       </div>
                     </div>
                   </Card>
-                ))}
+                )}
               </div>
             </div>
           </div>
@@ -145,83 +145,83 @@ export default function EnterprisesIndustryPage() {
 
               <div className="space-y-8">
                 {[
+                {
+                  icon: Factory,
+                  industry: "Manufacturing",
+                  description: "Optimize production energy while maintaining throughput and quality",
+                  features: [
                   {
-                    icon: Factory,
-                    industry: "Manufacturing",
-                    description: "Optimize production energy while maintaining throughput and quality",
-                    features: [
-                      {
-                        title: "Production Schedule Optimization",
-                        detail: "Align manufacturing operations with lowest electricity rates and renewable generation peaks"
-                      },
-                      {
-                        title: "Equipment Efficiency",
-                        detail: "Monitor and optimize motors, compressors, HVAC, and process equipment in real-time"
-                      },
-                      {
-                        title: "Demand Charge Reduction",
-                        detail: "Manage peak demand through load balancing and strategic equipment sequencing"
-                      },
-                      {
-                        title: "Energy-Intensive Process Optimization",
-                        detail: "Optimize heating, cooling, and chemical processes for maximum efficiency"
-                      }
-                    ],
-                    savings: "25-35% cost reduction",
-                    link: "/solutions/cost-optimization"
+                    title: "Production Schedule Optimization",
+                    detail: "Align manufacturing operations with lowest electricity rates and renewable generation peaks"
                   },
                   {
-                    icon: Database,
-                    industry: "Data Centers",
-                    description: "Maximize efficiency while ensuring 100% uptime and performance",
-                    features: [
-                      {
-                        title: "Cooling Optimization",
-                        detail: "AI-driven HVAC control reduces cooling energy by 20-30% without impacting server performance"
-                      },
-                      {
-                        title: "Workload Scheduling",
-                        detail: "Shift non-critical compute jobs to off-peak hours and renewable generation windows"
-                      },
-                      {
-                        title: "PUE Improvement",
-                        detail: "Continuously optimize Power Usage Effectiveness through real-time adjustments"
-                      },
-                      {
-                        title: "Predictive Maintenance",
-                        detail: "Prevent equipment failures and optimize maintenance schedules for critical infrastructure"
-                      }
-                    ],
-                    savings: "20-25% cost reduction",
-                    link: "/solutions/ai-energy-optimization"
+                    title: "Equipment Efficiency",
+                    detail: "Monitor and optimize motors, compressors, HVAC, and process equipment in real-time"
                   },
                   {
-                    icon: Building2,
-                    industry: "Commercial Real Estate",
-                    description: "Reduce operating costs across property portfolios while improving tenant satisfaction",
-                    features: [
-                      {
-                        title: "Smart Building Control",
-                        detail: "Automated HVAC, lighting, and equipment control based on occupancy and weather"
-                      },
-                      {
-                        title: "Portfolio Management",
-                        detail: "Centralized visibility and control across all properties with benchmarking"
-                      },
-                      {
-                        title: "Tenant Billing",
-                        detail: "Accurate sub-metering and cost allocation with detailed usage analytics"
-                      },
-                      {
-                        title: "Comfort Optimization",
-                        detail: "Maintain ideal conditions while minimizing energy waste through predictive control"
-                      }
-                    ],
-                    savings: "25-35% cost reduction",
-                    link: "/solutions/cost-optimization"
-                  }
-                ].map((sector, index) => (
-                  <Card key={index} className="p-8 hover:shadow-lg transition-shadow">
+                    title: "Demand Charge Reduction",
+                    detail: "Manage peak demand through load balancing and strategic equipment sequencing"
+                  },
+                  {
+                    title: "Energy-Intensive Process Optimization",
+                    detail: "Optimize heating, cooling, and chemical processes for maximum efficiency"
+                  }],
+
+                  savings: "25-35% cost reduction",
+                  link: "/solutions/cost-optimization"
+                },
+                {
+                  icon: Database,
+                  industry: "Data Centers",
+                  description: "Maximize efficiency while ensuring 100% uptime and performance",
+                  features: [
+                  {
+                    title: "Cooling Optimization",
+                    detail: "AI-driven HVAC control reduces cooling energy by 20-30% without impacting server performance"
+                  },
+                  {
+                    title: "Workload Scheduling",
+                    detail: "Shift non-critical compute jobs to off-peak hours and renewable generation windows"
+                  },
+                  {
+                    title: "PUE Improvement",
+                    detail: "Continuously optimize Power Usage Effectiveness through real-time adjustments"
+                  },
+                  {
+                    title: "Predictive Maintenance",
+                    detail: "Prevent equipment failures and optimize maintenance schedules for critical infrastructure"
+                  }],
+
+                  savings: "20-25% cost reduction",
+                  link: "/solutions/ai-energy-optimization"
+                },
+                {
+                  icon: Building2,
+                  industry: "Commercial Real Estate",
+                  description: "Reduce operating costs across property portfolios while improving tenant satisfaction",
+                  features: [
+                  {
+                    title: "Smart Building Control",
+                    detail: "Automated HVAC, lighting, and equipment control based on occupancy and weather"
+                  },
+                  {
+                    title: "Portfolio Management",
+                    detail: "Centralized visibility and control across all properties with benchmarking"
+                  },
+                  {
+                    title: "Tenant Billing",
+                    detail: "Accurate sub-metering and cost allocation with detailed usage analytics"
+                  },
+                  {
+                    title: "Comfort Optimization",
+                    detail: "Maintain ideal conditions while minimizing energy waste through predictive control"
+                  }],
+
+                  savings: "25-35% cost reduction",
+                  link: "/solutions/cost-optimization"
+                }].
+                map((sector, index) =>
+                <Card key={index} className="p-8 hover:shadow-lg transition-shadow">
                     <div className="space-y-6">
                       <div className="flex items-start gap-6">
                         <div className="flex-shrink-0">
@@ -244,12 +244,12 @@ export default function EnterprisesIndustryPage() {
                           </div>
                           
                           <div className="grid md:grid-cols-2 gap-4 mt-6">
-                            {sector.features.map((feature, idx) => (
-                              <div key={idx} className="space-y-1">
+                            {sector.features.map((feature, idx) =>
+                          <div key={idx} className="space-y-1">
                                 <div className="font-semibold text-sm">{feature.title}</div>
                                 <p className="text-xs text-muted-foreground">{feature.detail}</p>
                               </div>
-                            ))}
+                          )}
                           </div>
 
                           <div className="mt-6">
@@ -264,7 +264,7 @@ export default function EnterprisesIndustryPage() {
                       </div>
                     </div>
                   </Card>
-                ))}
+                )}
               </div>
             </div>
           </div>
@@ -280,45 +280,45 @@ export default function EnterprisesIndustryPage() {
 
               <div className="grid md:grid-cols-3 gap-6">
                 {[
-                  {
-                    icon: BarChart3,
-                    title: "Multi-Site Analytics",
-                    description: "Unified dashboard for portfolio-wide visibility with drill-down to individual facilities and equipment."
-                  },
-                  {
-                    icon: TrendingDown,
-                    title: "Cost Optimization",
-                    description: "Automated demand management, load shifting, and rate optimization across all locations."
-                  },
-                  {
-                    icon: Leaf,
-                    title: "ESG Reporting",
-                    description: "Comprehensive carbon tracking and sustainability reporting aligned with global standards."
-                  },
-                  {
-                    icon: Shield,
-                    title: "Enterprise Security",
-                    description: "SOC 2 compliant with role-based access control, audit logging, and data encryption."
-                  },
-                  {
-                    icon: Zap,
-                    title: "Real-Time Control",
-                    description: "Automated equipment control and demand response with operational constraint management."
-                  },
-                  {
-                    icon: Database,
-                    title: "API Integration",
-                    description: "Connect with existing BMS, ERP, and facilities management systems via REST APIs."
-                  }
-                ].map((capability, index) => (
-                  <Card key={index} className="p-6 space-y-4 hover:shadow-lg transition-shadow">
+                {
+                  icon: BarChart3,
+                  title: "Multi-Site Analytics",
+                  description: "Unified dashboard for portfolio-wide visibility with drill-down to individual facilities and equipment."
+                },
+                {
+                  icon: TrendingDown,
+                  title: "Cost Optimization",
+                  description: "Automated demand management, load shifting, and rate optimization across all locations."
+                },
+                {
+                  icon: Leaf,
+                  title: "ESG Reporting",
+                  description: "Comprehensive carbon tracking and sustainability reporting aligned with global standards."
+                },
+                {
+                  icon: Shield,
+                  title: "Enterprise Security",
+                  description: "SOC 2 compliant with role-based access control, audit logging, and data encryption."
+                },
+                {
+                  icon: Zap,
+                  title: "Real-Time Control",
+                  description: "Automated equipment control and demand response with operational constraint management."
+                },
+                {
+                  icon: Database,
+                  title: "API Integration",
+                  description: "Connect with existing BMS, ERP, and facilities management systems via REST APIs."
+                }].
+                map((capability, index) =>
+                <Card key={index} className="p-6 space-y-4 hover:shadow-lg transition-shadow">
                     <div className="inline-flex p-3 rounded-lg bg-purple-500/10">
                       <capability.icon className="h-6 w-6 text-purple-600 dark:text-purple-400" />
                     </div>
                     <h3 className="text-xl font-semibold">{capability.title}</h3>
                     <p className="text-muted-foreground text-sm">{capability.description}</p>
                   </Card>
-                ))}
+                )}
               </div>
             </div>
           </div>
@@ -334,44 +334,44 @@ export default function EnterprisesIndustryPage() {
 
               <div className="space-y-6">
                 {[
-                  {
-                    company: "Global Automotive Manufacturer",
-                    industry: "Manufacturing",
-                    facilities: "42 facilities across 12 countries",
-                    challenge: "High energy costs and aggressive carbon reduction targets",
-                    results: [
-                      "$12M annual energy cost savings (32% reduction)",
-                      "2.8M tons CO2 reduction over 3 years",
-                      "ROI achieved in 15 months",
-                      "Zero production disruptions during optimization"
-                    ]
-                  },
-                  {
-                    company: "Fortune 500 Technology Company",
-                    industry: "Data Centers",
-                    facilities: "8 hyperscale data centers",
-                    challenge: "Rising cooling costs and renewable energy integration",
-                    results: [
-                      "$8.5M annual savings (24% reduction)",
-                      "PUE improved from 1.6 to 1.3",
-                      "65% renewable energy utilization",
-                      "Maintained 99.999% uptime"
-                    ]
-                  },
-                  {
-                    company: "National REIT",
-                    industry: "Commercial Real Estate",
-                    facilities: "180 office buildings, 2.5M sq ft",
-                    challenge: "High operating costs and tenant demand for sustainability",
-                    results: [
-                      "$6.2M annual savings (28% reduction)",
-                      "45% reduction in carbon footprint",
-                      "15% increase in tenant satisfaction",
-                      "Enhanced property values and marketability"
-                    ]
-                  }
-                ].map((story, index) => (
-                  <Card key={index} className="p-8 hover:shadow-lg transition-shadow">
+                {
+                  company: "Global Automotive Manufacturer",
+                  industry: "Manufacturing",
+                  facilities: "42 facilities across 12 countries",
+                  challenge: "High energy costs and aggressive carbon reduction targets",
+                  results: [
+                  "$12M annual energy cost savings (32% reduction)",
+                  "2.8M tons CO2 reduction over 3 years",
+                  "ROI achieved in 15 months",
+                  "Zero production disruptions during optimization"]
+
+                },
+                {
+                  company: "Fortune 500 Technology Company",
+                  industry: "Data Centers",
+                  facilities: "8 hyperscale data centers",
+                  challenge: "Rising cooling costs and renewable energy integration",
+                  results: [
+                  "$8.5M annual savings (24% reduction)",
+                  "PUE improved from 1.6 to 1.3",
+                  "65% renewable energy utilization",
+                  "Maintained 99.999% uptime"]
+
+                },
+                {
+                  company: "National REIT",
+                  industry: "Commercial Real Estate",
+                  facilities: "180 office buildings, 2.5M sq ft",
+                  challenge: "High operating costs and tenant demand for sustainability",
+                  results: [
+                  "$6.2M annual savings (28% reduction)",
+                  "45% reduction in carbon footprint",
+                  "15% increase in tenant satisfaction",
+                  "Enhanced property values and marketability"]
+
+                }].
+                map((story, index) =>
+                <Card key={index} className="p-8 hover:shadow-lg transition-shadow">
                     <div className="space-y-6">
                       <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4">
                         <div>
@@ -391,18 +391,18 @@ export default function EnterprisesIndustryPage() {
                         <div>
                           <div className="font-semibold mb-3">Results</div>
                           <ul className="space-y-2">
-                            {story.results.map((result, idx) => (
-                              <li key={idx} className="flex items-start gap-2 text-sm">
+                            {story.results.map((result, idx) =>
+                          <li key={idx} className="flex items-start gap-2 text-sm">
                                 <CheckCircle2 className="h-4 w-4 text-green-600 dark:text-green-400 flex-shrink-0 mt-0.5" />
                                 <span className="text-muted-foreground">{result}</span>
                               </li>
-                            ))}
+                          )}
                           </ul>
                         </div>
                       </div>
                     </div>
                   </Card>
-                ))}
+                )}
               </div>
             </div>
           </div>
@@ -421,32 +421,32 @@ export default function EnterprisesIndustryPage() {
 
               <div className="grid md:grid-cols-4 gap-6">
                 {[
-                  {
-                    step: "1",
-                    title: "Assessment",
-                    duration: "2 weeks",
-                    description: "Analyze current energy usage, identify opportunities, and define success metrics"
-                  },
-                  {
-                    step: "2",
-                    title: "Pilot Program",
-                    duration: "4-6 weeks",
-                    description: "Deploy at 1-3 facilities to validate savings and refine approach"
-                  },
-                  {
-                    step: "3",
-                    title: "Rollout",
-                    duration: "6-8 weeks",
-                    description: "Scale across all facilities with phased deployment and training"
-                  },
-                  {
-                    step: "4",
-                    title: "Optimization",
-                    duration: "Ongoing",
-                    description: "Continuous improvement and expanding capabilities as needs evolve"
-                  }
-                ].map((phase, index) => (
-                  <Card key={index} className="p-6 space-y-4 relative">
+                {
+                  step: "1",
+                  title: "Assessment",
+                  duration: "2 weeks",
+                  description: "Analyze current energy usage, identify opportunities, and define success metrics"
+                },
+                {
+                  step: "2",
+                  title: "Pilot Program",
+                  duration: "4-6 weeks",
+                  description: "Deploy at 1-3 facilities to validate savings and refine approach"
+                },
+                {
+                  step: "3",
+                  title: "Rollout",
+                  duration: "6-8 weeks",
+                  description: "Scale across all facilities with phased deployment and training"
+                },
+                {
+                  step: "4",
+                  title: "Optimization",
+                  duration: "Ongoing",
+                  description: "Continuous improvement and expanding capabilities as needs evolve"
+                }].
+                map((phase, index) =>
+                <Card key={index} className="p-6 space-y-4 relative">
                     <div className="absolute -top-4 -left-4 w-12 h-12 rounded-full bg-purple-600 text-white flex items-center justify-center text-xl font-bold">
                       {phase.step}
                     </div>
@@ -458,7 +458,7 @@ export default function EnterprisesIndustryPage() {
                       <p className="text-sm text-muted-foreground">{phase.description}</p>
                     </div>
                   </Card>
-                ))}
+                )}
               </div>
             </div>
           </div>
@@ -477,18 +477,18 @@ export default function EnterprisesIndustryPage() {
                   <h3 className="text-2xl font-semibold">Security & Compliance</h3>
                   <ul className="space-y-3">
                     {[
-                      "SOC 2 Type II certified",
-                      "GDPR and CCPA compliant",
-                      "Role-based access control (RBAC)",
-                      "End-to-end data encryption",
-                      "Regular security audits",
-                      "99.9% uptime SLA"
-                    ].map((item, index) => (
-                      <li key={index} className="flex items-start gap-3">
+                    "SOC 2 Type II certified",
+                    "GDPR and CCPA compliant",
+                    "Role-based access control (RBAC)",
+                    "End-to-end data encryption",
+                    "Regular security audits",
+                    "99.9% uptime SLA"].
+                    map((item, index) =>
+                    <li key={index} className="flex items-start gap-3">
                         <CheckCircle2 className="h-5 w-5 text-purple-600 dark:text-purple-400 flex-shrink-0 mt-0.5" />
                         <span className="text-muted-foreground">{item}</span>
                       </li>
-                    ))}
+                    )}
                   </ul>
                 </Card>
 
@@ -496,18 +496,18 @@ export default function EnterprisesIndustryPage() {
                   <h3 className="text-2xl font-semibold">Support & Services</h3>
                   <ul className="space-y-3">
                     {[
-                      "Dedicated customer success manager",
-                      "24/7 technical support",
-                      "Custom training programs",
-                      "Quarterly business reviews",
-                      "API support and documentation",
-                      "Professional services available"
-                    ].map((item, index) => (
-                      <li key={index} className="flex items-start gap-3">
+                    "Dedicated customer success manager",
+                    "24/7 technical support",
+                    "Custom training programs",
+                    "Quarterly business reviews",
+                    "API support and documentation",
+                    "Professional services available"].
+                    map((item, index) =>
+                    <li key={index} className="flex items-start gap-3">
                         <CheckCircle2 className="h-5 w-5 text-purple-600 dark:text-purple-400 flex-shrink-0 mt-0.5" />
                         <span className="text-muted-foreground">{item}</span>
                       </li>
-                    ))}
+                    )}
                   </ul>
                 </Card>
               </div>
@@ -544,26 +544,26 @@ export default function EnterprisesIndustryPage() {
 
               <div className="grid md:grid-cols-3 gap-6">
                 {[
-                  {
-                    title: "Cost Optimization",
-                    description: "Maximize savings across your enterprise",
-                    link: "/solutions/cost-optimization",
-                    icon: TrendingDown
-                  },
-                  {
-                    title: "Sustainability",
-                    description: "Achieve ESG goals and net-zero targets",
-                    link: "/solutions/sustainability",
-                    icon: Leaf
-                  },
-                  {
-                    title: "Demand Forecasting",
-                    description: "Predict energy needs with AI accuracy",
-                    link: "/solutions/demand-forecasting",
-                    icon: BarChart3
-                  }
-                ].map((solution, index) => (
-                  <Card key={index} className="p-6 space-y-4 hover:shadow-lg transition-shadow group">
+                {
+                  title: "Cost Optimization",
+                  description: "Maximize savings across your enterprise",
+                  link: "/solutions/cost-optimization",
+                  icon: TrendingDown
+                },
+                {
+                  title: "Sustainability",
+                  description: "Achieve ESG goals and net-zero targets",
+                  link: "/solutions/sustainability",
+                  icon: Leaf
+                },
+                {
+                  title: "Demand Forecasting",
+                  description: "Predict energy needs with AI accuracy",
+                  link: "/solutions/demand-forecasting",
+                  icon: BarChart3
+                }].
+                map((solution, index) =>
+                <Card key={index} className="p-6 space-y-4 hover:shadow-lg transition-shadow group">
                     <div className="inline-flex p-3 rounded-lg bg-purple-500/10">
                       <solution.icon className="h-6 w-6 text-purple-600 dark:text-purple-400" />
                     </div>
@@ -576,7 +576,7 @@ export default function EnterprisesIndustryPage() {
                       </Link>
                     </Button>
                   </Card>
-                ))}
+                )}
               </div>
             </div>
           </div>
@@ -589,12 +589,12 @@ export default function EnterprisesIndustryPage() {
               <SolutionsCTA
                 title="Transform Your Enterprise Energy Management"
                 description="Join Fortune 500 companies achieving significant cost savings and sustainability goals with AI-powered energy optimization."
-                primaryButtonText="Schedule Demo"
-              />
+                primaryButtonText="Schedule Demo" />
+
             </div>
           </div>
         </section>
       </div>
-    </>
-  );
+    </>);
+
 }

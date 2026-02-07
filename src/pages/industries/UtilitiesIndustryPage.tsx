@@ -3,18 +3,18 @@ import SolutionsCTA from '@/components/SolutionsCTA';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
-import { 
-  Zap, 
-  Wind, 
-  Battery, 
-  Network, 
+import {
+  Zap,
+  Wind,
+  Battery,
+  Network,
   Shield,
   Users,
   ArrowRight,
   CheckCircle2,
   TrendingUp,
-  Globe
-} from 'lucide-react';
+  Globe } from
+'lucide-react';
 
 export default function UtilitiesIndustryPage() {
   const schema = {
@@ -41,8 +41,8 @@ export default function UtilitiesIndustryPage() {
         keywords="utility AI, grid optimization, demand management, renewable integration, utility forecasting, smart grid, electric utility software"
         canonicalUrl="/industries/utilities"
         ogImage="https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=1200&h=630&fit=crop"
-        schema={schema}
-      />
+        schema={schema} />
+
 
       <div className="min-h-screen">
         {/* Hero Section */}
@@ -90,28 +90,28 @@ export default function UtilitiesIndustryPage() {
 
               <div className="grid md:grid-cols-2 gap-8">
                 {[
-                  {
-                    challenge: "Grid Reliability & Resilience",
-                    description: "Maintaining stable operations with increasing complexity from distributed energy resources, aging infrastructure, and extreme weather events.",
-                    solution: "AI-powered predictive maintenance, real-time grid monitoring, and automated fault detection prevent outages before they occur."
-                  },
-                  {
-                    challenge: "Renewable Energy Integration",
-                    description: "Balancing intermittent solar and wind generation while maintaining grid stability and meeting regulatory clean energy mandates.",
-                    solution: "Advanced forecasting and optimization algorithms seamlessly integrate renewables, optimize storage, and balance supply-demand in real-time."
-                  },
-                  {
-                    challenge: "Peak Demand Management",
-                    description: "Meeting surging peak demand without expensive infrastructure upgrades while managing capacity and wholesale market costs.",
-                    solution: "AI-driven demand response programs and load forecasting enable proactive peak shaving and optimal resource dispatch."
-                  },
-                  {
-                    challenge: "Customer Expectations",
-                    description: "Delivering personalized experiences, billing transparency, and energy management tools that modern customers demand.",
-                    solution: "AI-powered customer portals, usage insights, and targeted engagement programs improve satisfaction and enable demand flexibility."
-                  }
-                ].map((item, index) => (
-                  <Card key={index} className="p-8 space-y-4">
+                {
+                  challenge: "Grid Reliability & Resilience",
+                  description: "Maintaining stable operations with increasing complexity from distributed energy resources, aging infrastructure, and extreme weather events.",
+                  solution: "AI-powered predictive maintenance, real-time grid monitoring, and automated fault detection prevent outages before they occur."
+                },
+                {
+                  challenge: "Renewable Energy Integration",
+                  description: "Balancing intermittent solar and wind generation while maintaining grid stability and meeting regulatory clean energy mandates.",
+                  solution: "Advanced forecasting and optimization algorithms seamlessly integrate renewables, optimize storage, and balance supply-demand in real-time."
+                },
+                {
+                  challenge: "Peak Demand Management",
+                  description: "Meeting surging peak demand without expensive infrastructure upgrades while managing capacity and wholesale market costs.",
+                  solution: "AI-driven demand response programs and load forecasting enable proactive peak shaving and optimal resource dispatch."
+                },
+                {
+                  challenge: "Customer Expectations",
+                  description: "Delivering personalized experiences, billing transparency, and energy management tools that modern customers demand.",
+                  solution: "AI-powered customer portals, usage insights, and targeted engagement programs improve satisfaction and enable demand flexibility."
+                }].
+                map((item, index) =>
+                <Card key={index} className="p-8 space-y-4">
                     <h3 className="text-2xl font-semibold text-blue-600 dark:text-blue-400">
                       {item.challenge}
                     </h3>
@@ -126,7 +126,7 @@ export default function UtilitiesIndustryPage() {
                       </div>
                     </div>
                   </Card>
-                ))}
+                )}
               </div>
             </div>
           </div>
@@ -145,92 +145,92 @@ export default function UtilitiesIndustryPage() {
 
               <div className="grid md:grid-cols-3 gap-6">
                 {[
-                  {
-                    icon: TrendingUp,
-                    title: "Load Forecasting",
-                    description: "Predict system-wide and regional demand with 95%+ accuracy across all time horizons.",
-                    benefits: [
-                      "Day-ahead market optimization",
-                      "Unit commitment planning",
-                      "Reserve requirement optimization",
-                      "Multi-timeframe predictions"
-                    ],
-                    link: "/solutions/demand-forecasting"
-                  },
-                  {
-                    icon: Wind,
-                    title: "Renewable Integration",
-                    description: "Maximize clean energy utilization while maintaining grid stability and reliability.",
-                    benefits: [
-                      "Solar and wind generation forecasting",
-                      "Battery storage optimization",
-                      "Curtailment minimization",
-                      "Virtual power plant orchestration"
-                    ],
-                    link: "/solutions/sustainability"
-                  },
-                  {
-                    icon: Network,
-                    title: "Grid Optimization",
-                    description: "Real-time optimization of generation dispatch, voltage control, and reactive power.",
-                    benefits: [
-                      "Economic dispatch optimization",
-                      "Voltage and VAR optimization",
-                      "Congestion management",
-                      "Topology optimization"
-                    ],
-                    link: "/solutions/ai-energy-optimization"
-                  },
-                  {
-                    icon: Users,
-                    title: "Demand Response",
-                    description: "Engage customers and manage flexible loads to reduce peak demand and costs.",
-                    benefits: [
-                      "Automated DR program management",
-                      "Customer targeting and enrollment",
-                      "Real-time event optimization",
-                      "Performance verification"
-                    ],
-                    link: "/solutions/cost-optimization"
-                  },
-                  {
-                    icon: Shield,
-                    title: "Outage Prevention",
-                    description: "Predict and prevent equipment failures and service interruptions.",
-                    benefits: [
-                      "Predictive maintenance alerts",
-                      "Fault detection and isolation",
-                      "Transformer monitoring",
-                      "Weather impact prediction"
-                    ],
-                    link: "/solutions/ai-energy-optimization"
-                  },
-                  {
-                    icon: Battery,
-                    title: "Energy Storage",
-                    description: "Optimize battery systems for maximum value across multiple use cases.",
-                    benefits: [
-                      "Charge/discharge optimization",
-                      "Multi-use stacking",
-                      "Degradation modeling",
-                      "Market participation"
-                    ],
-                    link: "/solutions/cost-optimization"
-                  }
-                ].map((capability, index) => (
-                  <Card key={index} className="p-6 space-y-4 hover:shadow-lg transition-shadow group">
+                {
+                  icon: TrendingUp,
+                  title: "Load Forecasting",
+                  description: "Predict system-wide and regional demand with 95%+ accuracy across all time horizons.",
+                  benefits: [
+                  "Day-ahead market optimization",
+                  "Unit commitment planning",
+                  "Reserve requirement optimization",
+                  "Multi-timeframe predictions"],
+
+                  link: "/solutions/demand-forecasting"
+                },
+                {
+                  icon: Wind,
+                  title: "Renewable Integration",
+                  description: "Maximize clean energy utilization while maintaining grid stability and reliability.",
+                  benefits: [
+                  "Solar and wind generation forecasting",
+                  "Battery storage optimization",
+                  "Curtailment minimization",
+                  "Virtual power plant orchestration"],
+
+                  link: "/solutions/sustainability"
+                },
+                {
+                  icon: Network,
+                  title: "Grid Optimization",
+                  description: "Real-time optimization of generation dispatch, voltage control, and reactive power.",
+                  benefits: [
+                  "Economic dispatch optimization",
+                  "Voltage and VAR optimization",
+                  "Congestion management",
+                  "Topology optimization"],
+
+                  link: "/solutions/ai-energy-optimization"
+                },
+                {
+                  icon: Users,
+                  title: "Demand Response",
+                  description: "Engage customers and manage flexible loads to reduce peak demand and costs.",
+                  benefits: [
+                  "Automated DR program management",
+                  "Customer targeting and enrollment",
+                  "Real-time event optimization",
+                  "Performance verification"],
+
+                  link: "/solutions/cost-optimization"
+                },
+                {
+                  icon: Shield,
+                  title: "Outage Prevention",
+                  description: "Predict and prevent equipment failures and service interruptions.",
+                  benefits: [
+                  "Predictive maintenance alerts",
+                  "Fault detection and isolation",
+                  "Transformer monitoring",
+                  "Weather impact prediction"],
+
+                  link: "/solutions/ai-energy-optimization"
+                },
+                {
+                  icon: Battery,
+                  title: "Energy Storage",
+                  description: "Optimize battery systems for maximum value across multiple use cases.",
+                  benefits: [
+                  "Charge/discharge optimization",
+                  "Multi-use stacking",
+                  "Degradation modeling",
+                  "Market participation"],
+
+                  link: "/solutions/cost-optimization"
+                }].
+                map((capability, index) =>
+                <Card key={index} className="p-6 space-y-4 hover:shadow-lg transition-shadow group">
                     <div className="inline-flex p-3 rounded-lg bg-blue-500/10">
                       <capability.icon className="h-8 w-8 text-blue-600 dark:text-blue-400" />
                     </div>
                     <h3 className="text-xl font-semibold">{capability.title}</h3>
                     <p className="text-muted-foreground text-sm">{capability.description}</p>
                     <ul className="space-y-2">
-                      {capability.benefits.map((benefit, idx) => (
-                        <li key={idx} className="flex items-start gap-2 text-xs">
+                      {capability.benefits.map((benefit, idx) =>
+                    <li key={idx} className="flex items-start gap-2 text-xs">
                           <CheckCircle2 className="h-3.5 w-3.5 text-blue-600 dark:text-blue-400 flex-shrink-0 mt-0.5" />
                           <span className="text-muted-foreground">{benefit}</span>
                         </li>
-                      ))}
+                    )}
                     </ul>
                     <Button asChild variant="link" className="px-0 text-sm group-hover:translate-x-1 transition-transform">
                       <Link to={capability.link}>
@@ -239,7 +239,7 @@ export default function UtilitiesIndustryPage() {
                       </Link>
                     </Button>
                   </Card>
-                ))}
+                )}
               </div>
             </div>
           </div>
@@ -255,41 +255,41 @@ export default function UtilitiesIndustryPage() {
 
               <div className="space-y-6">
                 {[
-                  {
-                    utility: "Regional Electric Cooperative",
-                    challenge: "Managing peak demand growth without infrastructure upgrades",
-                    solution: "Implemented AI-driven demand response program and load forecasting",
-                    results: [
-                      "Reduced peak demand by 12% (18 MW)",
-                      "Avoided $25M substation upgrade",
-                      "Increased renewable penetration to 35%",
-                      "Improved customer satisfaction scores by 28%"
-                    ]
-                  },
-                  {
-                    utility: "Municipal Electric Utility",
-                    challenge: "Integrating large-scale solar while maintaining grid reliability",
-                    solution: "Deployed renewable forecasting and battery storage optimization",
-                    results: [
-                      "Achieved 55% renewable energy mix",
-                      "Reduced solar curtailment by 80%",
-                      "Saved $4.2M in wholesale power costs",
-                      "Zero weather-related outages in 18 months"
-                    ]
-                  },
-                  {
-                    utility: "Investor-Owned Utility (IOU)",
-                    challenge: "Optimizing generation dispatch across diverse asset portfolio",
-                    solution: "Implemented AI-powered economic dispatch and unit commitment",
-                    results: [
-                      "$12M annual fuel cost savings",
-                      "15% reduction in emissions",
-                      "Improved day-ahead market performance",
-                      "20% faster response to grid events"
-                    ]
-                  }
-                ].map((caseStudy, index) => (
-                  <Card key={index} className="p-8 hover:shadow-lg transition-shadow">
+                {
+                  utility: "Regional Electric Cooperative",
+                  challenge: "Managing peak demand growth without infrastructure upgrades",
+                  solution: "Implemented AI-driven demand response program and load forecasting",
+                  results: [
+                  "Reduced peak demand by 12% (18 MW)",
+                  "Avoided $25M substation upgrade",
+                  "Increased renewable penetration to 35%",
+                  "Improved customer satisfaction scores by 28%"]
+
+                },
+                {
+                  utility: "Municipal Electric Utility",
+                  challenge: "Integrating large-scale solar while maintaining grid reliability",
+                  solution: "Deployed renewable forecasting and battery storage optimization",
+                  results: [
+                  "Achieved 55% renewable energy mix",
+                  "Reduced solar curtailment by 80%",
+                  "Saved $4.2M in wholesale power costs",
+                  "Zero weather-related outages in 18 months"]
+
+                },
+                {
+                  utility: "Investor-Owned Utility (IOU)",
+                  challenge: "Optimizing generation dispatch across diverse asset portfolio",
+                  solution: "Implemented AI-powered economic dispatch and unit commitment",
+                  results: [
+                  "$12M annual fuel cost savings",
+                  "15% reduction in emissions",
+                  "Improved day-ahead market performance",
+                  "20% faster response to grid events"]
+
+                }].
+                map((caseStudy, index) =>
+                <Card key={index} className="p-8 hover:shadow-lg transition-shadow">
                     <div className="space-y-6">
                       <div>
                         <div className="text-sm text-blue-600 dark:text-blue-400 font-medium mb-2">
@@ -310,17 +310,17 @@ export default function UtilitiesIndustryPage() {
                       <div>
                         <div className="font-semibold mb-3">Results</div>
                         <div className="grid md:grid-cols-2 gap-3">
-                          {caseStudy.results.map((result, idx) => (
-                            <div key={idx} className="flex items-start gap-2">
+                          {caseStudy.results.map((result, idx) =>
+                        <div key={idx} className="flex items-start gap-2">
                               <CheckCircle2 className="h-5 w-5 text-green-600 dark:text-green-400 flex-shrink-0 mt-0.5" />
                               <span className="text-sm text-muted-foreground">{result}</span>
                             </div>
-                          ))}
+                        )}
                         </div>
                       </div>
                     </div>
                   </Card>
-                ))}
+                )}
               </div>
             </div>
           </div>
@@ -339,22 +339,22 @@ export default function UtilitiesIndustryPage() {
 
               <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
                 {[
-                  "SCADA Systems",
-                  "Energy Management Systems (EMS)",
-                  "Distribution Management Systems (DMS)",
-                  "Outage Management Systems (OMS)",
-                  "Customer Information Systems (CIS)",
-                  "Meter Data Management (MDM)",
-                  "Weather Data Providers",
-                  "Market Management Systems"
-                ].map((system, index) => (
-                  <Card key={index} className="p-6 text-center">
+                "SCADA Systems",
+                "Energy Management Systems (EMS)",
+                "Distribution Management Systems (DMS)",
+                "Outage Management Systems (OMS)",
+                "Customer Information Systems (CIS)",
+                "Meter Data Management (MDM)",
+                "Weather Data Providers",
+                "Market Management Systems"].
+                map((system, index) =>
+                <Card key={index} className="p-6 text-center">
                     <div className="mx-auto w-12 h-12 rounded-full bg-blue-500/10 flex items-center justify-center mb-3">
                       <Globe className="h-6 w-6 text-blue-600 dark:text-blue-400" />
                     </div>
                     <div className="font-semibold">{system}</div>
                   </Card>
-                ))}
+                )}
               </div>
             </div>
           </div>
@@ -370,30 +370,30 @@ export default function UtilitiesIndustryPage() {
 
               <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
                 {[
-                  {
-                    metric: "10-15%",
-                    label: "Operating Cost Reduction"
-                  },
-                  {
-                    metric: "95%+",
-                    label: "Load Forecast Accuracy"
-                  },
-                  {
-                    metric: "30-40%",
-                    label: "More Renewable Integration"
-                  },
-                  {
-                    metric: "50%",
-                    label: "Fewer Unplanned Outages"
-                  }
-                ].map((stat, index) => (
-                  <Card key={index} className="p-8 text-center space-y-2">
+                {
+                  metric: "10-15%",
+                  label: "Operating Cost Reduction"
+                },
+                {
+                  metric: "95%+",
+                  label: "Load Forecast Accuracy"
+                },
+                {
+                  metric: "30-40%",
+                  label: "More Renewable Integration"
+                },
+                {
+                  metric: "50%",
+                  label: "Fewer Unplanned Outages"
+                }].
+                map((stat, index) =>
+                <Card key={index} className="p-8 text-center space-y-2">
                     <div className="text-4xl font-bold text-blue-600 dark:text-blue-400">
                       {stat.metric}
                     </div>
                     <div className="text-sm text-muted-foreground">{stat.label}</div>
                   </Card>
-                ))}
+                )}
               </div>
 
               <div className="pt-8">
@@ -428,26 +428,26 @@ export default function UtilitiesIndustryPage() {
 
               <div className="grid md:grid-cols-3 gap-6">
                 {[
-                  {
-                    title: "Demand Forecasting",
-                    description: "Industry-leading load prediction accuracy",
-                    link: "/solutions/demand-forecasting",
-                    icon: TrendingUp
-                  },
-                  {
-                    title: "Grid Optimization",
-                    description: "Real-time AI-powered operations",
-                    link: "/solutions/ai-energy-optimization",
-                    icon: Zap
-                  },
-                  {
-                    title: "Sustainability",
-                    description: "Clean energy transition enablement",
-                    link: "/solutions/sustainability",
-                    icon: Wind
-                  }
-                ].map((solution, index) => (
-                  <Card key={index} className="p-6 space-y-4 hover:shadow-lg transition-shadow group">
+                {
+                  title: "Demand Forecasting",
+                  description: "Industry-leading load prediction accuracy",
+                  link: "/solutions/demand-forecasting",
+                  icon: TrendingUp
+                },
+                {
+                  title: "Grid Optimization",
+                  description: "Real-time AI-powered operations",
+                  link: "/solutions/ai-energy-optimization",
+                  icon: Zap
+                },
+                {
+                  title: "Sustainability",
+                  description: "Clean energy transition enablement",
+                  link: "/solutions/sustainability",
+                  icon: Wind
+                }].
+                map((solution, index) =>
+                <Card key={index} className="p-6 space-y-4 hover:shadow-lg transition-shadow group">
                     <div className="inline-flex p-3 rounded-lg bg-blue-500/10">
                       <solution.icon className="h-6 w-6 text-blue-600 dark:text-blue-400" />
                     </div>
@@ -460,7 +460,7 @@ export default function UtilitiesIndustryPage() {
                       </Link>
                     </Button>
                   </Card>
-                ))}
+                )}
               </div>
             </div>
           </div>
@@ -473,12 +473,12 @@ export default function UtilitiesIndustryPage() {
               <SolutionsCTA
                 title="Transform Your Utility Operations"
                 description="Join leading utilities using AI to improve reliability, integrate renewables, and deliver exceptional customer value."
-                primaryButtonText="Schedule Consultation"
-              />
+                primaryButtonText="Schedule Consultation" />
+
             </div>
           </div>
         </section>
       </div>
-    </>
-  );
+    </>);
+
 }

@@ -3,18 +3,18 @@ import SolutionsCTA from '@/components/SolutionsCTA';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
-import { 
-  LineChart, 
-  Target, 
-  Clock, 
-  Brain, 
+import {
+  LineChart,
+  Target,
+  Clock,
+  Brain,
   TrendingUp,
   Zap,
   ArrowRight,
   CheckCircle2,
   Activity,
-  AlertCircle
-} from 'lucide-react';
+  AlertCircle } from
+'lucide-react';
 
 export default function DemandForecastingPage() {
   const schema = {
@@ -37,8 +37,8 @@ export default function DemandForecastingPage() {
         keywords="demand forecasting, energy prediction, load forecasting, AI forecasting, machine learning prediction, energy analytics, demand planning"
         canonicalUrl="/solutions/demand-forecasting"
         ogImage="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1200&h=630&fit=crop"
-        schema={schema}
-      />
+        schema={schema} />
+
 
       <div className="min-h-screen">
         {/* Hero Section */}
@@ -86,29 +86,29 @@ export default function DemandForecastingPage() {
 
               <div className="grid md:grid-cols-3 gap-6">
                 {[
-                  {
-                    title: "Short-Term",
-                    timeframe: "Next 24-48 hours",
-                    accuracy: "95-97%",
-                    description: "Ideal for operational planning, real-time optimization, and day-ahead market participation.",
-                    icon: Clock
-                  },
-                  {
-                    title: "Medium-Term",
-                    timeframe: "1-4 weeks",
-                    accuracy: "92-95%",
-                    description: "Perfect for maintenance scheduling, staffing decisions, and resource procurement planning.",
-                    icon: Target
-                  },
-                  {
-                    title: "Long-Term",
-                    timeframe: "1-12 months",
-                    accuracy: "88-92%",
-                    description: "Essential for capacity planning, infrastructure investment, and strategic decision-making.",
-                    icon: TrendingUp
-                  }
-                ].map((forecast, index) => (
-                  <Card key={index} className="p-8 space-y-4 hover:shadow-lg transition-shadow">
+                {
+                  title: "Short-Term",
+                  timeframe: "Next 24-48 hours",
+                  accuracy: "95-97%",
+                  description: "Ideal for operational planning, real-time optimization, and day-ahead market participation.",
+                  icon: Clock
+                },
+                {
+                  title: "Medium-Term",
+                  timeframe: "1-4 weeks",
+                  accuracy: "92-95%",
+                  description: "Perfect for maintenance scheduling, staffing decisions, and resource procurement planning.",
+                  icon: Target
+                },
+                {
+                  title: "Long-Term",
+                  timeframe: "1-12 months",
+                  accuracy: "88-92%",
+                  description: "Essential for capacity planning, infrastructure investment, and strategic decision-making.",
+                  icon: TrendingUp
+                }].
+                map((forecast, index) =>
+                <Card key={index} className="p-8 space-y-4 hover:shadow-lg transition-shadow">
                     <div className="inline-flex p-3 rounded-lg bg-blue-500/10">
                       <forecast.icon className="h-8 w-8 text-blue-600 dark:text-blue-400" />
                     </div>
@@ -121,7 +121,7 @@ export default function DemandForecastingPage() {
                     </div>
                     <p className="text-muted-foreground">{forecast.description}</p>
                   </Card>
-                ))}
+                )}
               </div>
             </div>
           </div>
@@ -140,41 +140,41 @@ export default function DemandForecastingPage() {
 
               <div className="space-y-6">
                 {[
-                  {
-                    title: "Multi-Model Ensemble",
-                    description: "We combine predictions from multiple algorithms (LSTM, Prophet, ARIMA, XGBoost) to achieve superior accuracy and robustness.",
-                    icon: Brain,
-                    features: [
-                      "Deep learning neural networks for pattern recognition",
-                      "Statistical models for trend analysis",
-                      "Gradient boosting for feature importance",
-                      "Ensemble weighting based on historical performance"
-                    ]
-                  },
-                  {
-                    title: "Comprehensive Data Integration",
-                    description: "Our models consider dozens of variables to understand the full context of energy demand patterns.",
-                    icon: Activity,
-                    features: [
-                      "Historical consumption patterns and seasonality",
-                      "Weather forecasts (temperature, humidity, cloud cover)",
-                      "Calendar effects (holidays, day of week, events)",
-                      "Economic indicators and business activity"
-                    ]
-                  },
-                  {
-                    title: "Continuous Learning",
-                    description: "Models automatically adapt to changing patterns and improve over time with new data.",
-                    icon: TrendingUp,
-                    features: [
-                      "Daily model retraining with latest data",
-                      "Automatic anomaly detection and handling",
-                      "Performance monitoring and optimization",
-                      "Feedback loop integration from actual results"
-                    ]
-                  }
-                ].map((method, index) => (
-                  <Card key={index} className="p-8">
+                {
+                  title: "Multi-Model Ensemble",
+                  description: "We combine predictions from multiple algorithms (LSTM, Prophet, ARIMA, XGBoost) to achieve superior accuracy and robustness.",
+                  icon: Brain,
+                  features: [
+                  "Deep learning neural networks for pattern recognition",
+                  "Statistical models for trend analysis",
+                  "Gradient boosting for feature importance",
+                  "Ensemble weighting based on historical performance"]
+
+                },
+                {
+                  title: "Comprehensive Data Integration",
+                  description: "Our models consider dozens of variables to understand the full context of energy demand patterns.",
+                  icon: Activity,
+                  features: [
+                  "Historical consumption patterns and seasonality",
+                  "Weather forecasts (temperature, humidity, cloud cover)",
+                  "Calendar effects (holidays, day of week, events)",
+                  "Economic indicators and business activity"]
+
+                },
+                {
+                  title: "Continuous Learning",
+                  description: "Models automatically adapt to changing patterns and improve over time with new data.",
+                  icon: TrendingUp,
+                  features: [
+                  "Daily model retraining with latest data",
+                  "Automatic anomaly detection and handling",
+                  "Performance monitoring and optimization",
+                  "Feedback loop integration from actual results"]
+
+                }].
+                map((method, index) =>
+                <Card key={index} className="p-8">
                     <div className="flex flex-col md:flex-row gap-6">
                       <div className="flex-shrink-0">
                         <div className="inline-flex p-4 rounded-lg bg-blue-500/10">
@@ -185,17 +185,17 @@ export default function DemandForecastingPage() {
                         <h3 className="text-2xl font-semibold">{method.title}</h3>
                         <p className="text-lg text-muted-foreground">{method.description}</p>
                         <ul className="grid md:grid-cols-2 gap-3 pt-2">
-                          {method.features.map((feature, idx) => (
-                            <li key={idx} className="flex items-start gap-2">
+                          {method.features.map((feature, idx) =>
+                        <li key={idx} className="flex items-start gap-2">
                               <CheckCircle2 className="h-5 w-5 text-blue-600 dark:text-blue-400 flex-shrink-0 mt-0.5" />
                               <span className="text-sm text-muted-foreground">{feature}</span>
                             </li>
-                          ))}
+                        )}
                         </ul>
                       </div>
                     </div>
                   </Card>
-                ))}
+                )}
               </div>
             </div>
           </div>
@@ -214,52 +214,52 @@ export default function DemandForecastingPage() {
 
               <div className="grid md:grid-cols-2 gap-8">
                 {[
-                  {
-                    title: "Cost Reduction",
-                    stat: "15-25%",
-                    description: "Lower energy procurement costs through better planning and market timing.",
-                    benefits: [
-                      "Avoid expensive peak demand charges",
-                      "Optimize day-ahead market participation",
-                      "Reduce reserve capacity requirements",
-                      "Minimize penalty costs for imbalances"
-                    ]
-                  },
-                  {
-                    title: "Operational Efficiency",
-                    stat: "30%",
-                    description: "Improve resource utilization and reduce manual planning overhead.",
-                    benefits: [
-                      "Automate scheduling and dispatch",
-                      "Optimize maintenance windows",
-                      "Reduce emergency interventions",
-                      "Improve staff allocation"
-                    ]
-                  },
-                  {
-                    title: "Grid Reliability",
-                    stat: "99.9%",
-                    description: "Enhance system stability and prevent outages through proactive planning.",
-                    benefits: [
-                      "Predict and prevent overload situations",
-                      "Optimize spinning reserve levels",
-                      "Improve load balancing",
-                      "Support renewable integration"
-                    ]
-                  },
-                  {
-                    title: "Renewable Integration",
-                    stat: "40%",
-                    description: "Maximize clean energy utilization with accurate generation and demand forecasts.",
-                    benefits: [
-                      "Optimize battery storage charging",
-                      "Balance intermittent generation",
-                      "Reduce curtailment of renewables",
-                      "Enable demand response programs"
-                    ]
-                  }
-                ].map((value, index) => (
-                  <Card key={index} className="p-8 space-y-6">
+                {
+                  title: "Cost Reduction",
+                  stat: "15-25%",
+                  description: "Lower energy procurement costs through better planning and market timing.",
+                  benefits: [
+                  "Avoid expensive peak demand charges",
+                  "Optimize day-ahead market participation",
+                  "Reduce reserve capacity requirements",
+                  "Minimize penalty costs for imbalances"]
+
+                },
+                {
+                  title: "Operational Efficiency",
+                  stat: "30%",
+                  description: "Improve resource utilization and reduce manual planning overhead.",
+                  benefits: [
+                  "Automate scheduling and dispatch",
+                  "Optimize maintenance windows",
+                  "Reduce emergency interventions",
+                  "Improve staff allocation"]
+
+                },
+                {
+                  title: "Grid Reliability",
+                  stat: "99.9%",
+                  description: "Enhance system stability and prevent outages through proactive planning.",
+                  benefits: [
+                  "Predict and prevent overload situations",
+                  "Optimize spinning reserve levels",
+                  "Improve load balancing",
+                  "Support renewable integration"]
+
+                },
+                {
+                  title: "Renewable Integration",
+                  stat: "40%",
+                  description: "Maximize clean energy utilization with accurate generation and demand forecasts.",
+                  benefits: [
+                  "Optimize battery storage charging",
+                  "Balance intermittent generation",
+                  "Reduce curtailment of renewables",
+                  "Enable demand response programs"]
+
+                }].
+                map((value, index) =>
+                <Card key={index} className="p-8 space-y-6">
                     <div className="flex items-start justify-between">
                       <h3 className="text-2xl font-semibold">{value.title}</h3>
                       <div className="text-3xl font-bold text-blue-600 dark:text-blue-400">
@@ -268,15 +268,15 @@ export default function DemandForecastingPage() {
                     </div>
                     <p className="text-muted-foreground">{value.description}</p>
                     <ul className="space-y-2">
-                      {value.benefits.map((benefit, idx) => (
-                        <li key={idx} className="flex items-start gap-2 text-sm">
+                      {value.benefits.map((benefit, idx) =>
+                    <li key={idx} className="flex items-start gap-2 text-sm">
                           <CheckCircle2 className="h-4 w-4 text-blue-600 dark:text-blue-400 flex-shrink-0 mt-0.5" />
                           <span className="text-muted-foreground">{benefit}</span>
                         </li>
-                      ))}
+                    )}
                     </ul>
                   </Card>
-                ))}
+                )}
               </div>
             </div>
           </div>
@@ -292,32 +292,32 @@ export default function DemandForecastingPage() {
 
               <div className="space-y-6">
                 {[
-                  {
-                    industry: "Utility Companies",
-                    scenario: "Grid Load Forecasting",
-                    description: "Predict regional and system-wide electricity demand to optimize generation dispatch, reserve requirements, and market participation.",
-                    link: "/industries/utilities"
-                  },
-                  {
-                    industry: "Manufacturing",
-                    scenario: "Production Energy Planning",
-                    description: "Forecast facility energy needs based on production schedules, enabling optimal procurement and peak demand management.",
-                    link: "/industries/enterprises"
-                  },
-                  {
-                    industry: "Commercial Real Estate",
-                    scenario: "Building Load Prediction",
-                    description: "Anticipate HVAC and lighting needs across property portfolios to minimize costs while maintaining comfort.",
-                    link: "/solutions/cost-optimization"
-                  },
-                  {
-                    industry: "Data Centers",
-                    scenario: "Capacity Planning",
-                    description: "Predict computing load and cooling requirements to ensure reliability while optimizing energy consumption.",
-                    link: "/industries/enterprises"
-                  }
-                ].map((useCase, index) => (
-                  <Card key={index} className="p-8 hover:shadow-lg transition-shadow">
+                {
+                  industry: "Utility Companies",
+                  scenario: "Grid Load Forecasting",
+                  description: "Predict regional and system-wide electricity demand to optimize generation dispatch, reserve requirements, and market participation.",
+                  link: "/industries/utilities"
+                },
+                {
+                  industry: "Manufacturing",
+                  scenario: "Production Energy Planning",
+                  description: "Forecast facility energy needs based on production schedules, enabling optimal procurement and peak demand management.",
+                  link: "/industries/enterprises"
+                },
+                {
+                  industry: "Commercial Real Estate",
+                  scenario: "Building Load Prediction",
+                  description: "Anticipate HVAC and lighting needs across property portfolios to minimize costs while maintaining comfort.",
+                  link: "/solutions/cost-optimization"
+                },
+                {
+                  industry: "Data Centers",
+                  scenario: "Capacity Planning",
+                  description: "Predict computing load and cooling requirements to ensure reliability while optimizing energy consumption.",
+                  link: "/industries/enterprises"
+                }].
+                map((useCase, index) =>
+                <Card key={index} className="p-8 hover:shadow-lg transition-shadow">
                     <div className="space-y-4">
                       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
                         <div>
@@ -336,7 +336,7 @@ export default function DemandForecastingPage() {
                       <p className="text-muted-foreground text-lg">{useCase.description}</p>
                     </div>
                   </Card>
-                ))}
+                )}
               </div>
             </div>
           </div>
@@ -352,45 +352,45 @@ export default function DemandForecastingPage() {
 
               <div className="grid md:grid-cols-3 gap-6">
                 {[
-                  {
-                    icon: LineChart,
-                    title: "Interactive Visualizations",
-                    description: "Explore forecasts with intuitive charts, confidence intervals, and scenario comparisons."
-                  },
-                  {
-                    icon: AlertCircle,
-                    title: "Anomaly Detection",
-                    description: "Automatic identification of unusual patterns and potential forecast errors."
-                  },
-                  {
-                    icon: Zap,
-                    title: "Real-Time Updates",
-                    description: "Forecasts automatically update as new data becomes available."
-                  },
-                  {
-                    icon: Target,
-                    title: "Scenario Planning",
-                    description: "Model different conditions and their impact on energy demand."
-                  },
-                  {
-                    icon: Activity,
-                    title: "Confidence Intervals",
-                    description: "Understand prediction uncertainty with probabilistic forecasts."
-                  },
-                  {
-                    icon: Brain,
-                    title: "Explainable AI",
-                    description: "See which factors are driving forecasted changes."
-                  }
-                ].map((feature, index) => (
-                  <Card key={index} className="p-6 space-y-4 hover:shadow-lg transition-shadow">
+                {
+                  icon: LineChart,
+                  title: "Interactive Visualizations",
+                  description: "Explore forecasts with intuitive charts, confidence intervals, and scenario comparisons."
+                },
+                {
+                  icon: AlertCircle,
+                  title: "Anomaly Detection",
+                  description: "Automatic identification of unusual patterns and potential forecast errors."
+                },
+                {
+                  icon: Zap,
+                  title: "Real-Time Updates",
+                  description: "Forecasts automatically update as new data becomes available."
+                },
+                {
+                  icon: Target,
+                  title: "Scenario Planning",
+                  description: "Model different conditions and their impact on energy demand."
+                },
+                {
+                  icon: Activity,
+                  title: "Confidence Intervals",
+                  description: "Understand prediction uncertainty with probabilistic forecasts."
+                },
+                {
+                  icon: Brain,
+                  title: "Explainable AI",
+                  description: "See which factors are driving forecasted changes."
+                }].
+                map((feature, index) =>
+                <Card key={index} className="p-6 space-y-4 hover:shadow-lg transition-shadow">
                     <div className="inline-flex p-3 rounded-lg bg-blue-500/10">
                       <feature.icon className="h-6 w-6 text-blue-600 dark:text-blue-400" />
                     </div>
                     <h3 className="text-xl font-semibold">{feature.title}</h3>
                     <p className="text-muted-foreground">{feature.description}</p>
                   </Card>
-                ))}
+                )}
               </div>
 
               <div className="pt-8">
@@ -425,26 +425,26 @@ export default function DemandForecastingPage() {
 
               <div className="grid md:grid-cols-3 gap-6">
                 {[
-                  {
-                    title: "AI Energy Optimization",
-                    description: "Use forecasts to drive intelligent optimization",
-                    link: "/solutions/ai-energy-optimization",
-                    icon: Brain
-                  },
-                  {
-                    title: "Cost Optimization",
-                    description: "Minimize expenses with predictive planning",
-                    link: "/solutions/cost-optimization",
-                    icon: TrendingUp
-                  },
-                  {
-                    title: "Utility Solutions",
-                    description: "Grid-scale forecasting and management",
-                    link: "/industries/utilities",
-                    icon: Zap
-                  }
-                ].map((solution, index) => (
-                  <Card key={index} className="p-6 space-y-4 hover:shadow-lg transition-shadow group">
+                {
+                  title: "AI Energy Optimization",
+                  description: "Use forecasts to drive intelligent optimization",
+                  link: "/solutions/ai-energy-optimization",
+                  icon: Brain
+                },
+                {
+                  title: "Cost Optimization",
+                  description: "Minimize expenses with predictive planning",
+                  link: "/solutions/cost-optimization",
+                  icon: TrendingUp
+                },
+                {
+                  title: "Utility Solutions",
+                  description: "Grid-scale forecasting and management",
+                  link: "/industries/utilities",
+                  icon: Zap
+                }].
+                map((solution, index) =>
+                <Card key={index} className="p-6 space-y-4 hover:shadow-lg transition-shadow group">
                     <div className="inline-flex p-3 rounded-lg bg-blue-500/10">
                       <solution.icon className="h-6 w-6 text-blue-600 dark:text-blue-400" />
                     </div>
@@ -457,7 +457,7 @@ export default function DemandForecastingPage() {
                       </Link>
                     </Button>
                   </Card>
-                ))}
+                )}
               </div>
             </div>
           </div>
@@ -470,12 +470,12 @@ export default function DemandForecastingPage() {
               <SolutionsCTA
                 title="Experience Forecasting Excellence"
                 description="See how accurate demand prediction can transform your energy management and drive significant cost savings."
-                primaryButtonText="Start Forecasting"
-              />
+                primaryButtonText="Start Forecasting" />
+
             </div>
           </div>
         </section>
       </div>
-    </>
-  );
+    </>);
+
 }

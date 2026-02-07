@@ -14,13 +14,13 @@ interface PressCardProps {
   location: string;
 }
 
-export default function PressCard({ 
-  title, 
-  slug, 
-  summary, 
-  category, 
+export default function PressCard({
+  title,
+  slug,
+  summary,
+  category,
   release_date,
-  location 
+  location
 }: PressCardProps) {
   const categoryLabels: Record<string, string> = {
     launch: 'Product Launch',
@@ -56,6 +56,6 @@ export default function PressCard({
           </div>
         </CardContent>
       </Card>
-    </Link>
-  );
+    </Link>);
+
 }

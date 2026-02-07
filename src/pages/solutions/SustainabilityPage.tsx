@@ -3,18 +3,18 @@ import SolutionsCTA from '@/components/SolutionsCTA';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
-import { 
-  Leaf, 
-  TrendingDown, 
-  FileText, 
-  Globe, 
+import {
+  Leaf,
+  TrendingDown,
+  FileText,
+  Globe,
   Award,
   Target,
   ArrowRight,
   CheckCircle2,
   BarChart3,
-  Wind
-} from 'lucide-react';
+  Wind } from
+'lucide-react';
 
 export default function SustainabilityPage() {
   const schema = {
@@ -37,8 +37,8 @@ export default function SustainabilityPage() {
         keywords="sustainability solutions, ESG reporting, carbon reduction, environmental impact, net zero, renewable energy, carbon footprint tracking"
         canonicalUrl="/solutions/sustainability"
         ogImage="https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?w=1200&h=630&fit=crop"
-        schema={schema}
-      />
+        schema={schema} />
+
 
       <div className="min-h-screen">
         {/* Hero Section */}
@@ -92,16 +92,16 @@ export default function SustainabilityPage() {
                   <h3 className="text-2xl font-semibold">Immediate Impact</h3>
                   <ul className="space-y-3">
                     {[
-                      "Reduce Scope 2 emissions by 30-40%",
-                      "Optimize renewable energy utilization",
-                      "Minimize peak demand carbon intensity",
-                      "Real-time carbon footprint tracking"
-                    ].map((item, index) => (
-                      <li key={index} className="flex items-start gap-3">
+                    "Reduce Scope 2 emissions by 30-40%",
+                    "Optimize renewable energy utilization",
+                    "Minimize peak demand carbon intensity",
+                    "Real-time carbon footprint tracking"].
+                    map((item, index) =>
+                    <li key={index} className="flex items-start gap-3">
                         <CheckCircle2 className="h-5 w-5 text-green-600 dark:text-green-400 flex-shrink-0 mt-0.5" />
                         <span className="text-muted-foreground">{item}</span>
                       </li>
-                    ))}
+                    )}
                   </ul>
                 </Card>
 
@@ -112,16 +112,16 @@ export default function SustainabilityPage() {
                   <h3 className="text-2xl font-semibold">Long-Term Goals</h3>
                   <ul className="space-y-3">
                     {[
-                      "Net-zero roadmap planning",
-                      "Science-based targets alignment",
-                      "Carbon offset optimization",
-                      "Sustainability milestone tracking"
-                    ].map((item, index) => (
-                      <li key={index} className="flex items-start gap-3">
+                    "Net-zero roadmap planning",
+                    "Science-based targets alignment",
+                    "Carbon offset optimization",
+                    "Sustainability milestone tracking"].
+                    map((item, index) =>
+                    <li key={index} className="flex items-start gap-3">
                         <CheckCircle2 className="h-5 w-5 text-green-600 dark:text-green-400 flex-shrink-0 mt-0.5" />
                         <span className="text-muted-foreground">{item}</span>
                       </li>
-                    ))}
+                    )}
                   </ul>
                 </Card>
               </div>
@@ -142,45 +142,45 @@ export default function SustainabilityPage() {
 
               <div className="grid md:grid-cols-3 gap-6">
                 {[
-                  {
-                    icon: FileText,
-                    title: "Compliance Ready",
-                    description: "Generate reports aligned with GRI, SASB, TCFD, and CDP frameworks automatically."
-                  },
-                  {
-                    icon: BarChart3,
-                    title: "Real-Time Metrics",
-                    description: "Track environmental KPIs with live dashboards and customizable views."
-                  },
-                  {
-                    icon: Globe,
-                    title: "Multi-Facility",
-                    description: "Aggregate data across all locations for comprehensive organizational reporting."
-                  },
-                  {
-                    icon: Award,
-                    title: "Audit Trail",
-                    description: "Maintain complete data lineage and verification for third-party audits."
-                  },
-                  {
-                    icon: Target,
-                    title: "Goal Tracking",
-                    description: "Monitor progress against sustainability commitments and targets."
-                  },
-                  {
-                    icon: Wind,
-                    title: "Impact Analysis",
-                    description: "Quantify environmental benefits and communicate results to stakeholders."
-                  }
-                ].map((feature, index) => (
-                  <Card key={index} className="p-6 space-y-4 hover:shadow-lg transition-shadow">
+                {
+                  icon: FileText,
+                  title: "Compliance Ready",
+                  description: "Generate reports aligned with GRI, SASB, TCFD, and CDP frameworks automatically."
+                },
+                {
+                  icon: BarChart3,
+                  title: "Real-Time Metrics",
+                  description: "Track environmental KPIs with live dashboards and customizable views."
+                },
+                {
+                  icon: Globe,
+                  title: "Multi-Facility",
+                  description: "Aggregate data across all locations for comprehensive organizational reporting."
+                },
+                {
+                  icon: Award,
+                  title: "Audit Trail",
+                  description: "Maintain complete data lineage and verification for third-party audits."
+                },
+                {
+                  icon: Target,
+                  title: "Goal Tracking",
+                  description: "Monitor progress against sustainability commitments and targets."
+                },
+                {
+                  icon: Wind,
+                  title: "Impact Analysis",
+                  description: "Quantify environmental benefits and communicate results to stakeholders."
+                }].
+                map((feature, index) =>
+                <Card key={index} className="p-6 space-y-4 hover:shadow-lg transition-shadow">
                     <div className="inline-flex p-3 rounded-lg bg-green-500/10">
                       <feature.icon className="h-6 w-6 text-green-600 dark:text-green-400" />
                     </div>
                     <h3 className="text-xl font-semibold">{feature.title}</h3>
                     <p className="text-muted-foreground">{feature.description}</p>
                   </Card>
-                ))}
+                )}
               </div>
 
               <div className="pt-8">
@@ -218,32 +218,32 @@ export default function SustainabilityPage() {
 
               <div className="space-y-8">
                 {[
-                  {
-                    title: "Reduced Carbon Footprint",
-                    description: "Lower your Scope 2 emissions significantly by optimizing electricity consumption patterns and maximizing renewable energy usage. Our AI identifies the optimal times to consume energy when grid carbon intensity is lowest.",
-                    stat: "30-40% reduction",
-                    link: "/solutions/ai-energy-optimization"
-                  },
-                  {
-                    title: "Renewable Energy Integration",
-                    description: "Seamlessly integrate solar, wind, and other renewable sources with intelligent forecasting and battery storage optimization. Balance intermittent generation with demand to maximize clean energy utilization.",
-                    stat: "Up to 60% renewable",
-                    link: "/solutions/demand-forecasting"
-                  },
-                  {
-                    title: "Resource Conservation",
-                    description: "Minimize energy waste through predictive analytics and automated controls. Reduce unnecessary consumption during off-peak hours and optimize equipment operation for maximum efficiency.",
-                    stat: "25% less waste",
-                    link: "/solutions/cost-optimization"
-                  },
-                  {
-                    title: "Circular Economy Support",
-                    description: "Enable demand response programs, virtual power plants, and energy sharing initiatives. Contribute to a more resilient and sustainable energy ecosystem.",
-                    stat: "Grid-positive impact",
-                    link: "/industries/utilities"
-                  }
-                ].map((benefit, index) => (
-                  <Card key={index} className="p-8 hover:shadow-lg transition-shadow">
+                {
+                  title: "Reduced Carbon Footprint",
+                  description: "Lower your Scope 2 emissions significantly by optimizing electricity consumption patterns and maximizing renewable energy usage. Our AI identifies the optimal times to consume energy when grid carbon intensity is lowest.",
+                  stat: "30-40% reduction",
+                  link: "/solutions/ai-energy-optimization"
+                },
+                {
+                  title: "Renewable Energy Integration",
+                  description: "Seamlessly integrate solar, wind, and other renewable sources with intelligent forecasting and battery storage optimization. Balance intermittent generation with demand to maximize clean energy utilization.",
+                  stat: "Up to 60% renewable",
+                  link: "/solutions/demand-forecasting"
+                },
+                {
+                  title: "Resource Conservation",
+                  description: "Minimize energy waste through predictive analytics and automated controls. Reduce unnecessary consumption during off-peak hours and optimize equipment operation for maximum efficiency.",
+                  stat: "25% less waste",
+                  link: "/solutions/cost-optimization"
+                },
+                {
+                  title: "Circular Economy Support",
+                  description: "Enable demand response programs, virtual power plants, and energy sharing initiatives. Contribute to a more resilient and sustainable energy ecosystem.",
+                  stat: "Grid-positive impact",
+                  link: "/industries/utilities"
+                }].
+                map((benefit, index) =>
+                <Card key={index} className="p-8 hover:shadow-lg transition-shadow">
                     <div className="flex flex-col lg:flex-row gap-6">
                       <div className="flex-shrink-0 lg:w-48">
                         <div className="text-4xl font-bold text-green-600 dark:text-green-400">
@@ -262,7 +262,7 @@ export default function SustainabilityPage() {
                       </div>
                     </div>
                   </Card>
-                ))}
+                )}
               </div>
             </div>
           </div>
@@ -281,19 +281,19 @@ export default function SustainabilityPage() {
 
               <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
                 {[
-                  { name: "UN SDGs", description: "Supporting Sustainable Development Goals" },
-                  { name: "Paris Agreement", description: "Aligned with climate commitments" },
-                  { name: "Science Based Targets", description: "SBTi approved methodologies" },
-                  { name: "CDP", description: "Carbon Disclosure Project reporting" }
-                ].map((framework, index) => (
-                  <Card key={index} className="p-6 text-center space-y-3">
+                { name: "UN SDGs", description: "Supporting Sustainable Development Goals" },
+                { name: "Paris Agreement", description: "Aligned with climate commitments" },
+                { name: "Science Based Targets", description: "SBTi approved methodologies" },
+                { name: "CDP", description: "Carbon Disclosure Project reporting" }].
+                map((framework, index) =>
+                <Card key={index} className="p-6 text-center space-y-3">
                     <div className="mx-auto w-12 h-12 rounded-full bg-green-500/10 flex items-center justify-center">
                       <Award className="h-6 w-6 text-green-600 dark:text-green-400" />
                     </div>
                     <h3 className="font-semibold">{framework.name}</h3>
                     <p className="text-sm text-muted-foreground">{framework.description}</p>
                   </Card>
-                ))}
+                )}
               </div>
             </div>
           </div>
@@ -309,26 +309,26 @@ export default function SustainabilityPage() {
 
               <div className="grid md:grid-cols-3 gap-6">
                 {[
-                  {
-                    title: "AI Energy Optimization",
-                    description: "The foundation for emissions reduction",
-                    link: "/solutions/ai-energy-optimization",
-                    icon: TrendingDown
-                  },
-                  {
-                    title: "Cost Optimization",
-                    description: "Financial and environmental benefits together",
-                    link: "/solutions/cost-optimization",
-                    icon: BarChart3
-                  },
-                  {
-                    title: "Enterprise Solutions",
-                    description: "Sustainability at scale across your organization",
-                    link: "/industries/enterprises",
-                    icon: Globe
-                  }
-                ].map((solution, index) => (
-                  <Card key={index} className="p-6 space-y-4 hover:shadow-lg transition-shadow group">
+                {
+                  title: "AI Energy Optimization",
+                  description: "The foundation for emissions reduction",
+                  link: "/solutions/ai-energy-optimization",
+                  icon: TrendingDown
+                },
+                {
+                  title: "Cost Optimization",
+                  description: "Financial and environmental benefits together",
+                  link: "/solutions/cost-optimization",
+                  icon: BarChart3
+                },
+                {
+                  title: "Enterprise Solutions",
+                  description: "Sustainability at scale across your organization",
+                  link: "/industries/enterprises",
+                  icon: Globe
+                }].
+                map((solution, index) =>
+                <Card key={index} className="p-6 space-y-4 hover:shadow-lg transition-shadow group">
                     <div className="inline-flex p-3 rounded-lg bg-green-500/10">
                       <solution.icon className="h-6 w-6 text-green-600 dark:text-green-400" />
                     </div>
@@ -341,7 +341,7 @@ export default function SustainabilityPage() {
                       </Link>
                     </Button>
                   </Card>
-                ))}
+                )}
               </div>
             </div>
           </div>
@@ -353,12 +353,12 @@ export default function SustainabilityPage() {
             <div className="max-w-6xl mx-auto">
               <SolutionsCTA
                 title="Start Your Sustainability Journey Today"
-                description="Join organizations worldwide reducing emissions and achieving net-zero goals with AI-powered energy management."
-              />
+                description="Join organizations worldwide reducing emissions and achieving net-zero goals with AI-powered energy management." />
+
             </div>
           </div>
         </section>
       </div>
-    </>
-  );
+    </>);
+
 }

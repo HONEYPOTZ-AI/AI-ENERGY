@@ -51,27 +51,27 @@ export default function ResourcesPage() {
 
     // Filter by tab
     if (activeTab === 'case-studies') {
-      filtered = filtered.filter(r => r.type === 'case_study');
+      filtered = filtered.filter((r) => r.type === 'case_study');
     } else if (activeTab === 'white-papers') {
-      filtered = filtered.filter(r => r.type === 'white_paper');
+      filtered = filtered.filter((r) => r.type === 'white_paper');
     }
 
     // Filter by search
     if (searchQuery) {
       const query = searchQuery.toLowerCase();
-      filtered = filtered.filter(r =>
-        r.title.toLowerCase().includes(query) ||
-        r.excerpt.toLowerCase().includes(query) ||
-        r.industry?.toLowerCase().includes(query) ||
-        r.tags?.toLowerCase().includes(query)
+      filtered = filtered.filter((r) =>
+      r.title.toLowerCase().includes(query) ||
+      r.excerpt.toLowerCase().includes(query) ||
+      r.industry?.toLowerCase().includes(query) ||
+      r.tags?.toLowerCase().includes(query)
       );
     }
 
     setFilteredResources(filtered);
   };
 
-  const caseStudiesCount = resources.filter(r => r.type === 'case_study').length;
-  const whitePapersCount = resources.filter(r => r.type === 'white_paper').length;
+  const caseStudiesCount = resources.filter((r) => r.type === 'case_study').length;
+  const whitePapersCount = resources.filter((r) => r.type === 'white_paper').length;
 
   return (
     <>
@@ -104,8 +104,8 @@ export default function ResourcesPage() {
                   placeholder="Search resources by title, industry, or topic..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="pl-10 py-6 text-lg"
-                />
+                  className="pl-10 py-6 text-lg" />
+
               </div>
             </div>
 
@@ -143,27 +143,27 @@ export default function ResourcesPage() {
             </TabsList>
 
             <TabsContent value={activeTab} className="mt-0">
-              {loading ? (
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {[1, 2, 3, 4, 5, 6].map(i => (
-                    <div key={i} className="h-96 bg-muted animate-pulse rounded-lg" />
-                  ))}
-                </div>
-              ) : filteredResources.length === 0 ? (
-                <div className="text-center py-20">
+              {loading ?
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {[1, 2, 3, 4, 5, 6].map((i) =>
+                <div key={i} className="h-96 bg-muted animate-pulse rounded-lg" />
+                )}
+                </div> :
+              filteredResources.length === 0 ?
+              <div className="text-center py-20">
                   <FileText className="w-16 h-16 mx-auto text-muted-foreground mb-4" />
                   <h3 className="text-xl font-semibold mb-2">No resources found</h3>
                   <p className="text-muted-foreground">
                     {searchQuery ? 'Try adjusting your search query' : 'Check back soon for new content'}
                   </p>
+                </div> :
+
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {filteredResources.map((resource) =>
+                <ResourceCard key={resource.id} {...resource} />
+                )}
                 </div>
-              ) : (
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {filteredResources.map(resource => (
-                    <ResourceCard key={resource.id} {...resource} />
-                  ))}
-                </div>
-              )}
+              }
             </TabsContent>
           </Tabs>
         </section>
@@ -186,6 +186,6 @@ export default function ResourcesPage() {
           </div>
         </section>
       </div>
-    </>
-  );
+    </>);
+
 }

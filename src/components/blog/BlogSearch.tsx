@@ -15,8 +15,8 @@ export default function BlogSearch({ value, onChange }: BlogSearchProps) {
         placeholder="Search articles..."
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="pl-10"
-      />
-    </div>
-  );
+        className="pl-10" />
+
+    </div>);
+
 }

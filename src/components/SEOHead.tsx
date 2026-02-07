@@ -45,11 +45,11 @@ export default function SEOHead({
       <link rel="canonical" href={fullUrl} />
       
       {/* Schema.org structured data */}
-      {schema && (
-        <script type="application/ld+json">
+      {schema &&
+      <script type="application/ld+json">
           {JSON.stringify(schema)}
         </script>
-      )}
-    </Helmet>
-  );
+      }
+    </Helmet>);
+
 }

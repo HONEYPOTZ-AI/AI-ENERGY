@@ -27,7 +27,7 @@ interface PressRelease {
 }
 
 export default function PressDetailPage() {
-  const { slug } = useParams<{ slug: string }>();
+  const { slug } = useParams<{slug: string;}>();
   const [release, setRelease] = useState<PressRelease | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -46,9 +46,9 @@ export default function PressDetailPage() {
         OrderByField: 'id',
         IsAsc: false,
         Filters: [
-          { name: 'slug', op: 'Equal', value: releaseSlug },
-          { name: 'is_published', op: 'Equal', value: true }
-        ]
+        { name: 'slug', op: 'Equal', value: releaseSlug },
+        { name: 'is_published', op: 'Equal', value: true }]
+
       });
 
       if (error) throw new Error(error);
@@ -73,8 +73,8 @@ export default function PressDetailPage() {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <Loader2 className="w-8 h-8 animate-spin text-primary" />
-      </div>
-    );
+      </div>);
+
   }
 
   if (!release) {
@@ -87,8 +87,8 @@ export default function PressDetailPage() {
             Back to Press Releases
           </Button>
         </Link>
-      </div>
-    );
+      </div>);
+
   }
 
   const categoryLabels: Record<string, string> = {
@@ -204,21 +204,21 @@ export default function PressDetailPage() {
           </header>
 
           {/* Featured Image */}
-          {release.featured_image && (
-            <div className="relative overflow-hidden rounded-lg mb-8 aspect-video">
+          {release.featured_image &&
+          <div className="relative overflow-hidden rounded-lg mb-8 aspect-video">
               <img
-                src={release.featured_image}
-                alt={release.title}
-                className="w-full h-full object-cover"
-              />
+              src={release.featured_image}
+              alt={release.title}
+              className="w-full h-full object-cover" />
+
             </div>
-          )}
+          }
 
           {/* Main Content */}
-          <div 
+          <div
             className="prose prose-lg dark:prose-invert max-w-none mb-12 leading-relaxed"
-            dangerouslySetInnerHTML={{ __html: release.content }}
-          />
+            dangerouslySetInnerHTML={{ __html: release.content }} />
+
 
           <Separator className="my-8" />
 
@@ -253,16 +253,16 @@ export default function PressDetailPage() {
 
           {/* Social Share */}
           <div className="print:hidden">
-            <SocialShare 
-              title={release.title} 
+            <SocialShare
+              title={release.title}
               url={canonicalUrl}
-              description={release.summary}
-            />
+              description={release.summary} />
+
           </div>
         </article>
 
         <Footer />
       </div>
-    </>
-  );
+    </>);
+
 }

@@ -39,6 +39,6 @@ export default function SolutionsCTA({
           </Button>
         </div>
       </div>
-    </Card>
-  );
+    </Card>);
+
 }

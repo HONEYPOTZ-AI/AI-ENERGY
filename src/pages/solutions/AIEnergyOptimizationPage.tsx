@@ -3,18 +3,18 @@ import SolutionsCTA from '@/components/SolutionsCTA';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
-import { 
-  Zap, 
-  Brain, 
-  TrendingDown, 
-  Clock, 
-  BarChart3, 
+import {
+  Zap,
+  Brain,
+  TrendingDown,
+  Clock,
+  BarChart3,
   Shield,
   ArrowRight,
   CheckCircle2,
   Cpu,
-  Activity
-} from 'lucide-react';
+  Activity } from
+'lucide-react';
 
 export default function AIEnergyOptimizationPage() {
   const schema = {
@@ -38,8 +38,8 @@ export default function AIEnergyOptimizationPage() {
         keywords="AI energy optimization, machine learning energy management, predictive energy analytics, smart grid optimization, energy efficiency AI"
         canonicalUrl="/solutions/ai-energy-optimization"
         ogImage="https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=1200&h=630&fit=crop"
-        schema={schema}
-      />
+        schema={schema} />
+
 
       <div className="min-h-screen">
         {/* Hero Section */}
@@ -87,28 +87,28 @@ export default function AIEnergyOptimizationPage() {
 
               <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
                 {[
-                  {
-                    icon: Activity,
-                    title: "Data Collection",
-                    description: "Real-time monitoring of energy consumption, weather patterns, and operational metrics across all facilities."
-                  },
-                  {
-                    icon: Brain,
-                    title: "AI Analysis",
-                    description: "Machine learning algorithms analyze patterns, detect anomalies, and identify optimization opportunities."
-                  },
-                  {
-                    icon: BarChart3,
-                    title: "Predictive Insights",
-                    description: "Advanced forecasting models predict future demand and recommend optimal resource allocation."
-                  },
-                  {
-                    icon: Zap,
-                    title: "Automated Actions",
-                    description: "Intelligent systems automatically adjust operations to maximize efficiency and minimize waste."
-                  }
-                ].map((step, index) => (
-                  <Card key={index} className="p-6 space-y-4 relative overflow-hidden group hover:shadow-lg transition-shadow">
+                {
+                  icon: Activity,
+                  title: "Data Collection",
+                  description: "Real-time monitoring of energy consumption, weather patterns, and operational metrics across all facilities."
+                },
+                {
+                  icon: Brain,
+                  title: "AI Analysis",
+                  description: "Machine learning algorithms analyze patterns, detect anomalies, and identify optimization opportunities."
+                },
+                {
+                  icon: BarChart3,
+                  title: "Predictive Insights",
+                  description: "Advanced forecasting models predict future demand and recommend optimal resource allocation."
+                },
+                {
+                  icon: Zap,
+                  title: "Automated Actions",
+                  description: "Intelligent systems automatically adjust operations to maximize efficiency and minimize waste."
+                }].
+                map((step, index) =>
+                <Card key={index} className="p-6 space-y-4 relative overflow-hidden group hover:shadow-lg transition-shadow">
                     <div className="absolute top-0 right-0 text-8xl font-bold text-primary/5">
                       {index + 1}
                     </div>
@@ -120,7 +120,7 @@ export default function AIEnergyOptimizationPage() {
                       <p className="text-muted-foreground">{step.description}</p>
                     </div>
                   </Card>
-                ))}
+                )}
               </div>
             </div>
           </div>
@@ -139,45 +139,45 @@ export default function AIEnergyOptimizationPage() {
 
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {[
-                  {
-                    icon: TrendingDown,
-                    title: "Reduce Costs by 30%",
-                    description: "Optimize energy consumption patterns and eliminate waste to achieve significant cost savings."
-                  },
-                  {
-                    icon: Clock,
-                    title: "Real-Time Optimization",
-                    description: "Make instant adjustments based on current conditions and market prices."
-                  },
-                  {
-                    icon: BarChart3,
-                    title: "Predictive Accuracy",
-                    description: "Forecast energy demand with 95%+ accuracy using advanced ML models."
-                  },
-                  {
-                    icon: Shield,
-                    title: "Enhanced Reliability",
-                    description: "Prevent outages and equipment failures with predictive maintenance alerts."
-                  },
-                  {
-                    icon: Cpu,
-                    title: "Automated Control",
-                    description: "Reduce manual intervention with intelligent automation systems."
-                  },
-                  {
-                    icon: Zap,
-                    title: "Peak Demand Management",
-                    description: "Avoid expensive peak charges with smart load balancing."
-                  }
-                ].map((benefit, index) => (
-                  <Card key={index} className="p-6 space-y-4 hover:shadow-lg transition-shadow">
+                {
+                  icon: TrendingDown,
+                  title: "Reduce Costs by 30%",
+                  description: "Optimize energy consumption patterns and eliminate waste to achieve significant cost savings."
+                },
+                {
+                  icon: Clock,
+                  title: "Real-Time Optimization",
+                  description: "Make instant adjustments based on current conditions and market prices."
+                },
+                {
+                  icon: BarChart3,
+                  title: "Predictive Accuracy",
+                  description: "Forecast energy demand with 95%+ accuracy using advanced ML models."
+                },
+                {
+                  icon: Shield,
+                  title: "Enhanced Reliability",
+                  description: "Prevent outages and equipment failures with predictive maintenance alerts."
+                },
+                {
+                  icon: Cpu,
+                  title: "Automated Control",
+                  description: "Reduce manual intervention with intelligent automation systems."
+                },
+                {
+                  icon: Zap,
+                  title: "Peak Demand Management",
+                  description: "Avoid expensive peak charges with smart load balancing."
+                }].
+                map((benefit, index) =>
+                <Card key={index} className="p-6 space-y-4 hover:shadow-lg transition-shadow">
                     <div className="inline-flex p-3 rounded-lg bg-primary/10 text-primary">
                       <benefit.icon className="h-8 w-8" />
                     </div>
                     <h3 className="text-xl font-semibold">{benefit.title}</h3>
                     <p className="text-muted-foreground">{benefit.description}</p>
                   </Card>
-                ))}
+                )}
               </div>
             </div>
           </div>
@@ -196,32 +196,32 @@ export default function AIEnergyOptimizationPage() {
 
               <div className="space-y-8">
                 {[
-                  {
-                    title: "Smart Grid Management",
-                    description: "Utility companies use AI to balance supply and demand in real-time, integrating renewable energy sources and preventing grid instability.",
-                    link: "/industries/utilities",
-                    linkText: "Learn more about utility solutions"
-                  },
-                  {
-                    title: "Manufacturing Optimization",
-                    description: "Industrial facilities reduce energy costs by optimizing production schedules, equipment usage, and HVAC systems based on predictive analytics.",
-                    link: "/industries/enterprises",
-                    linkText: "Explore enterprise solutions"
-                  },
-                  {
-                    title: "Commercial Building Efficiency",
-                    description: "Office buildings and retail spaces achieve 25-35% energy savings through intelligent climate control and lighting optimization.",
-                    link: "/solutions/cost-optimization",
-                    linkText: "Discover cost optimization"
-                  },
-                  {
-                    title: "Renewable Energy Integration",
-                    description: "AI forecasts solar and wind generation patterns to optimize battery storage and maximize renewable energy utilization.",
-                    link: "/solutions/sustainability",
-                    linkText: "View sustainability impact"
-                  }
-                ].map((useCase, index) => (
-                  <Card key={index} className="p-8 hover:shadow-lg transition-shadow">
+                {
+                  title: "Smart Grid Management",
+                  description: "Utility companies use AI to balance supply and demand in real-time, integrating renewable energy sources and preventing grid instability.",
+                  link: "/industries/utilities",
+                  linkText: "Learn more about utility solutions"
+                },
+                {
+                  title: "Manufacturing Optimization",
+                  description: "Industrial facilities reduce energy costs by optimizing production schedules, equipment usage, and HVAC systems based on predictive analytics.",
+                  link: "/industries/enterprises",
+                  linkText: "Explore enterprise solutions"
+                },
+                {
+                  title: "Commercial Building Efficiency",
+                  description: "Office buildings and retail spaces achieve 25-35% energy savings through intelligent climate control and lighting optimization.",
+                  link: "/solutions/cost-optimization",
+                  linkText: "Discover cost optimization"
+                },
+                {
+                  title: "Renewable Energy Integration",
+                  description: "AI forecasts solar and wind generation patterns to optimize battery storage and maximize renewable energy utilization.",
+                  link: "/solutions/sustainability",
+                  linkText: "View sustainability impact"
+                }].
+                map((useCase, index) =>
+                <Card key={index} className="p-8 hover:shadow-lg transition-shadow">
                     <div className="flex flex-col md:flex-row gap-6">
                       <div className="flex-shrink-0">
                         <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center text-primary font-bold text-xl">
@@ -240,7 +240,7 @@ export default function AIEnergyOptimizationPage() {
                       </div>
                     </div>
                   </Card>
-                ))}
+                )}
               </div>
             </div>
           </div>
@@ -262,16 +262,16 @@ export default function AIEnergyOptimizationPage() {
                   <h3 className="text-2xl font-semibold">Machine Learning Models</h3>
                   <ul className="space-y-3">
                     {[
-                      "Time series forecasting (LSTM, Prophet, ARIMA)",
-                      "Deep neural networks for pattern recognition",
-                      "Ensemble methods for improved accuracy",
-                      "Reinforcement learning for optimization"
-                    ].map((item, index) => (
-                      <li key={index} className="flex items-start gap-3">
+                    "Time series forecasting (LSTM, Prophet, ARIMA)",
+                    "Deep neural networks for pattern recognition",
+                    "Ensemble methods for improved accuracy",
+                    "Reinforcement learning for optimization"].
+                    map((item, index) =>
+                    <li key={index} className="flex items-start gap-3">
                         <CheckCircle2 className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
                         <span className="text-muted-foreground">{item}</span>
                       </li>
-                    ))}
+                    )}
                   </ul>
                 </Card>
 
@@ -279,16 +279,16 @@ export default function AIEnergyOptimizationPage() {
                   <h3 className="text-2xl font-semibold">Data Processing</h3>
                   <ul className="space-y-3">
                     {[
-                      "Real-time data streaming and processing",
-                      "Multi-source data integration",
-                      "Anomaly detection and alerting",
-                      "Historical data analysis and insights"
-                    ].map((item, index) => (
-                      <li key={index} className="flex items-start gap-3">
+                    "Real-time data streaming and processing",
+                    "Multi-source data integration",
+                    "Anomaly detection and alerting",
+                    "Historical data analysis and insights"].
+                    map((item, index) =>
+                    <li key={index} className="flex items-start gap-3">
                         <CheckCircle2 className="h-5 w-5 text-primary flex-shrink-0 mt-0.5" />
                         <span className="text-muted-foreground">{item}</span>
                       </li>
-                    ))}
+                    )}
                   </ul>
                 </Card>
               </div>
@@ -306,26 +306,26 @@ export default function AIEnergyOptimizationPage() {
 
               <div className="grid md:grid-cols-3 gap-6">
                 {[
-                  {
-                    title: "Demand Forecasting",
-                    description: "Predict energy demand with unprecedented accuracy",
-                    link: "/solutions/demand-forecasting",
-                    icon: BarChart3
-                  },
-                  {
-                    title: "Cost Optimization",
-                    description: "Maximize savings and ROI with intelligent pricing",
-                    link: "/solutions/cost-optimization",
-                    icon: TrendingDown
-                  },
-                  {
-                    title: "Sustainability",
-                    description: "Reduce carbon footprint and achieve ESG goals",
-                    link: "/solutions/sustainability",
-                    icon: Zap
-                  }
-                ].map((solution, index) => (
-                  <Card key={index} className="p-6 space-y-4 hover:shadow-lg transition-shadow group">
+                {
+                  title: "Demand Forecasting",
+                  description: "Predict energy demand with unprecedented accuracy",
+                  link: "/solutions/demand-forecasting",
+                  icon: BarChart3
+                },
+                {
+                  title: "Cost Optimization",
+                  description: "Maximize savings and ROI with intelligent pricing",
+                  link: "/solutions/cost-optimization",
+                  icon: TrendingDown
+                },
+                {
+                  title: "Sustainability",
+                  description: "Reduce carbon footprint and achieve ESG goals",
+                  link: "/solutions/sustainability",
+                  icon: Zap
+                }].
+                map((solution, index) =>
+                <Card key={index} className="p-6 space-y-4 hover:shadow-lg transition-shadow group">
                     <div className="inline-flex p-3 rounded-lg bg-primary/10 text-primary">
                       <solution.icon className="h-6 w-6" />
                     </div>
@@ -338,7 +338,7 @@ export default function AIEnergyOptimizationPage() {
                       </Link>
                     </Button>
                   </Card>
-                ))}
+                )}
               </div>
             </div>
           </div>
@@ -353,6 +353,6 @@ export default function AIEnergyOptimizationPage() {
           </div>
         </section>
       </div>
-    </>
-  );
+    </>);
+
 }
