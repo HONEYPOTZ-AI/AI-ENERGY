@@ -33,6 +33,7 @@ import { ErrorBoundary } from "react-error-boundary";
 import { HelmetProvider } from "react-helmet-async";
 import ErrorFallback from "./components/error-fallback";
 import { CanonicalManager } from "./components/canonical-manager";
+import ContentManagementPage from "./pages/admin/ContentManagementPage";
 
 const queryClient = new QueryClient();
 
@@ -66,6 +67,7 @@ const App = () =>
                 <Route path="/blog" element={<BlogListPage />} />
                 <Route path="/blog/:slug" element={<BlogDetailPage />} />
                 <Route path="/admin/seed-blog" element={<SeedBlogData />} />
+                <Route path="/admin/content-management" element={<ContentManagementPage />} />
                 <Route path="/press" element={<PressListPage />} />
                 <Route path="/press/:slug" element={<PressDetailPage />} />
                 <Route path="/admin/seed-press" element={<SeedPressData />} />
