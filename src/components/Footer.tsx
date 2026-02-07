@@ -8,6 +8,11 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Company Info */}
           <div>
+            <img 
+              src="https://newoaks.s3.us-west-1.amazonaws.com/AutoDev/59275/7b1d9089-26ac-42a4-8f23-d615a059978f.png" 
+              alt="AI-Energy Logo" 
+              className="h-12 w-auto mb-3"
+            />
             <h3 className="font-semibold text-lg mb-3 bg-gradient-to-r from-blue-600 to-cyan-600 dark:from-blue-400 dark:to-cyan-400 bg-clip-text text-transparent">
               Honeypotz Inc
             </h3>

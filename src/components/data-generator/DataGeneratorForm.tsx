@@ -30,12 +30,12 @@ export default function DataGeneratorForm({ onGenerate }: DataGeneratorFormProps
     // Validate dates
     const start = new Date(startDate);
     const end = new Date(endDate);
-    
+
     if (start >= end) {
       toast({
         title: 'Invalid Date Range',
         description: 'Start date must be before end date',
-        variant: 'destructive',
+        variant: 'destructive'
       });
       return;
     }
@@ -45,7 +45,7 @@ export default function DataGeneratorForm({ onGenerate }: DataGeneratorFormProps
       toast({
         title: 'Date Range Too Large',
         description: 'Date range cannot exceed 365 days',
-        variant: 'destructive',
+        variant: 'destructive'
       });
       return;
     }
@@ -57,17 +57,17 @@ export default function DataGeneratorForm({ onGenerate }: DataGeneratorFormProps
         path: 'dataGenerator/generateDataset',
         methodName: 'generateDataset',
         param: [
-          datasetType,
-          startDate,
-          endDate,
-          location,
-          {
-            seasonality: seasonality[0],
-            noiseLevel: noiseLevel[0],
-            timeInterval,
-            numCustomers,
-          }
-        ],
+        datasetType,
+        startDate,
+        endDate,
+        location,
+        {
+          seasonality: seasonality[0],
+          noiseLevel: noiseLevel[0],
+          timeInterval,
+          numCustomers
+        }]
+
       });
 
       if (error) throw new Error(error);
@@ -84,10 +84,10 @@ export default function DataGeneratorForm({ onGenerate }: DataGeneratorFormProps
           seasonality: seasonality[0],
           noiseLevel: noiseLevel[0],
           timeInterval,
-          numCustomers,
+          numCustomers
         }),
         data_points: JSON.stringify(data.dataPoints),
-        created_at: new Date().toISOString(),
+        created_at: new Date().toISOString()
       });
 
       if (saveError) throw new Error(saveError);
@@ -95,13 +95,13 @@ export default function DataGeneratorForm({ onGenerate }: DataGeneratorFormProps
       onGenerate(data);
       toast({
         title: 'Dataset Generated',
-        description: `Successfully generated ${data.dataPoints.length} data points`,
+        description: `Successfully generated ${data.dataPoints.length} data points`
       });
     } catch (err: any) {
       toast({
         title: 'Generation Failed',
         description: err.message || 'Failed to generate dataset',
-        variant: 'destructive',
+        variant: 'destructive'
       });
     } finally {
       setLoading(false);
@@ -136,8 +136,8 @@ export default function DataGeneratorForm({ onGenerate }: DataGeneratorFormProps
           <Input
             type="date"
             value={startDate}
-            onChange={(e) => setStartDate(e.target.value)}
-          />
+            onChange={(e) => setStartDate(e.target.value)} />
+
         </div>
 
         <div className="space-y-2">
@@ -145,8 +145,8 @@ export default function DataGeneratorForm({ onGenerate }: DataGeneratorFormProps
           <Input
             type="date"
             value={endDate}
-            onChange={(e) => setEndDate(e.target.value)}
-          />
+            onChange={(e) => setEndDate(e.target.value)} />
+
         </div>
 
         {/* Location */}
@@ -156,8 +156,8 @@ export default function DataGeneratorForm({ onGenerate }: DataGeneratorFormProps
             type="text"
             placeholder="e.g., San Francisco, CA"
             value={location}
-            onChange={(e) => setLocation(e.target.value)}
-          />
+            onChange={(e) => setLocation(e.target.value)} />
+
         </div>
 
         {/* Time Interval */}
@@ -185,8 +185,8 @@ export default function DataGeneratorForm({ onGenerate }: DataGeneratorFormProps
             min="1"
             max="1000"
             value={numCustomers}
-            onChange={(e) => setNumCustomers(Number(e.target.value))}
-          />
+            onChange={(e) => setNumCustomers(Number(e.target.value))} />
+
           <p className="text-xs text-muted-foreground">
             Generate data for multiple customers or sites (1-1000)
           </p>
@@ -200,8 +200,8 @@ export default function DataGeneratorForm({ onGenerate }: DataGeneratorFormProps
             onValueChange={setSeasonality}
             min={0}
             max={1}
-            step={0.05}
-          />
+            step={0.05} />
+
           <p className="text-xs text-muted-foreground">
             Controls seasonal variation patterns in the data
           </p>
@@ -215,8 +215,8 @@ export default function DataGeneratorForm({ onGenerate }: DataGeneratorFormProps
             onValueChange={setNoiseLevel}
             min={0}
             max={0.5}
-            step={0.05}
-          />
+            step={0.05} />
+
           <p className="text-xs text-muted-foreground">
             Adds realistic variability to the generated data
           </p>
@@ -226,18 +226,18 @@ export default function DataGeneratorForm({ onGenerate }: DataGeneratorFormProps
         <Button
           className="w-full"
           onClick={handleGenerate}
-          disabled={loading}
-        >
-          {loading ? (
-            <>
+          disabled={loading}>
+
+          {loading ?
+          <>
               <Loader2 className="mr-2 h-4 w-4 animate-spin" />
               Generating...
-            </>
-          ) : (
-            'Generate Dataset'
-          )}
+            </> :
+
+          'Generate Dataset'
+          }
         </Button>
       </CardContent>
-    </Card>
-  );
+    </Card>);
+
 }
