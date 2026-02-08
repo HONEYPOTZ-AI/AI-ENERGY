@@ -36,20 +36,20 @@ export default function InsertAIEnergyPostsPage() {
 
       for (const post of blogPosts) {
         const { error: insertError } = await window.ezsite.apis.tableCreate(BLOG_TABLE_ID, post);
-        
+
         if (insertError) {
           throw new Error(`Failed to insert post "${post.title}": ${insertError}`);
         }
-        
+
         titles.push(post.title);
       }
 
       setInsertedPosts(titles);
       setSuccess(true);
-      
+
       toast({
         title: "Success!",
-        description: `Successfully inserted ${blogPosts.length} AI Energy blog posts into the database.`,
+        description: `Successfully inserted ${blogPosts.length} AI Energy blog posts into the database.`
       });
 
     } catch (error) {
@@ -57,7 +57,7 @@ export default function InsertAIEnergyPostsPage() {
       toast({
         title: "Error",
         description: error instanceof Error ? error.message : 'Failed to insert blog posts',
-        variant: "destructive",
+        variant: "destructive"
       });
     } finally {
       setLoading(false);
@@ -115,41 +115,41 @@ export default function InsertAIEnergyPostsPage() {
                   onClick={handleInsertPosts}
                   disabled={loading || success}
                   size="lg"
-                  className="px-8 py-6 text-lg"
-                >
+                  className="px-8 py-6 text-lg">
+
                   {loading && <Loader2 className="mr-2 h-5 w-5 animate-spin" />}
                   {success && <CheckCircle2 className="mr-2 h-5 w-5" />}
                   {loading ? 'Inserting Posts...' : success ? 'Posts Inserted Successfully' : 'Insert Blog Posts'}
                 </Button>
               </div>
 
-              {success && insertedPosts.length > 0 && (
-                <div className="bg-green-50 border border-green-200 rounded-lg p-6">
+              {success && insertedPosts.length > 0 &&
+              <div className="bg-green-50 border border-green-200 rounded-lg p-6">
                   <div className="flex items-center mb-3">
                     <CheckCircle2 className="h-5 w-5 text-green-600 mr-2" />
                     <h3 className="font-semibold text-green-900">Successfully Inserted Posts:</h3>
                   </div>
                   <ul className="space-y-2">
-                    {insertedPosts.map((title, index) => (
-                      <li key={index} className="text-green-800 flex items-start">
+                    {insertedPosts.map((title, index) =>
+                  <li key={index} className="text-green-800 flex items-start">
                         <span className="mr-2">{index + 1}.</span>
                         <span>{title}</span>
                       </li>
-                    ))}
+                  )}
                   </ul>
                   <div className="mt-4 pt-4 border-t border-green-200">
                     <a
-                      href="/blog"
-                      className="text-green-700 hover:text-green-800 font-medium inline-flex items-center"
-                    >
+                    href="/blog"
+                    className="text-green-700 hover:text-green-800 font-medium inline-flex items-center">
+
                       View all blog posts →
                     </a>
                   </div>
                 </div>
-              )}
+              }
 
-              {!success && (
-                <div className="bg-amber-50 border border-amber-200 rounded-lg p-6">
+              {!success &&
+              <div className="bg-amber-50 border border-amber-200 rounded-lg p-6">
                   <div className="flex items-start">
                     <AlertCircle className="h-5 w-5 text-amber-600 mr-2 mt-0.5" />
                     <div>
@@ -161,11 +161,11 @@ export default function InsertAIEnergyPostsPage() {
                     </div>
                   </div>
                 </div>
-              )}
+              }
             </div>
           </div>
         </div>
       </div>
-    </>
-  );
+    </>);
+
 }
