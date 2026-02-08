@@ -16,6 +16,7 @@ import TermsOfService from "./pages/TermsOfService";
 import BlogListPage from "./pages/BlogListPage";
 import BlogDetailPage from "./pages/BlogDetailPage";
 import SeedBlogData from "./pages/SeedBlogData";
+import InsertAIEnergyPostsPage from "./pages/InsertAIEnergyPostsPage";
 import PressListPage from "./pages/PressListPage";
 import PressDetailPage from "./pages/PressDetailPage";
 import ResourcesPage from "./pages/ResourcesPage";
@@ -67,6 +68,7 @@ const App = () =>
                 <Route path="/blog" element={<BlogListPage />} />
                 <Route path="/blog/:slug" element={<BlogDetailPage />} />
                 <Route path="/admin/seed-blog" element={<SeedBlogData />} />
+                <Route path="/insert-ai-energy-posts" element={<InsertAIEnergyPostsPage />} />
                 <Route path="/admin/content-management" element={<ContentManagementPage />} />
                 <Route path="/press" element={<PressListPage />} />
                 <Route path="/press/:slug" element={<PressDetailPage />} />
