@@ -6,7 +6,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { toast } from '@/hooks/use-toast';
-import { Loader2, Sparkles, CheckCircle2, AlertCircle, Clock, ExternalLink, Shield } from 'lucide-react';
+import { Loader2, Sparkles, CheckCircle2, AlertCircle, Clock, ExternalLink, Shield, Trash2 } from 'lucide-react';
 import { Helmet } from 'react-helmet-async';
 import SiteNavigation from '@/components/SiteNavigation';
 
@@ -15,6 +15,7 @@ export default function ContentManagementPage() {
   const [apiKey, setApiKey] = useState('');
   const [isGenerating, setIsGenerating] = useState(false);
   const [isCheckingAuth, setIsCheckingAuth] = useState(true);
+  const [isRemovingDuplicates, setIsRemovingDuplicates] = useState(false);
   const [generatedCount, setGeneratedCount] = useState(0);
   const [generatedArticles, setGeneratedArticles] = useState<Array<{slug: string;title: string;}>>([]);
   const totalCount = 5;
@@ -119,6 +120,43 @@ export default function ContentManagementPage() {
       });
     } finally {
       setIsGenerating(false);
+    }
+  };
+
+  const handleRemoveDuplicates = async () => {
+    setIsRemovingDuplicates(true);
+
+    try {
+      const { data, error } = await window.ezsite.apis.run({
+        path: 'blog/removeDuplicates',
+        methodName: 'removeDuplicates',
+        param: []
+      });
+
+      if (error) {
+        throw new Error(error);
+      }
+
+      toast({
+        title: data.removedCount > 0 ? 'Duplicates Removed! 🎉' : 'No Duplicates Found',
+        description: data.message
+      });
+
+      // Refresh the page after successful removal to show updated data
+      if (data.removedCount > 0) {
+        setTimeout(() => {
+          window.location.reload();
+        }, 1500);
+      }
+
+    } catch (error) {
+      toast({
+        title: 'Operation Failed',
+        description: error instanceof Error ? error.message : 'Failed to remove duplicates',
+        variant: 'destructive'
+      });
+    } finally {
+      setIsRemovingDuplicates(false);
     }
   };
 
@@ -281,6 +319,40 @@ export default function ContentManagementPage() {
                   <li>HTML-formatted content with headings and structure</li>
                   <li>Automatic publication dates (staggered over last 30 days)</li>
                 </ul>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* Database Management Card */}
+          <Card className="shadow-lg border-0">
+            <CardHeader>
+              <CardTitle>Database Management</CardTitle>
+              <CardDescription>Clean up and maintain blog database</CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="bg-slate-50 border border-slate-200 rounded-lg p-4">
+                <h4 className="font-semibold text-slate-900 mb-2">Remove Duplicate Posts</h4>
+                <p className="text-sm text-slate-600 mb-4">
+                  Scan for blog posts with identical or very similar titles and remove duplicates, keeping the most recent version.
+                </p>
+                <Button
+                  onClick={handleRemoveDuplicates}
+                  disabled={isRemovingDuplicates || isGenerating}
+                  variant="destructive"
+                  className="w-full"
+                >
+                  {isRemovingDuplicates ? (
+                    <>
+                      <Loader2 className="w-4 h-4 mr-2 animate-spin" />
+                      Scanning for Duplicates...
+                    </>
+                  ) : (
+                    <>
+                      <Trash2 className="w-4 h-4 mr-2" />
+                      Remove Duplicates
+                    </>
+                  )}
+                </Button>
               </div>
             </CardContent>
           </Card>
