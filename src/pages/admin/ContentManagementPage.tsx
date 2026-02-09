@@ -339,19 +339,19 @@ export default function ContentManagementPage() {
                   onClick={handleRemoveDuplicates}
                   disabled={isRemovingDuplicates || isGenerating}
                   variant="destructive"
-                  className="w-full"
-                >
-                  {isRemovingDuplicates ? (
-                    <>
+                  className="w-full">
+
+                  {isRemovingDuplicates ?
+                  <>
                       <Loader2 className="w-4 h-4 mr-2 animate-spin" />
                       Scanning for Duplicates...
-                    </>
-                  ) : (
-                    <>
+                    </> :
+
+                  <>
                       <Trash2 className="w-4 h-4 mr-2" />
                       Remove Duplicates
                     </>
-                  )}
+                  }
                 </Button>
               </div>
             </CardContent>
