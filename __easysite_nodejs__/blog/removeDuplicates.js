@@ -7,7 +7,7 @@ export async function removeDuplicates() {
   try {
     // Get all blog posts
     const { data: posts, error: queryError } = await apis.sqlQuery({
-      Sql: "SELECT id, title, created_at FROM blog_posts ORDER BY id DESC",
+      Sql: "SELECT id, title FROM blog_posts ORDER BY id DESC",
       Parameters: []
     });
 
